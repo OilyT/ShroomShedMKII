@@ -50,7 +50,7 @@
       "conflict_shadows",
       "shapes"
     ],
-    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffaf",
+    "visible_layers": "ffffffff_ffffffff_ffffffff_ffffffff",
     "zone_display_mode": 0
   },
   "git": {
@@ -59,13 +59,11 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "ShroomShed_MKII_PCB.kicad_prl",
+    "filename": "Display_Adapter.kicad_prl",
     "version": 5
   },
   "net_inspector_panel": {
     "col_hidden": [
-      false,
-      false,
       false,
       false,
       false,
@@ -87,9 +85,7 @@
       6,
       7,
       8,
-      9,
-      10,
-      11
+      9
     ],
     "col_widths": [
       162,
@@ -100,8 +96,6 @@
       91,
       91,
       71,
-      91,
-      91,
       91,
       91
     ],

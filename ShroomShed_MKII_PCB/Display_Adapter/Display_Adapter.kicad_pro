@@ -479,7 +479,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "ShroomShed_MKII_PCB.kicad_pro",
+    "filename": "Display_Adapter.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -639,7 +639,7 @@
   },
   "sheets": [
     [
-      "105d344c-4f20-4256-bf27-45746633c7a8",
+      "8615760e-786e-49d0-a790-269adc154582",
       "Root"
     ]
   ],

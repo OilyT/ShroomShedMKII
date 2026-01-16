@@ -14442,7 +14442,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d9147e7-8758-42ef-b4e6-a85e6a7c875b")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR035"
 			(at 29.845 232.41 0)
 			(effects
 				(font
@@ -14492,7 +14492,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR033")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -14577,7 +14577,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "128f5cd5-7598-4ff9-b56d-b90f120620f3")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR031"
 			(at 130.81 208.915 0)
 			(effects
 				(font
@@ -14627,7 +14627,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR029")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -14714,7 +14714,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "177aeab0-06fe-45d8-a5d6-fa1983b97de6")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR028"
 			(at 211.455 158.115 0)
 			(effects
 				(font
@@ -14764,7 +14764,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR027")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -14950,7 +14950,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1e85dd52-9ee0-4639-aed2-b19f5a71d0e3")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR038"
 			(at 353.06 249.555 0)
 			(effects
 				(font
@@ -15000,7 +15000,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR036")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -15512,7 +15512,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2234d9e6-2acb-4ed9-9791-33e0875fa32c")
-		(property "Reference" "#PWR042"
+		(property "Reference" "#PWR030"
 			(at 156.845 179.705 0)
 			(effects
 				(font
@@ -15562,7 +15562,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR042")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -15578,7 +15578,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2308dcf6-861b-437b-92e2-49c3fb73e7a0")
-		(property "Reference" "#PWR040"
+		(property "Reference" "#PWR042"
 			(at 102.235 273.05 0)
 			(effects
 				(font
@@ -15628,7 +15628,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR040")
+					(reference "#PWR042")
 					(unit 1)
 				)
 			)
@@ -16043,7 +16043,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "30ec0311-808b-40b7-b2b0-1973db818369")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR040"
 			(at 75.565 254 0)
 			(effects
 				(font
@@ -16093,7 +16093,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR038")
+					(reference "#PWR040")
 					(unit 1)
 				)
 			)
@@ -17214,7 +17214,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c4f713c-ff5b-4f27-8307-962570636204")
-		(property "Reference" "#PWR041"
+		(property "Reference" "#PWR026"
 			(at 156.845 133.985 0)
 			(effects
 				(font
@@ -17264,7 +17264,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR041")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -17279,7 +17279,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4db7ad44-5c47-46c2-ad35-b2d56d881db0")
-		(property "Reference" "D6"
+		(property "Reference" "D3"
 			(at 160.655 136.8424 90)
 			(effects
 				(font
@@ -17375,7 +17375,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "D6")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -17529,7 +17529,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "520b32fb-5c0d-4df9-a8f1-4d3eb01bc36d")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR037"
 			(at 34.925 248.285 0)
 			(effects
 				(font
@@ -17579,7 +17579,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR035")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -18352,7 +18352,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6278aa6b-c35c-4a9f-8cbe-7ca1de270d81")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR036"
 			(at 313.69 241.935 0)
 			(effects
 				(font
@@ -18402,7 +18402,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR034")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -18417,7 +18417,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6329327b-bce5-4c6f-acac-baa1642748a1")
-		(property "Reference" "R14"
+		(property "Reference" "R15"
 			(at 246.253 153.162 90)
 			(effects
 				(font
@@ -18505,7 +18505,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "R14")
+					(reference "R15")
 					(unit 1)
 				)
 			)
@@ -18839,7 +18839,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6fc06121-2f5d-40c9-9612-051c68c09796")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR029"
 			(at 269.875 171.45 0)
 			(effects
 				(font
@@ -18889,7 +18889,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR028")
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -18904,7 +18904,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "75f7ed18-5c6b-4b47-84b2-0e35aec31cb9")
-		(property "Reference" "D3"
+		(property "Reference" "D4"
 			(at 260.985 142.5574 90)
 			(effects
 				(font
@@ -19000,7 +19000,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "D3")
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -19253,7 +19253,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "89aa65e3-fd74-4fa3-97fa-34a69b5c7eec")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR033"
 			(at 66.675 214.63 0)
 			(effects
 				(font
@@ -19303,7 +19303,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR031")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -19607,7 +19607,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "92c7eb48-a67b-44b1-887f-25c1f1a3c6fe")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR032"
 			(at 30.48 210.82 0)
 			(effects
 				(font
@@ -19657,7 +19657,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR030")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -19888,7 +19888,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95248aec-4293-43dd-a21a-71a0219020be")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR041"
 			(at 75.565 267.335 0)
 			(effects
 				(font
@@ -19938,7 +19938,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR039")
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -20554,7 +20554,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b3a34840-98e1-4a14-b821-1fd4c3c7544d")
-		(property "Reference" "R21"
+		(property "Reference" "R13"
 			(at 160.147 145.161 0)
 			(effects
 				(font
@@ -20642,7 +20642,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "R21")
+					(reference "R13")
 					(unit 1)
 				)
 			)
@@ -20723,7 +20723,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b75ab7df-44b5-4e58-9a7b-c23cf68b063a")
-		(property "Reference" "R13"
+		(property "Reference" "R14"
 			(at 189.865 144.145 90)
 			(effects
 				(font
@@ -20777,7 +20777,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "R13")
+					(reference "R14")
 					(unit 1)
 				)
 			)
@@ -21602,7 +21602,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0e497ed-ce6d-4dd6-afb0-5bfcb59b9382")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR034"
 			(at 66.675 229.87 0)
 			(effects
 				(font
@@ -21652,7 +21652,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR032")
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -22202,7 +22202,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e74eb7ac-3013-45df-8e0c-9dda0248d9f4")
-		(property "Reference" "#PWR037"
+		(property "Reference" "#PWR039"
 			(at 130.175 253.365 0)
 			(effects
 				(font
@@ -22252,7 +22252,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR037")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -22666,7 +22666,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f3be6624-1654-4519-99dd-9433ed8c1351")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR027"
 			(at 211.455 145.415 0)
 			(effects
 				(font
@@ -22716,7 +22716,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR026")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -22836,7 +22836,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7336e02-2e57-4121-bc5d-205a64d73457")
-		(property "Reference" "R15"
+		(property "Reference" "R16"
 			(at 253.873 161.29 0)
 			(effects
 				(font
@@ -22924,7 +22924,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "R15")
+					(reference "R16")
 					(unit 1)
 				)
 			)
