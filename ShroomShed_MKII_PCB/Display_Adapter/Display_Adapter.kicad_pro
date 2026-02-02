@@ -518,7 +518,7 @@
       "plot": "mfg/",
       "pos_files": "mfg/",
       "specctra_dsn": "",
-      "step": "",
+      "step": "Display_Adapter.step",
       "svg": "",
       "vrml": ""
     },
