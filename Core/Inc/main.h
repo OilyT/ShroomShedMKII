@@ -93,10 +93,6 @@ void Error_Handler(void);
 #define ENCODER_CHANNEL_B_GPIO_Port GPIOC
 #define ENCODER_CHANNEL_A_Pin GPIO_PIN_7
 #define ENCODER_CHANNEL_A_GPIO_Port GPIOC
-#define SHT31_SDA_Pin GPIO_PIN_9
-#define SHT31_SDA_GPIO_Port GPIOC
-#define SHT31_SCL_Pin GPIO_PIN_8
-#define SHT31_SCL_GPIO_Port GPIOA
 #define SD_NSS_Pin GPIO_PIN_15
 #define SD_NSS_GPIO_Port GPIOA
 #define SD_SCK_Pin GPIO_PIN_10
