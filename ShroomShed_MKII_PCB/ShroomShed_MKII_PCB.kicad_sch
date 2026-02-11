@@ -21524,7 +21524,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "470uF"
+		(property "Value" "100uF"
 			(at 279.146 40.64 0)
 			(effects
 				(font
@@ -21533,7 +21533,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x7.7"
+		(property "Footprint" "Capacitor_SMD:CP_Elec_6.3x5.4"
 			(at 276.5552 43.18 0)
 			(effects
 				(font
@@ -21551,7 +21551,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RVT1C471M0607"
+		(property "Description" "RVT100UF16V67RV0016"
 			(at 275.59 39.37 0)
 			(effects
 				(font
@@ -21560,7 +21560,7 @@
 				(hide yes)
 			)
 		)
-		(property "P#" "C2977552"
+		(property "P#" "C2887276"
 			(at 275.59 39.37 0)
 			(effects
 				(font

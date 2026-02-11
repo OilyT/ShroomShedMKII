@@ -2924,7 +2924,7 @@
 				)
 			)
 		)
-		(property "DESCRIPTION" "C3000009"
+		(property "P#" "C3000009"
 			(at 196.85 52.07 0)
 			(effects
 				(font
@@ -4107,7 +4107,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "DOWNLOAD_Connectors:CONN_532610001-SD_04_MOL"
+		(property "Footprint" "Connector_JST:JST_XH_S4B-XH-A-1_1x04_P2.50mm_Horizontal"
 			(at 203.2 135.255 0)
 			(effects
 				(font

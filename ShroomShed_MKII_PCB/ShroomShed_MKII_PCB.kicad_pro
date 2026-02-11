@@ -641,7 +641,7 @@
           "group_by": false,
           "label": "P#",
           "name": "P#",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,

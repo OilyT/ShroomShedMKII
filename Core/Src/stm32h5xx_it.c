@@ -55,7 +55,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef handle_GPDMA2_Channel7;
+extern SPI_HandleTypeDef hspi4;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -199,17 +199,17 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles GPDMA2 Channel 7 global interrupt.
+  * @brief This function handles SPI4 global interrupt.
   */
-void GPDMA2_Channel7_IRQHandler(void)
+void SPI4_IRQHandler(void)
 {
-  /* USER CODE BEGIN GPDMA2_Channel7_IRQn 0 */
+  /* USER CODE BEGIN SPI4_IRQn 0 */
 
-  /* USER CODE END GPDMA2_Channel7_IRQn 0 */
-  HAL_DMA_IRQHandler(&handle_GPDMA2_Channel7);
-  /* USER CODE BEGIN GPDMA2_Channel7_IRQn 1 */
+  /* USER CODE END SPI4_IRQn 0 */
+  HAL_SPI_IRQHandler(&hspi4);
+  /* USER CODE BEGIN SPI4_IRQn 1 */
 
-  /* USER CODE END GPDMA2_Channel7_IRQn 1 */
+  /* USER CODE END SPI4_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
