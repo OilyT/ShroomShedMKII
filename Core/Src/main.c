@@ -161,9 +161,11 @@ int main(void)
     ILI9341_FillScreen(ILI9341_BLACK);
     ILI9341_WriteString(10, 10, "Orangutan Ganja", Font_11x18, ILI9341_WHITE, ILI9341_GREEN);
     HAL_Delay(500);
+
     ILI9341_FillScreen(ILI9341_WHITE);
+    HAL_Delay(500);
+
     /* USER CODE END WHILE */
-      
 
     /* USER CODE BEGIN 3 */
   }
@@ -181,7 +183,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE0);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
 
@@ -193,8 +195,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLL1_SOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
-  RCC_OscInitStruct.PLL.PLLN = 96;
+  RCC_OscInitStruct.PLL.PLLM = 3;
+  RCC_OscInitStruct.PLL.PLLN = 93;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 16;
   RCC_OscInitStruct.PLL.PLLR = 2;
@@ -243,7 +245,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x10B0DCFB;
+  hi2c2.Init.Timing = 0x20A0A2F4;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -291,7 +293,7 @@ static void MX_I2C3_Init(void)
 
   /* USER CODE END I2C3_Init 1 */
   hi2c3.Instance = I2C3;
-  hi2c3.Init.Timing = 0x60606CA1;
+  hi2c3.Init.Timing = 0x40C0E9FF;
   hi2c3.Init.OwnAddress1 = 0;
   hi2c3.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c3.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;

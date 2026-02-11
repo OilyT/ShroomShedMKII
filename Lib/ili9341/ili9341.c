@@ -1,6 +1,7 @@
 /* vim: set ai et ts=4 sw=4: */
 #include "stm32h5xx_hal.h"
 #include "ili9341.h"
+#include <stdlib.h>
 
 static void ILI9341_Select() {
     HAL_GPIO_WritePin(ILI9341_CS_GPIO_Port, ILI9341_CS_Pin, GPIO_PIN_RESET);
@@ -277,16 +278,24 @@ void ILI9341_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
     ILI9341_Select();
 
-
-    uint8_t data[] = { color >> 8, color & 0xFF };
-    HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
-    for(y = h; y > 0; y--) {
-        for(x = w; x > 0; x--) {
-            HAL_SPI_Transmit(&ILI9341_SPI_PORT, data, sizeof(data), HAL_MAX_DELAY);
-
-
-        }
+    size_t pixel_count = (size_t)w * (size_t)h;
+    size_t data_size = pixel_count * 2u;
+    uint8_t *data = (uint8_t *)malloc(data_size);
+    if(data == NULL) {
+        ILI9341_Unselect();
+        return;
     }
+
+    for(size_t i = 0; i < pixel_count; i++) {
+        size_t offset = i * 2u;
+        data[offset] = color >> 8;
+        data[offset + 1u] = color & 0xFF;
+    }
+
+    HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
+    ILI9341_WriteData(data, data_size);
+    free(data);
+
 
     ILI9341_Unselect();
 
