@@ -48,15 +48,16 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # add user defined source files here
-    Core/Src/ILI9341_STM32_Driver.c
-    Core/Src/ILI9341_GFX.c
-    Core/Src/fonts.c
+    Lib/ili9341/fonts.c
+    Lib/ili9341/ili9341.c
+    Lib/ili9341/ili9341_touch.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # add user defined include paths here
     Core/Inc
+    Lib/ili9341
     lvgl
 )
 

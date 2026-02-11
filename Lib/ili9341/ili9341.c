@@ -17,11 +17,14 @@ static void ILI9341_Reset() {
 }
 
 static void ILI9341_WriteCommand(uint8_t cmd) {
+    ILI9341_Select();
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_RESET);
     HAL_SPI_Transmit(&ILI9341_SPI_PORT, &cmd, sizeof(cmd), HAL_MAX_DELAY);
+    ILI9341_Unselect();
 }
 
 static void ILI9341_WriteData(uint8_t* buff, size_t buff_size) {
+    ILI9341_Select();
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
 
     // split data in small chunks because HAL can't send more then 64K at once
@@ -31,6 +34,7 @@ static void ILI9341_WriteData(uint8_t* buff, size_t buff_size) {
         buff += chunk_size;
         buff_size -= chunk_size;
     }
+    ILI9341_Unselect();
 }
 
 static void ILI9341_SetAddressWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1) {
@@ -53,7 +57,6 @@ static void ILI9341_SetAddressWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint
 }
 
 void ILI9341_Init() {
-    ILI9341_Select();
     ILI9341_Reset();
 
     // command list is based on https://github.com/martnak/STM32-ILI9341
@@ -271,18 +274,22 @@ void ILI9341_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
     if((x + w - 1) >= ILI9341_WIDTH) w = ILI9341_WIDTH - x;
     if((y + h - 1) >= ILI9341_HEIGHT) h = ILI9341_HEIGHT - y;
 
-    ILI9341_Select();
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
+    ILI9341_Select();
+
 
     uint8_t data[] = { color >> 8, color & 0xFF };
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
     for(y = h; y > 0; y--) {
         for(x = w; x > 0; x--) {
             HAL_SPI_Transmit(&ILI9341_SPI_PORT, data, sizeof(data), HAL_MAX_DELAY);
+
+
         }
     }
 
     ILI9341_Unselect();
+
 }
 
 void ILI9341_FillScreen(uint16_t color) {

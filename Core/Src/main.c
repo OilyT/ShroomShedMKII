@@ -26,11 +26,13 @@
 #include <stdio.h>
 
 #include "stm32h562xx.h"
+#include "stm32h5xx_hal.h"
 #include "stm32h5xx_hal_gpio.h"
-
-#include "ILI9341_STM32_Driver.h"
-#include "ILI9341_GFX.h"
 #include "stm32h5xx_hal_spi.h"
+
+#include "ili9341.h"
+#include "ili9341_touch.h"
+#include "fonts.h"
 
 /* USER CODE END Includes */
 
@@ -140,76 +142,28 @@ int main(void)
   MX_SPI6_Init();
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
-  ILI9341_Init();
 
   HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
 
-  // Simple Text writing (Text, Font, X, Y, Color, BackColor)
-  // Available Fonts are FONT1, FONT2, FONT3 and FONT4
-  ILI9341_FillScreen(WHITE);
-  ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
-  ILI9341_DrawText("HELLO WORLD", FONT4, 90, 110, BLACK, WHITE);
-  HAL_Delay(1000);
+  ILI9341_Init();
+ 
 
-  //Writing numbers
-  ILI9341_FillScreen(WHITE);
-  static char BufferText[30];
-  for(uint8_t i = 0; i <= 5; i++)
-  {
-    sprintf(BufferText, "COUNT : %d", i);
-    ILI9341_DrawText(BufferText, FONT3, 10, 10, BLACK, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 30, BLUE, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 50, RED, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 70, GREEN, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 90, YELLOW, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 110, PURPLE, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 130, ORANGE, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 150, MAROON, WHITE);
-    ILI9341_DrawText(BufferText, FONT3, 10, 170, WHITE, BLACK);
-    ILI9341_DrawText(BufferText, FONT3, 10, 190, BLUE, BLACK);
-  }
 
-  // Horizontal Line (X, Y, Length, Color)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawHLine(50, 120, 200, NAVY);
-  HAL_Delay(1000);
 
-  // Vertical Line (X, Y, Length, Color)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawVLine(160, 40, 150, DARKGREEN);
-  HAL_Delay(1000);
 
-  // Hollow Circle (Centre X, Centre Y, Radius, Color)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawHollowCircle(160, 120, 80, PINK);
-  HAL_Delay(1000);
-
-  // Filled Circle (Centre X, Centre Y, Radius, Color)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawFilledCircle(160, 120, 50, CYAN);
-  HAL_Delay(1000);
-
-  // Filled Rectangle (Start X, Start Y, Length X, Length Y)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawRectangle(50, 50, 220, 140, GREENYELLOW);
-  HAL_Delay(1000);
-
-  // Hollow Rectangle (Start X, Start Y, End X, End Y)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawHollowRectangleCoord(50, 50, 270, 190, DARKCYAN);
-  HAL_Delay(1000);
-
-  // Simple Pixel Only (X, Y, Color)
-  ILI9341_FillScreen(WHITE);
-  ILI9341_DrawPixel(100, 100, BLACK);
-  HAL_Delay(1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+    ILI9341_FillScreen(ILI9341_BLACK);
+    ILI9341_WriteString(10, 10, "Orangutan Ganja", Font_11x18, ILI9341_WHITE, ILI9341_GREEN);
+    HAL_Delay(500);
+    ILI9341_FillScreen(ILI9341_WHITE);
     /* USER CODE END WHILE */
+      
 
     /* USER CODE BEGIN 3 */
   }
@@ -516,7 +470,7 @@ static void MX_SPI4_Init(void)
   hspi4.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi4.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi4.Init.NSS = SPI_NSS_SOFT;
-  hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi4.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi4.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi4.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
