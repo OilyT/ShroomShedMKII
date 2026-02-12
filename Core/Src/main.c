@@ -30,9 +30,7 @@
 #include "stm32h5xx_hal_gpio.h"
 #include "stm32h5xx_hal_spi.h"
 
-#include "ili9341.h"
-#include "ili9341_touch.h"
-#include "fonts.h"
+#include "display_manager.h"
 
 /* USER CODE END Includes */
 
@@ -43,6 +41,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+// system polling
+#define SYSTICK_HZ 1000
+#define BUTTON_PROCESS_HZ 100
+#define SERIAL_PROCESS_HZ 1
+#define DISPLAY_PROCESS_HZ 5
+#define SENSOR_PROCESS_HZ 0.5
+#define CONTROL_PROCESS_HZ 5
 
 /* USER CODE END PD */
 
@@ -71,6 +76,12 @@ UART_HandleTypeDef huart7;
 PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
+uint32_t currentSystick;
+uint32_t lastSerialProcess;
+uint32_t lastButtonProcess;
+uint32_t lastDisplayProcess;
+uint32_t lastControlProcess;
+uint32_t lastSensorProcess;
 
 /* USER CODE END PV */
 
@@ -143,12 +154,8 @@ int main(void)
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
-
-  ILI9341_Init();
+  initDisplay();
  
-
-
 
 
   /* USER CODE END 2 */
@@ -158,15 +165,14 @@ int main(void)
 
   while (1)
   {
-    ILI9341_FillScreen(ILI9341_BLACK);
-    ILI9341_WriteString(10, 10, "Orangutan Ganja", Font_11x18, ILI9341_WHITE, ILI9341_GREEN);
-    HAL_Delay(500);
 
-    ILI9341_FillScreen(ILI9341_WHITE);
-    HAL_Delay(500);
+
+  if (lastDisplayProcess + (SYSTICK_HZ/DISPLAY_PROCESS_HZ) < HAL_GetTick()) {
+    lastDisplayProcess = HAL_GetTick();
+    displayProcess();
+  }
 
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

@@ -59,6 +59,7 @@ static void ILI9341_SetAddressWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint
 
 void ILI9341_Init() {
     ILI9341_Reset();
+    
 
     // command list is based on https://github.com/martnak/STM32-ILI9341
 
@@ -291,11 +292,9 @@ void ILI9341_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
         data[offset] = color >> 8;
         data[offset + 1u] = color & 0xFF;
     }
-
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
     ILI9341_WriteData(data, data_size);
     free(data);
-
 
     ILI9341_Unselect();
 

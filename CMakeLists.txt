@@ -39,6 +39,14 @@ add_subdirectory(cmake/stm32cubemx)
 
 add_subdirectory(lvgl)
 
+# Create EEZ UI library
+file(GLOB EEZ_UI_SOURCES "Lib/EEZ/src/ui/*.c")
+add_library(eez_ui STATIC ${EEZ_UI_SOURCES})
+target_include_directories(eez_ui PUBLIC 
+    Lib/EEZ/src/ui
+    lvgl/src
+)
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -48,9 +56,9 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # add user defined source files here
-    Lib/ili9341/fonts.c
     Lib/ili9341/ili9341.c
     Lib/ili9341/ili9341_touch.c
+    Core/Src/display_manager.c
 )
 
 # Add include paths
@@ -73,6 +81,7 @@ list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
 target_link_libraries(${CMAKE_PROJECT_NAME}
     stm32cubemx
     lvgl
+    eez_ui
 
     # Add user defined libraries
 )
