@@ -30,7 +30,9 @@
 #include "stm32h5xx_hal_gpio.h"
 #include "stm32h5xx_hal_spi.h"
 
+#include "shroomshed.h"
 #include "display_manager.h"
+#include "sensors.h"
 
 /* USER CODE END Includes */
 
@@ -107,6 +109,7 @@ static void MX_SPI4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+struct shroomShed_t shroomShed;
 
 /* USER CODE END 0 */
 
@@ -118,6 +121,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+
 
   /* USER CODE END 1 */
 
@@ -155,6 +159,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   initDisplay();
+  init_sensors();
  
 
 
@@ -166,13 +171,18 @@ int main(void)
   while (1)
   {
 
-
   if (lastDisplayProcess + (SYSTICK_HZ/DISPLAY_PROCESS_HZ) < HAL_GetTick()) {
     lastDisplayProcess = HAL_GetTick();
     displayProcess();
   }
 
+  if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < HAL_GetTick()) {
+    lastSensorProcess = HAL_GetTick();
+    read_sensors();
+  }
+
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

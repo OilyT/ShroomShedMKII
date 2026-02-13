@@ -12,16 +12,20 @@
 #include "lvgl.h"
 #include "stm32h5xx_hal.h"
 #include "ui.h"
+#include "vars.h"
+#include "shroomshed.h"
 
 
 /* Declare buffer for 1/10 screen size; BYTES_PER_PIXEL will be 2 for RGB565. */
 #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565))
 static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
 
-
 lv_display_t * display;
 
+
 void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map);
+void update_display_vars(void);
+
 
 
 void initDisplay(void) {
@@ -57,13 +61,11 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
     int32_t height = area->y2 - area->y1 + 1;
     int32_t total_pixels = width * height;
     
-    /* Swap bytes for each pixel (LVGL little-endian to ST7735 big-endian) 
+    /* Swap bytes for each pixel (LVGL little-endian to ILI9341 big-endian) */
     for(int32_t i = 0; i < total_pixels; i++) {
         uint16_t pixel = buf16[i];
         buf16[i] = (pixel >> 8) | (pixel << 8);  // Swap MSB and LSB
     }
-    */
-    
 
     /* Send the entire buffer as one rectangular region */
     ILI9341_DrawImage(area->x1, area->y1, width, height, buf16);
@@ -72,6 +74,8 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
 
 
 void updateDisplay(void) {
+    update_display_vars();
+
     // Call LVGL timer handler
     lv_timer_handler();
     
@@ -86,6 +90,11 @@ void displayProcess(void) {
     }
 
     updateDisplay();
+}
+
+void update_display_vars(void) {
+    set_var_display_humidity(shroomShed.humidityCurrent);
+    set_var_display_temperature(shroomShed.temperatureCurrent);
 }
 
 

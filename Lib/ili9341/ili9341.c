@@ -292,12 +292,10 @@ void ILI9341_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
         data[offset] = color >> 8;
         data[offset + 1u] = color & 0xFF;
     }
-    HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
     ILI9341_WriteData(data, data_size);
     free(data);
 
     ILI9341_Unselect();
-
 }
 
 void ILI9341_FillScreen(uint16_t color) {
@@ -309,10 +307,8 @@ void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uin
     if((x + w - 1) >= ILI9341_WIDTH) return;
     if((y + h - 1) >= ILI9341_HEIGHT) return;
 
-    ILI9341_Select();
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
     ILI9341_WriteData((uint8_t*)data, sizeof(uint16_t)*w*h);
-    ILI9341_Unselect();
 }
 
 void ILI9341_InvertColors(bool invert) {

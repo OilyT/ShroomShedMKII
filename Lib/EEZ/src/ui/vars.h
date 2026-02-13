@@ -16,7 +16,7 @@ extern "C" {
 
 enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_DISPLAY_HUMIDITY = 0,
-    FLOW_GLOBAL_VARIABLE_DISPLAY_TEMPERAURE = 1,
+    FLOW_GLOBAL_VARIABLE_DISPLAY_TEMPERATURE = 1,
     FLOW_GLOBAL_VARIABLE_DISPLAY_AIRFLOW_STRING = 2,
     FLOW_GLOBAL_VARIABLE_DISPLAY_AIRFLOW_INT = 3
 };
@@ -25,8 +25,8 @@ enum FlowGlobalVariables {
 
 extern float get_var_display_humidity();
 extern void set_var_display_humidity(float value);
-extern float get_var_display_temperaure();
-extern void set_var_display_temperaure(float value);
+extern float get_var_display_temperature();
+extern void set_var_display_temperature(float value);
 extern const char *get_var_display_airflow_string();
 extern void set_var_display_airflow_string(const char *value);
 extern int32_t get_var_display_airflow_int();

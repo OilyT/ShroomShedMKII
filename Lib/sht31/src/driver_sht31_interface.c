@@ -40,10 +40,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
-#include "stm32f4xx_hal_i2c.h"
-#include "usbd_cdc_if.h"
+#include "stm32h5xx_hal_i2c.h"
 
-extern I2C_HandleTypeDef hi2c2;
+extern I2C_HandleTypeDef hi2c3;
 char sht31_usb_buffer[200];
 
 /**
@@ -83,9 +82,19 @@ uint8_t sht31_interface_iic_deinit(void)
  */
 uint8_t sht31_interface_iic_write_address16(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t len)
 {
-    if (HAL_I2C_Mem_Write(&hi2c2, addr, reg, I2C_MEMADD_SIZE_16BIT, buf, len, 1000)) {
+    uint8_t tx_len = (uint8_t)(2U + len);
+    uint8_t tx_buf[2U + len];
+
+    tx_buf[0] = (uint8_t)(reg >> 8);
+    tx_buf[1] = (uint8_t)(reg & 0xFF);
+    if (buf != NULL && len > 0U) {
+        (void)memcpy(&tx_buf[2], buf, len);
+    }
+
+    if (HAL_I2C_Master_Transmit(&hi2c3, addr, tx_buf, tx_len, 1000) != HAL_OK) {
         return 1;
     }
+
     return 0;
 }
 
@@ -102,7 +111,16 @@ uint8_t sht31_interface_iic_write_address16(uint8_t addr, uint16_t reg, uint8_t 
  */
 uint8_t sht31_interface_iic_read_address16(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t len)
 {
-    if (HAL_I2C_Mem_Read(&hi2c2, addr, reg, I2C_MEMADD_SIZE_16BIT, buf, len, 1000)) {
+    uint8_t cmd_buf[2];
+
+    cmd_buf[0] = (uint8_t)(reg >> 8);
+    cmd_buf[1] = (uint8_t)(reg & 0xFF);
+
+    if (HAL_I2C_Master_Transmit(&hi2c3, addr, cmd_buf, 2U, 1000) != HAL_OK) {
+        return 1;
+    }
+
+    if (HAL_I2C_Master_Receive(&hi2c3, addr, buf, len, 1000) != HAL_OK) {
         return 1;
     }
     return 0;
@@ -122,7 +140,7 @@ uint8_t sht31_interface_iic_read_address16(uint8_t addr, uint16_t reg, uint8_t *
 uint8_t sht31_interface_iic_scl_read_address16(uint8_t addr, uint16_t reg, uint8_t *buf, uint16_t len)
 {
     
-    if(HAL_I2C_Mem_Read(&hi2c2, addr, reg, I2C_MEMADD_SIZE_16BIT, buf, len, 1000) != HAL_OK)
+    if(HAL_I2C_Mem_Read(&hi2c3, addr, reg, I2C_MEMADD_SIZE_16BIT, buf, len, 1000) != HAL_OK)
     {
         return 1;
     }
@@ -159,7 +177,7 @@ void sht31_interface_debug_print(const char *const fmt, ...)
         len++;
     }
     
-    CDC_Transmit_FS((uint8_t*)sht31_usb_buffer, len);  
+    //CDC_Transmit_FS((uint8_t*)sht31_usb_buffer, len);  
 }
 
 /**

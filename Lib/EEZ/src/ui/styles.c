@@ -11,8 +11,9 @@
 
 void init_style_shroom_shed_header_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_text_color(style, lv_color_hex(0xff11c8da));
-    lv_style_set_text_font(style, &lv_font_montserrat_18);
+    lv_style_set_text_font(style, &lv_font_montserrat_32);
     lv_style_set_text_align(style, LV_TEXT_ALIGN_CENTER);
+    lv_style_set_text_opa(style, 255);
 };
 
 lv_style_t *get_style_shroom_shed_header_MAIN_DEFAULT() {
@@ -42,7 +43,7 @@ void remove_style_shroom_shed_header(lv_obj_t *obj) {
 void init_style_shroom_shed_sub_heading_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_text_color(style, lv_color_hex(0xff11c8da));
     lv_style_set_text_opa(style, 255);
-    lv_style_set_text_font(style, &lv_font_montserrat_14);
+    lv_style_set_text_font(style, &lv_font_montserrat_24);
     lv_style_set_text_align(style, LV_TEXT_ALIGN_CENTER);
 };
 
@@ -73,7 +74,7 @@ void remove_style_shroom_shed_sub_heading(lv_obj_t *obj) {
 void init_style_shroom_shed_small_label_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_text_color(style, lv_color_hex(0xff11c8da));
     lv_style_set_text_opa(style, 255);
-    lv_style_set_text_font(style, &lv_font_montserrat_10);
+    lv_style_set_text_font(style, &lv_font_montserrat_16);
     lv_style_set_text_align(style, LV_TEXT_ALIGN_CENTER);
 };
 
@@ -156,6 +157,7 @@ void init_style_default_scale_INDICATOR_DEFAULT(lv_style_t *style) {
     lv_style_set_line_width(style, 2);
     lv_style_set_line_color(style, lv_color_hex(0xff5da0aa));
     lv_style_set_radius(style, 0);
+    lv_style_set_text_font(style, &lv_font_montserrat_16);
 };
 
 lv_style_t *get_style_default_scale_INDICATOR_DEFAULT() {
@@ -171,7 +173,7 @@ lv_style_t *get_style_default_scale_INDICATOR_DEFAULT() {
 void init_style_default_scale_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_text_color(style, lv_color_hex(0xff10bdd8));
     lv_style_set_line_color(style, lv_color_hex(0xff5da0aa));
-    lv_style_set_text_font(style, &lv_font_montserrat_10);
+    lv_style_set_text_font(style, &lv_font_montserrat_16);
 };
 
 lv_style_t *get_style_default_scale_MAIN_DEFAULT() {

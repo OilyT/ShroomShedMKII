@@ -10,7 +10,6 @@ extern "C" {
 typedef struct _objects_t {
     lv_obj_t *splash_screen;
     lv_obj_t *main;
-    lv_obj_t *header;
     lv_obj_t *humidity_bar;
     lv_obj_t *humidity_label;
     lv_obj_t *humidity_scale;

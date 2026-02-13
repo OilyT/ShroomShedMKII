@@ -39,33 +39,40 @@ add_subdirectory(cmake/stm32cubemx)
 
 add_subdirectory(lvgl)
 
+
 # Create EEZ UI library
 file(GLOB EEZ_UI_SOURCES "Lib/EEZ/src/ui/*.c")
 add_library(eez_ui STATIC ${EEZ_UI_SOURCES})
 target_include_directories(eez_ui PUBLIC 
     Lib/EEZ/src/ui
+    Lib/EEZ/src/images
     lvgl/src
 )
 
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
-    
+    lvgl
 )
 
 # Add sources to executable
+file(GLOB SHT31_SOURCES "Lib/sht31/src/*.c")
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    # add user defined source files here
+    # Add user sources here
     Lib/ili9341/ili9341.c
     Lib/ili9341/ili9341_touch.c
     Core/Src/display_manager.c
+    Core/Src/sensors.c
+    ${SHT31_SOURCES}
+    
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
-    # add user defined include paths here
+    # Add user defined include paths
     Core/Inc
     Lib/ili9341
+    Lib/sht31/src
     lvgl
 )
 

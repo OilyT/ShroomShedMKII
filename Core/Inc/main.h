@@ -22,6 +22,7 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
+#include "shroomshed.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -36,6 +37,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+extern struct shroomShed_t shroomShed;
 
 /* USER CODE END ET */
 
