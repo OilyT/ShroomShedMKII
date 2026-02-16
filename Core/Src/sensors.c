@@ -7,7 +7,7 @@
 
 #include "sensors.h"
 #include "main.h"
-#include "driver_sht31.h"
+#include "SCD40_API.h"
 #include "shroomshed.h"
 #include "driver_sht31_basic.h"
 #include "driver_sht31_shot.h"
@@ -16,9 +16,11 @@
 
 
 uint8_t init_res;
-uint8_t sn[4];
+
 float temperature;
 float humidity;
+uint16_t co2;
+
 char err_buffer[200];
 
 
@@ -26,29 +28,24 @@ void init_sensors(void) {
     init_res = sht31_shot_init(SHT31_ADDRESS_1);
     if (init_res != 0) {
         sprintf(err_buffer, "Failed to initialize SHT31 sensor - Error code: %d\r\n", init_res);
-        //CDC_Transmit_FS((uint8_t*)usb_buffer, strlen(usb_buffer));
-    } else {
-        //sprintf(&usb_buffer, "SHT31 sensor initialized successfully\r\n");
-        //CDC_Transmit_FS((uint8_t*)usb_buffer, strlen(usb_buffer));
     }
 
-    sht31_shot_get_serial_number(sn);
-    //sprintf(&usb_buffer, "sht31: serial number is 0x%02X 0x%02X 0x%02X 0x%02X.\r\n", sn[0], sn[1], sn[2], sn[3]);
-    //CDC_Transmit_FS((uint8_t*)usb_buffer, strlen(usb_buffer));
-    
-    HAL_Delay(500);
+    if (!Init_SCD40()) {
+        sprintf(err_buffer, "Failed to initialize SCD40 sensor - No serial number detected\r\n");
+    }
 }
 
 void read_sensors(void) {
-    if (sht31_shot_read(&temperature, &humidity)) {
-        //sprintf(&usb_buffer, "Failed to read from SHT31 sensor\r\n");
-        //CDC_Transmit_FS((uint8_t*)usb_buffer, strlen(usb_buffer));
-    } else {
-        //sprintf(&usb_buffer, "SHT31 Read Result: %d, Temperature: %d C, Humidity: %d %%\r\n", res, (int16_t)temperature, (int16_t)humidity);
-        //CDC_Transmit_FS((uint8_t*)usb_buffer, strlen(usb_buffer));
+    if (!sht31_shot_read(&temperature, &humidity)) {
         shroomShed.temperatureCurrent = temperature;
         shroomShed.humidityCurrent = humidity;  
-    } 
+    }
+
+    co2 = get_co2();
+    if (co2 != 0) {
+        shroomShed.co2Current = co2;
+    }
+
 }
     
 

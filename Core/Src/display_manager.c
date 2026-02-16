@@ -22,9 +22,9 @@ static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
 
 lv_display_t * display;
 
-
 void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map);
 void update_display_vars(void);
+void updateDisplay(void);
 
 
 
@@ -48,7 +48,8 @@ void initDisplay(void) {
 
     // Initialize EEZ Studio generated UI
     ui_init();
-    loadScreen(SCREEN_ID_SPLASH_SCREEN); 
+    ui_tick();
+    lv_timer_handler();
  }
 
 
@@ -76,18 +77,16 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
 void updateDisplay(void) {
     update_display_vars();
 
-    // Call LVGL timer handler
-    lv_timer_handler();
-    
     // Call EEZ UI tick (handles screen updates)
     ui_tick();
+
+    // Call LVGL timer handler
+    lv_timer_handler();
 }
 
 void displayProcess(void) {
     // Placeholder for display processing code
-    if (HAL_GetTick() > 5000) {
-        loadScreen(SCREEN_ID_MAIN);
-    }
+    loadScreen(SCREEN_ID_MAIN);
 
     updateDisplay();
 }

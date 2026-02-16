@@ -22,7 +22,6 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 
-#include "shroomshed.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -101,16 +100,6 @@ void Error_Handler(void);
 #define ENS210_SCL_GPIO_Port GPIOB
 #define ENS210_SDA_Pin GPIO_PIN_12
 #define ENS210_SDA_GPIO_Port GPIOB
-#define INPUT_3_Pin GPIO_PIN_9
-#define INPUT_3_GPIO_Port GPIOD
-#define INPUT_2_Pin GPIO_PIN_10
-#define INPUT_2_GPIO_Port GPIOD
-#define INPUT_1_Pin GPIO_PIN_11
-#define INPUT_1_GPIO_Port GPIOD
-#define ENCODER_B_Pin GPIO_PIN_12
-#define ENCODER_B_GPIO_Port GPIOD
-#define ENCODER_A_Pin GPIO_PIN_13
-#define ENCODER_A_GPIO_Port GPIOD
 #define SHT31_SDA_Pin GPIO_PIN_9
 #define SHT31_SDA_GPIO_Port GPIOC
 #define SHT31_SCL_Pin GPIO_PIN_8

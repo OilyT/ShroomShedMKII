@@ -29,8 +29,8 @@ bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
     uint32_t avg_y = 0;
     uint8_t nsamples = 0;
     for(uint8_t i = 0; i < 16; i++) {
-        if(!ILI9341_TouchPressed())
-            break;
+        //if(!ILI9341_TouchPressed())
+            //break;
 
         nsamples++;
 

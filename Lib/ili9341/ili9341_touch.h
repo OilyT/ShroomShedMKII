@@ -3,6 +3,8 @@
 #define __ILI9341_TOUCH_H__
 
 #include <stdbool.h>
+#include "main.h"
+#include "stm32h5xx_hal_spi.h"
 
 /*** Redefine if necessary ***/
 
@@ -10,9 +12,9 @@
 #define ILI9341_TOUCH_SPI_PORT hspi1
 extern SPI_HandleTypeDef ILI9341_TOUCH_SPI_PORT;
 
-#define ILI9341_TOUCH_IRQ_Pin       GPIO_PIN_4 // Arduino D5
+#define ILI9341_TOUCH_IRQ_Pin       GPIO_PIN_6
 #define ILI9341_TOUCH_IRQ_GPIO_Port GPIOB
-#define ILI9341_TOUCH_CS_Pin        GPIO_PIN_10 // Arduino D2
+#define ILI9341_TOUCH_CS_Pin        GPIO_PIN_15
 #define ILI9341_TOUCH_CS_GPIO_Port  GPIOA
 
 // change depending on screen orientation

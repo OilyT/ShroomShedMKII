@@ -63,6 +63,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Lib/ili9341/ili9341_touch.c
     Core/Src/display_manager.c
     Core/Src/sensors.c
+    Lib/SCD40/SCD40_driver.c
+    Lib/SCD40/SCD40_API.c
     ${SHT31_SOURCES}
     
 )
@@ -73,6 +75,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Inc
     Lib/ili9341
     Lib/sht31/src
+    Lib/SCD40
     lvgl
 )
 

@@ -24,6 +24,7 @@ struct shroomShed_t {
 
     float humidityCurrent;
     float temperatureCurrent;
+    uint16_t co2Current;
     uint8_t humidityControlvalue;
     uint8_t fanSpeed;
 
