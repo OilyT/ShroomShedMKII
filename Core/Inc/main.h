@@ -47,6 +47,7 @@ extern struct shroomShed_t shroomShed;
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
+#define USB_FS
 
 /* USER CODE END EM */
 

@@ -57,6 +57,9 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 
 # Add sources to executable
 file(GLOB SHT31_SOURCES "Lib/sht31/src/*.c")
+file (GLOB USB_SOURCES "Lib/USB/Core/Src/*.c" "Lib/USB/Class/CDC/Src/*.c")
+
+
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Lib/ili9341/ili9341.c
@@ -66,6 +69,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Lib/SCD40/SCD40_driver.c
     Lib/SCD40/SCD40_API.c
     ${SHT31_SOURCES}
+    ${USB_SOURCES}
     
 )
 
@@ -73,6 +77,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
     Core/Inc
+    Lib/USB/Class/CDC/Inc
+    Lib/USB/Core/Inc
     Lib/ili9341
     Lib/sht31/src
     Lib/SCD40

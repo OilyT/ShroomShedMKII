@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "app_usbx_device.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -26,11 +25,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "usbd_core.h"
+#include "usbd_cdc_if.h"
+
 #include "ili9341_touch.h"
-#include "stm32h562xx.h"
-#include "stm32h5xx_hal.h"
-#include "stm32h5xx_hal_gpio.h"
-#include "stm32h5xx_hal_spi.h"
 
 #include "shroomshed.h"
 #include "display_manager.h"
@@ -86,6 +84,11 @@ uint32_t lastDisplayProcess;
 uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
 
+USBD_HandleTypeDef hUsbDeviceFS;
+extern USBD_DescriptorsTypeDef Class_Desc;
+
+uint8_t TxMessageBuffer[100];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -122,7 +125,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -155,14 +158,12 @@ int main(void)
   MX_UART7_Init();
   MX_SPI6_Init();
   MX_SPI4_Init();
-  MX_USBX_Device_Init();
   /* USER CODE BEGIN 2 */
 
   initDisplay();
   displayProcess();
   init_sensors();
  
-
 
   /* USER CODE END 2 */
 
@@ -190,8 +191,9 @@ int main(void)
 
   if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
     lastSerialProcess = HAL_GetTick();
-    printf("Serial monitor teset :)\r\n");
-  }
+    if (hUsbDeviceFS.pClassData != NULL) 
+      TEMPLATE_Transmit(TxMessageBuffer, sizeof(TxMessageBuffer));
+    }
 
 
     /* USER CODE END WHILE */
@@ -219,8 +221,9 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLL1_SOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
@@ -501,7 +504,7 @@ static void MX_SPI4_Init(void)
   hspi4.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi4.Init.NSS = SPI_NSS_SOFT;
   hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
-  hspi4.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi4.Init.FirstBit = SPI_FIRSTBIT_LSB;
   hspi4.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi4.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi4.Init.CRCPolynomial = 0x7;
@@ -809,7 +812,7 @@ static void MX_USB_PCD_Init(void)
 {
 
   /* USER CODE BEGIN USB_Init 0 */
-
+  hpcd_USB_DRD_FS.pData = &hUsbDeviceFS;
   /* USER CODE END USB_Init 0 */
 
   /* USER CODE BEGIN USB_Init 1 */
@@ -831,7 +834,18 @@ static void MX_USB_PCD_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USB_Init 2 */
+  if(USBD_Init(&hUsbDeviceFS, &Class_Desc, 0) != USBD_OK)
+        Error_Handler();
 
+  if (USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC) != USBD_OK)
+        Error_Handler();
+
+  if(USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_CDC_Template_fops) != USBD_OK)
+        Error_Handler();
+
+  if(USBD_Start(&hUsbDeviceFS) != USBD_OK)
+        Error_Handler();
+      
   /* USER CODE END USB_Init 2 */
 
 }

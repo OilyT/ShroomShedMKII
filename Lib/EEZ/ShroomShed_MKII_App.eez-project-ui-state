@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/0",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/1",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/4",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
@@ -201,10 +201,10 @@
                 {
                   "type": "tab",
                   "id": "#c7468f06-5989-4813-88bf-7a6a2ca57fec",
-                  "name": "Splash_Screen",
+                  "name": "Main",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/0",
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1011,12 +1011,34 @@
     },
     "[ShroomShed_MKII_App.eez-project]:/userPages/1[flow-state]": {
       "selection": {
-        "0": {}
+        "0": {
+          "1": {
+            "$selected": true
+          }
+        }
       },
       "transform": {
         "translate": {
           "x": -160,
           "y": -220
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ShroomShed_MKII_App.eez-project]:/userPages/2[flow-state]": {
+      "selection": {
+        "0": {}
+      },
+      "transform": {
+        "translate": {
+          "x": -160,
+          "y": -320
         },
         "scale": 2
       },
