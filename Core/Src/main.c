@@ -21,18 +21,12 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <string.h>
-#include <stdarg.h>
-#include <stdio.h>
 
 #include "usbd_core.h"
 #include "usbd_cdc_if.h"
 
-#include "ili9341_touch.h"
-
 #include "shroomshed.h"
-#include "display_manager.h"
-#include "sensors.h"
+#include <stdint.h>
 
 /* USER CODE END Includes */
 
@@ -43,13 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-// system polling
-#define SYSTICK_HZ 1000
-#define BUTTON_PROCESS_HZ 5
-#define SERIAL_PROCESS_HZ 1
-#define DISPLAY_PROCESS_HZ 5
-#define SENSOR_PROCESS_HZ 0.5
-#define CONTROL_PROCESS_HZ 5
+
 
 /* USER CODE END PD */
 
@@ -77,17 +65,9 @@ UART_HandleTypeDef huart7;
 PCD_HandleTypeDef hpcd_USB_DRD_FS;
 
 /* USER CODE BEGIN PV */
-uint32_t currentSystick;
-uint32_t lastSerialProcess;
-uint32_t lastButtonProcess;
-uint32_t lastDisplayProcess;
-uint32_t lastControlProcess;
-uint32_t lastSensorProcess;
 
 USBD_HandleTypeDef hUsbDeviceFS;
 extern USBD_DescriptorsTypeDef Class_Desc;
-
-uint8_t TxMessageBuffer[100];
 
 /* USER CODE END PV */
 
@@ -112,7 +92,6 @@ static void MX_SPI4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-struct shroomShed_t shroomShed;
 
 
 /* USER CODE END 0 */
@@ -160,10 +139,8 @@ int main(void)
   MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
 
-  initDisplay();
-  displayProcess();
-  init_sensors();
- 
+  init_shroomshed();
+  
 
   /* USER CODE END 2 */
 
@@ -173,28 +150,7 @@ int main(void)
   while (1)
   {
 
-  if (lastDisplayProcess + (SYSTICK_HZ/DISPLAY_PROCESS_HZ) < HAL_GetTick()) {
-    lastDisplayProcess = HAL_GetTick();
-    displayProcess();
-  }
-
-  if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < HAL_GetTick()) {
-    lastSensorProcess = HAL_GetTick();
-    read_sensors();
-  }
-
-  if (lastButtonProcess + (SYSTICK_HZ/BUTTON_PROCESS_HZ) < HAL_GetTick()) {
-    lastButtonProcess = HAL_GetTick();
-    uint16_t x, y;
-    ILI9341_TouchGetCoordinates(&x, &y);
-  }
-
-  if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
-    lastSerialProcess = HAL_GetTick();
-    if (hUsbDeviceFS.pClassData != NULL) 
-      TEMPLATE_Transmit(TxMessageBuffer, sizeof(TxMessageBuffer));
-    }
-
+    loop();
 
     /* USER CODE END WHILE */
 
@@ -504,7 +460,7 @@ static void MX_SPI4_Init(void)
   hspi4.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi4.Init.NSS = SPI_NSS_SOFT;
   hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
-  hspi4.Init.FirstBit = SPI_FIRSTBIT_LSB;
+  hspi4.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi4.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi4.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi4.Init.CRCPolynomial = 0x7;
@@ -547,10 +503,10 @@ static void MX_SPI6_Init(void)
   hspi6.Instance = SPI6;
   hspi6.Init.Mode = SPI_MODE_MASTER;
   hspi6.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi6.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi6.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi6.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi6.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi6.Init.NSS = SPI_NSS_HARD_OUTPUT;
+  hspi6.Init.NSS = SPI_NSS_SOFT;
   hspi6.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
   hspi6.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi6.Init.TIMode = SPI_TIMODE_DISABLE;
@@ -599,7 +555,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 65535;
+  htim1.Init.Period = 2307;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -624,7 +580,7 @@ static void MX_TIM1_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
+  sConfigOC.Pulse = 300;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
@@ -883,7 +839,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DISPLAY_LED_Pin|SD_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : DISPLAY_DC_Pin DISPLAY_CS_Pin */
   GPIO_InitStruct.Pin = DISPLAY_DC_Pin|DISPLAY_CS_Pin;
@@ -906,12 +862,18 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(WATER_LED_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : DISPLAY_LED_Pin */
-  GPIO_InitStruct.Pin = DISPLAY_LED_Pin;
+  /*Configure GPIO pins : DISPLAY_LED_Pin SD_CS_Pin */
+  GPIO_InitStruct.Pin = DISPLAY_LED_Pin|SD_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DISPLAY_LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : TEMP_TOUCH_IRQ_Pin */
+  GPIO_InitStruct.Pin = TEMP_TOUCH_IRQ_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(TEMP_TOUCH_IRQ_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_HUMIDIFIER_Pin */
   GPIO_InitStruct.Pin = LED_HUMIDIFIER_Pin;

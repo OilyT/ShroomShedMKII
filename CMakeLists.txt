@@ -62,6 +62,7 @@ file (GLOB USB_SOURCES "Lib/USB/Core/Src/*.c" "Lib/USB/Class/CDC/Src/*.c")
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    Core/Src/shroomshed.c
     Lib/ili9341/ili9341.c
     Lib/ili9341/ili9341_touch.c
     Core/Src/display_manager.c

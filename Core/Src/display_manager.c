@@ -30,9 +30,10 @@ void updateDisplay(void);
 
 void initDisplay(void) {
     // Initialize the display hardware
+    HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
+
     ILI9341_Init();
     // turn on backlight
-    HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
 
     // initialize LVGL
     lv_init();
@@ -74,6 +75,14 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
 }
 
 
+
+void displayProcess(void) {
+    // Placeholder for display processing code
+    loadScreen(SCREEN_ID_MAIN);
+
+    updateDisplay();
+}
+
 void updateDisplay(void) {
     update_display_vars();
 
@@ -82,13 +91,6 @@ void updateDisplay(void) {
 
     // Call LVGL timer handler
     lv_timer_handler();
-}
-
-void displayProcess(void) {
-    // Placeholder for display processing code
-    loadScreen(SCREEN_ID_MAIN);
-
-    updateDisplay();
 }
 
 void update_display_vars(void) {

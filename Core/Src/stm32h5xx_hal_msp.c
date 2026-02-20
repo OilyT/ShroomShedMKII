@@ -382,12 +382,11 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     /**SPI6 GPIO Configuration
-    PA4     ------> SPI6_NSS
     PA5     ------> SPI6_SCK
     PA6     ------> SPI6_MISO
     PA7     ------> SPI6_MOSI
     */
-    GPIO_InitStruct.Pin = SD_NSS_Pin|SD_SCK_Pin|SD_MISO_Pin|SD_MOSI_Pin;
+    GPIO_InitStruct.Pin = SD_SCK_Pin|SD_MISO_Pin|SD_MOSI_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -481,12 +480,11 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
     __HAL_RCC_SPI6_CLK_DISABLE();
 
     /**SPI6 GPIO Configuration
-    PA4     ------> SPI6_NSS
     PA5     ------> SPI6_SCK
     PA6     ------> SPI6_MISO
     PA7     ------> SPI6_MOSI
     */
-    HAL_GPIO_DeInit(GPIOA, SD_NSS_Pin|SD_SCK_Pin|SD_MISO_Pin|SD_MOSI_Pin);
+    HAL_GPIO_DeInit(GPIOA, SD_SCK_Pin|SD_MISO_Pin|SD_MOSI_Pin);
 
     /* USER CODE BEGIN SPI6_MspDeInit 1 */
 
@@ -550,15 +548,24 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
 
     /* USER CODE END TIM1_MspPostInit 0 */
     __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOE_CLK_ENABLE();
     /**TIM1 GPIO Configuration
     PB1     ------> TIM1_CH3N
+    PE13     ------> TIM1_CH3
     */
-    GPIO_InitStruct.Pin = ERM_PWM2_Pin;
+    GPIO_InitStruct.Pin = FAN_PWM_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-    HAL_GPIO_Init(ERM_PWM2_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(FAN_PWM_GPIO_Port, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = PWM_TEST_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
+    HAL_GPIO_Init(PWM_TEST_GPIO_Port, &GPIO_InitStruct);
 
     /* USER CODE BEGIN TIM1_MspPostInit 1 */
 
@@ -574,12 +581,12 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     /**TIM3 GPIO Configuration
     PB0     ------> TIM3_CH3
     */
-    GPIO_InitStruct.Pin = ERM_PWM1_Pin;
+    GPIO_InitStruct.Pin = TRANDUCER_PWM_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
-    HAL_GPIO_Init(ERM_PWM1_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(TRANDUCER_PWM_GPIO_Port, &GPIO_InitStruct);
 
     /* USER CODE BEGIN TIM3_MspPostInit 1 */
 

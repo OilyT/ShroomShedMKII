@@ -36,7 +36,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-extern struct shroomShed_t shroomShed;
 
 /* USER CODE END ET */
 
@@ -79,22 +78,26 @@ void Error_Handler(void);
 #define RGB_MOSI_GPIO_Port GPIOC
 #define DISPLAY_LED_Pin GPIO_PIN_3
 #define DISPLAY_LED_GPIO_Port GPIOA
-#define SD_NSS_Pin GPIO_PIN_4
-#define SD_NSS_GPIO_Port GPIOA
+#define SD_CS_Pin GPIO_PIN_4
+#define SD_CS_GPIO_Port GPIOA
 #define SD_SCK_Pin GPIO_PIN_5
 #define SD_SCK_GPIO_Port GPIOA
 #define SD_MISO_Pin GPIO_PIN_6
 #define SD_MISO_GPIO_Port GPIOA
 #define SD_MOSI_Pin GPIO_PIN_7
 #define SD_MOSI_GPIO_Port GPIOA
-#define ERM_PWM1_Pin GPIO_PIN_0
-#define ERM_PWM1_GPIO_Port GPIOB
-#define ERM_PWM2_Pin GPIO_PIN_1
-#define ERM_PWM2_GPIO_Port GPIOB
+#define TEMP_TOUCH_IRQ_Pin GPIO_PIN_4
+#define TEMP_TOUCH_IRQ_GPIO_Port GPIOC
+#define TRANDUCER_PWM_Pin GPIO_PIN_0
+#define TRANDUCER_PWM_GPIO_Port GPIOB
+#define FAN_PWM_Pin GPIO_PIN_1
+#define FAN_PWM_GPIO_Port GPIOB
 #define RF_RX_Pin GPIO_PIN_7
 #define RF_RX_GPIO_Port GPIOE
 #define RF_TX_Pin GPIO_PIN_8
 #define RF_TX_GPIO_Port GPIOE
+#define PWM_TEST_Pin GPIO_PIN_13
+#define PWM_TEST_GPIO_Port GPIOE
 #define LED_HUMIDIFIER_Pin GPIO_PIN_14
 #define LED_HUMIDIFIER_GPIO_Port GPIOE
 #define ENS210_SCL_Pin GPIO_PIN_10

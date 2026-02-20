@@ -15,9 +15,14 @@
 extern "C" {   
 #endif
 
-
 #include <stdint.h>
 #include <stdbool.h>
+#include "main.h"
+#include "usbd_cdc_if.h"
+
+#define TRANSDUCER_PWM_TIMER htim1
+extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
+extern USBD_HandleTypeDef hUsbDeviceFS;
 
 
 struct shroomShed_t {
@@ -31,8 +36,10 @@ struct shroomShed_t {
     bool waterState;
 };
 
+void init_shroomshed(void);
+void loop(void);
+
 extern struct shroomShed_t shroomShed;
-extern char usb_buffer[200];
 
 
 #ifdef __cplusplus

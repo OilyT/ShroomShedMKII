@@ -70,7 +70,7 @@ void create_screen_main() {
             objects.humidity_bar = obj;
             lv_obj_set_pos(obj, 10, 27);
             lv_obj_set_size(obj, 150, 15);
-            lv_bar_set_range(obj, 40, 99);
+            lv_bar_set_range(obj, 30, 100);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE|LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
             lv_obj_set_style_max_width(obj, 536870911, LV_PART_INDICATOR | LV_STATE_DEFAULT);
             lv_obj_set_style_radius(obj, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
@@ -94,8 +94,8 @@ void create_screen_main() {
             lv_obj_set_pos(obj, 10, 42);
             lv_obj_set_size(obj, 150, 15);
             lv_scale_set_mode(obj, LV_SCALE_MODE_HORIZONTAL_BOTTOM);
-            lv_scale_set_range(obj, 40, 100);
-            lv_scale_set_total_tick_count(obj, 7);
+            lv_scale_set_range(obj, 30, 100);
+            lv_scale_set_total_tick_count(obj, 8);
             lv_scale_set_major_tick_every(obj, 2);
             lv_scale_set_label_show(obj, true);
             add_style_default_scale(obj);

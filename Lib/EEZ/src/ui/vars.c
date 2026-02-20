@@ -2,18 +2,37 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 
-float display_humidity = 0;
-float display_temperature = 0;
-int32_t display_airflow_int = 50;
-char display_airflow_string[10] = { 0 };
+static float display_humidity = 40;
+static float display_temperature = 15;
+static int32_t display_airflow_int = 50;
+static char display_airflow_string[10] = { 0 };
 
 float get_var_display_humidity() {
     return display_humidity;
 }
 
 void set_var_display_humidity(float value) {
-    display_humidity = value;
+    
+    if (fabs(display_humidity - value) < 0.5) {
+        display_humidity = value;
+        return;
+    } else {
+        if (display_humidity < value) {
+            display_humidity += 0.5;
+            if (display_humidity > value) {
+                display_humidity = value;
+            }
+        } else if (display_humidity > value) {
+            display_humidity -= 0.5;
+            if (display_humidity < value) {
+                display_humidity = value;
+            }
+        }
+    }
+
+
 }
 
 float get_var_display_temperature() {
@@ -21,7 +40,22 @@ float get_var_display_temperature() {
 }
 
 void set_var_display_temperature(float value) {
-    display_temperature = value;
+    if (fabs(display_temperature - value) < 0.5) {
+        display_temperature = value;
+        return;
+    } else {
+        if (display_temperature < value) {
+            display_temperature += 0.5;
+            if (display_temperature > value) {
+                display_temperature = value;
+            }
+        } else if (display_temperature > value) {
+            display_temperature -= 0.5;
+            if (display_temperature < value) {
+                display_temperature = value;
+            }
+        }
+    }
 }
 
 
