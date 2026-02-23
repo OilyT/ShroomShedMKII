@@ -139,7 +139,7 @@ void remove_style_default_container(lv_obj_t *obj) {
 void init_style_default_scale_ITEMS_DEFAULT(lv_style_t *style) {
     lv_style_set_length(style, 5);
     lv_style_set_line_width(style, 2);
-    lv_style_set_line_color(style, lv_color_hex(0xff5da0aa));
+    lv_style_set_line_color(style, lv_color_hex(0xff10bdd8));
 };
 
 lv_style_t *get_style_default_scale_ITEMS_DEFAULT() {
@@ -155,7 +155,7 @@ lv_style_t *get_style_default_scale_ITEMS_DEFAULT() {
 void init_style_default_scale_INDICATOR_DEFAULT(lv_style_t *style) {
     lv_style_set_length(style, 10);
     lv_style_set_line_width(style, 2);
-    lv_style_set_line_color(style, lv_color_hex(0xff5da0aa));
+    lv_style_set_line_color(style, lv_color_hex(0xff10bdd8));
     lv_style_set_radius(style, 0);
     lv_style_set_text_font(style, &lv_font_montserrat_16);
 };
@@ -172,7 +172,7 @@ lv_style_t *get_style_default_scale_INDICATOR_DEFAULT() {
 
 void init_style_default_scale_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_text_color(style, lv_color_hex(0xff10bdd8));
-    lv_style_set_line_color(style, lv_color_hex(0xff5da0aa));
+    lv_style_set_line_color(style, lv_color_hex(0xff10bdd8));
     lv_style_set_text_font(style, &lv_font_montserrat_16);
 };
 

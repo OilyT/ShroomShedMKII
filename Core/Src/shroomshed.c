@@ -14,8 +14,8 @@
 #include "display_manager.h"
 #include "sensors.h"
 #include "ili9341_touch.h"
+#include "ili9341.h"
 #include "stm32h5xx_hal_tim.h"
-
 
 
 /* ============================================================================
@@ -23,7 +23,7 @@
  * ============================================================================ */
 // system polling
 #define SYSTICK_HZ 1000
-#define BUTTON_PROCESS_HZ 10
+#define TOUCH_PROCESS_HZ 250
 #define SERIAL_PROCESS_HZ 10
 #define DISPLAY_PROCESS_HZ 10
 #define SENSOR_PROCESS_HZ 0.5
@@ -41,7 +41,7 @@
  * ============================================================================ */
 uint32_t currentSystick;
 uint32_t lastSerialProcess;
-uint32_t lastButtonProcess;
+uint32_t lastTouchProcess;
 uint32_t lastDisplayProcess;
 uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
@@ -60,9 +60,6 @@ void humidity_control(void);
  * Function Implementations
  * ============================================================================ */
 
-
-
-
 void init_shroomshed(void) {
     shroomShed.temperatureCurrent = 15.0f;
     shroomShed.humidityCurrent = 40.0f;
@@ -72,6 +69,11 @@ void init_shroomshed(void) {
     shroomShed.waterState = true;
 
     initDisplay();
+
+    //uint32_t min_x, min_y, max_x, max_y;
+    //calibrate_touch(&min_x, &min_y, &max_x, &max_y);
+    //sprintf(usb_buffer, " Min X: %lu, Max X: %lu, Min Y: %lu, Max Y: %lu\r\n", min_x, max_x, min_y, max_y);
+
     displayProcess();
     init_sensors();
     init_pwm();
@@ -93,15 +95,12 @@ void loop(void)
         read_sensors();
     }
 
-    if (lastButtonProcess + (SYSTICK_HZ/BUTTON_PROCESS_HZ) < HAL_GetTick()) {
-        lastButtonProcess = HAL_GetTick();
-        if (ILI9341_TouchPressed()) {
-            uint16_t x, y;
-            if (ILI9341_TouchGetCoordinates(&x, &y)) {
-                sprintf(usb_buffer, "touch at x: %d, y: %d\r\n", x, y);
-            }
-        }
+    
+    if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < HAL_GetTick()) {
+        lastTouchProcess = HAL_GetTick();
+        poll_touchpad();
     }
+    
 
     if (lastControlProcess + (SYSTICK_HZ/CONTROL_PROCESS_HZ) < HAL_GetTick()) {
         lastControlProcess = HAL_GetTick();
@@ -164,7 +163,7 @@ void loop(void)
     }
 
     if (printSerial) {
-        sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
+        //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
     }
     
     TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
@@ -174,3 +173,4 @@ void loop(void)
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
 
  }
+

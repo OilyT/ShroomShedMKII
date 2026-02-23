@@ -3,6 +3,7 @@
 #define __ILI9341_TOUCH_H__
 
 #include <stdbool.h>
+#include <stdint.h>
 #include "main.h"
 #include "stm32h5xx_hal_spi.h"
 
@@ -21,16 +22,23 @@ extern SPI_HandleTypeDef ILI9341_TOUCH_SPI_PORT;
 #define ILI9341_TOUCH_SCALE_X 320
 #define ILI9341_TOUCH_SCALE_Y 240
 
-// to calibrate uncomment UART_Printf line in ili9341_touch.c
-#define ILI9341_TOUCH_MIN_RAW_X 1500
-#define ILI9341_TOUCH_MAX_RAW_X 31000
-#define ILI9341_TOUCH_MIN_RAW_Y 3276
-#define ILI9341_TOUCH_MAX_RAW_Y 30110
+// default calibration values
+#define ILI9341_TOUCH_MIN_RAW_X 32590
+#define ILI9341_TOUCH_MAX_RAW_X 63328
+#define ILI9341_TOUCH_MIN_RAW_Y 32798
+#define ILI9341_TOUCH_MAX_RAW_Y 63723
+
+// uint32_t TOUCH_MIN_X;
+// uint32_t TOUCH_MAX_X;
+// uint32_t TOUCH_MIN_Y;
+// uint32_t TOUCH_MAX_Y;
 
 // call before initializing any SPI devices
 void ILI9341_TouchUnselect();
 
 bool ILI9341_TouchPressed();
 bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y);
+void calibrate_touch(uint32_t *min_x, uint32_t *min_y, uint32_t *max_x, uint32_t *max_y );
+
 
 #endif // __ILI9341_TOUCH_H__

@@ -69,6 +69,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/sensors.c
     Lib/SCD40/SCD40_driver.c
     Lib/SCD40/SCD40_API.c
+    Core/Src/actions.c
+    Core/Src/vars.c
     ${SHT31_SOURCES}
     ${USB_SOURCES}
     

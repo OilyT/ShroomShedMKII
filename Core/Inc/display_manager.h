@@ -9,12 +9,11 @@
 #ifndef __DISPLAY_MANAGER_H
 #define __DISPLAY_MANAGER_H
 
-
 #include "main.h"
+#include "lvgl.h"
 
 void displayProcess(void);
 void initDisplay(void);
-void updateDisplay(void);
-
+void poll_touchpad(void);
 
 #endif /* __DISPLAY_MANAGER_H */

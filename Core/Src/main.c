@@ -26,7 +26,6 @@
 #include "usbd_cdc_if.h"
 
 #include "shroomshed.h"
-#include <stdint.h>
 
 /* USER CODE END Includes */
 
@@ -92,7 +91,6 @@ static void MX_SPI4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 
 /* USER CODE END 0 */
 
