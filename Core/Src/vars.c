@@ -6,7 +6,7 @@
 #include "shroomshed.h"
 
 static float display_humidity = 40;
-static float display_temperature = 15;
+static float display_temperature = 20;
 static int32_t display_airflow_int = 50;
 char display_airflow_string[10] = { 0 };
 char humidity_display_string[11] = { 0 };
@@ -37,22 +37,22 @@ void set_var_humidity_fp(float value) {
 
 }
 
-float get_var_temp_fp() {
+float get_var_temperature_fp() {
     return display_temperature;
 }
 
-void set_var_temp_fp(float value) {
-    if (fabs(display_temperature - value) < 0.02) {
+void set_var_temperature_fp(float value) {
+    if (fabs(display_temperature - value) < 0.05) {
         display_temperature = value;
         return;
     } else {
         if (display_temperature < value) {
-            display_temperature += 0.02;
+            display_temperature += 0.05;
             if (display_temperature > value) {
                 display_temperature = value;
             }
         } else if (display_temperature > value) {
-            display_temperature -= 0.02;
+            display_temperature -= 0.05;
             if (display_temperature < value) {
                 display_temperature = value;
             }
@@ -60,6 +60,11 @@ void set_var_temp_fp(float value) {
     }
 }
 
+const char *get_var_temperature_str() {
+    static char temp_str[10];
+    snprintf(temp_str, sizeof(temp_str), "%.1f°C", display_temperature);
+    return temp_str;
+}
 
 int32_t get_var_airflow_int() {
     return display_airflow_int;
@@ -69,9 +74,8 @@ void set_var_airflow_int(int32_t value) {
     display_airflow_int = value;
 }
 
-
 const char *get_var_airflow_string() {
-    sprintf(display_airflow_string, "%lu%%", display_airflow_int);
+    sprintf(display_airflow_string, "%d%%", (int)display_airflow_int);
     return display_airflow_string;
 }
 
@@ -81,7 +85,7 @@ void set_var_airflow_string(const char *value) {
 }
 
 const char *get_var_humidity_display_str(void) {
-    snprintf(humidity_display_string, sizeof(humidity_display_string),"%2.1f / %d%%", display_humidity, shroomShed.humidityControlvalue);
+    snprintf(humidity_display_string, sizeof(humidity_display_string),"%.1f/%d%%", display_humidity, shroomShed.humidityControlvalue);
     return humidity_display_string;
 }
 

@@ -22,6 +22,10 @@ typedef struct _objects_t {
     lv_obj_t *incr_airflow;
     lv_obj_t *airflow_label;
     lv_obj_t *airflow_value_label;
+    lv_obj_t *temperature_scale;
+    lv_obj_t *temperature_bar;
+    lv_obj_t *temperature_label;
+    lv_obj_t *temperature_value_label;
 } objects_t;
 
 extern objects_t objects;

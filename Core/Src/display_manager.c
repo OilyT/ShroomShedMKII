@@ -6,13 +6,11 @@
 */
 
 #include "display_manager.h"
-#include "indev/lv_indev.h"
 #include "main.h"  
 #include "screens.h"
 #include "ili9341.h"
 #include "ili9341_touch.h"
 #include "lvgl.h"
-#include "stm32h5xx_hal.h"
 #include "ui.h"
 #include "vars.h"
 #include "shroomshed.h"
@@ -103,7 +101,7 @@ static void updateDisplay(void) {
 
 static void update_display_vars(void) {
     set_var_humidity_fp(shroomShed.humidityCurrent);
-    set_var_temp_fp(shroomShed.temperatureCurrent);
+    set_var_temperature_fp(shroomShed.temperatureCurrent);
     set_var_airflow_int(shroomShed.fanSpeed);
 }
 
@@ -128,11 +126,7 @@ void poll_touchpad(void) {
     if(ILI9341_TouchPressed()) {
         if (ILI9341_TouchGetCoordinates(&last_touch_x, &last_touch_y)) {
             touched_since_last_read = true;
-        } else {
-            touched_since_last_read = false;
         }
-    } else {
-        touched_since_last_read = false;
     }
 }
 
@@ -151,6 +145,7 @@ static void touchpad_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
     else {
         data->state = LV_INDEV_STATE_RELEASED;
     }
+    touched_since_last_read = false;
 
     /*Set the last pressed coordinates*/
     data->point.x = last_x;
