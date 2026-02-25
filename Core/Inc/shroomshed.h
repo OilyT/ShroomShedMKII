@@ -20,7 +20,7 @@ extern "C" {
 #include "main.h"
 #include "usbd_cdc_if.h"
 
-#define TRANSDUCER_PWM_TIMER htim1
+#define TRANSDUCER_PWM_TIMER htim3
 extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern USBD_HandleTypeDef hUsbDeviceFS;
 

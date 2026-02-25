@@ -15,6 +15,7 @@
 #include "sensors.h"
 #include "ili9341_touch.h"
 #include "ili9341.h"
+#include "stm32h5xx_hal_gpio.h"
 #include "stm32h5xx_hal_tim.h"
 
 
@@ -28,6 +29,7 @@
 #define DISPLAY_PROCESS_HZ 10
 #define SENSOR_PROCESS_HZ 0.5
 #define CONTROL_PROCESS_HZ 1
+#define LED_PROCESS_HZ 2
 
 // humidity PID
 #define PID_ID_PERIOD 2 // seconds
@@ -45,6 +47,7 @@ uint32_t lastTouchProcess;
 uint32_t lastDisplayProcess;
 uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
+uint32_t lastLedProcess;
 
 struct shroomShed_t shroomShed;
 
@@ -114,6 +117,11 @@ void loop(void)
             memset(usb_buffer, 0, sizeof(usb_buffer));
         }
     }
+
+    if (lastLedProcess + (SYSTICK_HZ/LED_PROCESS_HZ) < HAL_GetTick()) {
+        lastLedProcess = HAL_GetTick();
+        HAL_GPIO_TogglePin(WATER_LED_GPIO_Port, WATER_LED_Pin);
+    }
     /* Cleanup */
 }
 
@@ -170,7 +178,7 @@ void loop(void)
  }
 
  void init_pwm(void) {
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+    HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
 
  }
 

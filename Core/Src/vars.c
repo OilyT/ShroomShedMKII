@@ -33,8 +33,6 @@ void set_var_humidity_fp(float value) {
             }
         }
     }
-
-
 }
 
 float get_var_temperature_fp() {
