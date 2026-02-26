@@ -71,6 +71,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Lib/SCD40/SCD40_API.c
     Core/Src/actions.c
     Core/Src/vars.c
+    Core/Src/rgb.c
     ${SHT31_SOURCES}
     ${USB_SOURCES}
     

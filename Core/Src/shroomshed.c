@@ -17,6 +17,7 @@
 #include "ili9341.h"
 #include "stm32h5xx_hal_gpio.h"
 #include "stm32h5xx_hal_tim.h"
+#include "rgb.h"
 
 
 /* ============================================================================
@@ -29,7 +30,7 @@
 #define DISPLAY_PROCESS_HZ 10
 #define SENSOR_PROCESS_HZ 0.5
 #define CONTROL_PROCESS_HZ 1
-#define LED_PROCESS_HZ 2
+#define LED_PROCESS_HZ 25
 
 // humidity PID
 #define PID_ID_PERIOD 2 // seconds
@@ -80,6 +81,8 @@ void init_shroomshed(void) {
     displayProcess();
     init_sensors();
     init_pwm();
+
+    RGB_Init();
 }
 
 void loop(void)
@@ -120,7 +123,7 @@ void loop(void)
 
     if (lastLedProcess + (SYSTICK_HZ/LED_PROCESS_HZ) < HAL_GetTick()) {
         lastLedProcess = HAL_GetTick();
-        HAL_GPIO_TogglePin(WATER_LED_GPIO_Port, WATER_LED_Pin);
+        RGB_Process();
     }
     /* Cleanup */
 }
