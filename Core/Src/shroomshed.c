@@ -1,8 +1,8 @@
 /**
  * @file shroomshed.c
  * @brief Main source file for ShroomShed application
- * @author 
- * @date 
+ * @author yolo swaggins
+ * @date with your mum
  */
 
 #include <stdio.h>
@@ -23,14 +23,7 @@
 /* ============================================================================
  * Defines and Typedefs
  * ============================================================================ */
-// system polling
-#define SYSTICK_HZ 1000
-#define TOUCH_PROCESS_HZ 250
-#define SERIAL_PROCESS_HZ 10
-#define DISPLAY_PROCESS_HZ 10
-#define SENSOR_PROCESS_HZ 0.5
-#define CONTROL_PROCESS_HZ 1
-#define LED_PROCESS_HZ 25
+
 
 // humidity PID
 #define PID_ID_PERIOD 2 // seconds
@@ -48,7 +41,7 @@ uint32_t lastTouchProcess;
 uint32_t lastDisplayProcess;
 uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
-uint32_t lastLedProcess;
+uint32_t lastRgbProcess;
 
 struct shroomShed_t shroomShed;
 
@@ -100,13 +93,11 @@ void loop(void)
         lastSensorProcess = HAL_GetTick();
         read_sensors();
     }
-
     
     if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < HAL_GetTick()) {
         lastTouchProcess = HAL_GetTick();
         poll_touchpad();
     }
-    
 
     if (lastControlProcess + (SYSTICK_HZ/CONTROL_PROCESS_HZ) < HAL_GetTick()) {
         lastControlProcess = HAL_GetTick();
@@ -121,8 +112,8 @@ void loop(void)
         }
     }
 
-    if (lastLedProcess + (SYSTICK_HZ/LED_PROCESS_HZ) < HAL_GetTick()) {
-        lastLedProcess = HAL_GetTick();
+    if (lastRgbProcess + (SYSTICK_HZ/RGB_PROCESS_HZ) < HAL_GetTick()) {
+        lastRgbProcess = HAL_GetTick();
         RGB_Process();
     }
     /* Cleanup */

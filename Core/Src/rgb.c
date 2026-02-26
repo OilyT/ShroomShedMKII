@@ -1,70 +1,38 @@
 #include "rgb.h"
 #include <stdint.h>
-#include <string.h>
 #include "main.h"
 #include "stdbool.h"
-#include "stm32h5xx_hal.h"
+#include "shroomshed.h"
 
-/* RGB LED structs */
+
+#define RGB_BUFFER_SIZE 96
+#define DISCO_POWER 10
+#define DISCO_SPEED 10
+#define DISCO_OFFSET 10
+#define DISCO_STEP_DIVISOR (RGB_PROCESS_HZ * 50)
+#define REDSHIFT 50
+
+
 RGB_Colour zone_colour[4];
-uint8_t rgb_buffer[96];
+uint8_t rgb_buffer[RGB_BUFFER_SIZE];
 
 
-
-/* Function prototypes */
 static void RGB_flush_buffer(void);
 static uint8_t* rgb_colour_to_buffer(RGB_Colour color);
 static uint8_t RGB_bit_to_byte(uint8_t byte, uint8_t bit_position);
-void disco_mode(RGB_Colour *colour, uint8_t step, uint16_t offset);
-void set_all_zones(RGB_Colour colour);
-void RGB_flush_buffer(void);
+static void disco_mode(RGB_Colour *colour, uint16_t offset);
+static void set_all_zones(RGB_Colour colour);
+static void RGB_flush_buffer(void);
+
 
 
 void RGB_Init(void) {
 
-
-    set_all_zones((RGB_Colour){.red = 1, .green = 0, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 64, .green = 0, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 128, .green = 0, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 255, .green = 0, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 1, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 64, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 128, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 255, .blue = 0});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 0, .blue = 1});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 0, .blue = 64});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 0, .blue = 128});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    set_all_zones((RGB_Colour){.red = 0, .green = 0, .blue = 255});
-    RGB_flush_buffer();
-    HAL_Delay(100);
-    
 }
 
 void RGB_Process(void) {
     for (uint8_t i = 0; i < 4; i++) {
-        disco_mode(&zone_colour[i], 5, i*64);
+        disco_mode(&zone_colour[i], DISCO_OFFSET*i);
     }
     RGB_flush_buffer();
 }
@@ -76,7 +44,6 @@ void set_all_zones(RGB_Colour colour) {
 }
 
 void RGB_flush_buffer(void) {
-    // load all data into buffer
     uint8_t *zone_buffer;
     uint8_t byte;
 
@@ -87,48 +54,71 @@ void RGB_flush_buffer(void) {
             rgb_buffer[i*24 + j] = byte;
         }
     }
-
-    // transmit entire buffer
-    HAL_SPI_Transmit(&RGB_SPI_PORT, rgb_buffer, 96, HAL_MAX_DELAY);
+    HAL_SPI_Transmit(&RGB_SPI_PORT, rgb_buffer, RGB_BUFFER_SIZE, HAL_MAX_DELAY);
 }
 
-void disco_mode(RGB_Colour *colour, uint8_t step, uint16_t offset) {
-    
+void disco_mode(RGB_Colour *colour, uint16_t offset) {
+
     static uint16_t pos = 0;
+    static uint16_t step_remainder = 0;
+
+    uint16_t range = (DISCO_POWER * 255) / 100;
+    offset = (offset * range) / 100;
+    uint16_t step = (range * DISCO_SPEED);
+    step = step + step_remainder;
+    step_remainder = step % DISCO_STEP_DIVISOR;
+    step = step / DISCO_STEP_DIVISOR;
+
+    uint32_t redshift = (REDSHIFT * range * DISCO_POWER) / 10000;
+  
 
     pos = pos + step;
-    if (pos >= 767) {
-        pos = pos % 767;
+    if (pos >= range * 3) {
+        pos = pos % (range * 3);
     }
 
     uint16_t zone_pos = pos + offset;
-    if (zone_pos >= 767) {
-        zone_pos = zone_pos % 767;
+    if (zone_pos >= range * 3) {
+        zone_pos = zone_pos % (range * 3);
     }
 
+    uint8_t phase = zone_pos / range;
 
-    uint8_t phase = zone_pos / 255;
-
+    int16_t temp_red, temp_green, temp_blue;
     switch (phase) {
         case 0:
-            colour->red = zone_pos;
+            temp_red = zone_pos + redshift;
+            if (temp_red > range) {
+                temp_red = range;
+            }
+            colour->red = temp_red;
             colour->green = 0;
-            colour->blue = 255 - zone_pos;
+            temp_blue = (range) - zone_pos - redshift;
+            if (temp_blue < 0) {
+                temp_blue = 0;
+            }
+            colour->blue = temp_blue;
             break;
         case 1:
-            colour->red = 510 - zone_pos;
-            colour->green = zone_pos - 255;
+            temp_red = (range * 2) - zone_pos + redshift;
+            if (temp_red > range) {
+                temp_red = range;
+            }   
+            colour->red = temp_red;
+            temp_green = zone_pos - range - redshift;
+            if (temp_green < 0) {
+                temp_green = 0;
+            }
+            colour->green = temp_green;
             colour->blue = 0;
             break;
         case 2:
             colour->red = 0;
-            colour->green = 765 - zone_pos;
-            colour->blue = zone_pos - 510;
+            colour->green = (range * 3) - zone_pos;
+            colour->blue = zone_pos - (range * 2);
             break;
     }
 }
-
-
 
 static uint8_t* rgb_colour_to_buffer(RGB_Colour color) {
     uint8_t buffer[24] = {0};
@@ -140,7 +130,6 @@ static uint8_t* rgb_colour_to_buffer(RGB_Colour color) {
     uint8_t *pBuffer = &buffer[0];
     return pBuffer;
 }
-
 
 static uint8_t RGB_bit_to_byte(uint8_t byte, uint8_t bit_position) {
     uint8_t return_byte = (byte & (1 << bit_position)) ? LOGIC_1 : LOGIC_0;

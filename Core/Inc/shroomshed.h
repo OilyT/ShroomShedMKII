@@ -20,9 +20,20 @@ extern "C" {
 #include "main.h"
 #include "usbd_cdc_if.h"
 
+// system polling
+#define SYSTICK_HZ 1000
+#define TOUCH_PROCESS_HZ 250
+#define SERIAL_PROCESS_HZ 10
+#define DISPLAY_PROCESS_HZ 100
+#define SENSOR_PROCESS_HZ 0.5
+#define CONTROL_PROCESS_HZ 1
+#define RGB_PROCESS_HZ 100
+
 #define TRANSDUCER_PWM_TIMER htim3
+
 extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern USBD_HandleTypeDef hUsbDeviceFS;
+extern struct shroomShed_t shroomShed;
 
 
 struct shroomShed_t {
@@ -39,7 +50,6 @@ struct shroomShed_t {
 void init_shroomshed(void);
 void loop(void);
 
-extern struct shroomShed_t shroomShed;
 
 
 #ifdef __cplusplus
