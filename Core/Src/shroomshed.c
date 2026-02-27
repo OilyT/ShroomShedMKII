@@ -12,6 +12,7 @@
 #include "main.h"
 #include "shroomshed.h"
 #include "display_manager.h"
+#include "screens.h"
 #include "sensors.h"
 #include "ili9341_touch.h"
 #include "ili9341.h"
@@ -74,8 +75,9 @@ void init_shroomshed(void) {
     displayProcess();
     init_sensors();
     init_pwm();
-
     RGB_Init();
+
+    switch_screen(SCREEN_ID_MAIN);
 }
 
 void loop(void)
@@ -168,6 +170,7 @@ void loop(void)
         //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
     }
     
+    // load pulse value into timer register
     TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
  }
 

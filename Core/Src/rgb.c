@@ -6,15 +6,16 @@
 
 
 #define RGB_BUFFER_SIZE 96
-#define DISCO_POWER 10
+#define DISCO_POWER 35
 #define DISCO_SPEED 10
 #define DISCO_OFFSET 10
 #define DISCO_STEP_DIVISOR (RGB_PROCESS_HZ * 50)
-#define REDSHIFT 50
+#define REDSHIFT 35
 
 
 RGB_Colour zone_colour[4];
 uint8_t rgb_buffer[RGB_BUFFER_SIZE];
+RGB_disco_settings_t discoSettings;
 
 
 static void RGB_flush_buffer(void);
@@ -25,14 +26,22 @@ static void set_all_zones(RGB_Colour colour);
 static void RGB_flush_buffer(void);
 
 
-
 void RGB_Init(void) {
+    discoSettings.discoPower = DISCO_POWER;
+    discoSettings.discoSpeed = DISCO_SPEED;
+    discoSettings.discoOffset = DISCO_OFFSET;
+    discoSettings.on = false;
 
 }
 
 void RGB_Process(void) {
-    for (uint8_t i = 0; i < 4; i++) {
-        disco_mode(&zone_colour[i], DISCO_OFFSET*i);
+    if (discoSettings.on) {
+        for (uint8_t i = 0; i < 4; i++) {
+            disco_mode(&zone_colour[i], discoSettings.discoOffset*i);
+        } 
+     } else {
+        RGB_Colour off_colour = { .red = 0, .green = 0, .blue = 0 };
+        set_all_zones(off_colour);
     }
     RGB_flush_buffer();
 }
@@ -62,16 +71,15 @@ void disco_mode(RGB_Colour *colour, uint16_t offset) {
     static uint16_t pos = 0;
     static uint16_t step_remainder = 0;
 
-    uint16_t range = (DISCO_POWER * 255) / 100;
+    uint16_t range = (discoSettings.discoPower * 255) / 100;
     offset = (offset * range) / 100;
-    uint16_t step = (range * DISCO_SPEED);
+    uint16_t step = (range * discoSettings.discoSpeed);
     step = step + step_remainder;
     step_remainder = step % DISCO_STEP_DIVISOR;
     step = step / DISCO_STEP_DIVISOR;
 
-    uint32_t redshift = (REDSHIFT * range * DISCO_POWER) / 10000;
+    uint32_t redshift = (REDSHIFT * range * discoSettings.discoPower) / 10000;
   
-
     pos = pos + step;
     if (pos >= range * 3) {
         pos = pos % (range * 3);

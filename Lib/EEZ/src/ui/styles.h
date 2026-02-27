@@ -34,6 +34,18 @@ lv_style_t *get_style_default_scale_MAIN_DEFAULT();
 void add_style_default_scale(lv_obj_t *obj);
 void remove_style_default_scale(lv_obj_t *obj);
 
+// Style: Std_button
+lv_style_t *get_style_std_button_MAIN_DEFAULT();
+void add_style_std_button(lv_obj_t *obj);
+void remove_style_std_button(lv_obj_t *obj);
+
+// Style: Disco_slider
+lv_style_t *get_style_disco_slider_INDICATOR_DEFAULT();
+lv_style_t *get_style_disco_slider_KNOB_DEFAULT();
+lv_style_t *get_style_disco_slider_MAIN_DEFAULT();
+void add_style_disco_slider(lv_obj_t *obj);
+void remove_style_disco_slider(lv_obj_t *obj);
+
 
 
 #ifdef __cplusplus

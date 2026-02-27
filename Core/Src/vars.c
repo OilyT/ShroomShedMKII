@@ -4,12 +4,16 @@
 #include <stdio.h>
 #include <math.h>
 #include "shroomshed.h"
+#include "rgb.h"
 
 static float display_humidity = 40;
 static float display_temperature = 20;
 static int32_t display_airflow_int = 50;
 char display_airflow_string[10] = { 0 };
 char humidity_display_string[11] = { 0 };
+
+
+// MAIN SCREEN VARS
 
 float get_var_humidity_fp(void) {
     return display_humidity;
@@ -90,3 +94,35 @@ const char *get_var_humidity_display_str(void) {
 void set_var_humidity_display_str(const char *value) {
     // not used
 }
+
+
+// DISCO SCREEN VARS
+static uint8_t disco_power = 50;
+static uint8_t disco_speed = 50;
+static uint8_t disco_phase = 25;
+
+
+int32_t get_var_disco_power_int() {
+    return disco_power;
+}
+
+void set_var_disco_power_int(int32_t value) {
+    disco_power = value;
+}
+
+int32_t get_var_disco_speed_int() {
+    return disco_speed;
+}
+
+void set_var_disco_speed_int(int32_t value) {
+    disco_speed = value;
+}
+
+int32_t get_var_disco_phase_int() {
+    return disco_phase;
+}
+
+void set_var_disco_phase_int(int32_t value) {
+    disco_phase = value;
+}
+

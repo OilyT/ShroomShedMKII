@@ -8,8 +8,9 @@
 #define READ_Y 0xD0
 #define READ_X 0x90
 
-#define NUM_SAMPLES 16
-#define CALIBRATION_SAMPLES 64
+#define MIN_SAMPLES 16
+#define MAX_SAMPLES 128
+#define CALIBRATION_SAMPLES 128
 #define CALIBRATION_ITERATIONS 4
 
 static void ILI9341_TouchSelect() {
@@ -21,10 +22,11 @@ void ILI9341_TouchUnselect() {
 }
 
 bool ILI9341_TouchPressed() {
-    return HAL_GPIO_ReadPin(ILI9341_TOUCH_IRQ_GPIO_Port, ILI9341_TOUCH_IRQ_Pin) == GPIO_PIN_RESET;
+    //return HAL_GPIO_ReadPin(ILI9341_TOUCH_IRQ_GPIO_Port, ILI9341_TOUCH_IRQ_Pin) == GPIO_PIN_RESET;
 }
 
 bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
+
     static const uint8_t cmd_read_x[] = { READ_X };
     static const uint8_t cmd_read_y[] = { READ_Y };
     static const uint8_t zeroes_tx[] = { 0x00, 0x00 };
@@ -34,9 +36,11 @@ bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
     uint32_t avg_x = 0;
     uint32_t avg_y = 0;
     uint8_t nsamples = 0;
-    for(uint8_t i = 0; i < NUM_SAMPLES; i++) {
+    for(uint8_t i = 0; i < MAX_SAMPLES; i++) {
+        /*
         if(!ILI9341_TouchPressed())
             break;
+        */
 
         nsamples++;
 
@@ -54,14 +58,14 @@ bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
 
     ILI9341_TouchUnselect();
 
-    if(nsamples < NUM_SAMPLES)
+    if(nsamples < MIN_SAMPLES)
         return false;
 
-    uint32_t raw_x = (avg_x / NUM_SAMPLES);
+    uint32_t raw_x = (avg_x / nsamples);
     if(raw_x < ILI9341_TOUCH_MIN_RAW_X) raw_x = ILI9341_TOUCH_MIN_RAW_X;
     if(raw_x > ILI9341_TOUCH_MAX_RAW_X) raw_x = ILI9341_TOUCH_MAX_RAW_X;
 
-    uint32_t raw_y = (avg_y / NUM_SAMPLES);
+    uint32_t raw_y = (avg_y / nsamples);
     if(raw_y < ILI9341_TOUCH_MIN_RAW_Y) raw_y = ILI9341_TOUCH_MIN_RAW_Y;
     if(raw_y > ILI9341_TOUCH_MAX_RAW_Y) raw_y = ILI9341_TOUCH_MAX_RAW_Y;
 

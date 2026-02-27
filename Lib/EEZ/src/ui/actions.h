@@ -11,6 +11,13 @@ extern void action_increment_humidity(lv_event_t * e);
 extern void action_decrement_humidity(lv_event_t * e);
 extern void action_increment_airflow(lv_event_t * e);
 extern void action_decrement_airflow(lv_event_t * e);
+extern void action_load_screen_disco(lv_event_t * e);
+extern void action_disco_settings(lv_event_t * e);
+extern void action_load_screen_main(lv_event_t * e);
+extern void action_disco_switch(lv_event_t * e);
+extern void action_update_disco_power(lv_event_t * e);
+extern void action_update_disco_speed(lv_event_t * e);
+extern void action_update_disco_phase(lv_event_t * e);
 
 
 #ifdef __cplusplus
