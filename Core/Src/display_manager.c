@@ -11,17 +11,22 @@
 #include "ili9341_touch.h"
 #include "lvgl.h"
 #include "stm32h5xx_hal_exti.h"
+#include "stm32h5xx_hal_gpio.h"
 #include "ui.h"
 #include "vars.h"
 #include "shroomshed.h"
 #include <stdint.h>
 #include "rgb.h"
 #include "screens.h"
+#include "stdbool.h"
+
+
+#define TOUCH_BUFFER_SIZE 8
 
 
 /* Declare buffer for 1/10 screen size; BYTES_PER_PIXEL will be 2 for RGB565. */
 #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565))
-static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 2 * BYTES_PER_PIXEL];
+static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
 
 
 lv_display_t * display;
@@ -37,8 +42,8 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
 static void update_display_vars(void);
 static void touchpad_read(lv_indev_t * indev_drv, lv_indev_data_t * data);
 static void touchpad_init(void);
-static void TOUCH_IRQ_EXTI_Callback(void);
-static void init_touch_interrupt(void);
+uint32_t flush_touch_buffer(uint16_t *buffer, bool avg);
+
 
 
 void initDisplay(void) {
@@ -57,7 +62,6 @@ void initDisplay(void) {
     lv_display_set_flush_cb(display, my_flush_cb);
 
     touchpad_init();
-    init_touch_interrupt();
 
     ui_init();
     ui_tick();
@@ -132,9 +136,14 @@ static void update_display_vars(void) {
  * Touchpad
  * -----------------*/
 
-bool touched_since_last_read = false;
-static uint16_t last_touch_x = 0;
-static uint16_t last_touch_y = 0;
+bool currentlyTouched = false;
+bool touchSinceLastRead = false;
+static uint16_t xbuffer[TOUCH_BUFFER_SIZE];
+static uint16_t ybuffer[TOUCH_BUFFER_SIZE];
+static uint8_t bufferIndex = 0;
+
+uint16_t last_touch_x = 0;
+uint16_t last_touch_y = 0;
 
 
 static void touchpad_init(void)
@@ -144,15 +153,6 @@ static void touchpad_init(void)
     lv_indev_set_read_cb(indev_touchpad, touchpad_read);    /* Set the read callback */
 }
 
-void poll_touchpad(void) {
-    /*
-    if(ILI9341_TouchPressed()) {
-        if (ILI9341_TouchGetCoordinates(&last_touch_x, &last_touch_y)) {
-            touched_since_last_read = true;
-        }
-    }
-    */
-}
 
 /*Called by LVGL to read the touchpad*/
 static void touchpad_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
@@ -160,46 +160,86 @@ static void touchpad_read(lv_indev_t * indev_drv, lv_indev_data_t * data)
     static int32_t last_x = 0;
     static int32_t last_y = 0;
 
-    if(touched_since_last_read) {
-        last_x = last_touch_x;
-        last_y = last_touch_y;
-        data->state = LV_INDEV_STATE_PRESSED;
-    }
-    else {
+    if(touchSinceLastRead) {
+        last_x = flush_touch_buffer(xbuffer, true);
+        last_y = flush_touch_buffer(ybuffer, true);
+        if (last_x != 0 && last_y != 0) {
+            data->state = LV_INDEV_STATE_PRESSED;
+        } else {
+            data->state = LV_INDEV_STATE_RELEASED;
+        }
+    } else {
         data->state = LV_INDEV_STATE_RELEASED;
     }
-    touched_since_last_read = false;
+    touchSinceLastRead = false;
 
     data->point.x = last_x;
     data->point.y = last_y;
 }
 
-// touchpad intterup implementation 
 
+void poll_touchpad(void) {
 
+    if (ILI9341_TouchPressed()) {
+        currentlyTouched = true;
+    } else {
+        currentlyTouched = false;
+    }
 
-void init_touch_interrupt(void) {
-
-    EXTI_ConfigTypeDef touch_exiti_config = {0};
-    touch_exiti_config.Line = 6;
-    touch_exiti_config.Mode = EXTI_MODE_INTERRUPT;
-    touch_exiti_config.Trigger = EXTI_TRIGGER_FALLING;
-    touch_exiti_config.GPIOSel = EXTI_GPIOB;
-    // Configure the EXTI line for the touch interrupt pin
-    HAL_EXTI_SetConfigLine(&htouch_exti, &touch_exiti_config);
-
-    HAL_EXTI_RegisterCallback(&htouch_exti, HAL_EXTI_FALLING_CB_ID, TOUCH_IRQ_EXTI_Callback);
-
-    // Enable and set EXTI line interrupt priority
-}
-
-
-
-void TOUCH_IRQ_EXTI_Callback(void) {
-    if (ILI9341_TouchGetCoordinates(&last_touch_x, &last_touch_y)) {
-        touched_since_last_read = true;
+    if (currentlyTouched) {
+        //HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, GPIO_PIN_SET);
+        if (!ILI9341_TouchGetCoordinates(&last_touch_x, &last_touch_y)) {
+            currentlyTouched = false;
+        } else {
+            xbuffer[bufferIndex] = last_touch_x;
+            ybuffer[bufferIndex] = last_touch_y;
+            bufferIndex = (bufferIndex + 1) % TOUCH_BUFFER_SIZE;
+            touchSinceLastRead = true;
+        }
+    }
+    if (!currentlyTouched) {
+       // HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, GPIO_PIN_RESET);
     }
 }
 
+uint32_t flush_touch_buffer(uint16_t *buffer, bool avg) {
+    uint32_t avg_value = 0;
+    if (avg) {
+        uint8_t samplesInBuffer = 0;
+        for (uint8_t i = 0; i < TOUCH_BUFFER_SIZE; i++) {
+            if (buffer[i] == 0) continue;
+            avg_value += buffer[i];
+            samplesInBuffer++;
+            buffer[i] = 0;
+        }
+        if (samplesInBuffer) avg_value = avg_value / samplesInBuffer;
+    } else {
+        for (uint8_t i = 0; i < TOUCH_BUFFER_SIZE; i++) {
+            buffer[i] = 0;
+        }
+    }
+    return avg_value;
+}
+
+
+
+// touchpad interrupt callback functions
+
+/* 
+void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin) {
+    if (GPIO_Pin == TOUCH_IRQ_Pin) {
+        currentlyTouched = true;
+        touchSinceLastRead = true;
+    }
+}
+*/
+/*
+void HAL_GPIO_EXTI_Rising_Callback(uint16_t GPIO_Pin) {
+    if (GPIO_Pin == TOUCH_IRQ_Pin) {
+        currentlyTouched = false;
+        touchSinceLastRead = true;
+    }
+}
+*/
 
 

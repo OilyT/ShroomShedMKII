@@ -77,7 +77,7 @@
           },
           {
             "type": "border",
-            "selected": 0,
+            "selected": 1,
             "size": 54.5,
             "location": "bottom",
             "children": [
@@ -200,6 +200,18 @@
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
+                {
+                  "type": "tab",
+                  "id": "#97422e9f-3051-4d8e-861f-ddcde5845428",
+                  "name": "Settings",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/settings",
+                    "subObjectPath": "[ShroomShed_MKII_App.eez-project]:/settings",
+                    "permanent": false
+                  },
+                  "icon": "material:settings"
+                },
                 {
                   "type": "tab",
                   "id": "#c7468f06-5989-4813-88bf-7a6a2ca57fec",
@@ -1044,8 +1056,8 @@
       },
       "transform": {
         "translate": {
-          "x": -305,
-          "y": -232
+          "x": -283.72916666666663,
+          "y": -277.97291666666666
         },
         "scale": 2
       },

@@ -509,7 +509,7 @@ void create_screen_disco_mode() {
             objects.disco_power_slider_1 = obj;
             lv_obj_set_pos(obj, 26, 149);
             lv_obj_set_size(obj, 273, 17);
-            lv_slider_set_range(obj, 1, 100);
+            lv_slider_set_range(obj, 0, 100);
             lv_obj_add_event_cb(obj, action_update_disco_speed, LV_EVENT_VALUE_CHANGED, (void *)0);
             lv_obj_add_event_cb(obj, event_handler_cb_disco_mode_disco_power_slider_1, LV_EVENT_ALL, 0);
             add_style_disco_slider(obj);
@@ -529,7 +529,7 @@ void create_screen_disco_mode() {
             objects.disco_power_slider_2 = obj;
             lv_obj_set_pos(obj, 25, 204);
             lv_obj_set_size(obj, 273, 17);
-            lv_slider_set_range(obj, 1, 100);
+            lv_slider_set_range(obj, 0, 75);
             lv_obj_add_event_cb(obj, action_update_disco_phase, LV_EVENT_VALUE_CHANGED, (void *)0);
             lv_obj_add_event_cb(obj, event_handler_cb_disco_mode_disco_power_slider_2, LV_EVENT_ALL, 0);
             add_style_disco_slider(obj);
@@ -599,7 +599,7 @@ void tick_screen_by_id(enum ScreensEnum screenId) {
 
 void create_screens() {
     lv_disp_t *dispp = lv_disp_get_default();
-    lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), false, LV_FONT_DEFAULT);
+    lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
     
     create_screen_splash_screen();
