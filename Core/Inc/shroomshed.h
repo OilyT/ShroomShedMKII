@@ -30,8 +30,11 @@ extern "C" {
 #define RGB_PROCESS_HZ 100
 
 #define TRANSDUCER_PWM_TIMER htim3
+#define FAN_PWM_TIMER htim1
 
 extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
+extern TIM_HandleTypeDef FAN_PWM_TIMER;
+
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern struct shroomShed_t shroomShed;
 

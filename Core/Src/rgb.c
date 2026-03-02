@@ -10,7 +10,7 @@
 #define DISCO_SPEED 10
 #define DISCO_OFFSET 10
 #define DISCO_STEP_DIVISOR (RGB_PROCESS_HZ * 50)
-#define REDSHIFT 35
+#define REDSHIFT 15
 
 
 RGB_Colour zone_colour[4];

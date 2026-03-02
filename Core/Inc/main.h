@@ -110,7 +110,6 @@ void Error_Handler(void);
 #define TOUCH_MOSI_GPIO_Port GPIOB
 #define TOUCH_IRQ_Pin GPIO_PIN_6
 #define TOUCH_IRQ_GPIO_Port GPIOB
-#define TOUCH_IRQ_EXTI_IRQn EXTI6_IRQn
 #define DISPLAY_LED_Pin GPIO_PIN_8
 #define DISPLAY_LED_GPIO_Port GPIOB
 

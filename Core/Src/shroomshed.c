@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
+#include <math.h>
 #include "main.h"
 #include "shroomshed.h"
 #include "display_manager.h"
@@ -28,8 +29,8 @@
 
 // humidity PID
 #define PID_ID_PERIOD 2 // seconds
-#define MAX_PULSE 1200
-#define MIN_PULSE 300
+#define MAX_PULSE 1400
+#define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
 #define PID_MODIFIER 100
 
@@ -52,8 +53,9 @@ uint8_t usb_buffer[200];
 /* ============================================================================
  * Function Prototypes
  * ============================================================================ */
-void init_pwm(void);
-void humidity_control(void);
+static void init_pwm(void);
+static void humidity_control(void);
+static void fan_control(void);
 /* ============================================================================
  * Function Implementations
  * ============================================================================ */
@@ -104,6 +106,7 @@ void loop(void)
     if (lastControlProcess + (SYSTICK_HZ/CONTROL_PROCESS_HZ) < HAL_GetTick()) {
         lastControlProcess = HAL_GetTick();
         humidity_control();
+        fan_control();
     }
 
     if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
@@ -167,15 +170,21 @@ void loop(void)
     }
 
     if (printSerial) {
-        //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
+        sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
     }
     
     // load pulse value into timer register
-    TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
+    //TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
+ }
+
+ void fan_control(void) {
+    float gamma = 0.7;
+    uint16_t pwm_output = pow(shroomShed.fanSpeed / 100.0f, gamma) * FAN_PWM_TIMER.Init.Period;
+    FAN_PWM_TIMER.Instance->CCR3 = pwm_output;
  }
 
  void init_pwm(void) {
     HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
-
+    HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // Use TIMEx_PWMN_Start for complementary channel
  }
 

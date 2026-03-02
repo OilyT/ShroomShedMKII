@@ -8,7 +8,7 @@
 #define READ_Y 0xD0
 #define READ_X 0x90
 
-#define MIN_SAMPLES 16
+#define MIN_SAMPLES 32
 #define MAX_SAMPLES 64
 #define CALIBRATION_SAMPLES 128
 #define CALIBRATION_ITERATIONS 4

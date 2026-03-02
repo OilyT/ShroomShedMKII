@@ -185,20 +185,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI Line6 interrupt.
-  */
-void EXTI6_IRQHandler(void)
-{
-  /* USER CODE BEGIN EXTI6_IRQn 0 */
-
-  /* USER CODE END EXTI6_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(TOUCH_IRQ_Pin);
-  /* USER CODE BEGIN EXTI6_IRQn 1 */
-
-  /* USER CODE END EXTI6_IRQn 1 */
-}
-
-/**
   * @brief This function handles USB FS global interrupt.
   */
 void USB_DRD_FS_IRQHandler(void)
