@@ -25,7 +25,7 @@ char err_buffer[200];
 
 
 void init_sensors(void) {
-    init_res = sht31_shot_init(SHT31_ADDRESS_1);
+    init_res = sht31_shot_init(SHT31_ADDRESS_0);
     if (init_res != 0) {
         sprintf(err_buffer, "Failed to initialize SHT31 sensor - Error code: %d\r\n", init_res);
     }
@@ -41,10 +41,12 @@ void read_sensors(void) {
         shroomShed.humidityCurrent = humidity;  
     }
 
+    /*
     co2 = get_co2();
     if (co2 != 0) {
         shroomShed.co2Current = co2;
     }
+    */
 
 }
     

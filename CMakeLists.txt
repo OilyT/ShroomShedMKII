@@ -72,9 +72,9 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/actions.c
     Core/Src/vars.c
     Core/Src/rgb.c
+    Core/Src/sd.c
     ${SHT31_SOURCES}
     ${USB_SOURCES}
-    
 )
 
 # Add include paths
