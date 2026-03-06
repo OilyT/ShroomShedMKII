@@ -39,6 +39,6 @@ void ILI9341_TouchUnselect();
 bool ILI9341_TouchPressed();
 bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y);
 void calibrate_touch(uint32_t *min_x, uint32_t *min_y, uint32_t *max_x, uint32_t *max_y );
-
+bool get_touch_coordinates(uint16_t* x, uint16_t* y);
 
 #endif // __ILI9341_TOUCH_H__

@@ -22,7 +22,7 @@ extern "C" {
 
 // system polling
 #define SYSTICK_HZ 1000
-#define TOUCH_PROCESS_HZ 500
+#define TOUCH_PROCESS_HZ 100
 #define SERIAL_PROCESS_HZ 10
 #define DISPLAY_PROCESS_HZ 50
 #define SENSOR_PROCESS_HZ 0.5
