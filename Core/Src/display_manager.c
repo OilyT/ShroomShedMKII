@@ -188,7 +188,7 @@ void poll_touchpad(void) {
 
     if (currentlyTouched) {
         //HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, GPIO_PIN_SET);
-        if (!(get_touch_coordinates(&last_touch_x, &last_touch_y))) {
+        if (!(ILI9341_TouchGetCoordinates(&last_touch_x, &last_touch_y))) {
             currentlyTouched = false;
         } else {
             xbuffer[bufferIndex] = last_touch_x;

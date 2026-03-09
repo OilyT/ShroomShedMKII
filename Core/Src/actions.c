@@ -17,7 +17,6 @@
 
 
 
-
 // MAIN SCREEN ACTIONS 
 
 void action_load_screen_disco(lv_event_t * e) {
@@ -25,16 +24,16 @@ void action_load_screen_disco(lv_event_t * e) {
 }
 
 void action_increment_humidity(lv_event_t * e) {
-    shroomShed.humidityControlvalue += 5;
-    if (shroomShed.humidityControlvalue > 100) {
-        shroomShed.humidityControlvalue = 100;
+    shroomShed.humidityControlValue += 5;
+    if (shroomShed.humidityControlValue > 100) {
+        shroomShed.humidityControlValue = 100;
     }
 }
 
 void action_decrement_humidity(lv_event_t * e) {
-    shroomShed.humidityControlvalue -= 5;
-    if (shroomShed.humidityControlvalue < 30) {
-        shroomShed.humidityControlvalue = 30;
+    shroomShed.humidityControlValue -= 5;
+    if (shroomShed.humidityControlValue < 30) {
+        shroomShed.humidityControlValue = 30;
     }
 }
 
@@ -55,7 +54,6 @@ void action_decrement_airflow(lv_event_t *e) {
 
 
 // DISCO SCREEN ACTIONS
-
 extern RGB_disco_settings_t discoSettings;
 
 void action_load_screen_main(lv_event_t * e) {

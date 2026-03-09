@@ -178,3 +178,23 @@ uint8_t sht31_shot_get_serial_number(uint8_t sn[4])
     
     return 0;
 }
+
+/**
+ * @brief      shot set heater
+ * @param[in]  heater_enable enable or disable the heater
+ * @return     status code
+ *             - 0 success
+ *             - 1 set failed
+ * @note       none
+ */
+uint8_t sht31_shot_set_heater(sht31_bool_t heater_enable)
+{
+    /* set heater */
+    if (sht31_set_heater(&gs_handle, heater_enable) != 0)
+    {
+        return 1;
+    }
+    
+    return 0;
+}
+

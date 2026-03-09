@@ -185,9 +185,9 @@ bool get_touch_coordinates(uint16_t* x, uint16_t* y) {
     uint16_t x_data[repeats];
     uint16_t y_data[repeats];
 
-    uint8_t cmd_buff[2] = {0};
+    uint8_t cmd_buff[3] = {0};
     uint8_t *p_cmd_buff = &cmd_buff[0];
-    uint8_t rx_buff[2] = {0};
+    uint8_t rx_buff[3] = {0};
     uint8_t *p_rx_buff = &rx_buff[0];
 
     uint8_t samples_taken = 0;
@@ -198,14 +198,14 @@ bool get_touch_coordinates(uint16_t* x, uint16_t* y) {
     // read touch pressure
     uint16_t z;
 
-    p_cmd_buff[0] = 0xB1; 
-    HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, 2, HAL_MAX_DELAY);
+    p_cmd_buff[0] = 0xB1;
+    HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, 3, HAL_MAX_DELAY); // 24 clocks so that conversions is complete
     p_cmd_buff[0] = 0xC1;
-    HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, p_rx_buff, 1, HAL_MAX_DELAY);
+    HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, p_rx_buff, 3, HAL_MAX_DELAY); // 24 clock cycle
     uint16_t z1 = xpt2046_unpack_sample(rx_buff);
     z = z1 + 4095;
     p_cmd_buff[0] = 0x91;
-    HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, p_rx_buff, 2, HAL_MAX_DELAY);
+    HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, p_cmd_buff, p_rx_buff, 3, HAL_MAX_DELAY);
     uint16_t z2 = xpt2046_unpack_sample(rx_buff);
     z -= z2;
     
@@ -217,7 +217,6 @@ bool get_touch_coordinates(uint16_t* x, uint16_t* y) {
 
     for (uint8_t i = 0; i < repeats; i++) {
         //if (!ILI9341_TouchPressed()) break;
-
         read_xy_cycle(&x_data[i], &y_data[i]);   
         samples_taken ++;
     }

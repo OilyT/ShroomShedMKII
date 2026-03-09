@@ -25,7 +25,7 @@ extern "C" {
 #define TOUCH_PROCESS_HZ 100
 #define SERIAL_PROCESS_HZ 10
 #define DISPLAY_PROCESS_HZ 50
-#define SENSOR_PROCESS_HZ 0.5
+#define SENSOR_PROCESS_HZ 1
 #define CONTROL_PROCESS_HZ 1
 #define RGB_PROCESS_HZ 100
 
@@ -44,7 +44,7 @@ struct shroomShed_t {
     float humidityCurrent;
     float temperatureCurrent;
     uint16_t co2Current;
-    uint8_t humidityControlvalue;
+    uint8_t humidityControlValue;
     uint8_t fanSpeed;
 
     bool waterState;

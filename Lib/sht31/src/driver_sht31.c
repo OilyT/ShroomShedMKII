@@ -178,6 +178,7 @@ uint8_t sht31_init(sht31_handle_t *handle)
 {
     uint8_t res;
     uint16_t command;
+    uint8_t retry;
     
     if (handle == NULL)                                                      /* check handle */
     {
@@ -224,16 +225,27 @@ uint8_t sht31_init(sht31_handle_t *handle)
        
         return 1;                                                            /* return error */
     }
+
+    handle->delay_ms(2);                                                     /* allow device startup on hot-plug */
     command = SHT31_COMMAND_SOFT_RESET;                                      /* set command */
-    res = a_sht31_write(handle, command);                                    /* write command */
+    res = 1;
+    for (retry = 0; retry < 3; retry++)
+    {
+        res = a_sht31_write(handle, command);                                /* write command */
+        if (res == 0)
+        {
+            break;
+        }
+        handle->delay_ms(5);
+    }
     if (res != 0)                                                            /* check result */
     {
-        handle->debug_print("sht31: write command failed.\n");               /* write command failed */
+        handle->debug_print("sht31: soft reset failed.\n");               /* write command failed */
         (void)handle->iic_deinit();                                          /* close iic */
         
         return 1;                                                            /* return error */
     }
-    handle->inited = 1;                                                      /* flag finish initialization */
+    handle->inited = 1;                                                     /* flag finish initialization */
     
     return 0;                                                                /* success return 0 */
 }

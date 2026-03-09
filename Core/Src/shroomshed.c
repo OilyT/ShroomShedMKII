@@ -28,7 +28,7 @@
 
 
 // humidity PID
-#define PID_ID_PERIOD 2 // seconds
+#define PID_ID_PERIOD 1 // seconds
 #define MAX_PULSE 1400
 #define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
@@ -61,11 +61,11 @@ static void fan_control(void);
  * ============================================================================ */
 
 void init_shroomshed(void) {
-    shroomShed.temperatureCurrent = 15.0f;
-    shroomShed.humidityCurrent = 40.0f;
+    shroomShed.temperatureCurrent = 20.0f;
+    shroomShed.humidityCurrent = 90.0f;
     shroomShed.co2Current = 0;
-    shroomShed.humidityControlvalue = 90;
-    shroomShed.fanSpeed = 15;
+    shroomShed.humidityControlValue = 90;
+    shroomShed.fanSpeed = 20;
     shroomShed.waterState = true;
 
     initDisplay();
@@ -80,6 +80,8 @@ void init_shroomshed(void) {
     RGB_Init();
 
     switch_screen(SCREEN_ID_MAIN);
+
+    
 }
 
 void loop(void)
@@ -95,7 +97,7 @@ void loop(void)
 
     if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < HAL_GetTick()) {
         lastSensorProcess = HAL_GetTick();
-        read_sensors();
+        sensor_process ();
     }
     
     if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < HAL_GetTick()) {
@@ -130,9 +132,10 @@ void loop(void)
 
  void humidity_control(void) {
     // humidifier PID control
-    uint16_t Pk = 10;
-    uint16_t Ik = 1;
-    uint16_t Dk = 100;
+    const static uint16_t Pk = 20;
+    const static uint16_t Ik = 1; 
+    const static uint16_t Dk = 200;
+
     static uint16_t counter = 0;
     static int32_t lastError = 0;
 
@@ -143,7 +146,7 @@ void loop(void)
     static int32_t I_term = 0;
     static int32_t D_term = 0;
 
-    int32_t error = (shroomShed.humidityControlvalue*PID_MODIFIER) - (shroomShed.humidityCurrent*PID_MODIFIER);
+    int32_t error = (shroomShed.humidityControlValue*PID_MODIFIER) - (shroomShed.humidityCurrent*PID_MODIFIER);
 
     P_term = (Pk * error);
 
@@ -163,18 +166,59 @@ void loop(void)
     }
 
     PID_output = P_term/PID_MODIFIER + I_term/PID_MODIFIER + D_term/PID_MODIFIER + MIN_PULSE;
+
     if (PID_output < MIN_PULSE) {
         PID_output = MIN_PULSE;
     } else if (PID_output > MAX_PULSE) {
         PID_output = MAX_PULSE;
     }
 
+    uint16_t PID_output_normalised = ((PID_output - MIN_PULSE) * 100) / PULSE_RANGE;
+
+
     if (printSerial) {
-        sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
+        //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/PID_MODIFIER, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
+        sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shroomShed.humidityControlValue, shroomShed.humidityCurrent, PID_output_normalised, shroomShed.fanSpeed);
+    }
+    // load pulse value into timer register
+    TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
+
+
+    // Low water detection logic
+    static const uint8_t lowWaterTimeout = 1;
+
+    uint8_t threshold = 90;
+    if (shroomShed.humidityControlValue - 5 < threshold) {
+         threshold = shroomShed.humidityControlValue - 5;
     }
     
-    // load pulse value into timer register
-    //TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
+    static uint32_t humStart = 0;
+    uint32_t humTimeOn = 0;
+    static bool belowThreshold = false;
+    static bool lastWaterState = true;
+    if (shroomShed.waterState && !lastWaterState) {
+        humStart = HAL_GetTick();
+        belowThreshold = false;
+    }
+    lastWaterState = shroomShed.waterState;
+
+    if (shroomShed.humidityCurrent < threshold && shroomShed.waterState) {
+        if (!belowThreshold) {
+            humStart = HAL_GetTick();
+            belowThreshold = true;
+        }
+        humTimeOn = HAL_GetTick() - humStart;
+        if (humTimeOn > (lowWaterTimeout * 60000)) {
+            shroomShed.waterState = false;
+        }
+    } else {
+        belowThreshold = false;
+        if (!shroomShed.waterState && (shroomShed.humidityCurrent >= threshold)) {
+            shroomShed.waterState = true;
+        }
+    }
+    // LED indicator
+    HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, shroomShed.waterState ? GPIO_PIN_RESET : GPIO_PIN_SET);
  }
 
  void fan_control(void) {
@@ -185,6 +229,6 @@ void loop(void)
 
  void init_pwm(void) {
     HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
-    HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // Use TIMEx_PWMN_Start for complementary channel
+    HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // TIMEx_PWMN_Start is for complementary channel (3N)
  }
 

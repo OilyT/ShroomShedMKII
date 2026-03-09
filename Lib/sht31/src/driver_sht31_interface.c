@@ -41,9 +41,11 @@
 #include <string.h>
 #include <stdarg.h>
 #include "stm32h5xx_hal_i2c.h"
+#include "usbd_cdc_if.h"
+
 
 extern I2C_HandleTypeDef hi2c3;
-char sht31_usb_buffer[200];
+uint8_t sht31_usb_buffer[200];
 
 /**
  * @brief  interface iic bus init
@@ -177,7 +179,8 @@ void sht31_interface_debug_print(const char *const fmt, ...)
         len++;
     }
     
-    //CDC_Transmit_FS((uint8_t*)sht31_usb_buffer, len);  
+    TEMPLATE_Transmit(sht31_usb_buffer, sizeof(sht31_usb_buffer));
+    memset(sht31_usb_buffer, 0, sizeof(sht31_usb_buffer));  
 }
 
 /**

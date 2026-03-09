@@ -100,6 +100,9 @@ uint8_t sht31_shot_get_serial_number(uint8_t sn[4]);
  * @}
  */
 
+uint8_t sht31_shot_set_heater(sht31_bool_t heater_enable);
+
+
 #ifdef __cplusplus
 }
 #endif

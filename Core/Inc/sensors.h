@@ -15,7 +15,8 @@ extern "C" {
 #include "shroomshed.h"
 #include "stm32h5xx_hal.h"
 
-void read_sensors(void);
+
+void sensor_process(void);
 void init_sensors(void);
 
 extern struct shroomShed_t shroomShed;

@@ -87,7 +87,7 @@ void set_var_airflow_string(const char *value) {
 }
 
 const char *get_var_humidity_display_str(void) {
-    snprintf(humidity_display_string, sizeof(humidity_display_string),"%.1f/%d%%", display_humidity, shroomShed.humidityControlvalue);
+    snprintf(humidity_display_string, sizeof(humidity_display_string),"%.1f/%d%%", display_humidity, shroomShed.humidityControlValue);
     return humidity_display_string;
 }
 
