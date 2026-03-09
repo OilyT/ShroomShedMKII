@@ -17,8 +17,6 @@
 #include "sensors.h"
 #include "ili9341_touch.h"
 #include "ili9341.h"
-#include "stm32h5xx_hal_gpio.h"
-#include "stm32h5xx_hal_tim.h"
 #include "rgb.h"
 
 
@@ -45,9 +43,11 @@ uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
 uint32_t lastRgbProcess;
 
-struct shroomShed_t shroomShed;
 
 uint8_t usb_buffer[200];
+
+// global state struct
+struct shroomShed_t shroomShed;
 
 
 /* ============================================================================
@@ -185,7 +185,7 @@ void loop(void)
 
 
     // Low water detection logic
-    static const uint8_t lowWaterTimeout = 1;
+    static const uint8_t lowWaterTimeout = 10;
 
     uint8_t threshold = 90;
     if (shroomShed.humidityControlValue - 5 < threshold) {

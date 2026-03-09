@@ -23,15 +23,17 @@ void action_load_screen_disco(lv_event_t * e) {
     loadScreen(SCREEN_ID_DISCO_MODE);
 }
 
-void action_increment_humidity(lv_event_t * e) {
-    shroomShed.humidityControlValue += 5;
+void action_increment_humidity(lv_event_t *e) {
+    uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
+    shroomShed.humidityControlValue += step;
     if (shroomShed.humidityControlValue > 100) {
         shroomShed.humidityControlValue = 100;
     }
 }
 
 void action_decrement_humidity(lv_event_t * e) {
-    shroomShed.humidityControlValue -= 5;
+    uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
+    shroomShed.humidityControlValue -= step;
     if (shroomShed.humidityControlValue < 30) {
         shroomShed.humidityControlValue = 30;
     }

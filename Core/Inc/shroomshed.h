@@ -23,7 +23,7 @@ extern "C" {
 // system polling
 #define SYSTICK_HZ 1000
 #define TOUCH_PROCESS_HZ 100
-#define SERIAL_PROCESS_HZ 10
+#define SERIAL_PROCESS_HZ 2
 #define DISPLAY_PROCESS_HZ 50
 #define SENSOR_PROCESS_HZ 1
 #define CONTROL_PROCESS_HZ 1
@@ -36,10 +36,10 @@ extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern TIM_HandleTypeDef FAN_PWM_TIMER;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
-extern struct shroomShed_t shroomShed;
 
+extern struct shroomShed_t shroomShed;\
 
-struct shroomShed_t {
+typedef struct shroomShed_t {
 
     float humidityCurrent;
     float temperatureCurrent;
@@ -48,7 +48,10 @@ struct shroomShed_t {
     uint8_t fanSpeed;
 
     bool waterState;
-};
+} shroomShed_t;
+
+
+
 
 void init_shroomshed(void);
 void loop(void);

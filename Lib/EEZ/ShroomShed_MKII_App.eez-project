@@ -646,10 +646,17 @@
               "eventHandlers": [
                 {
                   "objID": "285e3ce1-4f62-4237-8fe1-d11cfa3c4b36",
-                  "eventName": "CLICKED",
+                  "eventName": "PRESSED",
                   "handlerType": "action",
                   "action": "Increment_humidity",
-                  "userData": 0
+                  "userData": 1
+                },
+                {
+                  "objID": "3e214090-7839-428f-e44c-a7b17b92c066",
+                  "eventName": "LONG_PRESSED",
+                  "handlerType": "action",
+                  "action": "Increment_humidity",
+                  "userData": 9
                 }
               ],
               "identifier": "incr_humidity",
@@ -752,10 +759,17 @@
               "eventHandlers": [
                 {
                   "objID": "4ef22268-6664-4e9c-b09f-684f90787bbc",
-                  "eventName": "CLICKED",
+                  "eventName": "PRESSED",
                   "handlerType": "action",
                   "action": "Decrement_humidity",
-                  "userData": 0
+                  "userData": 1
+                },
+                {
+                  "objID": "392406a4-6df5-475a-d655-ceaf811683fa",
+                  "eventName": "LONG_PRESSED",
+                  "handlerType": "action",
+                  "action": "Decrement_humidity",
+                  "userData": 9
                 }
               ],
               "identifier": "dec_humidity",

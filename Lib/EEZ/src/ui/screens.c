@@ -140,7 +140,8 @@ void create_screen_main() {
             objects.incr_humidity = obj;
             lv_obj_set_pos(obj, 254, 5);
             lv_obj_set_size(obj, 61, 50);
-            lv_obj_add_event_cb(obj, action_increment_humidity, LV_EVENT_CLICKED, (void *)0);
+            lv_obj_add_event_cb(obj, action_increment_humidity, LV_EVENT_PRESSED, (void *)1);
+            lv_obj_add_event_cb(obj, action_increment_humidity, LV_EVENT_LONG_PRESSED, (void *)9);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_ON_FOCUS|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
             lv_obj_set_style_bg_color(obj, lv_color_hex(0xff00c8d2), LV_PART_MAIN | LV_STATE_DEFAULT);
             {
@@ -161,7 +162,8 @@ void create_screen_main() {
             objects.dec_humidity = obj;
             lv_obj_set_pos(obj, 181, 6);
             lv_obj_set_size(obj, 61, 50);
-            lv_obj_add_event_cb(obj, action_decrement_humidity, LV_EVENT_CLICKED, (void *)0);
+            lv_obj_add_event_cb(obj, action_decrement_humidity, LV_EVENT_PRESSED, (void *)1);
+            lv_obj_add_event_cb(obj, action_decrement_humidity, LV_EVENT_LONG_PRESSED, (void *)9);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_ON_FOCUS|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
             lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_color(obj, lv_color_hex(0xff00c8d2), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -509,7 +511,6 @@ void create_screen_disco_mode() {
             objects.disco_power_slider_1 = obj;
             lv_obj_set_pos(obj, 26, 149);
             lv_obj_set_size(obj, 273, 17);
-            lv_slider_set_range(obj, 0, 100);
             lv_obj_add_event_cb(obj, action_update_disco_speed, LV_EVENT_VALUE_CHANGED, (void *)0);
             lv_obj_add_event_cb(obj, event_handler_cb_disco_mode_disco_power_slider_1, LV_EVENT_ALL, 0);
             add_style_disco_slider(obj);

@@ -66,6 +66,10 @@ void initDisplay(void) {
     ui_init();
     ui_tick();
     lv_timer_handler();
+    ui_tick();
+    lv_timer_handler();
+    ui_tick();
+    lv_timer_handler();
  }
 
 
