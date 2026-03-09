@@ -98,8 +98,8 @@ void set_var_humidity_display_str(const char *value) {
 
 
 // DISCO SCREEN VARS
-static uint8_t disco_power = 50;
-static uint8_t disco_speed = 50;
+static uint8_t disco_power = 75;
+static uint8_t disco_speed = 25;
 static uint8_t disco_phase = 25;
 
 
