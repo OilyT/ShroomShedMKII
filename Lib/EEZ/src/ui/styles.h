@@ -46,6 +46,30 @@ lv_style_t *get_style_disco_slider_MAIN_DEFAULT();
 void add_style_disco_slider(lv_obj_t *obj);
 void remove_style_disco_slider(lv_obj_t *obj);
 
+// Style: std_button_dark
+lv_style_t *get_style_std_button_dark_MAIN_DEFAULT();
+lv_style_t *get_style_std_button_dark_MAIN_PRESSED();
+void add_style_std_button_dark(lv_obj_t *obj);
+void remove_style_std_button_dark(lv_obj_t *obj);
+
+// Style: std_button_matrix_dark
+lv_style_t *get_style_std_button_matrix_dark_ITEMS_DEFAULT();
+lv_style_t *get_style_std_button_matrix_dark_ITEMS_PRESSED();
+lv_style_t *get_style_std_button_matrix_dark_MAIN_DEFAULT();
+void add_style_std_button_matrix_dark(lv_obj_t *obj);
+void remove_style_std_button_matrix_dark(lv_obj_t *obj);
+
+// Style: disco_button_style
+lv_style_t *get_style_disco_button_style_MAIN_DEFAULT();
+void add_style_disco_button_style(lv_obj_t *obj);
+void remove_style_disco_button_style(lv_obj_t *obj);
+
+// Style: std_slider_dark
+lv_style_t *get_style_std_slider_dark_INDICATOR_DEFAULT();
+lv_style_t *get_style_std_slider_dark_MAIN_DEFAULT();
+void add_style_std_slider_dark(lv_obj_t *obj);
+void remove_style_std_slider_dark(lv_obj_t *obj);
+
 
 
 #ifdef __cplusplus

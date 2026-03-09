@@ -12,6 +12,7 @@
 #include "lvgl.h"
 #include "stm32h5xx_hal_exti.h"
 #include "stm32h5xx_hal_gpio.h"
+#include "stm32h5xx_hal_tim.h"
 #include "ui.h"
 #include "vars.h"
 #include "shroomshed.h"
@@ -31,8 +32,12 @@ static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
 
 lv_display_t * display;
 lv_indev_t * indev_touchpad;
+
 static int16_t current_screen = 2;
+static int16_t previous_screen = 2;
 extern RGB_disco_settings_t discoSettings;
+
+uint8_t display_brightness = 80;
 
 EXTI_HandleTypeDef htouch_exti;
 
@@ -46,11 +51,16 @@ uint32_t flush_touch_buffer(uint16_t *buffer, bool avg);
 
 
 
+//INIT DISPLAY HARDWARE AND LVGL
+
 void initDisplay(void) {
     ILI9341_Init();
-    // turn on backlight
-    HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
+
+    // turn on backlight with PWM
+    HAL_TIM_PWM_Start(&DISPLAY_LED_TIMER, TIM_CHANNEL_3);
+    //HAL_GPIO_WritePin(DISPLAY_LED_GPIO_Port, DISPLAY_LED_Pin, GPIO_PIN_SET);
     
+
     // initialize LVGL
     lv_init();
     lv_tick_set_cb(HAL_GetTick);
@@ -94,6 +104,8 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
 }
 
 
+// DISPLAY PROCESSING
+
 void displayProcess(void) {
     update_display_vars();
     // Call EEZ UI tick (handles screen updates)
@@ -104,6 +116,7 @@ void displayProcess(void) {
 }
 
 void switch_screen(enum ScreensEnum screen) {
+    previous_screen = current_screen;
     current_screen = screen;
     switch (screen) {
         case SCREEN_ID_SPLASH_SCREEN:
@@ -111,6 +124,12 @@ void switch_screen(enum ScreensEnum screen) {
             break;
         case SCREEN_ID_MAIN:
             loadScreen(SCREEN_ID_MAIN );
+            break;
+        case SCREEN_ID_MENU_MAIN:
+            loadScreen(SCREEN_ID_MENU_MAIN);
+            break;
+        case SCREEN_ID_MENU_GENERAL:
+            loadScreen(SCREEN_ID_MENU_GENERAL);
             break;
         case SCREEN_ID_DISCO_MODE:
             loadScreen(SCREEN_ID_DISCO_MODE);
@@ -125,15 +144,30 @@ static void update_display_vars(void) {
         case SCREEN_ID_MAIN:
             set_var_humidity_fp(shroomShed.humidityCurrent);
             set_var_temperature_fp(shroomShed.temperatureCurrent);
-            set_var_airflow_int(shroomShed.fanSpeed);\
+            set_var_airflow_int(shroomShed.fanSpeed);
             break;
         case SCREEN_ID_DISCO_MODE:
             set_var_disco_power_int(discoSettings.discoPower);
             set_var_disco_speed_int(discoSettings.discoSpeed);
             set_var_disco_phase_int(discoSettings.discoOffset);
             break;
+        case SCREEN_ID_MENU_GENERAL:
+            set_var_display_brightness(get_var_display_brightness());
+            break;
     }
+}
 
+
+// INTERFACE FUNCTIONS
+
+inline void load_previous_screen(void) {
+    switch_screen(previous_screen);
+}
+
+
+inline void set_display_brightness(uint8_t brightness) {
+    display_brightness = brightness;
+    DISPLAY_LED_TIMER.Instance->CCR3 = (brightness * DISPLAY_LED_TIMER.Init.Period) / 100;
 }
 
 /*------------------

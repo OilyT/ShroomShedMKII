@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
+#include "display_manager.h"
 #include "shroomshed.h"
 #include "rgb.h"
 
@@ -126,3 +127,13 @@ void set_var_disco_phase_int(int32_t value) {
     disco_phase = value;
 }
 
+// GENERAL SETTINGS VARS
+extern uint8_t display_brightness;
+
+int32_t get_var_display_brightness() {
+    return display_brightness;
+}
+
+void set_var_display_brightness(int32_t value) {
+    display_brightness = value;
+}

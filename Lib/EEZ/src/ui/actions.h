@@ -18,6 +18,10 @@ extern void action_disco_switch(lv_event_t * e);
 extern void action_update_disco_power(lv_event_t * e);
 extern void action_update_disco_speed(lv_event_t * e);
 extern void action_update_disco_phase(lv_event_t * e);
+extern void action_load_screen_menu(lv_event_t * e);
+extern void action_load_menu_button_matrix(lv_event_t * e);
+extern void action_load_previous_screen(lv_event_t * e);
+extern void action_update_display_brightness(lv_event_t * e);
 
 
 #ifdef __cplusplus
