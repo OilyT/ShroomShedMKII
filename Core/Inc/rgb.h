@@ -23,6 +23,8 @@ typedef struct {
 #define RGB_SPI_PORT hspi2
 extern SPI_HandleTypeDef RGB_SPI_PORT;
 
+extern RGB_disco_settings_t discoSettings;
+
 
 #define LOGIC_0 0xC0
 #define LOGIC_1 0xF0

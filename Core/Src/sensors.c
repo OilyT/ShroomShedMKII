@@ -22,12 +22,15 @@
 #define HEATER_COOLDOWN 15 // cycles
 #define HEATER_TIMEOUT 30 // cycles
 
+#define HUMIDITY_BUFFER_SIZE 8
 
 
 uint8_t init_res;
 
 float temperature;
 float humidity;
+static float humidity_buffer[HUMIDITY_BUFFER_SIZE] = {0};
+static uint8_t humidity_buffer_index;
 uint16_t co2;
 
 char err_buffer[200];
@@ -49,12 +52,20 @@ void init_sensors(void) {
 
 
 void sensor_process(void) {
-    read_temperature_humidity();
-    if (!sensor_heater_process()) { // don't load values if in a heater cycle
-        shroomShed.humidityCurrent = humidity;
-        shroomShed.temperatureCurrent = temperature;
-    }
+    if (read_temperature_humidity()) {
+        if (!sensor_heater_process()) { // don't load values if in a heater cycle
+            humidity_buffer[humidity_buffer_index] = humidity;
+            humidity_buffer_index = (humidity_buffer_index + 1) % HUMIDITY_BUFFER_SIZE;
+            float humidity_sum = 0;
+            for (uint8_t i = 0; i < HUMIDITY_BUFFER_SIZE; i++) {
+                humidity_sum += humidity_buffer[i];
+            }
+            float humidity_avg = humidity_sum / HUMIDITY_BUFFER_SIZE;
 
+            shroomShed.humidityCurrent = humidity_avg;
+            shroomShed.temperatureCurrent = temperature;
+        }
+    }
     /*
     co2 = get_co2();
     if (co2 != 0) {

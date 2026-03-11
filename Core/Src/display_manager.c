@@ -37,7 +37,7 @@ static int16_t current_screen = 2;
 static int16_t previous_screen = 2;
 extern RGB_disco_settings_t discoSettings;
 
-uint8_t display_brightness = 80;
+uint8_t display_brightness = 100;
 
 EXTI_HandleTypeDef htouch_exti;
 
@@ -134,6 +134,9 @@ void switch_screen(enum ScreensEnum screen) {
         case SCREEN_ID_DISCO_MODE:
             loadScreen(SCREEN_ID_DISCO_MODE);
             break;
+        case SCREEN_ID_MANUAL_CONTROL:
+            loadScreen(SCREEN_ID_MANUAL_CONTROL);
+            break;
     }
 }
 
@@ -153,6 +156,10 @@ static void update_display_vars(void) {
             break;
         case SCREEN_ID_MENU_GENERAL:
             set_var_display_brightness(get_var_display_brightness());
+            break;
+        case SCREEN_ID_MANUAL_CONTROL:
+            set_var_humidity_fp(shroomShed.humidityCurrent);
+            set_var_airflow_int(shroomShed.fanSpeed);
             break;
     }
 }
@@ -258,7 +265,6 @@ uint32_t flush_touch_buffer(uint16_t *buffer, bool avg) {
     }
     return avg_value;
 }
-
 
 
 // touchpad interrupt callback functions

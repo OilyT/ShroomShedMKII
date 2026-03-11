@@ -13,16 +13,13 @@ typedef struct _objects_t {
     lv_obj_t *disco_mode;
     lv_obj_t *menu_main;
     lv_obj_t *menu_general;
+    lv_obj_t *manual_control;
     lv_obj_t *humidity_bar;
     lv_obj_t *humidity_value_label;
     lv_obj_t *humidity_label;
     lv_obj_t *humidity_scale;
-    lv_obj_t *incr_humidity;
-    lv_obj_t *dec_humidity;
     lv_obj_t *airflow_scale;
     lv_obj_t *airflow_bar;
-    lv_obj_t *dec_airflow;
-    lv_obj_t *incr_airflow;
     lv_obj_t *airflow_label;
     lv_obj_t *airflow_value_label;
     lv_obj_t *temperature_scale;
@@ -44,6 +41,23 @@ typedef struct _objects_t {
     lv_obj_t *back_button;
     lv_obj_t *back_button_1;
     lv_obj_t *display_brightness_slider;
+    lv_obj_t *manual_control_header;
+    lv_obj_t *back_button_2;
+    lv_obj_t *manual_control_switch;
+    lv_obj_t *humidity_control_container;
+    lv_obj_t *manual_humidity_label;
+    lv_obj_t *humidity_value_label_1;
+    lv_obj_t *dec_humidity_cv;
+    lv_obj_t *dec_humidity_cv_label;
+    lv_obj_t *incr_humidity_cv;
+    lv_obj_t *incr_humidity_cv_label;
+    lv_obj_t *humidity_control_container_1;
+    lv_obj_t *airflow_value_label_1;
+    lv_obj_t *manual_airflow_label;
+    lv_obj_t *dec_airflow;
+    lv_obj_t *dec_humidity_cv_label_1;
+    lv_obj_t *incr_airflow;
+    lv_obj_t *incr_humidity_cv_label_1;
 } objects_t;
 
 extern objects_t objects;
@@ -54,6 +68,7 @@ enum ScreensEnum {
     SCREEN_ID_DISCO_MODE = 3,
     SCREEN_ID_MENU_MAIN = 4,
     SCREEN_ID_MENU_GENERAL = 5,
+    SCREEN_ID_MANUAL_CONTROL = 6,
 };
 
 void create_screen_splash_screen();
@@ -71,6 +86,9 @@ void tick_screen_menu_main();
 void create_screen_menu_general();
 void tick_screen_menu_general();
 
+void create_screen_manual_control();
+void tick_screen_manual_control();
+
 enum Themes {
     THEME_ID_DEFAULT,
 };
@@ -78,9 +96,13 @@ enum Colors {
     COLOR_ID_TEAL_1,
     COLOR_ID_DARK_GREY,
     COLOR_ID_BLACK,
+    COLOR_ID_DARK_BLUE,
+    COLOR_ID_LIGHT_GREEN,
+    COLOR_ID_RED,
+    COLOR_ID_WHITE,
 };
 void change_color_theme(uint32_t themeIndex);
-extern uint32_t theme_colors[1][3];
+extern uint32_t theme_colors[1][7];
 extern uint32_t active_theme_index;
 
 void tick_screen_by_id(enum ScreensEnum screenId);

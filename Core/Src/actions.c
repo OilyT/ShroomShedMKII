@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "actions.h"
+#include "screens.h"
 #include "vars.h"
 #include "shroomshed.h"
 #include "lvgl.h"
@@ -73,6 +74,9 @@ void action_load_menu_button_matrix(lv_event_t * e) {
             break;
         case 1:
             switch_screen(SCREEN_ID_MENU_GENERAL);
+            break;
+        case 2:
+            switch_screen(SCREEN_ID_MANUAL_CONTROL);
             break;
         default:
             break;

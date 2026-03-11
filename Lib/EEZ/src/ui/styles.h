@@ -22,10 +22,10 @@ lv_style_t *get_style_shroom_shed_small_label_MAIN_DEFAULT();
 void add_style_shroom_shed_small_label(lv_obj_t *obj);
 void remove_style_shroom_shed_small_label(lv_obj_t *obj);
 
-// Style: default_container
-lv_style_t *get_style_default_container_MAIN_DEFAULT();
-void add_style_default_container(lv_obj_t *obj);
-void remove_style_default_container(lv_obj_t *obj);
+// Style: blue_container
+lv_style_t *get_style_blue_container_MAIN_DEFAULT();
+void add_style_blue_container(lv_obj_t *obj);
+void remove_style_blue_container(lv_obj_t *obj);
 
 // Style: default_scale
 lv_style_t *get_style_default_scale_ITEMS_DEFAULT();
@@ -69,6 +69,47 @@ lv_style_t *get_style_std_slider_dark_INDICATOR_DEFAULT();
 lv_style_t *get_style_std_slider_dark_MAIN_DEFAULT();
 void add_style_std_slider_dark(lv_obj_t *obj);
 void remove_style_std_slider_dark(lv_obj_t *obj);
+
+// Style: Button_Label_48
+lv_style_t *get_style_button_label_48_MAIN_DEFAULT();
+lv_style_t *get_style_button_label_48_MAIN_CHECKED_PRESSED();
+void add_style_button_label_48(lv_obj_t *obj);
+void remove_style_button_label_48(lv_obj_t *obj);
+
+// Style: Button_Label_32
+lv_style_t *get_style_button_label_32_MAIN_DEFAULT();
+lv_style_t *get_style_button_label_32_MAIN_CHECKED_PRESSED();
+void add_style_button_label_32(lv_obj_t *obj);
+void remove_style_button_label_32(lv_obj_t *obj);
+
+// Style: Button_Label_24
+lv_style_t *get_style_button_label_24_MAIN_DEFAULT();
+lv_style_t *get_style_button_label_24_MAIN_CHECKED_PRESSED();
+void add_style_button_label_24(lv_obj_t *obj);
+void remove_style_button_label_24(lv_obj_t *obj);
+
+// Style: std_switch
+lv_style_t *get_style_std_switch_MAIN_DEFAULT();
+lv_style_t *get_style_std_switch_KNOB_DEFAULT();
+lv_style_t *get_style_std_switch_INDICATOR_CHECKED();
+lv_style_t *get_style_std_switch_INDICATOR_DEFAULT();
+void add_style_std_switch(lv_obj_t *obj);
+void remove_style_std_switch(lv_obj_t *obj);
+
+// Style: std_Label_24
+lv_style_t *get_style_std_label_24_MAIN_DEFAULT();
+void add_style_std_label_24(lv_obj_t *obj);
+void remove_style_std_label_24(lv_obj_t *obj);
+
+// Style: std_Label_32
+lv_style_t *get_style_std_label_32_MAIN_DEFAULT();
+void add_style_std_label_32(lv_obj_t *obj);
+void remove_style_std_label_32(lv_obj_t *obj);
+
+// Style: std_Label_48
+lv_style_t *get_style_std_label_48_MAIN_DEFAULT();
+void add_style_std_label_48(lv_obj_t *obj);
+void remove_style_std_label_48(lv_obj_t *obj);
 
 
 
