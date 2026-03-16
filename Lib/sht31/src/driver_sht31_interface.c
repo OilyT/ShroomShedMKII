@@ -179,8 +179,8 @@ void sht31_interface_debug_print(const char *const fmt, ...)
         len++;
     }
     
-    TEMPLATE_Transmit(sht31_usb_buffer, sizeof(sht31_usb_buffer));
-    memset(sht31_usb_buffer, 0, sizeof(sht31_usb_buffer));  
+    // TEMPLATE_Transmit(sht31_usb_buffer, sizeof(sht31_usb_buffer));
+    // memset(sht31_usb_buffer, 0, sizeof(sht31_usb_buffer));  
 }
 
 /**

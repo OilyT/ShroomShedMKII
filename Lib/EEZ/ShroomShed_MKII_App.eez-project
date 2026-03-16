@@ -973,8 +973,8 @@
                       "border_side": "BOTTOM|TOP|LEFT",
                       "bg_grad_dir": "HOR",
                       "bg_grad_color": "#ff0000",
-                      "bg_grad_stop": 222,
-                      "bg_main_stop": 32
+                      "bg_grad_stop": 255,
+                      "bg_main_stop": 0
                     }
                   },
                   "MAIN": {
@@ -1097,9 +1097,9 @@
             {
               "objID": "f4e77bf5-6c88-4546-8064-a089fcfc509f",
               "type": "LVGLButtonWidget",
-              "left": 204,
-              "top": 152,
-              "width": 100,
+              "left": 201,
+              "top": 179,
+              "width": 110,
               "height": 50,
               "customInputs": [],
               "customOutputs": [],
@@ -1130,8 +1130,8 @@
                   "type": "LVGLLabelWidget",
                   "left": 0,
                   "top": 0,
-                  "width": 47,
-                  "height": 18,
+                  "width": 95,
+                  "height": 35,
                   "customInputs": [],
                   "customOutputs": [],
                   "style": {
@@ -1157,6 +1157,7 @@
                   "checkedStateType": "literal",
                   "disabledStateType": "literal",
                   "states": "",
+                  "useStyle": "Button_Label_32",
                   "localStyles": {
                     "objID": "9c9c102f-c9a4-45ec-fba4-03500fa9439c",
                     "definition": {
@@ -1546,7 +1547,7 @@
               "flagScrollDirection": "",
               "scrollSnapX": "",
               "scrollSnapY": "",
-              "checkedState": true,
+              "checkedState": false,
               "checkedStateType": "literal",
               "disabledStateType": "literal",
               "states": "",
@@ -3574,7 +3575,8 @@
               },
               "CHECKED|PRESSED": {
                 "text_font": "MONTSERRAT_32",
-                "text_color": "Teal_1"
+                "text_color": "Teal_1",
+                "align": "DEFAULT"
               }
             }
           }

@@ -24,9 +24,15 @@
 
 #define TOUCH_BUFFER_SIZE 8
 
+//#define RGB_18_BIT
 
-/* Declare buffer for 1/10 screen size; BYTES_PER_PIXEL will be 2 for RGB565. */
+
+/* Declare buffer for 1/10 screen size. */
+#ifdef RGB_18_BIT
+#define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB888))
+#else
 #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565))
+#endif
 static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
 
 
@@ -69,6 +75,9 @@ void initDisplay(void) {
 
     /* Set display buffer for display `display1`. */
     lv_display_set_buffers(display, buf1, NULL, sizeof(buf1), LV_DISPLAY_RENDER_MODE_PARTIAL);
+#ifdef RGB_18_BIT
+    lv_display_set_color_format(display, LV_COLOR_FORMAT_RGB888);
+#endif
     lv_display_set_flush_cb(display, my_flush_cb);
 
     touchpad_init();
@@ -80,9 +89,13 @@ void initDisplay(void) {
     lv_timer_handler();
     ui_tick();
     lv_timer_handler();
+    ui_tick();
+    lv_timer_handler();
+    ui_tick();
+    lv_timer_handler();
  }
 
-
+#ifndef RGB_18_BIT
 void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map)
 {
     uint16_t * buf16 = (uint16_t *)px_map; /* RGB565 display buffer */
@@ -102,6 +115,32 @@ void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_ma
     ILI9341_DrawImage(area->x1, area->y1, width, height, buf16);
     lv_display_flush_ready(display);
 }
+#else 
+void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map)
+{
+    /* Calculate area dimensions */
+    int32_t width = area->x2 - area->x1 + 1;
+    int32_t height = area->y2 - area->y1 + 1;
+    int32_t total_pixels = width * height;
+
+    /* Quantize RGB888 to RGB666 and swap byte order to match panel expectation. */
+    for(int32_t i = 0; i < total_pixels; i++) {
+        uint8_t * px = &px_map[i * 3];
+        uint8_t r = px[0] & 0xFC;
+        uint8_t g = px[1] & 0xFC;
+        uint8_t b = px[2] & 0xFC;
+
+        px[0] = b;
+        px[1] = g;
+        px[2] = r;
+    }
+
+    /* Send the converted RGB666 buffer as one rectangular region. */
+    ILI9341_DrawImageRGB666(area->x1, area->y1, width, height, px_map);
+    lv_display_flush_ready(display);
+}
+#endif
+
 
 
 // DISPLAY PROCESSING

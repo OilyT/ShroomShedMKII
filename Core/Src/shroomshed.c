@@ -114,8 +114,8 @@ void loop(void)
     if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
         lastSerialProcess = HAL_GetTick();
         if (hUsbDeviceFS.pClassData != NULL) {
-            TEMPLATE_Transmit(usb_buffer, sizeof(usb_buffer));
-            memset(usb_buffer, 0, sizeof(usb_buffer));
+            //TEMPLATE_Transmit(usb_buffer, sizeof(usb_buffer));
+            //memset(usb_buffer, 0, sizeof(usb_buffer));
         }
     }
 
@@ -227,7 +227,7 @@ void loop(void)
 
     uint8_t threshold = 90;
     if (shroomShed.humidityControlValue - 5 < threshold) {
-         threshold = shroomShed.humidityControlValue - 5;
+            threshold = shroomShed.humidityControlValue - 5;
     }
     
     static uint32_t humStart = 0;

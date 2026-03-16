@@ -3,9 +3,9 @@
     "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/5",
     "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/0",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/9",
-    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/3",
+    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/7",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
-    "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/3",
+    "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/1",
     "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/3",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -77,6 +77,7 @@
           },
           {
             "type": "border",
+            "selected": 0,
             "size": 54.5,
             "location": "bottom",
             "children": [
@@ -130,6 +131,7 @@
                   "type": "tabset",
                   "id": "#6a4e08c5-ad67-4682-adad-39f5157e26a3",
                   "weight": 1.0585387139977858,
+                  "selected": 2,
                   "enableClose": false,
                   "children": [
                     {
@@ -195,7 +197,7 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 52.281043540249215,
+              "weight": 53.44830538192338,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
@@ -209,17 +211,6 @@
                     "permanent": false
                   },
                   "icon": "svg:page"
-                },
-                {
-                  "type": "tab",
-                  "id": "#c7468f06-5989-4813-88bf-7a6a2ca57fec",
-                  "name": "Menu_main",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/3",
-                    "permanent": true
-                  },
-                  "icon": "svg:page"
                 }
               ],
               "active": true
@@ -227,7 +218,7 @@
             {
               "type": "row",
               "id": "#cc5dea6a-df32-46dd-b7df-5c658d04b06e",
-              "weight": 28.3828932028145,
+              "weight": 27.2156313611403,
               "children": [
                 {
                   "type": "tabset",
@@ -1012,28 +1003,25 @@
       "0": {},
       "1": {},
       "2": {},
-      "3": {
-        "$selected": true
-      },
+      "3": {},
       "4": {},
       "5": {},
       "6": {},
-      "7": {},
+      "7": {
+        "$selected": true
+      },
       "8": {},
       "9": {},
       "10": {},
-      "11": {
-        "$selected": true
-      },
+      "11": {},
       "12": {},
       "13": {},
-      "14": {
-        "$selected": true
-      },
-      "15": {
-        "$selected": true
-      },
+      "14": {},
+      "15": {},
       "16": {
+        "$selected": true
+      },
+      "17": {
         "$selected": true
       }
     },
@@ -1047,6 +1035,7 @@
           "4": {},
           "5": {},
           "6": {},
+          "7": {},
           "12": {
             "0": {}
           }
@@ -1074,6 +1063,9 @@
           },
           "1": {},
           "2": {},
+          "4": {
+            "$selected": true
+          },
           "6": {}
         }
       },
@@ -1143,7 +1135,17 @@
       "selection": {
         "0": {
           "0": {},
-          "2": {}
+          "2": {},
+          "3": {
+            "1": {
+              "$selected": true
+            },
+            "3": {}
+          },
+          "4": {
+            "2": {},
+            "3": {}
+          }
         }
       },
       "transform": {
@@ -1172,8 +1174,8 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
-  "lvglState": "DEFAULT",
+  "lvglPart": "INDICATOR",
+  "lvglState": "CHECKED|PRESSED",
   "lvglExpandedPropertiesGroup": [],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,

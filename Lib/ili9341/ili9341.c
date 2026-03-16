@@ -143,10 +143,15 @@ void ILI9341_Init() {
         ILI9341_WriteData(data, sizeof(data));
     }
 
+    
     // PIXEL FORMAT
+
+    static const uint8_t rgb_16bit = 0x55;
+    static const uint8_t rgb_18bit = 0x66;
+
     ILI9341_WriteCommand(0x3A);
     {
-        uint8_t data[] = { 0x55 };
+        uint8_t data[] = { rgb_16bit };
         ILI9341_WriteData(data, sizeof(data));
     }
 
@@ -308,6 +313,15 @@ void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uin
 
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
     ILI9341_WriteData((uint8_t*)data, sizeof(uint16_t)*w*h);
+}
+
+void ILI9341_DrawImageRGB666(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint8_t* data) {
+    if((x >= ILI9341_WIDTH) || (y >= ILI9341_HEIGHT)) return;
+    if((x + w - 1) >= ILI9341_WIDTH) return;
+    if((y + h - 1) >= ILI9341_HEIGHT) return;
+
+    ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
+    ILI9341_WriteData((uint8_t*)data, (size_t)w * (size_t)h * 3u);
 }
 
 void ILI9341_InvertColors(bool invert) {
