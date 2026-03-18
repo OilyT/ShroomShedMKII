@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "stm32h5xx_hal_dma.h"
 #include "stm32h5xx_hal_gpio.h"
 #include "usbd_core.h"
 #include "usbd_cdc_if.h"
@@ -56,6 +57,7 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi4;
 SPI_HandleTypeDef hspi6;
+DMA_HandleTypeDef handle_GPDMA1_Channel7;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
@@ -76,6 +78,7 @@ extern USBD_DescriptorsTypeDef Class_Desc;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_GPDMA1_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_UART4_Init(void);
 static void MX_USB_PCD_Init(void);
@@ -106,14 +109,14 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  
   HAL_Init();
+
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
@@ -127,6 +130,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_GPDMA1_Init();
   MX_TIM1_Init();
   MX_UART4_Init();
   MX_USB_PCD_Init();
@@ -139,12 +143,12 @@ int main(void)
   MX_UART7_Init();
   MX_SPI6_Init();
   MX_SPI4_Init();
-  MX_FileX_Init();
   MX_TIM4_Init();
+  MX_FileX_Init();
   /* USER CODE BEGIN 2 */
 
   init_shroomshed();
-  
+
 
   /* USER CODE END 2 */
 
@@ -218,6 +222,53 @@ void SystemClock_Config(void)
   /** Configure the programming delay
   */
   __HAL_FLASH_SET_PROGRAM_DELAY(FLASH_PROGRAMMING_DELAY_2);
+}
+
+/**
+  * @brief GPDMA1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPDMA1_Init(void)
+{
+
+  /* USER CODE BEGIN GPDMA1_Init 0 */
+  DMA_InitTypeDef init = {0};
+  init.Request = GPDMA1_REQUEST_SPI4_TX;
+  init.Direction = DMA_MEMORY_TO_PERIPH;
+  init.SrcInc = DMA_SINC_INCREMENTED;
+  init.DestInc = DMA_DINC_FIXED;
+  init.SrcDataWidth = DMA_SRC_DATAWIDTH_BYTE;
+  init.DestDataWidth = DMA_DEST_DATAWIDTH_BYTE;
+  init.SrcBurstLength = 1;
+  init.DestBurstLength = 1;
+  init.Priority = DMA_HIGH_PRIORITY;
+  init.TransferAllocatedPort = DMA_SRC_ALLOCATED_PORT0;
+  init.Mode = DMA_NORMAL;
+
+  handle_GPDMA1_Channel7.Instance = GPDMA1_Channel7;
+  handle_GPDMA1_Channel7.Init = init;
+
+  HAL_DMA_Init(&handle_GPDMA1_Channel7);
+
+  
+
+  /* USER CODE END GPDMA1_Init 0 */
+
+  /* Peripheral clock enable */
+  __HAL_RCC_GPDMA1_CLK_ENABLE();
+
+  /* GPDMA1 interrupt Init */
+    HAL_NVIC_SetPriority(GPDMA1_Channel7_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(GPDMA1_Channel7_IRQn);
+
+  /* USER CODE BEGIN GPDMA1_Init 1 */
+
+  /* USER CODE END GPDMA1_Init 1 */
+  /* USER CODE BEGIN GPDMA1_Init 2 */
+
+  /* USER CODE END GPDMA1_Init 2 */
+
 }
 
 /**
@@ -864,7 +915,7 @@ static void MX_USB_PCD_Init(void)
 
   if(USBD_Start(&hUsbDeviceFS) != USBD_OK)
         Error_Handler();
-      
+
   /* USER CODE END USB_Init 2 */
 
 }
@@ -944,6 +995,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
 
 
 /* USER CODE END 4 */

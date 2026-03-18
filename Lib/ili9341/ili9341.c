@@ -1,7 +1,23 @@
 /* vim: set ai et ts=4 sw=4: */
 #include "stm32h5xx_hal.h"
+#include "stm32h5xx_hal_spi.h"
 #include "ili9341.h"
 #include <stdlib.h>
+#include <stdbool.h>
+
+static volatile bool DMA_txInProgress = false;
+
+static bool ILI9341_WaitForDmaTxComplete(uint32_t timeout_ms) {
+    uint32_t start = HAL_GetTick();
+    while (DMA_txInProgress) {
+        if ((HAL_GetTick() - start) > timeout_ms) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 
 static void ILI9341_Select() {
     HAL_GPIO_WritePin(ILI9341_CS_GPIO_Port, ILI9341_CS_Pin, GPIO_PIN_RESET);
@@ -32,6 +48,30 @@ static void ILI9341_WriteData(uint8_t* buff, size_t buff_size) {
     while(buff_size > 0) {
         uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
         HAL_SPI_Transmit(&ILI9341_SPI_PORT, buff, chunk_size, HAL_MAX_DELAY);
+        buff += chunk_size;
+        buff_size -= chunk_size;
+    }
+    ILI9341_Unselect();
+}
+
+static void ILI9341_WriteData_DMA(uint8_t* buff, size_t buff_size) {
+    ILI9341_Select();
+    HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
+
+    // split data in small chunks because HAL can't send more then 64K at once
+    while(buff_size > 0) {
+        uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
+        DMA_txInProgress = true;
+        HAL_StatusTypeDef status = HAL_SPI_Transmit_DMA(&ILI9341_SPI_PORT, buff, chunk_size);
+        if (status != HAL_OK) {
+            DMA_txInProgress = false;
+            break;
+        }
+
+        if (!ILI9341_WaitForDmaTxComplete(100)) {
+            break;
+        }
+
         buff += chunk_size;
         buff_size -= chunk_size;
     }
@@ -312,7 +352,7 @@ void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uin
     if((y + h - 1) >= ILI9341_HEIGHT) return;
 
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
-    ILI9341_WriteData((uint8_t*)data, sizeof(uint16_t)*w*h);
+    ILI9341_WriteData_DMA((uint8_t*)data, sizeof(uint16_t)*w*h);
 }
 
 void ILI9341_DrawImageRGB666(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint8_t* data) {
@@ -321,7 +361,7 @@ void ILI9341_DrawImageRGB666(uint16_t x, uint16_t y, uint16_t w, uint16_t h, con
     if((y + h - 1) >= ILI9341_HEIGHT) return;
 
     ILI9341_SetAddressWindow(x, y, x+w-1, y+h-1);
-    ILI9341_WriteData((uint8_t*)data, (size_t)w * (size_t)h * 3u);
+    ILI9341_WriteData_DMA((uint8_t*)data, (size_t)w * (size_t)h * 3u);
 }
 
 void ILI9341_InvertColors(bool invert) {
@@ -330,3 +370,9 @@ void ILI9341_InvertColors(bool invert) {
     ILI9341_Unselect();
 }
 
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef * hspi)
+{
+    if (hspi == &ILI9341_SPI_PORT) {
+        DMA_txInProgress = false;
+    }
+}
