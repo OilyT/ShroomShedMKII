@@ -9,7 +9,7 @@
 #define READ_Y 0xD0
 #define READ_X 0x90
 
-#define MIN_SAMPLES 32
+#define MIN_SAMPLES 16
 #define MAX_SAMPLES 64
 #define CALIBRATION_SAMPLES 128
 #define CALIBRATION_ITERATIONS 4
@@ -111,68 +111,6 @@ bool touch_get_avg_x_y(uint16_t *x, uint16_t *y, uint8_t samples) {
     *x = avg_x / samples;
     *y = avg_y / samples;
     return true;
-}
-
-
- void calibrate_touch(uint32_t *min_x, uint32_t *min_y, uint32_t *max_x, uint32_t *max_y) {
-    uint16_t x, y;
-    uint8_t iterations = 0;
-    *min_x = 0xFFFFFFFF;
-    *min_y = 0xFFFFFFFF;
-    *max_x = 0;
-    *max_y = 0;
-
-    // top left
-    ILI9341_FillRectangle(0, 0, 5, 5, ILI9341_RED);
-    while (iterations < CALIBRATION_ITERATIONS) {
-        if (touch_get_avg_x_y(&x, &y, CALIBRATION_SAMPLES)) {
-            if (x < *min_x) *min_x = x;
-            if (y < *min_y) *min_y = y;
-            iterations++;
-        }
-    }
-    iterations = 0;
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_RED);
-    HAL_Delay(500);
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_WHITE);
-
-    // top right
-    ILI9341_FillRectangle(315, 0, 5, 5, ILI9341_RED);
-    while (iterations < CALIBRATION_ITERATIONS) {
-        if (touch_get_avg_x_y(&x, &y, CALIBRATION_SAMPLES)) {
-            if (x > *max_x) *max_x = x;
-            if (y < *min_y) *min_y = y;
-            iterations++;
-        }
-    }
-    iterations = 0;
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_RED);
-    HAL_Delay(500);
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_WHITE);
-
-    // bottom left
-    ILI9341_FillRectangle(0, 235, 5, 5, ILI9341_RED);
-    while (iterations < CALIBRATION_ITERATIONS) {
-        if (touch_get_avg_x_y(&x, &y, CALIBRATION_SAMPLES)) {
-            if (x < *min_x) *min_x = x;
-            if (y > *max_y) *max_y = y;
-            iterations++;
-        }
-    }
-    iterations = 0;
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_RED);
-    HAL_Delay(500);
-    ILI9341_FillRectangle(145, 105, 30, 30, ILI9341_WHITE);
-
-    // bottom right
-    ILI9341_FillRectangle(315, 235, 5, 5, ILI9341_RED);
-    while(iterations < CALIBRATION_ITERATIONS) {
-        if (touch_get_avg_x_y(&x, &y, CALIBRATION_SAMPLES)) {
-            if (x > *max_x) *max_x = x;
-            if (y > *max_y) *max_y = y;
-            iterations++;
-        }
-    }
 }
 
 

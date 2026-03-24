@@ -1102,264 +1102,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Connector_Generic:Conn_02x03_Odd_Even"
-			(pin_names
-				(offset 1.016)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at 1.27 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_02x03_Odd_Even"
-				(at 1.27 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "connector"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Connector*:*_2x??_*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_02x03_Odd_Even_1_1"
-				(rectangle
-					(start -1.27 3.81)
-					(end 3.81 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 3.81 2.667)
-					(end 2.54 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 3.81 0.127)
-					(end 2.54 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(rectangle
-					(start 3.81 -2.413)
-					(end 2.54 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin passive line
-					(at -5.08 2.54 0)
-					(length 3.81)
-					(name "Pin_1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 3.81)
-					(name "Pin_3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 -2.54 0)
-					(length 3.81)
-					(name "Pin_5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 2.54 180)
-					(length 3.81)
-					(name "Pin_2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 0 180)
-					(length 3.81)
-					(name "Pin_4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 7.62 -2.54 180)
-					(length 3.81)
-					(name "Pin_6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Connector_Generic:Conn_02x05_Odd_Even"
 			(pin_names
 				(offset 1.016)
@@ -10229,7 +9971,7 @@
 	)
 	(text "GPIO CONN\n"
 		(exclude_from_sim no)
-		(at 177.8 106.68 0)
+		(at 177.8 114.935 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -10303,12 +10045,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "24f5b0f3-ae01-404d-bc73-1b80b23c7914")
-	)
-	(junction
-		(at 205.105 108.585)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2c394860-b14a-484a-8cba-ccdb0089d2d0")
 	)
 	(junction
 		(at 266.7 100.33)
@@ -10401,12 +10137,6 @@
 		(uuid "49a5241b-a705-4f44-94c1-fb9f4c95bc59")
 	)
 	(junction
-		(at 44.45 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "49ba6d98-90fa-45da-bad1-1f20ebe9d5fc")
-	)
-	(junction
 		(at 365.125 95.885)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10425,10 +10155,10 @@
 		(uuid "4e15d94d-176e-47d8-bba7-30c4ba641910")
 	)
 	(junction
-		(at 211.455 103.505)
+		(at 41.275 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4f3bda4a-c845-4c12-8529-d2ce8af2a216")
+		(uuid "4e74a735-8375-43de-8996-4c745a9b0b33")
 	)
 	(junction
 		(at 288.29 43.18)
@@ -10449,10 +10179,10 @@
 		(uuid "54324d64-c78f-4c66-8da6-be43bd6277f3")
 	)
 	(junction
-		(at 198.755 103.505)
+		(at 205.74 114.935)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "5b88b5bb-f442-45dc-82f4-cceb92dd6a06")
+		(uuid "65307c0a-9aff-4902-a227-1c8760be6850")
 	)
 	(junction
 		(at 135.89 217.17)
@@ -10465,6 +10195,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "67fa9665-5365-4dcd-a149-e112993a063a")
+	)
+	(junction
+		(at 205.74 93.345)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "68995600-4be2-4d42-9e4a-6b3d8e7f9629")
 	)
 	(junction
 		(at 273.05 259.08)
@@ -10623,6 +10359,12 @@
 		(uuid "b4a91783-89c1-440f-a441-6ea88e5648aa")
 	)
 	(junction
+		(at 179.07 96.52)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b4f2afba-f11e-48e0-acd9-b3a245dd7ed0")
+	)
+	(junction
 		(at 76.2 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -10657,12 +10399,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c4e3fc2b-4414-48ae-bd7f-6497f565dffe")
-	)
-	(junction
-		(at 45.72 36.83)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c7ce1ec3-eef7-4baf-9057-c9882d6b1d59")
 	)
 	(junction
 		(at 393.065 32.385)
@@ -10911,6 +10647,16 @@
 			(type default)
 		)
 		(uuid "07c69ae3-bb31-4b60-a236-4b2b9b0d9c14")
+	)
+	(wire
+		(pts
+			(xy 172.72 96.52) (xy 179.07 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09bd5ada-57a5-4e79-8df5-a67e38568777")
 	)
 	(wire
 		(pts
@@ -11184,13 +10930,13 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 36.83) (xy 45.72 39.37)
+			(xy 185.42 93.345) (xy 185.42 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1f608c16-6261-46ff-a45d-1a8541cc8f14")
+		(uuid "1e7bd51a-72e4-4514-b9a0-3442f72be4e0")
 	)
 	(wire
 		(pts
@@ -11234,6 +10980,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 93.345) (xy 212.09 93.345)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22196d0b-03ef-4ecd-a852-a512c756a4d1")
+	)
+	(wire
+		(pts
 			(xy 140.97 184.15) (xy 126.365 184.15)
 		)
 		(stroke
@@ -11241,6 +10997,16 @@
 			(type default)
 		)
 		(uuid "22993dae-9095-4a89-b855-41791b561264")
+	)
+	(wire
+		(pts
+			(xy 199.39 111.76) (xy 199.39 114.935)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23a9e6c2-6d25-4154-9f93-2e783f65cd57")
 	)
 	(wire
 		(pts
@@ -11271,16 +11037,6 @@
 			(type default)
 		)
 		(uuid "28b94ecc-5dc5-453a-aa4c-58126d5a017d")
-	)
-	(wire
-		(pts
-			(xy 211.455 103.505) (xy 211.455 108.585)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "290b07c7-3d68-4220-91e8-97647b5560e2")
 	)
 	(wire
 		(pts
@@ -11324,16 +11080,6 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 39.37) (xy 55.88 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2baa6c9c-52f6-47e0-b279-bd8d062ec519")
-	)
-	(wire
-		(pts
 			(xy 344.805 32.385) (xy 353.695 32.385)
 		)
 		(stroke
@@ -11341,6 +11087,16 @@
 			(type default)
 		)
 		(uuid "2c302b1f-f087-4622-9085-72a6322c8576")
+	)
+	(wire
+		(pts
+			(xy 179.07 96.52) (xy 185.42 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ca43bd9-ca8f-447b-9278-2db042c9f47b")
 	)
 	(wire
 		(pts
@@ -11361,16 +11117,6 @@
 			(type default)
 		)
 		(uuid "2ec2428b-8bd1-43e5-ad1d-abbb085f8a71")
-	)
-	(wire
-		(pts
-			(xy 211.455 100.965) (xy 211.455 103.505)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2eec8994-b40f-4ed4-8cc2-55e1aa015103")
 	)
 	(wire
 		(pts
@@ -11464,13 +11210,13 @@
 	)
 	(wire
 		(pts
-			(xy 198.755 100.965) (xy 198.755 103.505)
+			(xy 199.39 114.935) (xy 205.74 114.935)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "36d808b4-1d0f-4c22-be2c-d6b048bd7e7e")
+		(uuid "355aab62-d93a-4030-94fd-0ef1d42bf1a5")
 	)
 	(wire
 		(pts
@@ -11551,6 +11297,16 @@
 			(type default)
 		)
 		(uuid "40c84b42-ad9c-415a-b76b-e31a44092d5c")
+	)
+	(wire
+		(pts
+			(xy 199.39 93.345) (xy 205.74 93.345)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40cbff0c-ea06-4e6b-bf79-b028f0c04073")
 	)
 	(wire
 		(pts
@@ -11784,16 +11540,6 @@
 	)
 	(wire
 		(pts
-			(xy 198.755 108.585) (xy 205.105 108.585)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "540110b9-5adb-4827-b4be-d1f5959c6d92")
-	)
-	(wire
-		(pts
 			(xy 203.2 130.81) (xy 203.2 137.16)
 		)
 		(stroke
@@ -11861,6 +11607,16 @@
 			(type default)
 		)
 		(uuid "595196ca-6a46-4e9e-b691-b139cb3d819e")
+	)
+	(wire
+		(pts
+			(xy 199.39 90.17) (xy 199.39 93.345)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ab2f66b-1077-4b8c-beb3-85fed0455e2f")
 	)
 	(wire
 		(pts
@@ -12164,16 +11920,6 @@
 	)
 	(wire
 		(pts
-			(xy 211.455 84.455) (xy 215.265 84.455)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6ec0abce-4df3-4c02-a66b-29acdc1b7b4e")
-	)
-	(wire
-		(pts
 			(xy 275.59 35.56) (xy 280.67 35.56)
 		)
 		(stroke
@@ -12354,6 +12100,16 @@
 	)
 	(wire
 		(pts
+			(xy 205.74 114.935) (xy 212.09 114.935)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7ce78cfb-128f-4528-bd2e-1737f0b474ab")
+	)
+	(wire
+		(pts
 			(xy 293.37 35.56) (xy 288.29 35.56)
 		)
 		(stroke
@@ -12484,16 +12240,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 36.83) (xy 44.45 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "85464c61-d5d4-407b-bf6b-5af97324d14e")
-	)
-	(wire
-		(pts
 			(xy 24.13 259.08) (xy 28.575 259.08)
 		)
 		(stroke
@@ -12594,7 +12340,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 36.83) (xy 45.72 36.83)
+			(xy 38.1 36.83) (xy 41.275 36.83)
 		)
 		(stroke
 			(width 0)
@@ -12631,16 +12377,6 @@
 			(type default)
 		)
 		(uuid "8dbdcfcf-5774-462c-9ebd-086dbf206128")
-	)
-	(wire
-		(pts
-			(xy 211.455 86.995) (xy 219.71 86.995)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8f7ccf2e-81bb-435b-a2df-f0c96a21f0d1")
 	)
 	(wire
 		(pts
@@ -12681,16 +12417,6 @@
 			(type default)
 		)
 		(uuid "92b25ae6-1a13-4edf-a6a0-48b51d0ad8f4")
-	)
-	(wire
-		(pts
-			(xy 45.72 36.83) (xy 55.88 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9413e4d7-705e-4c45-8ac8-7ae5e716b97d")
 	)
 	(wire
 		(pts
@@ -12804,16 +12530,6 @@
 	)
 	(wire
 		(pts
-			(xy 211.455 108.585) (xy 205.105 108.585)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a0e11c5f-abb8-4280-9b09-dcceb346d5d6")
-	)
-	(wire
-		(pts
 			(xy 28.575 161.925) (xy 38.735 161.925)
 		)
 		(stroke
@@ -12891,6 +12607,16 @@
 			(type default)
 		)
 		(uuid "a85e27d1-e53b-4791-9a46-a3ac336de806")
+	)
+	(wire
+		(pts
+			(xy 41.275 36.83) (xy 55.88 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a87f0600-134c-45b9-8769-3dc364d8e57b")
 	)
 	(wire
 		(pts
@@ -12994,16 +12720,6 @@
 	)
 	(wire
 		(pts
-			(xy 55.88 41.91) (xy 44.45 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b13531e3-58fe-4f08-9c05-b4987f4d40db")
-	)
-	(wire
-		(pts
 			(xy 205.74 41.91) (xy 213.36 41.91)
 		)
 		(stroke
@@ -13104,6 +12820,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 41.91) (xy 41.275 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9862d09-914a-440e-a7fc-c40edf880af0")
+	)
+	(wire
+		(pts
 			(xy 210.82 208.28) (xy 210.82 210.82)
 		)
 		(stroke
@@ -13134,6 +12860,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 111.76) (xy 212.09 114.935)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bbf7b4e6-8f25-4513-aab8-6fd3ad2c2bbd")
+	)
+	(wire
+		(pts
 			(xy 85.09 30.48) (xy 85.09 36.83)
 		)
 		(stroke
@@ -13151,6 +12887,16 @@
 			(type default)
 		)
 		(uuid "beee4ae2-816d-4f7f-92e2-cb8d8ecd15f4")
+	)
+	(wire
+		(pts
+			(xy 41.275 41.91) (xy 41.275 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bf20fcbf-8f67-4414-9814-3d9ee4659304")
 	)
 	(wire
 		(pts
@@ -13214,6 +12960,16 @@
 	)
 	(wire
 		(pts
+			(xy 212.09 90.17) (xy 212.09 93.345)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6b09169-ee69-4b68-8430-806a41881148")
+	)
+	(wire
+		(pts
 			(xy 99.695 259.08) (xy 106.045 259.08)
 		)
 		(stroke
@@ -13261,16 +13017,6 @@
 			(type default)
 		)
 		(uuid "cc7cd49f-a3db-45ce-983e-50c633272915")
-	)
-	(wire
-		(pts
-			(xy 194.945 84.455) (xy 198.755 84.455)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cfcf4450-b78c-4945-bb07-51a978ae6a1d")
 	)
 	(wire
 		(pts
@@ -13371,16 +13117,6 @@
 			(type default)
 		)
 		(uuid "dcdf6e75-0ea6-4027-8088-f2f0e6ea42d4")
-	)
-	(wire
-		(pts
-			(xy 191.77 86.995) (xy 198.755 86.995)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dce92a1e-46b5-4eb9-8eb7-5c97f2eb6d23")
 	)
 	(wire
 		(pts
@@ -13724,16 +13460,6 @@
 	)
 	(wire
 		(pts
-			(xy 198.755 103.505) (xy 198.755 108.585)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb1da0c7-2bd6-484a-8bb5-f833862a62d0")
-	)
-	(wire
-		(pts
 			(xy 133.35 48.26) (xy 152.4 48.26)
 		)
 		(stroke
@@ -13764,13 +13490,13 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 36.83) (xy 44.45 41.91)
+			(xy 172.72 93.345) (xy 172.72 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "fea0a5da-e245-4374-a241-997300b3cfae")
+		(uuid "fe2fc207-6c00-48b1-948c-5b26ba034463")
 	)
 	(label "BOOST_OUT"
 		(at 71.12 26.67 0)
@@ -14326,7 +14052,7 @@
 	)
 	(global_label "PB14"
 		(shape input)
-		(at 139.065 94.615 180)
+		(at 141.478 95.25 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14336,7 +14062,7 @@
 		)
 		(uuid "3447b8ee-354f-4b8d-8eae-b76a83b9a289")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.1208 94.615 0)
+			(at 133.5338 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14700,7 +14426,7 @@
 	)
 	(global_label "PC7"
 		(shape input)
-		(at 151.765 79.375 0)
+		(at 154.178 80.01 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14710,7 +14436,7 @@
 		)
 		(uuid "58d73700-e1ad-4599-b7f2-8fbf71d759bd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.4997 79.375 0)
+			(at 160.9127 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14722,7 +14448,7 @@
 	)
 	(global_label "PB12"
 		(shape input)
-		(at 151.765 94.615 0)
+		(at 154.178 95.25 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14732,7 +14458,7 @@
 		)
 		(uuid "5a188bdc-8293-49f6-b0bc-377393485505")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 159.7092 94.615 0)
+			(at 162.1222 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14744,7 +14470,7 @@
 	)
 	(global_label "PD10"
 		(shape input)
-		(at 139.065 89.535 180)
+		(at 141.478 90.17 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14754,7 +14480,7 @@
 		)
 		(uuid "5be5a4cd-a30d-44df-9079-f5b7a6a42bc0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 89.535 0)
+			(at 134.7433 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14876,7 +14602,7 @@
 	)
 	(global_label "PD11"
 		(shape input)
-		(at 151.765 86.995 0)
+		(at 154.178 87.63 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14886,7 +14612,7 @@
 		)
 		(uuid "657c1f3e-06c7-490e-aeca-9696d58669b3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 159.7092 86.995 0)
+			(at 162.1222 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14920,7 +14646,7 @@
 	)
 	(global_label "PD13"
 		(shape input)
-		(at 151.765 84.455 0)
+		(at 154.178 85.09 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -14930,7 +14656,7 @@
 		)
 		(uuid "6b4aa60a-1cd0-4ea9-9082-77b803ed081a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 159.7092 84.455 0)
+			(at 162.1222 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15072,6 +14798,28 @@
 			)
 		)
 	)
+	(global_label "BOOST_EN"
+		(shape input)
+		(at 387.985 111.125 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "7fff4a6b-cad1-4d18-8cf2-216f19226965")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 400.5254 111.125 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "PE14"
 		(shape input)
 		(at 327.025 164.465 180)
@@ -15096,7 +14844,7 @@
 	)
 	(global_label "PD12"
 		(shape input)
-		(at 139.065 86.995 180)
+		(at 141.478 87.63 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15106,7 +14854,7 @@
 		)
 		(uuid "82fbeebb-6405-4fb9-af82-1b25691e9992")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 86.995 0)
+			(at 134.7433 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15162,7 +14910,7 @@
 	)
 	(global_label "PA10"
 		(shape input)
-		(at 139.065 76.835 180)
+		(at 141.478 77.47 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15172,7 +14920,7 @@
 		)
 		(uuid "8dd7aae5-2a5d-430f-ad78-1f5301b82f72")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.3022 76.835 0)
+			(at 133.7152 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15195,6 +14943,28 @@
 		(uuid "8e626d4d-971b-4097-8140-60f59ddf119e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 267.9481 215.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BOOST_EN"
+		(shape input)
+		(at 55.88 39.37 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8ec379a0-d46f-4af8-8437-fa20b9f997fd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 43.3396 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15228,7 +14998,7 @@
 	)
 	(global_label "PB15"
 		(shape input)
-		(at 151.765 92.075 0)
+		(at 154.178 92.71 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15238,7 +15008,7 @@
 		)
 		(uuid "94642a95-7a99-4e3a-a855-53a4f799b97e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 159.7092 92.075 0)
+			(at 162.1222 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15360,7 +15130,7 @@
 	)
 	(global_label "PC6"
 		(shape input)
-		(at 139.065 81.915 180)
+		(at 141.478 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15370,7 +15140,7 @@
 		)
 		(uuid "a446c3e2-4fac-45b2-a018-576aa1be551c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 81.915 0)
+			(at 134.7433 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15448,7 +15218,7 @@
 	)
 	(global_label "PD15"
 		(shape input)
-		(at 151.765 81.915 0)
+		(at 154.178 82.55 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15458,7 +15228,7 @@
 		)
 		(uuid "ac05e706-8d94-40bb-a0dd-6770a74908c3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 159.7092 81.915 0)
+			(at 162.1222 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15690,7 +15460,7 @@
 	)
 	(global_label "PD8"
 		(shape input)
-		(at 139.065 92.075 180)
+		(at 141.478 92.71 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15700,7 +15470,7 @@
 		)
 		(uuid "c647a659-f390-4825-9411-b90cb58ac155")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 92.075 0)
+			(at 134.7433 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15734,7 +15504,7 @@
 	)
 	(global_label "PC8"
 		(shape input)
-		(at 139.065 79.375 180)
+		(at 141.478 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15744,7 +15514,7 @@
 		)
 		(uuid "c749991a-a25b-4271-9071-1abccbf23d53")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 79.375 0)
+			(at 134.7433 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15888,7 +15658,7 @@
 	)
 	(global_label "PD9"
 		(shape input)
-		(at 151.765 89.535 0)
+		(at 154.178 90.17 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15898,7 +15668,7 @@
 		)
 		(uuid "d5504cc8-367c-48aa-917d-0e012488b5ae")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.4997 89.535 0)
+			(at 160.9127 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15932,7 +15702,7 @@
 	)
 	(global_label "PD14"
 		(shape input)
-		(at 139.065 84.455 180)
+		(at 141.478 85.09 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -15942,7 +15712,7 @@
 		)
 		(uuid "d5644b1b-46fe-4b33-ae3e-d526c9790611")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 132.3303 84.455 0)
+			(at 134.7433 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16218,7 +15988,7 @@
 	)
 	(global_label "PA9"
 		(shape input)
-		(at 151.765 76.835 0)
+		(at 154.178 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -16228,7 +15998,7 @@
 		)
 		(uuid "eebaa2e6-9bb4-4b46-b76f-0f2a21b227bd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 158.3183 76.835 0)
+			(at 160.7313 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16921,7 +16691,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "01bb512f-adb0-4d5b-8ce5-bff28dd2c9df")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR026"
 			(at 203.2 134.62 0)
 			(effects
 				(font
@@ -16971,7 +16741,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR022")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
@@ -16986,7 +16756,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "03b4f2f8-745e-4b5d-90fc-427cf60eeccc")
-		(property "Reference" "J6"
+		(property "Reference" "J8"
 			(at 218.44 247.0149 0)
 			(effects
 				(font
@@ -17055,7 +16825,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J6")
+					(reference "J8")
 					(unit 1)
 				)
 			)
@@ -17175,7 +16945,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0a56fd61-1450-4cbd-9d1f-fa8653571832")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR028"
 			(at 205.74 48.26 0)
 			(effects
 				(font
@@ -17225,7 +16995,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR024")
+					(reference "#PWR028")
 					(unit 1)
 				)
 			)
@@ -17310,7 +17080,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "128f5cd5-7598-4ff9-b56d-b90f120620f3")
-		(property "Reference" "#PWR037"
+		(property "Reference" "#PWR045"
 			(at 276.86 241.935 0)
 			(effects
 				(font
@@ -17360,7 +17130,73 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR037")
+					(reference "#PWR045")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 205.74 93.345 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "158c7cc8-58f3-4618-ae2f-f007673de5d2")
+		(property "Reference" "#PWR029"
+			(at 205.74 99.695 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 205.74 98.425 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.74 93.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 205.74 93.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 205.74 93.345 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "87030717-1999-4a68-8e47-f5d405991a0f")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR029")
 					(unit 1)
 				)
 			)
@@ -17447,7 +17283,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "177aeab0-06fe-45d8-a5d6-fa1983b97de6")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR044"
 			(at 276.86 146.685 0)
 			(effects
 				(font
@@ -17497,7 +17333,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR036")
+					(reference "#PWR044")
 					(unit 1)
 				)
 			)
@@ -17969,7 +17805,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1e85dd52-9ee0-4639-aed2-b19f5a71d0e3")
-		(property "Reference" "#PWR046"
+		(property "Reference" "#PWR054"
 			(at 357.505 247.015 0)
 			(effects
 				(font
@@ -18019,7 +17855,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR046")
+					(reference "#PWR054")
 					(unit 1)
 				)
 			)
@@ -18391,72 +18227,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 215.265 84.455 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "218cdad4-d041-4714-bea1-5f83aaaa7e47")
-		(property "Reference" "#PWR050"
-			(at 215.265 88.265 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+5V"
-			(at 215.265 79.375 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 215.265 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 215.265 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 215.265 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "12567c59-ea52-4e4b-a602-2723069ba6dc")
-		)
-		(instances
-			(project "ShroomShed_MKII_PCB"
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR050")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 273.05 275.59 0)
 		(unit 1)
@@ -18466,7 +18236,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2308dcf6-861b-437b-92e2-49c3fb73e7a0")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR042"
 			(at 273.05 281.94 0)
 			(effects
 				(font
@@ -18516,7 +18286,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR034")
+					(reference "#PWR042")
 					(unit 1)
 				)
 			)
@@ -18531,7 +18301,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "23dd29aa-a54f-4ebd-b3b5-308a6b7010e3")
-		(property "Reference" "#PWR048"
+		(property "Reference" "#PWR056"
 			(at 371.475 45.72 0)
 			(effects
 				(font
@@ -18581,7 +18351,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR048")
+					(reference "#PWR056")
 					(unit 1)
 				)
 			)
@@ -18666,7 +18436,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "26f331c5-263c-4642-ae50-7a6e92492ca8")
-		(property "Reference" "#PWR041"
+		(property "Reference" "#PWR049"
 			(at 314.96 36.83 0)
 			(effects
 				(font
@@ -18716,7 +18486,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR041")
+					(reference "#PWR049")
 					(unit 1)
 				)
 			)
@@ -18955,7 +18725,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "307c9089-e18e-4730-b3cf-05e5b0c43557")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR027"
 			(at 203.2 183.515 0)
 			(effects
 				(font
@@ -19005,7 +18775,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR023")
+					(reference "#PWR027")
 					(unit 1)
 				)
 			)
@@ -19151,7 +18921,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "30ec0311-808b-40b7-b2b0-1973db818369")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR033"
 			(at 210.82 245.745 0)
 			(effects
 				(font
@@ -19201,7 +18971,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR027")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -19284,7 +19054,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "336ad3cd-96e3-4eed-80ba-1d5e4ec557da")
-		(property "Reference" "#PWR049"
+		(property "Reference" "#PWR057"
 			(at 393.065 42.545 0)
 			(effects
 				(font
@@ -19334,7 +19104,7 @@
 		(instances
 			(project ""
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR049")
+					(reference "#PWR057")
 					(unit 1)
 				)
 			)
@@ -19415,7 +19185,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "382a7f5d-c83e-4b76-83ff-333b47259a78")
-		(property "Reference" "J5"
+		(property "Reference" "J7"
 			(at 218.44 213.3599 0)
 			(effects
 				(font
@@ -19484,7 +19254,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J5")
+					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -19589,7 +19359,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "38d57d53-c2da-442c-8c76-fba87b5ec79d")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR041"
 			(at 266.7 106.68 0)
 			(effects
 				(font
@@ -19639,7 +19409,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR033")
+					(reference "#PWR041")
 					(unit 1)
 				)
 			)
@@ -19655,7 +19425,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "38eb3a90-02dd-41ea-8103-44ab64123879")
-		(property "Reference" "J7"
+		(property "Reference" "J9"
 			(at 227.33 22.86 0)
 			(effects
 				(font
@@ -19752,7 +19522,7 @@
 		(instances
 			(project ""
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J7")
+					(reference "J9")
 					(unit 1)
 				)
 			)
@@ -20318,6 +20088,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 185.42 90.805 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "46bffaa9-70b7-4565-afac-c7bf501da378")
+		(property "Reference" "#PWR022"
+			(at 185.42 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 185.42 85.725 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 185.42 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9d024262-d74e-41c6-8f2a-1cbfa91417ae")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 280.67 35.56 0)
 		(unit 1)
@@ -20327,7 +20163,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4f90a27b-7a67-40cb-8f89-577bf6e4ef71")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR046"
 			(at 280.67 39.37 0)
 			(effects
 				(font
@@ -20377,7 +20213,7 @@
 		(instances
 			(project ""
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR038")
+					(reference "#PWR046")
 					(unit 1)
 				)
 			)
@@ -20732,7 +20568,7 @@
 		(dnp no)
 		(uuid "586c95ec-c5ed-4f93-b104-c2d324b51d69")
 		(property "Reference" "C4"
-			(at 39.878 39.37 0)
+			(at 34.925 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20741,7 +20577,7 @@
 			)
 		)
 		(property "Value" "1uF"
-			(at 39.624 41.91 0)
+			(at 34.29 42.545 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -20942,7 +20778,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5c13847c-1547-4493-9598-a9c002cb830d")
-		(property "Reference" "#PWR047"
+		(property "Reference" "#PWR055"
 			(at 360.68 58.42 0)
 			(effects
 				(font
@@ -20992,7 +20828,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR047")
+					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -21143,7 +20979,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6278aa6b-c35c-4a9f-8cbe-7ca1de270d81")
-		(property "Reference" "#PWR042"
+		(property "Reference" "#PWR050"
 			(at 318.135 239.395 0)
 			(effects
 				(font
@@ -21193,72 +21029,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR042")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+15V")
-		(at 219.71 86.995 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "654609ab-d4fd-4846-8a0f-ba83485c0df8")
-		(property "Reference" "#PWR054"
-			(at 219.71 90.805 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+12V"
-			(at 218.948 83.185 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 219.71 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 219.71 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+15V\""
-			(at 219.71 86.995 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0a81249f-44cd-4d23-aa2a-46c51fb2b61e")
-		)
-		(instances
-			(project "ShroomShed_MKII_PCB"
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR054")
+					(reference "#PWR050")
 					(unit 1)
 				)
 			)
@@ -21411,7 +21182,7 @@
 		(dnp no)
 		(uuid "6e0e8dd8-ecdd-4092-adb7-3e4c2de7d6fb")
 		(property "Reference" "C1"
-			(at 27.432 39.116 0)
+			(at 26.035 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21420,7 +21191,7 @@
 			)
 		)
 		(property "Value" "10uF"
-			(at 27.432 41.91 0)
+			(at 26.035 42.545 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21570,6 +21341,80 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_02x02_Odd_Even")
+		(at 177.8 90.805 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6f96550e-98bf-4f13-960f-ef842867f935")
+		(property "Reference" "J4"
+			(at 179.07 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "3V3_PWR"
+			(at 179.07 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical"
+			(at 177.8 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 177.8 90.805 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "a11f8194-6d90-4d4a-bd50-4dd375130f2e")
+		)
+		(pin "4"
+			(uuid "f055b7f5-76dd-414a-a3e0-893d00c0d191")
+		)
+		(pin "2"
+			(uuid "85b93db2-e863-4538-b67a-e5502b8d48d7")
+		)
+		(pin "1"
+			(uuid "a90c9392-49b4-4d1d-a3f7-982be978cc60")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "J4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Custom:XL-5050RGBC")
 		(at 135.89 222.25 90)
 		(unit 1)
@@ -21653,6 +21498,72 @@
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
 					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 179.07 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "73b80be2-9801-4a29-b149-5bc9a031e298")
+		(property "Reference" "#PWR021"
+			(at 179.07 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 179.07 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 179.07 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 179.07 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 179.07 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5efab136-5fb7-4213-bc0f-e18431cec620")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -22019,7 +21930,7 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 194.945 84.455 0)
+		(at 212.09 87.63 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -22027,8 +21938,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7ba6faab-4bfb-4ae5-adb8-41f931dcb577")
-		(property "Reference" "#PWR021"
-			(at 194.945 88.265 0)
+		(property "Reference" "#PWR035"
+			(at 212.09 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22037,7 +21948,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 194.945 79.375 0)
+			(at 212.09 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22045,7 +21956,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 194.945 84.455 0)
+			(at 212.09 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22054,7 +21965,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 194.945 84.455 0)
+			(at 212.09 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22063,7 +21974,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 194.945 84.455 0)
+			(at 212.09 87.63 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -22077,7 +21988,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR021")
+					(reference "#PWR035")
 					(unit 1)
 				)
 			)
@@ -22309,6 +22220,80 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_02x02_Odd_Even")
+		(at 204.47 87.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8427c6ed-051d-411e-ac2c-e4d6b774528b")
+		(property "Reference" "J5"
+			(at 205.74 81.915 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "5V_PWR"
+			(at 205.74 84.455 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical"
+			(at 204.47 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 204.47 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 204.47 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "1cc6789f-6445-4dba-a7e7-5086f1e091b6")
+		)
+		(pin "4"
+			(uuid "1e11e863-9362-4862-9042-7a6ddb60e716")
+		)
+		(pin "2"
+			(uuid "7c078ede-72b4-4e34-99bd-ceb993408f91")
+		)
+		(pin "1"
+			(uuid "2880a361-37e7-448b-acb7-9f5910099988")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "J5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+5V")
 		(at 25.4 35.56 0)
 		(unit 1)
@@ -22486,7 +22471,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "89aa65e3-fd74-4fa3-97fa-34a69b5c7eec")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR031"
 			(at 210.82 212.09 0)
 			(effects
 				(font
@@ -22536,7 +22521,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR025")
+					(reference "#PWR031")
 					(unit 1)
 				)
 			)
@@ -22774,7 +22759,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "922fd114-b90c-434b-aacf-af7c1b4965c2")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR047"
 			(at 288.29 50.8 0)
 			(effects
 				(font
@@ -22824,7 +22809,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR039")
+					(reference "#PWR047")
 					(unit 1)
 				)
 			)
@@ -23194,7 +23179,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "95248aec-4293-43dd-a21a-71a0219020be")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR034"
 			(at 210.82 261.62 0)
 			(effects
 				(font
@@ -23244,7 +23229,73 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR028")
+					(reference "#PWR034")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 205.74 114.935 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9699ffa1-7fb9-4c31-95e6-90fcf1feb691")
+		(property "Reference" "#PWR030"
+			(at 205.74 121.285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 205.74 120.015 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 205.74 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 205.74 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 205.74 114.935 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f5022acc-6e33-4ed4-9c4e-aefc7b53cc36")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -23410,16 +23461,16 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
-		(at 198.755 81.915 0)
+		(at 172.72 90.805 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "9b0b79d7-d68b-49a9-b7e6-631dddf19122")
-		(property "Reference" "#PWR052"
-			(at 198.755 85.725 0)
+		(uuid "99ce43e0-aa79-4645-b049-fd2c28e9e099")
+		(property "Reference" "#PWR020"
+			(at 172.72 94.615 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23428,7 +23479,7 @@
 			)
 		)
 		(property "Value" "+3V3"
-			(at 198.755 76.835 0)
+			(at 172.72 85.725 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23436,7 +23487,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 198.755 81.915 0)
+			(at 172.72 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23445,7 +23496,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 198.755 81.915 0)
+			(at 172.72 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23454,7 +23505,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 198.755 81.915 0)
+			(at 172.72 90.805 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -23463,86 +23514,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "a80f47af-4494-4468-beab-11254bd4d649")
+			(uuid "69643de1-81d7-4316-bc68-ab64ac585848")
 		)
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR052")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_02x02_Odd_Even")
-		(at 203.835 100.965 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9ba3b33f-499f-476c-aebe-4ab0e0eac47b")
-		(property "Reference" "J10"
-			(at 205.105 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GPIO_GND"
-			(at 205.105 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical"
-			(at 203.835 100.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 203.835 100.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 203.835 100.965 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "6fb465b9-21be-4e45-aa03-5a687d0cb88f")
-		)
-		(pin "4"
-			(uuid "b52bdd4e-2fbd-4aee-8262-4a7a2c7fe58c")
-		)
-		(pin "2"
-			(uuid "f91c4257-7fb0-47f0-a6d4-240b9d815ed2")
-		)
-		(pin "1"
-			(uuid "c3ead50d-8ff7-446e-ab8e-e32f63e7edd1")
-		)
-		(instances
-			(project ""
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J10")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -23647,7 +23624,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9cf8ea77-5077-457a-ba80-90d66f834d00")
-		(property "Reference" "#PWR045"
+		(property "Reference" "#PWR053"
 			(at 352.425 93.345 0)
 			(effects
 				(font
@@ -23697,153 +23674,7 @@
 		(instances
 			(project ""
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR045")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 211.455 81.915 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9e264ec7-3dab-4d87-8cc7-4c99ac050fd8")
-		(property "Reference" "#PWR051"
-			(at 211.455 85.725 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V3"
-			(at 211.455 76.835 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 211.455 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 211.455 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+3V3\""
-			(at 211.455 81.915 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "98caedaa-166d-4644-8ecd-cf569aed8498")
-		)
-		(instances
-			(project "ShroomShed_MKII_PCB"
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR051")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector_Generic:Conn_02x03_Odd_Even")
-		(at 203.835 84.455 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9f80efb8-cb8e-4b00-8726-748d9ee315a2")
-		(property "Reference" "J4"
-			(at 205.105 76.2 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GPIO_PWR"
-			(at 205.105 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical"
-			(at 203.835 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 203.835 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, double row, 02x03, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 203.835 84.455 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "4"
-			(uuid "21096245-d8f9-4abc-af00-f678dcf34bfe")
-		)
-		(pin "2"
-			(uuid "1763aa9a-08be-4b4f-9550-9c7501001ea9")
-		)
-		(pin "6"
-			(uuid "8fec2a43-2a12-49b0-9cb3-d4c8d46e1042")
-		)
-		(pin "3"
-			(uuid "ac92f76e-ad0f-4042-93ce-a95666b36c0d")
-		)
-		(pin "1"
-			(uuid "a0d1d3fa-de02-4e01-b5af-a52dc9c922db")
-		)
-		(pin "5"
-			(uuid "5e462e91-cfea-4c9f-83d4-7e1b450b7be3")
-		)
-		(instances
-			(project ""
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J4")
+					(reference "#PWR053")
 					(unit 1)
 				)
 			)
@@ -24281,7 +24112,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5ff32be-9c30-4a30-ad38-16ddc07e7071")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR038"
 			(at 238.125 165.735 0)
 			(effects
 				(font
@@ -24331,7 +24162,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR030")
+					(reference "#PWR038")
 					(unit 1)
 				)
 			)
@@ -24560,7 +24391,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ac2d6261-33ad-42e0-a63a-dd92ba7d666b")
-		(property "Reference" "#PWR043"
+		(property "Reference" "#PWR051"
 			(at 323.85 125.095 0)
 			(effects
 				(font
@@ -24610,7 +24441,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR043")
+					(reference "#PWR051")
 					(unit 1)
 				)
 			)
@@ -24897,7 +24728,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c41770c6-b365-448e-ad82-db79d1618405")
-		(property "Reference" "#PWR044"
+		(property "Reference" "#PWR052"
 			(at 344.805 23.495 0)
 			(effects
 				(font
@@ -24947,7 +24778,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR044")
+					(reference "#PWR052")
 					(unit 1)
 				)
 			)
@@ -25031,7 +24862,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cab807eb-9d05-41a6-8638-1b7ebd48b6e1")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR039"
 			(at 261.62 36.83 0)
 			(effects
 				(font
@@ -25081,7 +24912,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR031")
+					(reference "#PWR039")
 					(unit 1)
 				)
 			)
@@ -25191,15 +25022,15 @@
 	)
 	(symbol
 		(lib_id "power:+15V")
-		(at 191.77 86.995 0)
+		(at 212.09 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(uuid "cbf32a43-ed71-4b89-9d6d-8c08deaea42b")
-		(property "Reference" "#PWR053"
-			(at 191.77 90.805 0)
+		(property "Reference" "#PWR036"
+			(at 212.09 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25208,7 +25039,7 @@
 			)
 		)
 		(property "Value" "+12V"
-			(at 191.008 83.185 0)
+			(at 211.328 105.41 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25216,7 +25047,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 191.77 86.995 0)
+			(at 212.09 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25225,7 +25056,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 191.77 86.995 0)
+			(at 212.09 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25234,7 +25065,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+15V\""
-			(at 191.77 86.995 0)
+			(at 212.09 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25248,7 +25079,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR053")
+					(reference "#PWR036")
 					(unit 1)
 				)
 			)
@@ -25353,7 +25184,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d04ec5d8-3c5d-4abb-8a15-c62064dc34af")
-		(property "Reference" "#PWR040"
+		(property "Reference" "#PWR048"
 			(at 314.325 120.015 0)
 			(effects
 				(font
@@ -25403,7 +25234,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR040")
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)
@@ -25469,72 +25300,6 @@
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
 					(reference "#PWR017")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 205.105 108.585 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d618cae2-d85f-4efa-9fa5-f5e821f043c7")
-		(property "Reference" "#PWR055"
-			(at 205.105 114.935 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 205.105 113.665 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 205.105 108.585 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 205.105 108.585 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 205.105 108.585 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6fda63a0-c5a6-49ef-8847-b0423eb3baea")
-		)
-		(instances
-			(project "ShroomShed_MKII_PCB"
-				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -25653,7 +25418,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d6d9aa70-166a-42a1-b694-d6e46b59e1bf")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR037"
 			(at 213.36 31.75 0)
 			(effects
 				(font
@@ -25703,7 +25468,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR029")
+					(reference "#PWR037")
 					(unit 1)
 				)
 			)
@@ -26058,7 +25823,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0e497ed-ce6d-4dd6-afb0-5bfcb59b9382")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR032"
 			(at 210.82 227.33 0)
 			(effects
 				(font
@@ -26108,7 +25873,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR026")
+					(reference "#PWR032")
 					(unit 1)
 				)
 			)
@@ -26635,6 +26400,79 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector_Generic:Conn_02x02_Odd_Even")
+		(at 204.47 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e6c55177-2978-4b24-b364-30f41d229602")
+		(property "Reference" "J6"
+			(at 205.105 106.045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "12V_PWR"
+			(at 205.74 103.505 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x02_P2.54mm_Vertical"
+			(at 204.47 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 204.47 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, double row, 02x02, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 204.47 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "4ecd3cc0-ad9a-41d5-b1f0-61f4b1eb5aa0")
+		)
+		(pin "4"
+			(uuid "d943ebfa-a06a-4c36-a23f-6223c092c13f")
+		)
+		(pin "2"
+			(uuid "f33a6a71-1bd4-4a55-88d6-f113ecc0b6db")
+		)
+		(pin "1"
+			(uuid "0d434a6e-4b34-4f56-803a-033dfc1de267")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 264.16 228.6 0)
 		(unit 1)
@@ -26643,7 +26481,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e74eb7ac-3013-45df-8e0c-9dda0248d9f4")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR040"
 			(at 264.16 234.95 0)
 			(effects
 				(font
@@ -26693,7 +26531,73 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR032")
+					(reference "#PWR040")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+5V")
+		(at 199.39 87.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e8258fd0-08c5-4502-96ca-2316dc0af825")
+		(property "Reference" "#PWR024"
+			(at 199.39 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 199.39 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.39 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 199.39 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0cb12a3a-535a-465f-8da2-e82498bab3fa")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -27429,7 +27333,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f3be6624-1654-4519-99dd-9433ed8c1351")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR043"
 			(at 276.86 133.985 0)
 			(effects
 				(font
@@ -27479,7 +27383,72 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR035")
+					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+15V")
+		(at 199.39 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f4171091-5120-4506-8840-562b6be72efc")
+		(property "Reference" "#PWR025"
+			(at 199.39 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+12V"
+			(at 198.628 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.39 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+15V\""
+			(at 199.39 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "addd41cf-2158-4bfd-b1d4-60c0d2b743d2")
+		)
+		(instances
+			(project "ShroomShed_MKII_PCB"
+				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -27494,7 +27463,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f6e0d020-4e86-421f-8e9a-80bcf3cb1a78")
-		(property "Reference" "J9"
+		(property "Reference" "J11"
 			(at 290.83 213.3599 0)
 			(effects
 				(font
@@ -27593,7 +27562,7 @@
 		(instances
 			(project ""
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J9")
+					(reference "J11")
 					(unit 1)
 				)
 			)
@@ -27675,7 +27644,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "faeb5c27-215b-481e-99cc-8c89304783f3")
-		(property "Reference" "J8"
+		(property "Reference" "J10"
 			(at 250.19 212.7249 0)
 			(effects
 				(font
@@ -27744,7 +27713,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "J8")
+					(reference "J10")
 					(unit 1)
 				)
 			)
@@ -27760,7 +27729,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fb5e4939-4236-4aff-9796-44974601348d")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR023"
 			(at 194.31 34.29 0)
 			(effects
 				(font
@@ -27810,7 +27779,7 @@
 		(instances
 			(project "ShroomShed_MKII_PCB"
 				(path "/105d344c-4f20-4256-bf27-45746633c7a8"
-					(reference "#PWR020")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -27818,7 +27787,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x08_Odd_Even")
-		(at 144.145 84.455 0)
+		(at 146.558 85.09 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -27827,7 +27796,7 @@
 		(fields_autoplaced yes)
 		(uuid "fba9a102-eeb3-4755-9841-59486b0234c7")
 		(property "Reference" "J2"
-			(at 145.415 70.485 0)
+			(at 147.828 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27835,7 +27804,7 @@
 			)
 		)
 		(property "Value" "GPIO_1"
-			(at 145.415 73.025 0)
+			(at 147.828 73.66 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27843,7 +27812,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical"
-			(at 144.145 84.455 0)
+			(at 146.558 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27852,7 +27821,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 144.145 84.455 0)
+			(at 146.558 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27861,7 +27830,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x08, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 144.145 84.455 0)
+			(at 146.558 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
