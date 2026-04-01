@@ -47,9 +47,9 @@ uint32_t lastRgbProcess;
 uint8_t usb_buffer[100];
 
 // global state struct
-shedState_t shroomShed;
-shedSettings_t shroomShedSettings;
-shedControl_t shedControl;
+struct shedState_t shroomShed;
+struct shedSettings_t shroomShedSettings;
+struct shedControl_t shedControl;
 
 
 /* ============================================================================
