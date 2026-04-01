@@ -38,25 +38,40 @@ extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern TIM_HandleTypeDef FAN_PWM_TIMER;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
-extern struct shroomShed_t shroomShed;
+extern struct shedState_t shroomShed;
+extern struct shedSettings_t shroomShedSettings;
+extern struct shedControl_t shedControl;
 
 
-typedef struct shroomShedSettings_t {
+typedef struct shedSettings_t {
     uint8_t lowWaterTimeout; // minutes
     RGB_disco_settings_t *discoSettings;
-} shroomShedSettings_t;
+} shedSettings_t;
 
 
-typedef struct shroomShed_t {
+typedef enum shedControlMode_e {
+    MODE_AUTOMATIC = 0,
+    MODE_MANUAL = 1
+} shedControlMode_e;
+
+typedef enum shedOutputMode_e {
+    OUT_PUT_NORMAL = 0,
+    OUT_PUT_SLEEP = 1
+} shedOutputMode_e;
+
+typedef struct shedControl_t {
+    shedControlMode_e controlMode; // 0 for automatic, 1 for manual
+    shedOutputMode_e outputMode; // 0 for default 1 for sleep
+    uint8_t humidityControlValue;
+    uint8_t fanControlValue;
+} shedControl_t;
+
+typedef struct shedState_t {
     float humidityCurrent;
     float temperatureCurrent;
     uint16_t co2Current;
-    uint8_t humidityControlValue;
-    uint8_t fanSpeed;
     bool waterState;
-    bool shedManualMode;
-    shroomShedSettings_t *settings;
-} shroomShed_t;
+} shedState_t;
 
 typedef struct MGP_node_t {
     uint8_t humidity_cv;

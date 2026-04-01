@@ -47,8 +47,9 @@ uint32_t lastRgbProcess;
 uint8_t usb_buffer[100];
 
 // global state struct
-struct shroomShed_t shroomShed;
-struct shroomShedSettings_t shroomShedSettings;
+shedState_t shroomShed;
+shedSettings_t shroomShedSettings;
+shedControl_t shedControl;
 
 
 /* ============================================================================
@@ -66,12 +67,11 @@ void init_shroomshed(void) {
     shroomShed.temperatureCurrent = 0;
     shroomShed.humidityCurrent = 0;
     shroomShed.co2Current = 0;
-    shroomShed.humidityControlValue = 90;
-    shroomShed.fanSpeed = 20;
     shroomShed.waterState = true;
-    shroomShed.shedManualMode = true;
-    shroomShed.settings = &shroomShedSettings;
-    shroomShed.settings->lowWaterTimeout = 10;
+    shedControl.humidityControlValue = 90;
+    shedControl.fanControlValue = 20;
+    shedControl.controlMode = MODE_MANUAL;
+    shroomShedSettings.lowWaterTimeout = 10;
     initDisplay();
 
     //uint32_t min_x, min_y, max_x, max_y;
@@ -84,7 +84,6 @@ void init_shroomshed(void) {
     RGB_Init();
 
     switch_screen(SCREEN_ID_MAIN);
-
 }
 
 void loop(void)
@@ -149,7 +148,7 @@ void loop(void)
     static int32_t I_term = 0;
     static int32_t D_term = 0;
 
-    int32_t error = (shroomShed.humidityControlValue*PID_MODIFIER) - (shroomShed.humidityCurrent*PID_MODIFIER);
+    int32_t error = (shedControl.humidityControlValue*PID_MODIFIER) - (shroomShed.humidityCurrent*PID_MODIFIER);
 
     P_term = (Pk * error);
     if (P_term > PULSE_RANGE * PID_MODIFIER) {
@@ -213,7 +212,7 @@ void loop(void)
 
     if (printSerial) {
         sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/10, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
-        //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shroomShed.humidityControlValue, shroomShed.humidityCurrent, PID_output_normalised, shroomShed.fanSpeed);
+        //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shedControl.humidityControlValue, shroomShed.humidityCurrent, PID_output_normalised, shedControl.fanControlValue);
     }
     // load pulse value into timer register, add min pulse value if not PID_oputput is not 0
     if (PID_output) PID_output += MIN_PULSE;
@@ -223,11 +222,11 @@ void loop(void)
 
  static void determine_water_state(void) {
     // Low water detection logic
-    uint8_t lowWaterTimeout = shroomShed.settings->lowWaterTimeout;
+    uint8_t lowWaterTimeout = shroomShedSettings.lowWaterTimeout;
 
     uint8_t threshold = 90;
-    if (shroomShed.humidityControlValue - 5 < threshold) {
-            threshold = shroomShed.humidityControlValue - 5;
+    if (shedControl.humidityControlValue - 5 < threshold) {
+            threshold = shedControl.humidityControlValue - 5;
     }
     
     static uint32_t humStart = 0;
@@ -262,7 +261,7 @@ void loop(void)
 
  void fan_control(void) {
     float gamma = 0.7;
-    uint16_t pwm_output = pow(shroomShed.fanSpeed / 100.0f, gamma) * FAN_PWM_TIMER.Init.Period;
+    uint16_t pwm_output = pow(shedControl.fanControlValue / 100.0f, gamma) * FAN_PWM_TIMER.Init.Period;
     FAN_PWM_TIMER.Instance->CCR3 = pwm_output;
  }
 

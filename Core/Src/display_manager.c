@@ -190,7 +190,7 @@ static void update_display_vars(void) {
         case SCREEN_ID_MAIN:
             set_var_humidity_fp(shroomShed.humidityCurrent);
             set_var_temperature_fp(shroomShed.temperatureCurrent);
-            set_var_airflow_int(shroomShed.fanSpeed);
+            set_var_airflow_int(shedControl.fanControlValue);
             break;
         case SCREEN_ID_DISCO_MODE:
             set_var_disco_power_int(discoSettings.discoPower);
@@ -202,7 +202,7 @@ static void update_display_vars(void) {
             break;
         case SCREEN_ID_MANUAL_CONTROL:
             set_var_humidity_fp(shroomShed.humidityCurrent);
-            set_var_airflow_int(shroomShed.fanSpeed);
+            set_var_airflow_int(shedControl.fanControlValue);
             break;
     }
 }

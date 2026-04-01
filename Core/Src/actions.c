@@ -31,32 +31,32 @@ inline void action_load_screen_menu(lv_event_t *e) {
 
 void action_increment_humidity(lv_event_t *e) {
     uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
-    shroomShed.humidityControlValue += step;
-    if (shroomShed.humidityControlValue > 100) {
-        shroomShed.humidityControlValue = 100;
+    shedControl.humidityControlValue += step;
+    if (shedControl.humidityControlValue > 100) {
+        shedControl.humidityControlValue = 100;
     }
 }
 
 void action_decrement_humidity(lv_event_t * e) {
     uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
-    shroomShed.humidityControlValue -= step;
-    if (shroomShed.humidityControlValue < 30) {
-        shroomShed.humidityControlValue = 30;
+    shedControl.humidityControlValue -= step;
+    if (shedControl.humidityControlValue < 30) {
+        shedControl.humidityControlValue = 30;
     }
 }
 
 void action_increment_airflow(lv_event_t * e) {
-    shroomShed.fanSpeed += 5;
-    if (shroomShed.fanSpeed > 100) {
-        shroomShed.fanSpeed = 100;
+    shedControl.fanControlValue += 5;
+    if (shedControl.fanControlValue > 100) {
+        shedControl.fanControlValue = 100;
     }
 
 }
 
 void action_decrement_airflow(lv_event_t *e) {
-    shroomShed.fanSpeed -= 5;
-    if (shroomShed.fanSpeed < 10) {
-        shroomShed.fanSpeed = 10;
+    shedControl.fanControlValue -= 5;
+    if (shedControl.fanControlValue < 10) {
+        shedControl.fanControlValue = 10;
     }
 }
 
