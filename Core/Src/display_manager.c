@@ -24,7 +24,7 @@
 
 #define TOUCH_BUFFER_SIZE 8
 
-//#define RGB_18_BIT
+#define RGB_18_BIT
 
 
 /* Declare buffer for 1/10 screen size. */
@@ -33,7 +33,11 @@
 #else
 #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565))
 #endif
-static uint8_t buf1[ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL];
+
+#define BUFF_SIZE (ILI9341_WIDTH * ILI9341_HEIGHT / 10 * BYTES_PER_PIXEL)
+
+static uint8_t buf1[BUFF_SIZE];
+static uint8_t buf2[BUFF_SIZE];
 
 
 lv_display_t * display;
@@ -74,7 +78,7 @@ void initDisplay(void) {
     display = lv_display_create(ILI9341_WIDTH, ILI9341_HEIGHT);
 
     /* Set display buffer for display `display1`. */
-    lv_display_set_buffers(display, buf1, NULL, sizeof(buf1), LV_DISPLAY_RENDER_MODE_PARTIAL);
+    lv_display_set_buffers(display, buf1, buf2, BUFF_SIZE, LV_DISPLAY_RENDER_MODE_PARTIAL);
 #ifdef RGB_18_BIT
     lv_display_set_color_format(display, LV_COLOR_FORMAT_RGB888);
 #endif

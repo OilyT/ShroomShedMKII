@@ -5,13 +5,26 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define DMA_TIMEOUT_MS 100
+
 static volatile bool DMA_txInProgress = false;
-static volatile uint8_t *dmaTxBuffer = NULL;
+static uint8_t *dmaTxBuffer = NULL;
+static void (*dmaTxCompleteCallback)(void) = NULL;
 
 
 static void ILI9341_Select();
 static void ILI9341_Unselect();
 static void ILI9341_Reset();
+
+static void ILI9341_NotifyDmaTxComplete(void) {
+    if (dmaTxCompleteCallback != NULL) {
+        dmaTxCompleteCallback();
+    }
+}
+
+void ILI9341_SetDmaTxCompleteCallback(void (*callback)(void)) {
+    dmaTxCompleteCallback = callback;
+}
 
 
 
@@ -26,6 +39,11 @@ static bool ILI9341_WaitForDmaTxComplete(uint32_t timeout_ms) {
 }
 
 static void ILI9341_WriteCommand(uint8_t cmd) {
+
+    if (!ILI9341_WaitForDmaTxComplete(DMA_TIMEOUT_MS)) {
+        return;
+    }
+
     //ILI9341_Select();
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_RESET);
     HAL_SPI_Transmit(&ILI9341_SPI_PORT, &cmd, sizeof(cmd), HAL_MAX_DELAY);
@@ -33,6 +51,11 @@ static void ILI9341_WriteCommand(uint8_t cmd) {
 }
 
 static void ILI9341_WriteData(uint8_t* buff, size_t buff_size) {
+
+    if (!ILI9341_WaitForDmaTxComplete(DMA_TIMEOUT_MS)) {
+        return;
+    }
+
     //ILI9341_Select();
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
 
@@ -48,27 +71,22 @@ static void ILI9341_WriteData(uint8_t* buff, size_t buff_size) {
 
 static void ILI9341_WriteData_DMA(uint8_t* buff, size_t buff_size) {
     //ILI9341_Select();
+
+    if (!ILI9341_WaitForDmaTxComplete(DMA_TIMEOUT_MS)) {
+            ILI9341_NotifyDmaTxComplete();
+      return;
+    }
     HAL_GPIO_WritePin(ILI9341_DC_GPIO_Port, ILI9341_DC_Pin, GPIO_PIN_SET);
-
-    // split data in small chunks because HAL can't send more then 64K at once
-    while(buff_size > 0) {
-        uint16_t chunk_size = buff_size > 32768 ? 32768 : buff_size;
-        DMA_txInProgress = true;
-        HAL_StatusTypeDef status = HAL_SPI_Transmit_DMA(&ILI9341_SPI_PORT, buff, chunk_size);
-        if (status != HAL_OK) {
-            DMA_txInProgress = false;
-            break;
-        }
-
-        if (!ILI9341_WaitForDmaTxComplete(100)) {
-            break;
-        }
-
-        buff += chunk_size;
-        buff_size -= chunk_size;
+    dmaTxBuffer = buff;
+    DMA_txInProgress = true;
+    HAL_StatusTypeDef status = HAL_SPI_Transmit_DMA(&ILI9341_SPI_PORT, dmaTxBuffer, buff_size);
+    if (status != HAL_OK) {
+        DMA_txInProgress = false;
+                ILI9341_NotifyDmaTxComplete();
     }
     //ILI9341_Unselect();
 }
+
 
 static void ILI9341_SetAddressWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1) {
     // column address set
@@ -188,7 +206,7 @@ void ILI9341_Init() {
 
     ILI9341_WriteCommand(0x3A);
     {
-        uint8_t data[] = { rgb_16bit };
+        uint8_t data[] = { rgb_18bit };
         ILI9341_WriteData(data, sizeof(data));
     }
 
@@ -297,9 +315,9 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef * hspi)
 {
     if (hspi == &ILI9341_SPI_PORT) {
         DMA_txInProgress = false;
+        ILI9341_NotifyDmaTxComplete();
     }
 }
-
 
 
 static void ILI9341_Select() {

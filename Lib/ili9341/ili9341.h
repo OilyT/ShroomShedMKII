@@ -47,5 +47,6 @@ extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 void ILI9341_Init(void);
 void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t* data);
 void ILI9341_DrawImageRGB666(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint8_t* data);
+void ILI9341_SetDmaTxCompleteCallback(void (*callback)(void));
 
 #endif // __ILI9341_H__
