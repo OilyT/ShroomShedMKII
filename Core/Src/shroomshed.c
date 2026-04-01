@@ -109,7 +109,7 @@ void loop(void)
         humidity_control();
         determine_water_state();
         fan_control();
-    }-[09
+    }
 
     if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
         lastSerialProcess = HAL_GetTick();
