@@ -62,14 +62,14 @@ void sensor_process(void) {
             }
             float humidity_avg = humidity_sum / HUMIDITY_BUFFER_SIZE;
 
-            shroomShed.humidityCurrent = humidity_avg;
-            shroomShed.temperatureCurrent = temperature;
+            shedState.humidityCurrent = humidity_avg;
+            shedState.temperatureCurrent = temperature;
         }
     }
     /*
     co2 = get_co2();
     if (co2 != 0) {
-        shroomShed.co2Current = co2;
+        shedState.co2Current = co2;
     }
     */
 }

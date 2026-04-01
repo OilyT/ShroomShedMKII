@@ -188,8 +188,8 @@ static void update_display_vars(void) {
 
     switch (current_screen) {
         case SCREEN_ID_MAIN:
-            set_var_humidity_fp(shroomShed.humidityCurrent);
-            set_var_temperature_fp(shroomShed.temperatureCurrent);
+            set_var_humidity_fp(shedState.humidityCurrent);
+            set_var_temperature_fp(shedState.temperatureCurrent);
             set_var_airflow_int(shedControl.fanControlValue);
             break;
         case SCREEN_ID_DISCO_MODE:
@@ -201,7 +201,7 @@ static void update_display_vars(void) {
             set_var_display_brightness(get_var_display_brightness());
             break;
         case SCREEN_ID_MANUAL_CONTROL:
-            set_var_humidity_fp(shroomShed.humidityCurrent);
+            set_var_humidity_fp(shedState.humidityCurrent);
             set_var_airflow_int(shedControl.fanControlValue);
             break;
     }

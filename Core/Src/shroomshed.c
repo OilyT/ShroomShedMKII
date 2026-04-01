@@ -46,10 +46,25 @@ uint32_t lastRgbProcess;
 
 uint8_t usb_buffer[100];
 
-// global state struct
-struct shedState_t shroomShed;
-struct shedSettings_t shroomShedSettings;
-struct shedControl_t shedControl;
+
+/* ============================================================================
+ * Global Structs
+ * ============================================================================ */
+struct shedState_t shedState = {
+    .temperatureCurrent = 0,
+    .humidityCurrent = 0,
+    .co2Current = 0,
+    .waterState = true
+};
+struct shedSettings_t shedSettings = {
+    .lowWaterTimeout = 10
+};
+struct shedControl_t shedControl = {
+    .controlMode = MODE_MANUAL,
+    .outputMode = OUT_PUT_NORMAL,
+    .humidityControlValue = 90,
+    .fanControlValue = 20
+};
 
 
 /* ============================================================================
@@ -64,20 +79,8 @@ static void determine_water_state(void);
  * ============================================================================ */
 
 void init_shroomshed(void) {
-    shroomShed.temperatureCurrent = 0;
-    shroomShed.humidityCurrent = 0;
-    shroomShed.co2Current = 0;
-    shroomShed.waterState = true;
-    shedControl.humidityControlValue = 90;
-    shedControl.fanControlValue = 20;
-    shedControl.controlMode = MODE_MANUAL;
-    shroomShedSettings.lowWaterTimeout = 10;
+
     initDisplay();
-
-    //uint32_t min_x, min_y, max_x, max_y;
-    //calibrate_touch(&min_x, &min_y, &max_x, &max_y);
-    //sprintf(usb_buffer, " Min X: %lu, Max X: %lu, Min Y: %lu, Max Y: %lu\r\n", min_x, max_x, min_y, max_y);
-
     displayProcess();
     init_sensors();
     init_pwm();
@@ -148,7 +151,7 @@ void loop(void)
     static int32_t I_term = 0;
     static int32_t D_term = 0;
 
-    int32_t error = (shedControl.humidityControlValue*PID_MODIFIER) - (shroomShed.humidityCurrent*PID_MODIFIER);
+    int32_t error = (shedControl.humidityControlValue*PID_MODIFIER) - (shedState.humidityCurrent*PID_MODIFIER);
 
     P_term = (Pk * error);
     if (P_term > PULSE_RANGE * PID_MODIFIER) {
@@ -212,7 +215,7 @@ void loop(void)
 
     if (printSerial) {
         sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/10, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
-        //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shedControl.humidityControlValue, shroomShed.humidityCurrent, PID_output_normalised, shedControl.fanControlValue);
+        //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shedControl.humidityControlValue, shedState.humidityCurrent, PID_output_normalised, shedControl.fanControlValue);
     }
     // load pulse value into timer register, add min pulse value if not PID_oputput is not 0
     if (PID_output) PID_output += MIN_PULSE;
@@ -222,7 +225,7 @@ void loop(void)
 
  static void determine_water_state(void) {
     // Low water detection logic
-    uint8_t lowWaterTimeout = shroomShedSettings.lowWaterTimeout;
+    uint8_t lowWaterTimeout = shedSettings.lowWaterTimeout;
 
     uint8_t threshold = 90;
     if (shedControl.humidityControlValue - 5 < threshold) {
@@ -233,29 +236,29 @@ void loop(void)
     uint32_t humTimeOn = 0;
     static bool belowThreshold = false;
     static bool lastWaterState = true;
-    if (shroomShed.waterState && !lastWaterState) {
+    if (shedState.waterState && !lastWaterState) {
         humStart = HAL_GetTick();
         belowThreshold = false;
     }
-    lastWaterState = shroomShed.waterState;
+    lastWaterState = shedState.waterState;
 
-    if (shroomShed.humidityCurrent < threshold && shroomShed.waterState) {
+    if (shedState.humidityCurrent < threshold && shedState.waterState) {
         if (!belowThreshold) {
             humStart = HAL_GetTick();
             belowThreshold = true;
         }
         humTimeOn = HAL_GetTick() - humStart;
         if (humTimeOn > (lowWaterTimeout * 60000)) {
-            shroomShed.waterState = false;
+            shedState.waterState = false;
         }
     } else {
         belowThreshold = false;
-        if (!shroomShed.waterState && (shroomShed.humidityCurrent >= threshold)) {
-            shroomShed.waterState = true;
+        if (!shedState.waterState && (shedState.humidityCurrent >= threshold)) {
+            shedState.waterState = true;
         }
     }
     // LED indicator
-    HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, shroomShed.waterState ? GPIO_PIN_RESET : GPIO_PIN_SET);  
+    HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, shedState.waterState ? GPIO_PIN_RESET : GPIO_PIN_SET);  
 }
 
 

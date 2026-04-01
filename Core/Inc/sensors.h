@@ -19,8 +19,6 @@ extern "C" {
 void sensor_process(void);
 void init_sensors(void);
 
-extern struct shroomShed_t shroomShed;
-
 
 #ifdef __cplusplus
 }

@@ -38,8 +38,8 @@ extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern TIM_HandleTypeDef FAN_PWM_TIMER;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
-extern struct shedState_t shroomShed;
-extern struct shedSettings_t shroomShedSettings;
+extern struct shedState_t shedState;
+extern struct shedSettings_t shedSettings;
 extern struct shedControl_t shedControl;
 
 
@@ -72,19 +72,6 @@ typedef struct shedState_t {
     uint16_t co2Current;
     bool waterState;
 } shedState_t;
-
-typedef struct MGP_node_t {
-    uint8_t humidity_cv;
-    uint8_t fan_speed;
-    uint16_t time; // hours
-    struct MGP_node_t *next;
-} MGP_node_t;
-
-
-typedef struct MGP_t {
-    MGP_node_t *head;
-    char name[20];
-} MGP_t;
 
 
 
