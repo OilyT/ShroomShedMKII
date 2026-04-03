@@ -187,6 +187,22 @@
         "defaultValue": "0",
         "persistent": false,
         "native": false
+      },
+      {
+        "objID": "1c94d8bf-5bc6-430c-9f8e-a34a8717e7af",
+        "name": "mushroom_names_list",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
+      },
+      {
+        "objID": "8165d334-1f86-4fc3-a7fa-5345c6ab760d",
+        "name": "mushroom_list_index",
+        "type": "integer",
+        "defaultValue": "0",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [],
@@ -312,6 +328,22 @@
       "localVariables": [],
       "userProperties": [],
       "name": "update_display_brightness"
+    },
+    {
+      "objID": "d8daf2d5-ce89-4116-8810-4db9904aa3bc",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "set_control_mode"
+    },
+    {
+      "objID": "c4ba39fd-f519-432b-a10d-507e1642f853",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "start_grow"
     }
   ],
   "userPages": [
@@ -2506,7 +2538,15 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "b70802be-7cad-49c6-e0fd-dc786ed2f766",
+                  "eventName": "CLICKED",
+                  "handlerType": "action",
+                  "action": "set_control_mode",
+                  "userData": 0
+                }
+              ],
               "identifier": "manual_control_switch",
               "leftUnit": "px",
               "topUnit": "px",
@@ -3285,7 +3325,7 @@
                   "objID": "412eeb85-f941-47af-e431-37f00effacdd",
                   "eventName": "PRESSED",
                   "handlerType": "action",
-                  "action": "load_previous_screen",
+                  "action": "load_screen_menu",
                   "userData": 0
                 }
               ],
@@ -3358,30 +3398,31 @@
               "groupIndex": 0
             },
             {
-              "objID": "737cf1a9-db9d-4e46-b90b-d0bd9aa5b8a6",
-              "type": "LVGLLabelWidget",
-              "left": 110,
-              "top": 5,
-              "width": 93,
-              "height": 41,
+              "objID": "66834deb-be6a-49fe-abac-8762a03a066a",
+              "type": "LVGLRollerWidget",
+              "left": 0,
+              "top": 84,
+              "width": 100,
+              "height": 65,
               "customInputs": [],
               "customOutputs": [],
               "style": {
-                "objID": "c60cec59-5df4-4c4f-ee02-dc563e1df841",
+                "objID": "f16ab493-1a72-41b6-87a7-28ad02ac9932",
                 "useStyle": "default",
                 "conditionalStyles": [],
                 "childStyles": []
               },
               "timeline": [],
               "eventHandlers": [],
-              "identifier": "grow_menu_header",
+              "identifier": "mushroom_roller",
               "leftUnit": "px",
               "topUnit": "px",
-              "widthUnit": "content",
-              "heightUnit": "content",
+              "widthUnit": "%",
+              "heightUnit": "%",
               "children": [],
-              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLL_CHAIN_HOR|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
               "hiddenFlagType": "literal",
+              "clickableFlag": true,
               "clickableFlagType": "literal",
               "flagScrollbarMode": "",
               "flagScrollDirection": "",
@@ -3390,19 +3431,145 @@
               "checkedStateType": "literal",
               "disabledStateType": "literal",
               "states": "",
-              "useStyle": "ShroomShed_Header",
               "localStyles": {
-                "objID": "8bb2b733-b0e3-47d5-fd85-51ba3141f28b"
+                "objID": "5c083223-5a52-404b-c8b8-4e216c5bde49",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "bg_color": "Black",
+                      "border_color": "Teal_1",
+                      "border_opa": 255,
+                      "border_width": 4,
+                      "text_font": "MONTSERRAT_24"
+                    }
+                  },
+                  "SELECTED": {
+                    "DEFAULT": {
+                      "bg_color": "Dark_grey",
+                      "border_color": "Teal_1",
+                      "border_opa": 255,
+                      "border_width": 4,
+                      "text_font": "MONTSERRAT_32",
+                      "text_color": "Teal_1"
+                    }
+                  }
+                }
               },
               "group": "",
               "groupIndex": 0,
-              "text": "Grow",
-              "textType": "literal",
-              "longMode": "WRAP",
-              "recolor": false
+              "options": "mushroom_names_list",
+              "optionsType": "expression",
+              "selected": "mushroom_list_index",
+              "selectedType": "expression",
+              "mode": "NORMAL"
+            },
+            {
+              "objID": "0893f810-03b9-48e4-ebad-7f75a285994a",
+              "type": "LVGLButtonWidget",
+              "left": 118,
+              "top": 17,
+              "width": 100,
+              "height": 50,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "082e8b84-618b-441b-db67-11fc2864ef1c",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [
+                {
+                  "objID": "b2797f75-4418-4bef-be38-c04adfe0ce06",
+                  "eventName": "CLICKED",
+                  "handlerType": "action",
+                  "action": "start_grow",
+                  "userData": 0
+                }
+              ],
+              "identifier": "Start_grow_button",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [
+                {
+                  "objID": "9f38e753-f021-459a-b4ec-653f1375e5be",
+                  "type": "LVGLLabelWidget",
+                  "left": 0,
+                  "top": 0,
+                  "width": 79,
+                  "height": 35,
+                  "customInputs": [],
+                  "customOutputs": [],
+                  "style": {
+                    "objID": "5bbef451-74a7-4621-9707-32f931898b74",
+                    "useStyle": "default",
+                    "conditionalStyles": [],
+                    "childStyles": []
+                  },
+                  "timeline": [],
+                  "eventHandlers": [],
+                  "identifier": "start_grow_button_label",
+                  "leftUnit": "px",
+                  "topUnit": "px",
+                  "widthUnit": "content",
+                  "heightUnit": "content",
+                  "children": [],
+                  "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+                  "hiddenFlagType": "literal",
+                  "clickableFlagType": "literal",
+                  "flagScrollbarMode": "",
+                  "flagScrollDirection": "",
+                  "scrollSnapX": "",
+                  "scrollSnapY": "",
+                  "checkedStateType": "literal",
+                  "disabledStateType": "literal",
+                  "states": "",
+                  "useStyle": "Button_Label_32",
+                  "localStyles": {
+                    "objID": "8b8621aa-1860-4b6f-996e-7fdce53ddccf",
+                    "definition": {
+                      "MAIN": {
+                        "DEFAULT": {
+                          "align": "CENTER",
+                          "text_color": "white"
+                        }
+                      }
+                    }
+                  },
+                  "group": "",
+                  "groupIndex": 0,
+                  "text": "Start",
+                  "textType": "literal",
+                  "longMode": "WRAP",
+                  "recolor": false
+                }
+              ],
+              "widgetFlags": "",
+              "hiddenFlag": false,
+              "hiddenFlagType": "literal",
+              "clickableFlag": true,
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedState": false,
+              "checkedStateType": "literal",
+              "disabledState": false,
+              "disabledStateType": "literal",
+              "states": "",
+              "useStyle": "Std_button",
+              "localStyles": {
+                "objID": "b928f9e5-ad3b-441b-ce08-aff7387daf02"
+              },
+              "group": "",
+              "groupIndex": 0
             }
           ],
-          "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
+          "widgetFlags": "CLICKABLE",
           "hiddenFlagType": "literal",
           "clickableFlag": true,
           "clickableFlagType": "literal",
@@ -3410,7 +3577,14 @@
           "disabledStateType": "literal",
           "states": "",
           "localStyles": {
-            "objID": "fe3e2f59-6221-402f-b45b-fc159a758292"
+            "objID": "fe3e2f59-6221-402f-b45b-fc159a758292",
+            "definition": {
+              "MAIN": {
+                "DEFAULT": {
+                  "bg_color": "Black"
+                }
+              }
+            }
           },
           "groupIndex": 0
         }

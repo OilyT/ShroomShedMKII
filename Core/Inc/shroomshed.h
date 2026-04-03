@@ -55,8 +55,8 @@ typedef enum shedControlMode_e {
 } shedControlMode_e;
 
 typedef enum shedOutputMode_e {
-    OUT_PUT_NORMAL = 0,
-    OUT_PUT_SLEEP = 1
+    OUTPUT_NORMAL = 0,
+    OUTPUT_SLEEP = 1
 } shedOutputMode_e;
 
 typedef struct shedControl_t {
@@ -64,6 +64,8 @@ typedef struct shedControl_t {
     shedOutputMode_e outputMode; // 0 for default 1 for sleep
     uint8_t humidityControlValue;
     uint8_t fanControlValue;
+    uint8_t manualHumidityControlValue;
+    uint8_t manualFanControlValue;
 } shedControl_t;
 
 typedef struct shedState_t {

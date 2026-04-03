@@ -22,6 +22,8 @@ extern void action_load_screen_menu(lv_event_t * e);
 extern void action_load_menu_button_matrix(lv_event_t * e);
 extern void action_load_previous_screen(lv_event_t * e);
 extern void action_update_display_brightness(lv_event_t * e);
+extern void action_set_control_mode(lv_event_t * e);
+extern void action_start_grow(lv_event_t * e);
 
 
 #ifdef __cplusplus

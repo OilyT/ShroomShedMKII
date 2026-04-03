@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
     "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/0",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/9",
-    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/12",
+    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/6",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
     "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/1",
     "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/3",
@@ -203,10 +203,10 @@
                 {
                   "type": "tab",
                   "id": "#f0a6fed2-b344-4bb8-8d21-0be2306e5c43",
-                  "name": "Main",
+                  "name": "grow_menu",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1005,15 +1005,15 @@
       "3": {},
       "4": {},
       "5": {},
-      "6": {},
+      "6": {
+        "$selected": true
+      },
       "7": {},
       "8": {},
       "9": {},
       "10": {},
       "11": {},
-      "12": {
-        "$selected": true
-      },
+      "12": {},
       "13": {},
       "14": {},
       "15": {},
@@ -1077,10 +1077,10 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/3[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {
+          "0": {
             "$selected": true
           },
+          "1": {},
           "2": {}
         }
       },
@@ -1126,11 +1126,10 @@
       "selection": {
         "0": {
           "0": {},
+          "1": {},
           "2": {},
           "3": {
-            "1": {
-              "$selected": true
-            },
+            "1": {},
             "3": {}
           },
           "4": {
@@ -1143,6 +1142,26 @@
         "translate": {
           "x": -305,
           "y": -229
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ShroomShed_MKII_App.eez-project]:/userPages/6[flow-state]": {
+      "selection": {
+        "0": {
+          "1": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -304,
+          "y": -262
         },
         "scale": 2
       },
@@ -1165,9 +1184,11 @@
   "showComponentDescriptions": true,
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
-  "lvglPart": "MAIN",
-  "lvglState": "CHECKED|PRESSED",
-  "lvglExpandedPropertiesGroup": [],
+  "lvglPart": "INDICATOR",
+  "lvglState": "DEFAULT",
+  "lvglExpandedPropertiesGroup": [
+    "BACKGROUND"
+  ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
   "flowZoom": 2,

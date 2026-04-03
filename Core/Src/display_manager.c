@@ -180,6 +180,9 @@ void switch_screen(enum ScreensEnum screen) {
         case SCREEN_ID_MANUAL_CONTROL:
             loadScreen(SCREEN_ID_MANUAL_CONTROL);
             break;
+        case SCREEN_ID_GROW_MENU:
+            loadScreen(SCREEN_ID_GROW_MENU);
+            break;
     }
 }
 
@@ -203,6 +206,9 @@ static void update_display_vars(void) {
         case SCREEN_ID_MANUAL_CONTROL:
             set_var_humidity_fp(shedState.humidityCurrent);
             set_var_airflow_int(shedControl.fanControlValue);
+            break;
+        case SCREEN_ID_GROW_MENU:
+            set_var_mushroom_names_list(get_var_mushroom_names_list());
             break;
     }
 }

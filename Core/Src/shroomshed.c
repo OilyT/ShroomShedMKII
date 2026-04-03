@@ -18,6 +18,8 @@
 #include "ili9341_touch.h"
 #include "ili9341.h"
 #include "rgb.h"
+#include "mushroom.h"
+
 
 
 /* ============================================================================
@@ -61,7 +63,7 @@ struct shedSettings_t shedSettings = {
 };
 struct shedControl_t shedControl = {
     .controlMode = MODE_MANUAL,
-    .outputMode = OUT_PUT_NORMAL,
+    .outputMode = OUTPUT_NORMAL,
     .humidityControlValue = 90,
     .fanControlValue = 20
 };
@@ -85,6 +87,7 @@ void init_shroomshed(void) {
     init_sensors();
     init_pwm();
     RGB_Init();
+    init_mushrooms();
 
     switch_screen(SCREEN_ID_MAIN);
 }
@@ -130,6 +133,19 @@ void loop(void)
 /* ============================================================================
  * Local Function Implementations
  * ============================================================================ */
+
+static void shed_control (void) {
+    if (shedControl.controlMode == MODE_AUTOMATIC) {
+        tick_MGP();
+    } else {
+        shedControl.humidityControlValue = shedControl.manualHumidityControlValue;
+        shedControl.fanControlValue = shedControl.manualFanControlValue;
+    }
+    
+    humidity_control();
+    determine_water_state();
+    fan_control();
+}
 
  void humidity_control(void) {
     // humidifier PID control

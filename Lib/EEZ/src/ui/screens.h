@@ -14,6 +14,7 @@ typedef struct _objects_t {
     lv_obj_t *menu_main;
     lv_obj_t *menu_general;
     lv_obj_t *manual_control;
+    lv_obj_t *grow_menu;
     lv_obj_t *humidity_bar;
     lv_obj_t *humidity_value_label;
     lv_obj_t *humidity_label;
@@ -58,6 +59,10 @@ typedef struct _objects_t {
     lv_obj_t *dec_humidity_cv_label_1;
     lv_obj_t *incr_airflow;
     lv_obj_t *incr_humidity_cv_label_1;
+    lv_obj_t *back_button_3;
+    lv_obj_t *mushroom_roller;
+    lv_obj_t *start_grow_button;
+    lv_obj_t *start_grow_button_label;
 } objects_t;
 
 extern objects_t objects;
@@ -69,6 +74,7 @@ enum ScreensEnum {
     SCREEN_ID_MENU_MAIN = 4,
     SCREEN_ID_MENU_GENERAL = 5,
     SCREEN_ID_MANUAL_CONTROL = 6,
+    SCREEN_ID_GROW_MENU = 7,
 };
 
 void create_screen_splash_screen();
@@ -88,6 +94,9 @@ void tick_screen_menu_general();
 
 void create_screen_manual_control();
 void tick_screen_manual_control();
+
+void create_screen_grow_menu();
+void tick_screen_grow_menu();
 
 enum Themes {
     THEME_ID_DEFAULT,

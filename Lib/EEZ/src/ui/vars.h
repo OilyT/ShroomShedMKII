@@ -24,7 +24,9 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_DISCO_POWER_INT = 6,
     FLOW_GLOBAL_VARIABLE_DISCO_SPEED_INT = 7,
     FLOW_GLOBAL_VARIABLE_DISCO_PHASE_INT = 8,
-    FLOW_GLOBAL_VARIABLE_DISPLAY_BRIGHTNESS = 9
+    FLOW_GLOBAL_VARIABLE_DISPLAY_BRIGHTNESS = 9,
+    FLOW_GLOBAL_VARIABLE_MUSHROOM_NAMES_LIST = 10,
+    FLOW_GLOBAL_VARIABLE_MUSHROOM_LIST_INDEX = 11
 };
 
 // Native global variables
@@ -49,6 +51,10 @@ extern int32_t get_var_disco_phase_int();
 extern void set_var_disco_phase_int(int32_t value);
 extern int32_t get_var_display_brightness();
 extern void set_var_display_brightness(int32_t value);
+extern const char *get_var_mushroom_names_list();
+extern void set_var_mushroom_names_list(const char *value);
+extern int32_t get_var_mushroom_list_index();
+extern void set_var_mushroom_list_index(int32_t value);
 
 
 #ifdef __cplusplus

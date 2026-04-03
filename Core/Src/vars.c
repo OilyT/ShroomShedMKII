@@ -5,7 +5,11 @@
 #include <math.h>
 #include "display_manager.h"
 #include "shroomshed.h"
+#include "mushroom.h"
 #include "rgb.h"
+
+extern MGP_t MGP_list[];
+extern uint8_t MGP_list_index;
 
 static float display_humidity = 40;
 static float display_temperature = 20;
@@ -136,4 +140,53 @@ int32_t get_var_display_brightness() {
 
 void set_var_display_brightness(int32_t value) {
     display_brightness = value;
+}
+
+
+// GROW SELECTION VARS
+char mushroom_names_list[100] = { 0 };
+
+const char *get_var_mushroom_names_list() {
+    return mushroom_names_list;
+}
+
+
+void set_var_mushroom_names_list(const char *value) {
+    (void)value;
+
+    mushroom_names_list[0] = '\0';
+    size_t offset = 0;
+
+    for (uint8_t i = 0; i < MGP_list_index; i++) {
+        const char *name = MGP_list[i].name;
+
+        if (name[0] == '\0') {
+            continue;
+        }
+
+        int written = snprintf(
+            &mushroom_names_list[offset],
+            sizeof(mushroom_names_list) - offset,
+            "%s%s",
+            (offset > 0) ? "\n" : "",
+            name
+        );
+
+        if (written < 0 || (size_t)written >= (sizeof(mushroom_names_list) - offset)) {
+            mushroom_names_list[sizeof(mushroom_names_list) - 1] = '\0';
+            break;
+        }
+
+        offset += (size_t)written;
+    }
+}
+
+int32_t mushroom_list_index;
+
+int32_t get_var_mushroom_list_index() {
+    return mushroom_list_index;
+}
+
+void set_var_mushroom_list_index(int32_t value) {
+    mushroom_list_index = value;
 }
