@@ -7,10 +7,10 @@
 #include <stdint.h>
 
 typedef enum node_type_e {
-    NODE_TYPE_START = 0,
+    NODE_TYPE_START = 0, // primordia formation
     NODE_TYPE_MID,
     NODE_TYPE_END
-}node_type_e;
+} node_type_e;
 
 typedef struct MGP_node_t {
     uint8_t humidity_cv;
@@ -33,13 +33,15 @@ typedef struct MGP_t {
     MGP_node_t *head;
     uint16_t duration; 
     uint16_t progress;
+    uint16_t estimatedHarvestWindow; // days, start of window
 } MGP_t;
 
 extern struct MGP_t MGP_list[];
 
+
 void tick_MGP(void);
 void init_mushrooms(void);
-void start_profile(MGP_t *profile);
+void start_grow(uint8_t profile_index);
 
     
 

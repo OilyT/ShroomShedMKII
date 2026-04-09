@@ -24,8 +24,6 @@
 
 #define TOUCH_BUFFER_SIZE 8
 
-#define RGB_18_BIT
-
 
 /* Declare buffer for 1/10 screen size. */
 #ifdef RGB_18_BIT

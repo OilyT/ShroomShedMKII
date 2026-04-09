@@ -1,11 +1,11 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
-    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/0",
-    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/9",
-    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/6",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/10",
+    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/17",
+    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/5",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
-    "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/1",
+    "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/4",
     "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/3",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
@@ -29,7 +29,7 @@
           },
           {
             "type": "border",
-            "selected": 0,
+            "selected": 3,
             "size": 249.5,
             "location": "right",
             "children": [
@@ -78,7 +78,7 @@
           {
             "type": "border",
             "selected": 0,
-            "size": 54.5,
+            "size": 71.5,
             "location": "bottom",
             "children": [
               {
@@ -203,10 +203,10 @@
                 {
                   "type": "tab",
                   "id": "#f0a6fed2-b344-4bb8-8d21-0be2306e5c43",
-                  "name": "grow_menu",
+                  "name": "Main",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1004,10 +1004,10 @@
       "2": {},
       "3": {},
       "4": {},
-      "5": {},
-      "6": {
+      "5": {
         "$selected": true
       },
+      "6": {},
       "7": {},
       "8": {},
       "9": {},
@@ -1023,21 +1023,13 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
-          "0": {},
-          "1": {},
-          "2": {},
-          "3": {},
-          "4": {},
-          "5": {},
-          "6": {},
-          "7": {},
-          "9": {}
+          "1": {}
         }
       },
       "transform": {
         "translate": {
           "x": -281.1,
-          "y": -189.45
+          "y": -289.45000000000005
         },
         "scale": 2
       },
@@ -1056,7 +1048,9 @@
           },
           "1": {},
           "2": {},
-          "4": {},
+          "4": {
+            "$selected": true
+          },
           "6": {}
         }
       },
@@ -1077,10 +1071,10 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/3[flow-state]": {
       "selection": {
         "0": {
-          "0": {
+          "0": {},
+          "1": {
             "$selected": true
           },
-          "1": {},
           "2": {}
         }
       },
@@ -1126,11 +1120,8 @@
       "selection": {
         "0": {
           "0": {},
-          "1": {},
-          "2": {},
-          "3": {
-            "1": {},
-            "3": {}
+          "2": {
+            "$selected": true
           },
           "4": {
             "2": {},
@@ -1155,13 +1146,15 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/6[flow-state]": {
       "selection": {
         "0": {
-          "1": {}
+          "0": {},
+          "1": {},
+          "2": {}
         }
       },
       "transform": {
         "translate": {
           "x": -304,
-          "y": -262
+          "y": -362
         },
         "scale": 2
       },
@@ -1179,6 +1172,7 @@
   "searchMatchWholeWord": false,
   "replaceEnabled": false,
   "replaceText": "",
+  "pageRuntimeFrontFace": true,
   "breakpoints": {},
   "watchExpressions": [],
   "showComponentDescriptions": true,

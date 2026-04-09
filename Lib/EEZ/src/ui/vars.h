@@ -26,7 +26,15 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_DISCO_PHASE_INT = 8,
     FLOW_GLOBAL_VARIABLE_DISPLAY_BRIGHTNESS = 9,
     FLOW_GLOBAL_VARIABLE_MUSHROOM_NAMES_LIST = 10,
-    FLOW_GLOBAL_VARIABLE_MUSHROOM_LIST_INDEX = 11
+    FLOW_GLOBAL_VARIABLE_MUSHROOM_LIST_INDEX = 11,
+    FLOW_GLOBAL_VARIABLE_MANUAL_HUMIDITY_STR = 12,
+    FLOW_GLOBAL_VARIABLE_MANUAL_AIRFLOW_STR = 13,
+    FLOW_GLOBAL_VARIABLE_GROW_PROGRESS_INT = 14,
+    FLOW_GLOBAL_VARIABLE_GROW_PROGRESS_STR = 15,
+    FLOW_GLOBAL_VARIABLE_MUSHROOM_GROW_LABEL = 16,
+    FLOW_GLOBAL_VARIABLE_SHED_MANUAL_MODE = 17,
+    FLOW_GLOBAL_VARIABLE_SHED_AUTO_MODE = 18,
+    FLOW_GLOBAL_VARIABLE_GROW_STATUS = 19
 };
 
 // Native global variables
@@ -55,6 +63,22 @@ extern const char *get_var_mushroom_names_list();
 extern void set_var_mushroom_names_list(const char *value);
 extern int32_t get_var_mushroom_list_index();
 extern void set_var_mushroom_list_index(int32_t value);
+extern const char *get_var_manual_humidity_str();
+extern void set_var_manual_humidity_str(const char *value);
+extern const char *get_var_manual_airflow_str();
+extern void set_var_manual_airflow_str(const char *value);
+extern int32_t get_var_grow_progress_int();
+extern void set_var_grow_progress_int(int32_t value);
+extern const char *get_var_grow_progress_str();
+extern void set_var_grow_progress_str(const char *value);
+extern const char *get_var_mushroom_grow_label();
+extern void set_var_mushroom_grow_label(const char *value);
+extern bool get_var_shed_manual_mode();
+extern void set_var_shed_manual_mode(bool value);
+extern bool get_var_shed_auto_mode();
+extern void set_var_shed_auto_mode(bool value);
+extern const char *get_var_grow_status();
+extern void set_var_grow_status(const char *value);
 
 
 #ifdef __cplusplus

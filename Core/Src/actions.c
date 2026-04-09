@@ -16,6 +16,7 @@
 #include "ui.h"
 #include "rgb.h"
 #include "display_manager.h"
+#include "mushroom.h"
 
 
 // GENERAL ACTIONS
@@ -66,7 +67,6 @@ void action_update_display_brightness(lv_event_t * e) {
 
 
 // DISCO SCREEN ACTIONS
-extern RGB_disco_settings_t discoSettings;
 
 inline void action_load_screen_main(lv_event_t * e) {
     switch_screen(SCREEN_ID_MAIN);
@@ -140,10 +140,10 @@ void action_set_control_mode(lv_event_t * e) {
     }
 }
 
+
 // GROW MENU ACTIONS
 void action_start_grow(lv_event_t *e) {
-    shedControl.controlMode = MODE_AUTOMATIC;
     uint8_t index = (uint8_t)get_var_mushroom_list_index();
     start_grow(index);
+    switch_screen(SCREEN_ID_MAIN);
 }
-

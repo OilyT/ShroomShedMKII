@@ -8,35 +8,54 @@
 #include "mushroom.h"
 #include "rgb.h"
 
+#define DISPLAY_HUMIDITY_DELTA 0.5
+#define DISPLAY_TEMPERATURE_DELTA 0.5
+
 extern MGP_t MGP_list[];
 extern uint8_t MGP_list_index;
 
-static float display_humidity = 40;
+static float display_humidity = 50;
 static float display_temperature = 20;
-static int32_t display_airflow_int = 50;
+static int32_t display_airflow_int = 0;
 char display_airflow_string[10] = { 0 };
 char humidity_display_string[11] = { 0 };
 
 
-// MAIN SCREEN VARS
+// GLOBAL VARS
+bool get_var_shed_manual_mode(void) {
+    return shedControl.controlMode == MODE_MANUAL;
+}
+void set_var_shed_manual_mode(bool value) {
+    //not used
+}
 
+bool get_var_shed_auto_mode(void) {
+    return shedControl.controlMode == MODE_AUTOMATIC;
+}
+
+void set_var_shed_auto_mode(bool value) {
+    //not used
+}
+
+
+// MAIN SCREEN VARS
 float get_var_humidity_fp(void) {
     return display_humidity;
 }
 
 void set_var_humidity_fp(float value) {
     
-    if (fabs(display_humidity - value) < 0.25) {
+    if (fabs(display_humidity - value) < DISPLAY_HUMIDITY_DELTA) {
         display_humidity = value;
         return;
     } else {
         if (display_humidity < value) {
-            display_humidity += 0.25;
+            display_humidity += DISPLAY_HUMIDITY_DELTA;
             if (display_humidity > value) {
                 display_humidity = value;
             }
         } else if (display_humidity > value) {
-            display_humidity -= 0.25;
+            display_humidity -= DISPLAY_HUMIDITY_DELTA;
             if (display_humidity < value) {
                 display_humidity = value;
             }
@@ -49,17 +68,17 @@ float get_var_temperature_fp() {
 }
 
 void set_var_temperature_fp(float value) {
-    if (fabs(display_temperature - value) < 0.05) {
+    if (fabs(display_temperature - value) < DISPLAY_TEMPERATURE_DELTA) {
         display_temperature = value;
         return;
     } else {
         if (display_temperature < value) {
-            display_temperature += 0.05;
+            display_temperature += DISPLAY_TEMPERATURE_DELTA;
             if (display_temperature > value) {
                 display_temperature = value;
             }
         } else if (display_temperature > value) {
-            display_temperature -= 0.05;
+            display_temperature -= DISPLAY_TEMPERATURE_DELTA;
             if (display_temperature < value) {
                 display_temperature = value;
             }
@@ -99,6 +118,27 @@ const char *get_var_humidity_display_str(void) {
 void set_var_humidity_display_str(const char *value) {
     // not used
 }
+
+const char *get_var_grow_progress_str(void) {
+
+    int32_t progress = get_var_grow_progress_int();
+    static char progress_str[10];
+    snprintf(progress_str, sizeof(progress_str), "%d%%", (int)(progress));
+    return progress_str;
+}
+
+void set_var_grow_progress_str(const char *value) {
+    (void)value;
+}
+
+void set_var_grow_progress_int(int32_t value) {
+    // not used, grow progress is calculated in tick_MGP
+}
+
+void set_var_grow_status(const char *value) {
+    // n/a
+}
+
 
 
 // DISCO SCREEN VARS
@@ -181,6 +221,29 @@ void set_var_mushroom_names_list(const char *value) {
     }
 }
 
+
+// manual control vars
+const char *get_var_manual_humidity_str(void) {
+    static char manual_humidity_str[10];
+    snprintf(manual_humidity_str, sizeof(manual_humidity_str),"%.1f/%d%%", display_humidity, shedControl.manualHumidityControlValue);
+    return manual_humidity_str;
+}
+
+void set_var_manual_humidity_str(const char *value) {
+    (void)value;
+}
+
+const char *get_var_manual_airflow_str(void) {
+    static char manual_airflow_str[10];
+    snprintf(manual_airflow_str, sizeof(manual_airflow_str), "%d%%", shedControl.manualFanControlValue);
+    return manual_airflow_str;
+}
+
+void set_var_manual_airflow_str(const char *value) {
+    (void)value;
+}
+
+// grow selection vars
 int32_t mushroom_list_index;
 
 int32_t get_var_mushroom_list_index() {

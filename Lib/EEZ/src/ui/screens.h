@@ -15,19 +15,23 @@ typedef struct _objects_t {
     lv_obj_t *menu_general;
     lv_obj_t *manual_control;
     lv_obj_t *grow_menu;
+    lv_obj_t *grow_progress_bar;
+    lv_obj_t *mushroom_label;
+    lv_obj_t *manual_control_switch;
+    lv_obj_t *menu_button;
+    lv_obj_t *humidity_label;
     lv_obj_t *humidity_bar;
     lv_obj_t *humidity_value_label;
-    lv_obj_t *humidity_label;
-    lv_obj_t *humidity_scale;
-    lv_obj_t *airflow_scale;
-    lv_obj_t *airflow_bar;
     lv_obj_t *airflow_label;
+    lv_obj_t *airflow_bar;
     lv_obj_t *airflow_value_label;
-    lv_obj_t *temperature_scale;
-    lv_obj_t *temperature_bar;
     lv_obj_t *temperature_label;
+    lv_obj_t *temperature_bar;
     lv_obj_t *temperature_value_label;
-    lv_obj_t *menu_button;
+    lv_obj_t *grow_progres_value_label;
+    lv_obj_t *grow_status_label;
+    lv_obj_t *manual_indicatorr;
+    lv_obj_t *auto_indicator;
     lv_obj_t *home_button;
     lv_obj_t *disco_power_slider;
     lv_obj_t *disco_power;
@@ -44,7 +48,6 @@ typedef struct _objects_t {
     lv_obj_t *display_brightness_slider;
     lv_obj_t *manual_control_header;
     lv_obj_t *back_button_2;
-    lv_obj_t *manual_control_switch;
     lv_obj_t *humidity_control_container;
     lv_obj_t *manual_humidity_label;
     lv_obj_t *humidity_value_label_1;
@@ -52,7 +55,7 @@ typedef struct _objects_t {
     lv_obj_t *dec_humidity_cv_label;
     lv_obj_t *incr_humidity_cv;
     lv_obj_t *incr_humidity_cv_label;
-    lv_obj_t *humidity_control_container_1;
+    lv_obj_t *airflow_container;
     lv_obj_t *airflow_value_label_1;
     lv_obj_t *manual_airflow_label;
     lv_obj_t *dec_airflow;
@@ -63,6 +66,8 @@ typedef struct _objects_t {
     lv_obj_t *mushroom_roller;
     lv_obj_t *start_grow_button;
     lv_obj_t *start_grow_button_label;
+    lv_obj_t *stop_grow_button;
+    lv_obj_t *stop_grow_button_label;
 } objects_t;
 
 extern objects_t objects;

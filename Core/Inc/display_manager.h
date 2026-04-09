@@ -16,6 +16,9 @@
 #include "screens.h"
 
 
+#define RGB_18_BIT
+
+
 #define DISPLAY_LED_TIMER htim4
 
 extern TIM_HandleTypeDef DISPLAY_LED_TIMER;

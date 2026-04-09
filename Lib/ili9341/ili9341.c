@@ -4,6 +4,7 @@
 #include "ili9341.h"
 #include <stdlib.h>
 #include <stdbool.h>
+#include "display_manager.h"
 
 #define DMA_TIMEOUT_MS 100
 
@@ -204,11 +205,20 @@ void ILI9341_Init() {
     static const uint8_t rgb_16bit = 0x55;
     static const uint8_t rgb_18bit = 0x66;
 
-    ILI9341_WriteCommand(0x3A);
-    {
-        uint8_t data[] = { rgb_18bit };
-        ILI9341_WriteData(data, sizeof(data));
-    }
+    #ifdef RGB_18_BIT
+        ILI9341_WriteCommand(0x3A);
+        {
+            uint8_t data[] = { rgb_18bit };
+            ILI9341_WriteData(data, sizeof(data));
+        }
+    #else
+        ILI9341_WriteCommand(0x3A);
+        {
+            uint8_t data[] = { rgb_16bit };
+            ILI9341_WriteData(data, sizeof(data));
+        }
+    #endif
+
 
     // FRAME RATIO CONTROL, STANDARD RGB COLOR
     ILI9341_WriteCommand(0xB1);

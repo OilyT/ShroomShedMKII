@@ -19,7 +19,7 @@
 #include "ili9341.h"
 #include "rgb.h"
 #include "mushroom.h"
-
+#include "stm32h5xx_hal.h"
 
 
 /* ============================================================================
@@ -45,9 +45,7 @@ uint32_t lastControlProcess;
 uint32_t lastSensorProcess;
 uint32_t lastRgbProcess;
 
-
 uint8_t usb_buffer[100];
-
 
 /* ============================================================================
  * Global Structs
@@ -65,13 +63,16 @@ struct shedControl_t shedControl = {
     .controlMode = MODE_MANUAL,
     .outputMode = OUTPUT_NORMAL,
     .humidityControlValue = 90,
-    .fanControlValue = 20
+    .fanControlValue = 20,
+    .manualHumidityControlValue = 85,
+    .manualFanControlValue = 20
 };
 
 
 /* ============================================================================
  * Function Prototypes
  * ============================================================================ */
+static void shed_control(void);
 static void init_pwm(void);
 static void humidity_control(void);
 static void fan_control(void);
@@ -88,44 +89,48 @@ void init_shroomshed(void) {
     init_pwm();
     RGB_Init();
     init_mushrooms();
-
+    HAL_Delay(2000);
     switch_screen(SCREEN_ID_MAIN);
 }
 
 void loop(void)
 {    
-    if (lastDisplayProcess + (SYSTICK_HZ/DISPLAY_PROCESS_HZ) < HAL_GetTick()) {
-        lastDisplayProcess = HAL_GetTick();
+    currentSystick = HAL_GetTick();
+    if (lastDisplayProcess + (SYSTICK_HZ/DISPLAY_PROCESS_HZ) < currentSystick) {
+        lastDisplayProcess = currentSystick;
         displayProcess();
     }
 
-    if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < HAL_GetTick()) {
-        lastSensorProcess = HAL_GetTick();
+    currentSystick = HAL_GetTick();
+    if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < currentSystick) {
+        lastSensorProcess = currentSystick;
         sensor_process ();
     }
     
-    if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < HAL_GetTick()) {
-        lastTouchProcess = HAL_GetTick();
+    currentSystick = HAL_GetTick();
+    if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < currentSystick) {
+        lastTouchProcess = currentSystick;
         poll_touchpad();
     }
 
-    if (lastControlProcess + (SYSTICK_HZ/CONTROL_PROCESS_HZ) < HAL_GetTick()) {
-        lastControlProcess = HAL_GetTick();
-        humidity_control();
-        determine_water_state();
-        fan_control();
+    currentSystick = HAL_GetTick();
+    if (lastControlProcess + (SYSTICK_HZ/CONTROL_PROCESS_HZ) < currentSystick) {
+        lastControlProcess = currentSystick;
+        shed_control();
     }
 
-    if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < HAL_GetTick()) {
-        lastSerialProcess = HAL_GetTick();
+    currentSystick = HAL_GetTick();
+    if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < currentSystick) {
+        lastSerialProcess = currentSystick;
         if (hUsbDeviceFS.pClassData != NULL) {
             //TEMPLATE_Transmit(usb_buffer, sizeof(usb_buffer));
             //memset(usb_buffer, 0, sizeof(usb_buffer));
         }
     }
 
-    if (lastRgbProcess + (SYSTICK_HZ/RGB_PROCESS_HZ) < HAL_GetTick()) {
-        lastRgbProcess = HAL_GetTick();
+    currentSystick = HAL_GetTick(); 
+    if (lastRgbProcess + (SYSTICK_HZ/RGB_PROCESS_HZ) < currentSystick) {
+        lastRgbProcess = currentSystick;
         RGB_Process();
     }
 }
@@ -147,7 +152,7 @@ static void shed_control (void) {
     fan_control();
 }
 
- void humidity_control(void) {
+static void humidity_control(void) {
     // humidifier PID control
     const static uint16_t Pk = 50;
     const static uint16_t Ik = 1; 
@@ -239,7 +244,7 @@ static void shed_control (void) {
 }
 
 
- static void determine_water_state(void) {
+static void determine_water_state(void) {
     // Low water detection logic
     uint8_t lowWaterTimeout = shedSettings.lowWaterTimeout;
 
@@ -278,15 +283,15 @@ static void shed_control (void) {
 }
 
 
- void fan_control(void) {
+static void fan_control(void) {
     float gamma = 0.7;
     uint16_t pwm_output = pow(shedControl.fanControlValue / 100.0f, gamma) * FAN_PWM_TIMER.Init.Period;
     FAN_PWM_TIMER.Instance->CCR3 = pwm_output;
- }
+}
 
 
- void init_pwm(void) {
+static void init_pwm(void) {
     HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
     HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // TIMEx_PWMN_Start is for complementary channel (3N)
- }
+}
 
