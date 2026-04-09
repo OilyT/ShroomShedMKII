@@ -14,15 +14,15 @@
 #define TICK_PERIOD 1000*60*60 // 1 hour
 #define GROW_SPEED_MULTIPLIER 10000
 
-struct MGP_t MGP_list[MGP_LIST_SIZE];
-static uint8_t MGP_list_index = 0;
-struct MGP_node_t node_pool[NODE_POOL_SIZE];
+MGP_t MGP_list[MGP_LIST_SIZE];
+uint8_t MGP_list_index = 0;
+MGP_node_t node_pool[NODE_POOL_SIZE];
 static uint16_t node_pool_index = 0;
 
 
 //Mushroom grow profiles
-struct MGP_t *current_profile = NULL;
-struct MGP_node_t *current_node = NULL;
+MGP_t *current_profile = NULL;
+MGP_node_t *current_node = NULL;
 static uint32_t last_mpg_tick;
 
 // oyster
@@ -125,10 +125,13 @@ void start_grow(uint8_t profile_index) {
     current_profile = profile;
     profile->progress = 0;
     current_node = profile->head;
+    current_node->progress = 0;
     last_mpg_tick = HAL_GetTick();
     grow_process();
 }
 
+
+// profile and init functions
 
 static void add_profile(char *name, MGP_data_t *data, uint16_t estimatedHarvestWindow) {
     if (MGP_list_index >= MGP_LIST_SIZE) return;
@@ -174,7 +177,6 @@ static MGP_node_t* add_node(MGP_node_t *base_node, uint8_t humidity_cv, uint8_t 
     } 
     return newNode;
 }
-
 
 
 // var funcs

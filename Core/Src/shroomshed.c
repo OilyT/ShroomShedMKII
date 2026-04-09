@@ -37,15 +37,15 @@
 /* ============================================================================
  * Static Variables
  * ============================================================================ */
-uint32_t currentSystick;
-uint32_t lastSerialProcess;
-uint32_t lastTouchProcess;
-uint32_t lastDisplayProcess;
-uint32_t lastControlProcess;
-uint32_t lastSensorProcess;
-uint32_t lastRgbProcess;
+static uint32_t currentSystick;
+static uint32_t lastSerialProcess;
+static uint32_t lastTouchProcess;
+static uint32_t lastDisplayProcess;
+static uint32_t lastControlProcess;
+static uint32_t lastSensorProcess;
+static uint32_t lastRgbProcess;
 
-uint8_t usb_buffer[100];
+static uint8_t usb_buffer[100];
 
 /* ============================================================================
  * Global Structs
@@ -89,7 +89,6 @@ void init_shroomshed(void) {
     init_pwm();
     RGB_Init();
     init_mushrooms();
-    HAL_Delay(2000);
     switch_screen(SCREEN_ID_MAIN);
 }
 
@@ -106,7 +105,7 @@ void loop(void)
         lastSensorProcess = currentSystick;
         sensor_process ();
     }
-    
+
     currentSystick = HAL_GetTick();
     if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < currentSystick) {
         lastTouchProcess = currentSystick;
@@ -139,7 +138,7 @@ void loop(void)
  * Local Function Implementations
  * ============================================================================ */
 
-static void shed_control (void) {
+static void shed_control(void) {
     if (shedControl.controlMode == MODE_AUTOMATIC) {
         tick_MGP();
     } else {

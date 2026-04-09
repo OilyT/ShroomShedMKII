@@ -1,5 +1,5 @@
-#include "rgb.h"
 #include <stdint.h>
+#include "rgb.h"
 #include "main.h"
 #include "stdbool.h"
 #include "shroomshed.h"
@@ -15,7 +15,12 @@
 
 RGB_Colour zone_colour[4];
 uint8_t rgb_buffer[RGB_BUFFER_SIZE];
-RGB_disco_settings_t discoSettings;
+RGB_disco_settings_t discoSettings = {
+    .on = false,
+    .discoPower = DISCO_POWER,
+    .discoSpeed = DISCO_SPEED,
+    .discoOffset = DISCO_OFFSET
+};
 
 
 static void RGB_flush_buffer(void);
@@ -27,11 +32,7 @@ static void RGB_flush_buffer(void);
 
 
 void RGB_Init(void) {
-    discoSettings.discoPower = DISCO_POWER;
-    discoSettings.discoSpeed = DISCO_SPEED;
-    discoSettings.discoOffset = DISCO_OFFSET;
-    discoSettings.on = false;
-
+    //pejis
 }
 
 void RGB_Process(void) {

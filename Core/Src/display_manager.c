@@ -25,7 +25,7 @@
 #define TOUCH_BUFFER_SIZE 8
 
 
-/* Declare buffer for 1/10 screen size. */
+
 #ifdef RGB_18_BIT
 #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB888))
 #else
