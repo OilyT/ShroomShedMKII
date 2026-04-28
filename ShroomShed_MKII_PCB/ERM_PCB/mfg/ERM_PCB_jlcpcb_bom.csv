@@ -1,0 +1,10 @@
+Comment,Designator,Footprint,JLCPCB Part #?optional?
+1uf,"C1,C2",Capacitor_SMD:C_0603_1608Metric,
+RED,D1,LED_SMD:LED_0603_1608Metric,
+Fan,J1,Connector_JST:JST_XH_S2B-XH-A-1_1x02_P2.50mm_Horizontal,
+Humidifier,J2,Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal,
+Conn_01x04,J3,Connector_JST:JST_XH_S4B-XH-A-1_1x04_P2.50mm_Horizontal,
+220uH,L1,footprints:SMDRH104R,C3000009
+BSS123,"Q1,Q2",Package_TO_SOT_SMD:SOT-23,C8491
+100R,"R1,R3",Resistor_SMD:R_0603_1608Metric,
+10k,"R2,R4,R5",Resistor_SMD:R_0603_1608Metric,

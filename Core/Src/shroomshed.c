@@ -23,7 +23,7 @@
 
 
 /* ============================================================================
- * Defines and Typedefs
+ * Defines
  * ============================================================================ */
 
 
@@ -139,12 +139,19 @@ void loop(void)
  * ============================================================================ */
 
 static void shed_control(void) {
-    if (shedControl.controlMode == MODE_AUTOMATIC) {
-        tick_MGP();
+
+    if (shedControl.outputMode == OUTPUT_SLEEP) {
+        shedControl.humidityControlValue = 0;
+        shedControl.fanControlValue = 0;
     } else {
-        shedControl.humidityControlValue = shedControl.manualHumidityControlValue;
-        shedControl.fanControlValue = shedControl.manualFanControlValue;
+        if (shedControl.controlMode == MODE_AUTOMATIC) {
+            tick_MGP();
+        } else {
+            shedControl.humidityControlValue = shedControl.manualHumidityControlValue;
+            shedControl.fanControlValue = shedControl.manualFanControlValue;
+        }
     }
+
     
     humidity_control();
     determine_water_state();

@@ -37,6 +37,14 @@ void set_var_shed_auto_mode(bool value) {
     //not used
 }
 
+bool get_var_shed_output_normal(void) {
+    return shedControl.outputMode == OUTPUT_NORMAL;
+}
+
+void set_var_shed_output_normal(bool value) {
+    // not used
+}
+
 
 // MAIN SCREEN VARS
 float get_var_humidity_fp(void) {

@@ -51,6 +51,17 @@ static void event_handler_cb_main_mushroom_label(lv_event_t *e) {
     lv_event_code_t event = lv_event_get_code(e);
 }
 
+static void event_handler_cb_main_output_mode_switch(lv_event_t *e) {
+    lv_event_code_t event = lv_event_get_code(e);
+    if (event == LV_EVENT_VALUE_CHANGED) {
+        lv_obj_t *ta = lv_event_get_target(e);
+        if (tick_value_change_obj != ta) {
+            bool value = lv_obj_has_state(ta, LV_STATE_CHECKED);
+            set_var_shed_output_normal(value);
+        }
+    }
+}
+
 static void event_handler_cb_disco_mode_disco_power_slider(lv_event_t *e) {
     lv_event_code_t event = lv_event_get_code(e);
     if (event == LV_EVENT_VALUE_CHANGED) {
@@ -304,7 +315,7 @@ void create_screen_main() {
             // grow_progress_bar
             lv_obj_t *obj = lv_bar_create(parent_obj);
             objects.grow_progress_bar = obj;
-            lv_obj_set_pos(obj, 8, 157);
+            lv_obj_set_pos(obj, 8, 191);
             lv_obj_set_size(obj, 304, 29);
             lv_obj_add_event_cb(obj, event_handler_cb_main_grow_progress_bar, LV_EVENT_ALL, 0);
             lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE|LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
@@ -338,19 +349,10 @@ void create_screen_main() {
             // mushroom_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.mushroom_label = obj;
-            lv_obj_set_pos(obj, 94, 120);
+            lv_obj_set_pos(obj, 85, 154);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             lv_obj_add_event_cb(obj, event_handler_cb_main_mushroom_label, LV_EVENT_ALL, 0);
             add_style_std_label_32(obj);
-            lv_label_set_text(obj, "");
-        }
-        {
-            // grow_status_label
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.grow_status_label = obj;
-            lv_obj_set_pos(obj, 0, 186);
-            lv_obj_set_size(obj, LV_PCT(100), LV_SIZE_CONTENT);
-            add_style_std_label_24(obj);
             lv_label_set_text(obj, "");
         }
         {
@@ -365,22 +367,32 @@ void create_screen_main() {
             // Manual_indicatorr
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.manual_indicatorr = obj;
-            lv_obj_set_pos(obj, 239, 62);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_pos(obj, 237, 132);
+            lv_obj_set_size(obj, 41, LV_SIZE_CONTENT);
             add_style_shroom_shed_header(obj);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "M");
         }
         {
             // Auto_indicator
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.auto_indicator = obj;
-            lv_obj_set_pos(obj, 239, 62);
-            lv_obj_set_size(obj, 52, LV_SIZE_CONTENT);
+            lv_obj_set_pos(obj, 237, 132);
+            lv_obj_set_size(obj, 41, LV_SIZE_CONTENT);
             add_style_shroom_shed_header(obj);
-            lv_obj_set_style_text_font(obj, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_color(obj, lv_color_hex(theme_colors[active_theme_index][4]), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_label_set_text(obj, "A");
+        }
+        {
+            // output_mode_switch
+            lv_obj_t *obj = lv_switch_create(parent_obj);
+            objects.output_mode_switch = obj;
+            lv_obj_set_pos(obj, 218, 58);
+            lv_obj_set_size(obj, 79, 54);
+            lv_obj_add_event_cb(obj, action_set_output_mode, LV_EVENT_CLICKED, (void *)0);
+            lv_obj_add_event_cb(obj, event_handler_cb_main_output_mode_switch, LV_EVENT_ALL, 0);
+            add_style_std_switch(obj);
         }
     }
     
@@ -510,25 +522,6 @@ void tick_screen_main() {
         }
     }
     {
-        bool new_val = get_var_shed_manual_mode();
-        bool cur_val = lv_obj_has_flag(objects.grow_status_label, LV_OBJ_FLAG_HIDDEN);
-        if (new_val != cur_val) {
-            tick_value_change_obj = objects.grow_status_label;
-            if (new_val) lv_obj_add_flag(objects.grow_status_label, LV_OBJ_FLAG_HIDDEN);
-            else lv_obj_clear_flag(objects.grow_status_label, LV_OBJ_FLAG_HIDDEN);
-            tick_value_change_obj = NULL;
-        }
-    }
-    {
-        const char *new_val = get_var_grow_status();
-        const char *cur_val = lv_label_get_text(objects.grow_status_label);
-        if (strcmp(new_val, cur_val) != 0) {
-            tick_value_change_obj = objects.grow_status_label;
-            lv_label_set_text(objects.grow_status_label, new_val);
-            tick_value_change_obj = NULL;
-        }
-    }
-    {
         bool new_val = get_var_shed_auto_mode();
         bool cur_val = lv_obj_has_flag(objects.manual_indicatorr, LV_OBJ_FLAG_HIDDEN);
         if (new_val != cur_val) {
@@ -545,6 +538,16 @@ void tick_screen_main() {
             tick_value_change_obj = objects.auto_indicator;
             if (new_val) lv_obj_add_flag(objects.auto_indicator, LV_OBJ_FLAG_HIDDEN);
             else lv_obj_clear_flag(objects.auto_indicator, LV_OBJ_FLAG_HIDDEN);
+            tick_value_change_obj = NULL;
+        }
+    }
+    {
+        bool new_val = get_var_shed_output_normal();
+        bool cur_val = lv_obj_has_state(objects.output_mode_switch, LV_STATE_CHECKED);
+        if (new_val != cur_val) {
+            tick_value_change_obj = objects.output_mode_switch;
+            if (new_val) lv_obj_add_state(objects.output_mode_switch, LV_STATE_CHECKED);
+            else lv_obj_clear_state(objects.output_mode_switch, LV_STATE_CHECKED);
             tick_value_change_obj = NULL;
         }
     }

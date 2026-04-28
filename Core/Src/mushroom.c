@@ -12,7 +12,7 @@
 #define MGP_LIST_SIZE 10
 #define NODE_POOL_SIZE MGP_LIST_SIZE * 10
 #define TICK_PERIOD 1000*60*60 // 1 hour
-#define GROW_SPEED_MULTIPLIER 10000
+#define GROW_SPEED_MULTIPLIER 1
 
 MGP_t MGP_list[MGP_LIST_SIZE];
 uint8_t MGP_list_index = 0;

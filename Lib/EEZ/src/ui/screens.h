@@ -17,6 +17,7 @@ typedef struct _objects_t {
     lv_obj_t *grow_menu;
     lv_obj_t *grow_progress_bar;
     lv_obj_t *mushroom_label;
+    lv_obj_t *output_mode_switch;
     lv_obj_t *manual_control_switch;
     lv_obj_t *menu_button;
     lv_obj_t *humidity_label;
@@ -29,7 +30,6 @@ typedef struct _objects_t {
     lv_obj_t *temperature_bar;
     lv_obj_t *temperature_value_label;
     lv_obj_t *grow_progres_value_label;
-    lv_obj_t *grow_status_label;
     lv_obj_t *manual_indicatorr;
     lv_obj_t *auto_indicator;
     lv_obj_t *home_button;

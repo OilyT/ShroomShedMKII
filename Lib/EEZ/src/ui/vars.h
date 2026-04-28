@@ -34,7 +34,8 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_MUSHROOM_GROW_LABEL = 16,
     FLOW_GLOBAL_VARIABLE_SHED_MANUAL_MODE = 17,
     FLOW_GLOBAL_VARIABLE_SHED_AUTO_MODE = 18,
-    FLOW_GLOBAL_VARIABLE_GROW_STATUS = 19
+    FLOW_GLOBAL_VARIABLE_GROW_STATUS = 19,
+    FLOW_GLOBAL_VARIABLE_SHED_OUTPUT_NORMAL = 20
 };
 
 // Native global variables
@@ -79,6 +80,8 @@ extern bool get_var_shed_auto_mode();
 extern void set_var_shed_auto_mode(bool value);
 extern const char *get_var_grow_status();
 extern void set_var_grow_status(const char *value);
+extern bool get_var_shed_output_normal();
+extern void set_var_shed_output_normal(bool value);
 
 
 #ifdef __cplusplus

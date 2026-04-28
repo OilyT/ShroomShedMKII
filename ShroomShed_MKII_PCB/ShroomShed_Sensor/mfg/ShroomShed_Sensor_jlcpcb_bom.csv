@@ -1,0 +1,9 @@
+Comment,Designator,Footprint,JLCPCB Part #?optional?
+100nF,"C1,C3",Capacitor_SMD:C_0603_1608Metric,
+100nF (XR5 / XR7),C2,Capacitor_SMD:C_0603_1608Metric,
+RED,D1,LED_SMD:LED_0603_1608Metric,
+Conn_01x04,J1,Connector_JST:JST_XH_B4B-XH-AM_1x04_P2.50mm_Vertical,
+10k,"R1,R2",Resistor_SMD:R_0603_1608Metric,
+1K,R3,Resistor_SMD:R_0603_1608Metric,
+SHT31-DIS,U1,Sensor_Humidity:Sensirion_DFN-8-1EP_2.5x2.5mm_P0.5mm_EP1.1x1.7mm,
+SCD40-D-R2,U2,Sensor:Sensirion_SCD4x-1EP_10.1x10.1mm_P1.25mm_EP4.8x4.8mm,

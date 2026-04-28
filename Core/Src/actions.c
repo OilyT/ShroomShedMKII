@@ -30,6 +30,15 @@ inline void action_load_screen_menu(lv_event_t *e) {
     switch_screen(SCREEN_ID_MENU_MAIN);
 }
 
+void action_set_output_mode(lv_event_t * e) {
+    lv_obj_t *ta = lv_event_get_target(e);
+    if (lv_obj_has_state(ta, LV_STATE_CHECKED)) {
+        shedControl.outputMode = OUTPUT_NORMAL;
+    } else {
+        shedControl.outputMode = OUTPUT_SLEEP;
+    }
+}
+
 
 // MAIN MENU ACTIONS
 inline void action_load_screen_disco(lv_event_t * e) {

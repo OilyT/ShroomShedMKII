@@ -65,6 +65,9 @@ void sensor_process(void) {
             shedState.humidityCurrent = humidity_avg;
             shedState.temperatureCurrent = temperature;
         }
+    } else {
+        shedControl.outputMode = OUTPUT_SLEEP; // if sensor read fails, put shed into sleep mode to prevent damage
+        sht31_shot_init(SHT31_ADDRESS_0);
     }
     /*
     co2 = get_co2();
