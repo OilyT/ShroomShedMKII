@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/-1",
     "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/18",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/20",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/14",
@@ -197,21 +197,10 @@
               "type": "tabset",
               "id": "EDITORS",
               "weight": 49.45158060630654,
+              "selected": -1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
-              "children": [
-                {
-                  "type": "tab",
-                  "id": "#f0a6fed2-b344-4bb8-8d21-0be2306e5c43",
-                  "name": "Main",
-                  "component": "editor",
-                  "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
-                    "permanent": false
-                  },
-                  "icon": "svg:page"
-                }
-              ],
+              "children": [],
               "active": true
             },
             {

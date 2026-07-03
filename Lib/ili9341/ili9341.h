@@ -29,7 +29,7 @@ extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 
 #define ILI9341_WIDTH  320
 #define ILI9341_HEIGHT 240
-#define ILI9341_ROTATION (ILI9341_MADCTL_MY | ILI9341_MADCTL_RGB)
+#define ILI9341_ROTATION (ILI9341_MADCTL_MV | ILI9341_MADCTL_BGR)
 
 
 // Color definitions
@@ -45,6 +45,7 @@ extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 
 
 void ILI9341_Init(void);
+void ILI9341_DrawFilledCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
 void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t* data);
 void ILI9341_DrawImageRGB666(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint8_t* data);
 void ILI9341_SetDmaTxCompleteCallback(void (*callback)(void));

@@ -77,7 +77,6 @@ typedef struct shedState_t {
 
 
 
-
 void init_shroomshed(void);
 void loop(void);
 

@@ -16,7 +16,7 @@
 #include "screens.h"
 
 
-#define RGB_18_BIT
+#define RGB_16_BIT
 
 
 #define DISPLAY_LED_TIMER htim4

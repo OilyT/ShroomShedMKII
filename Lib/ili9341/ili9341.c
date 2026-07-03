@@ -302,6 +302,41 @@ static void ILI9341_WriteChar(uint16_t x, uint16_t y, char ch, FontDef font, uin
 }
 
 
+static void ILI9341_DrawHLine(int16_t x, int16_t y, int16_t w, uint16_t color) {
+    if (y < 0 || y >= (int16_t)ILI9341_HEIGHT || x >= (int16_t)ILI9341_WIDTH || w <= 0) return;
+    if (x < 0) { w += x; x = 0; }
+    if (x + w > (int16_t)ILI9341_WIDTH) w = (int16_t)ILI9341_WIDTH - x;
+    if (w <= 0) return;
+    ILI9341_SetAddressWindow((uint16_t)x, (uint16_t)y, (uint16_t)(x + w - 1), (uint16_t)y);
+    uint8_t pixel[2] = { color >> 8, color & 0xFF };
+    for (int16_t i = 0; i < w; i++) {
+        ILI9341_WriteData(pixel, sizeof(pixel));
+    }
+}
+
+void ILI9341_DrawFilledCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color) {
+    int16_t cx0 = (int16_t)x0;
+    int16_t cy0 = (int16_t)y0;
+    int16_t x = (int16_t)r;
+    int16_t y = 0;
+    int16_t err = 1 - x;
+
+    while (x >= y) {
+        ILI9341_DrawHLine(cx0 - x, cy0 + y, 2 * x + 1, color);
+        ILI9341_DrawHLine(cx0 - x, cy0 - y, 2 * x + 1, color);
+        ILI9341_DrawHLine(cx0 - y, cy0 + x, 2 * y + 1, color);
+        ILI9341_DrawHLine(cx0 - y, cy0 - x, 2 * y + 1, color);
+
+        y++;
+        if (err < 0) {
+            err += 2 * y + 1;
+        } else {
+            x--;
+            err += 2 * (y - x) + 1;
+        }
+    }
+}
+
 void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t* data) {
     if((x >= ILI9341_WIDTH) || (y >= ILI9341_HEIGHT)) return;
     if((x + w - 1) >= ILI9341_WIDTH) return;

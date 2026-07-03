@@ -23,10 +23,13 @@ extern SPI_HandleTypeDef ILI9341_TOUCH_SPI_PORT;
 #define ILI9341_TOUCH_SCALE_Y 240
 
 // default calibration values
-#define ILI9341_TOUCH_MIN_RAW_X 1760
-#define ILI9341_TOUCH_MAX_RAW_X 30901
-#define ILI9341_TOUCH_MIN_RAW_Y 2143
-#define ILI9341_TOUCH_MAX_RAW_Y 31068
+#define ILI9341_TOUCH_MIN_RAW_X 2500
+#define ILI9341_TOUCH_MAX_RAW_X 31116
+#define ILI9341_TOUCH_MIN_RAW_Y 2500
+#define ILI9341_TOUCH_MAX_RAW_Y 30675
+
+#define ILI9341_TOUCH_X_RANGE (ILI9341_TOUCH_MAX_RAW_X - ILI9341_TOUCH_MIN_RAW_X)
+#define ILI9341_TOUCH_Y_RANGE (ILI9341_TOUCH_MAX_RAW_Y - ILI9341_TOUCH_MIN_RAW_Y)
 
 // uint32_t TOUCH_MIN_X;
 // uint32_t TOUCH_MAX_X;
@@ -38,7 +41,7 @@ void ILI9341_TouchUnselect();
 
 bool ILI9341_TouchPressed();
 bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y);
-void calibrate_touch(uint32_t *min_x, uint32_t *min_y, uint32_t *max_x, uint32_t *max_y );
+bool touch_raw(uint32_t *x, uint32_t *y);
 bool get_touch_coordinates(uint16_t* x, uint16_t* y);
 
 #endif // __ILI9341_TOUCH_H__

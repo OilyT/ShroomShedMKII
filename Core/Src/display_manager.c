@@ -286,6 +286,9 @@ void poll_touchpad(void) {
             ybuffer[bufferIndex] = last_touch_y;
             bufferIndex = (bufferIndex + 1) % TOUCH_BUFFER_SIZE;
             touchSinceLastRead = true;
+
+            // draw a red dot on the screen at the touch location for debugging
+            //ILI9341_DrawFilledCircle(last_touch_x, last_touch_y, 5, 0xF800);
         }
     }
     if (!currentlyTouched) {

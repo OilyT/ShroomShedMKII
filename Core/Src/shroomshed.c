@@ -20,6 +20,7 @@
 #include "rgb.h"
 #include "mushroom.h"
 #include "stm32h5xx_hal.h"
+#include "stm32h5xx_hal_gpio.h"
 
 
 /* ============================================================================
@@ -77,6 +78,7 @@ static void init_pwm(void);
 static void humidity_control(void);
 static void fan_control(void);
 static void determine_water_state(void);
+static void calibrate_touch(void);
 /* ============================================================================
  * Function Implementations
  * ============================================================================ */
@@ -110,6 +112,7 @@ void loop(void)
     if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < currentSystick) {
         lastTouchProcess = currentSystick;
         poll_touchpad();
+        //calibrate_touch();
     }
 
     currentSystick = HAL_GetTick();
@@ -122,8 +125,8 @@ void loop(void)
     if (lastSerialProcess + (SYSTICK_HZ/SERIAL_PROCESS_HZ) < currentSystick) {
         lastSerialProcess = currentSystick;
         if (hUsbDeviceFS.pClassData != NULL) {
-            //TEMPLATE_Transmit(usb_buffer, sizeof(usb_buffer));
-            //memset(usb_buffer, 0, sizeof(usb_buffer));
+            TEMPLATE_Transmit(usb_buffer, sizeof(usb_buffer));
+            memset(usb_buffer, 0, sizeof(usb_buffer));
         }
     }
 
@@ -241,7 +244,7 @@ static void humidity_control(void) {
 
 
     if (printSerial) {
-        sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/10, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
+        //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/10, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
         //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shedControl.humidityControlValue, shedState.humidityCurrent, PID_output_normalised, shedControl.fanControlValue);
     }
     // load pulse value into timer register, add min pulse value if not PID_oputput is not 0
@@ -299,5 +302,12 @@ static void fan_control(void) {
 static void init_pwm(void) {
     HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
     HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // TIMEx_PWMN_Start is for complementary channel (3N)
+    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
 }
 
+void calibrate_touch(void) {
+    uint32_t raw_x, raw_y;
+    if (touch_raw(&raw_x, &raw_y)) {
+        sprintf(usb_buffer, "Raw touch coordinates: X=%lu, Y=%lu\r\n", raw_x, raw_y);
+    }
+}

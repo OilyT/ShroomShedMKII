@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define WATER_LED_GPIO_Port GPIOC
 #define RGB_MOSI_Pin GPIO_PIN_3
 #define RGB_MOSI_GPIO_Port GPIOC
+#define BOOST_EN_Pin GPIO_PIN_2
+#define BOOST_EN_GPIO_Port GPIOA
 #define SD_CS_Pin GPIO_PIN_4
 #define SD_CS_GPIO_Port GPIOA
 #define SD_SCK_Pin GPIO_PIN_5
@@ -88,20 +90,10 @@ void Error_Handler(void);
 #define TRANDUCER_PWM_GPIO_Port GPIOB
 #define FAN_PWM_Pin GPIO_PIN_1
 #define FAN_PWM_GPIO_Port GPIOB
-#define RF_RX_Pin GPIO_PIN_7
-#define RF_RX_GPIO_Port GPIOE
-#define RF_TX_Pin GPIO_PIN_8
-#define RF_TX_GPIO_Port GPIOE
-#define ENS210_SCL_Pin GPIO_PIN_10
-#define ENS210_SCL_GPIO_Port GPIOB
-#define ENS210_SDA_Pin GPIO_PIN_12
-#define ENS210_SDA_GPIO_Port GPIOB
 #define SHT31_SDA_Pin GPIO_PIN_9
 #define SHT31_SDA_GPIO_Port GPIOC
 #define SHT31_SCL_Pin GPIO_PIN_8
 #define SHT31_SCL_GPIO_Port GPIOA
-#define TOUCH_CS_Pin GPIO_PIN_15
-#define TOUCH_CS_GPIO_Port GPIOA
 #define TOUCH_SCK_Pin GPIO_PIN_3
 #define TOUCH_SCK_GPIO_Port GPIOB
 #define TOUCH_MISO_Pin GPIO_PIN_4
@@ -110,6 +102,8 @@ void Error_Handler(void);
 #define TOUCH_MOSI_GPIO_Port GPIOB
 #define TOUCH_IRQ_Pin GPIO_PIN_6
 #define TOUCH_IRQ_GPIO_Port GPIOB
+#define TOUCH_CS_Pin GPIO_PIN_7
+#define TOUCH_CS_GPIO_Port GPIOB
 #define DISPLAY_LED_Pin GPIO_PIN_8
 #define DISPLAY_LED_GPIO_Port GPIOB
 

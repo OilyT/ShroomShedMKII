@@ -9,7 +9,7 @@
 #define READ_Y 0xD0
 #define READ_X 0x90
 
-#define MIN_SAMPLES 16
+#define MIN_SAMPLES 8
 #define MAX_SAMPLES 64
 #define CALIBRATION_SAMPLES 128
 #define CALIBRATION_ITERATIONS 4
@@ -77,8 +77,11 @@ bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
     if(raw_y > ILI9341_TOUCH_MAX_RAW_Y) raw_y = ILI9341_TOUCH_MAX_RAW_Y;
 
 
-    *x = (raw_x - ILI9341_TOUCH_MIN_RAW_X) * ILI9341_TOUCH_SCALE_X / (ILI9341_TOUCH_MAX_RAW_X - ILI9341_TOUCH_MIN_RAW_X);
-    *y = (raw_y - ILI9341_TOUCH_MIN_RAW_Y) * ILI9341_TOUCH_SCALE_Y / (ILI9341_TOUCH_MAX_RAW_Y - ILI9341_TOUCH_MIN_RAW_Y);
+    *x = (raw_x - ILI9341_TOUCH_MIN_RAW_X) * ILI9341_TOUCH_SCALE_X / ILI9341_TOUCH_X_RANGE;
+    *y = (raw_y - ILI9341_TOUCH_MIN_RAW_Y) * ILI9341_TOUCH_SCALE_Y / ILI9341_TOUCH_Y_RANGE;
+
+    *x = ILI9341_TOUCH_SCALE_X - *x; // flip x coordinate
+    *y = ILI9341_TOUCH_SCALE_Y - *y; // flip y coordinate
 
     return true;
 }
@@ -234,4 +237,48 @@ static uint16_t besttwoavg( uint16_t x , uint16_t y , uint16_t z ) {
     return (reta);
 }
 
+bool touch_raw(uint32_t *x, uint32_t *y) {
 
+    static const uint8_t cmd_read_x[] = { READ_X };
+    static const uint8_t cmd_read_y[] = { READ_Y };
+    static const uint8_t zeroes_tx[] = { 0x00, 0x00 };
+
+    ILI9341_TouchSelect();
+
+    uint32_t avg_x = 0;
+    uint32_t avg_y = 0;
+    uint8_t nsamples = 0;
+    for(uint8_t i = 0; i < MAX_SAMPLES; i++) {
+        if(!ILI9341_TouchPressed())
+            break;
+        
+        nsamples++;
+
+        HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)cmd_read_y, sizeof(cmd_read_y), HAL_MAX_DELAY);
+        uint8_t y_raw[2];
+        HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)zeroes_tx, y_raw, sizeof(y_raw), HAL_MAX_DELAY);
+
+        HAL_SPI_Transmit(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)cmd_read_x, sizeof(cmd_read_x), HAL_MAX_DELAY);
+        uint8_t x_raw[2];
+        HAL_SPI_TransmitReceive(&ILI9341_TOUCH_SPI_PORT, (uint8_t*)zeroes_tx, x_raw, sizeof(x_raw), HAL_MAX_DELAY);
+
+        avg_x += (((uint16_t)x_raw[0]) << 8) | ((uint16_t)x_raw[1]);
+        avg_y += (((uint16_t)y_raw[0]) << 8) | ((uint16_t)y_raw[1]);
+    }
+
+    ILI9341_TouchUnselect();
+
+    if(nsamples < MIN_SAMPLES)
+        return false;
+
+    uint32_t raw_x = (avg_x / nsamples);
+
+    uint32_t raw_y = (avg_y / nsamples);
+
+
+
+    *x = raw_x;
+    *y = raw_y;
+
+    return true;
+}
