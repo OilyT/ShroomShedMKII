@@ -152,7 +152,6 @@ void displayProcess(void) {
     ui_tick();
     // Call LVGL timer handler
     lv_timer_handler();
-
 }
 
 void switch_screen(enum ScreensEnum screen) {

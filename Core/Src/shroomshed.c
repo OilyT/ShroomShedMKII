@@ -58,14 +58,14 @@ struct shedState_t shedState = {
     .waterState = true
 };
 struct shedSettings_t shedSettings = {
-    .lowWaterTimeout = 10
+    .lowWaterTimeout = 15
 };
 struct shedControl_t shedControl = {
     .controlMode = MODE_MANUAL,
     .outputMode = OUTPUT_NORMAL,
     .humidityControlValue = 90,
     .fanControlValue = 20,
-    .manualHumidityControlValue = 85,
+    .manualHumidityControlValue = 90,
     .manualFanControlValue = 20
 };
 
@@ -259,7 +259,7 @@ static void determine_water_state(void) {
 
     uint8_t threshold = 90;
     if (shedControl.humidityControlValue - 5 < threshold) {
-            threshold = shedControl.humidityControlValue - 5;
+        threshold = shedControl.humidityControlValue - 5;
     }
     
     static uint32_t humStart = 0;
@@ -287,6 +287,11 @@ static void determine_water_state(void) {
             shedState.waterState = true;
         }
     }
+
+    if (shedControl.outputMode == OUTPUT_SLEEP) {
+        shedState.waterState = true;
+    }
+
     // LED indicator
     HAL_GPIO_WritePin(WATER_LED_GPIO_Port, WATER_LED_Pin, shedState.waterState ? GPIO_PIN_RESET : GPIO_PIN_SET);  
 }

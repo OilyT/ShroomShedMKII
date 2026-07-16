@@ -22,7 +22,7 @@
 #define HEATER_COOLDOWN 15 // cycles
 #define HEATER_TIMEOUT 30 // cycles
 
-#define HUMIDITY_BUFFER_SIZE 8
+#define HUMIDITY_BUFFER_SIZE 4
 
 
 uint8_t init_res;

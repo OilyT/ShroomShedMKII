@@ -18,6 +18,11 @@
 #include "display_manager.h"
 #include "mushroom.h"
 
+#define MAX_HUMIDITY 95
+#define MIN_HUMIDITY 30
+#define MAX_FAN 100
+#define MIN_FAN 10
+
 
 // GENERAL ACTIONS
 inline void action_load_previous_screen(lv_event_t *e) {
@@ -112,31 +117,31 @@ void action_update_disco_phase(lv_event_t * e) {
 void action_increment_humidity(lv_event_t *e) {
     uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
     shedControl.manualHumidityControlValue += step;
-    if (shedControl.manualHumidityControlValue > 100) {
-        shedControl.manualHumidityControlValue = 100;
+    if (shedControl.manualHumidityControlValue > MAX_HUMIDITY) {
+        shedControl.manualHumidityControlValue = MAX_HUMIDITY;
     }
 }
 
 void action_decrement_humidity(lv_event_t * e) {
     uint8_t step = (uint8_t)(uintptr_t)lv_event_get_user_data(e);
     shedControl.manualHumidityControlValue -= step;
-    if (shedControl.manualHumidityControlValue < 30) {
-        shedControl.manualHumidityControlValue = 30;
+    if (shedControl.manualHumidityControlValue < MIN_HUMIDITY) {
+        shedControl.manualHumidityControlValue = MIN_HUMIDITY;
     }
 }
 
 void action_increment_airflow(lv_event_t * e) {
     shedControl.manualFanControlValue += 5;
-    if (shedControl.manualFanControlValue > 100) {
-        shedControl.manualFanControlValue = 100;
+    if (shedControl.manualFanControlValue > MAX_FAN) {
+        shedControl.manualFanControlValue = MAX_FAN;
     }
 
 }
 
 void action_decrement_airflow(lv_event_t *e) {
     shedControl.manualFanControlValue -= 5;
-    if (shedControl.manualFanControlValue < 10) {
-        shedControl.manualFanControlValue = 10;
+    if (shedControl.manualFanControlValue < MIN_FAN) {
+        shedControl.manualFanControlValue = MIN_FAN;
     }
 }
 

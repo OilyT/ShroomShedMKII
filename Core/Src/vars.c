@@ -8,14 +8,14 @@
 #include "mushroom.h"
 #include "rgb.h"
 
-#define DISPLAY_HUMIDITY_DELTA 0.5
-#define DISPLAY_TEMPERATURE_DELTA 0.5
+#define DISPLAY_HUMIDITY_ALPHA 0.0005
+#define DISPLAY_TEMPERATURE_ALPHA 0.001
 
 extern MGP_t MGP_list[];
 extern uint8_t MGP_list_index;
 
-static float display_humidity = 50;
-static float display_temperature = 20;
+static float display_humidity = 40;
+static float display_temperature = 15;
 static int32_t display_airflow_int = 0;
 char display_airflow_string[10] = { 0 };
 char humidity_display_string[11] = { 0 };
@@ -52,23 +52,8 @@ float get_var_humidity_fp(void) {
 }
 
 void set_var_humidity_fp(float value) {
-    
-    if (fabs(display_humidity - value) < DISPLAY_HUMIDITY_DELTA) {
-        display_humidity = value;
-        return;
-    } else {
-        if (display_humidity < value) {
-            display_humidity += DISPLAY_HUMIDITY_DELTA;
-            if (display_humidity > value) {
-                display_humidity = value;
-            }
-        } else if (display_humidity > value) {
-            display_humidity -= DISPLAY_HUMIDITY_DELTA;
-            if (display_humidity < value) {
-                display_humidity = value;
-            }
-        }
-    }
+
+    display_humidity = display_humidity * (1 - DISPLAY_HUMIDITY_ALPHA) + value * DISPLAY_HUMIDITY_ALPHA;
 }
 
 float get_var_temperature_fp() {
@@ -76,22 +61,8 @@ float get_var_temperature_fp() {
 }
 
 void set_var_temperature_fp(float value) {
-    if (fabs(display_temperature - value) < DISPLAY_TEMPERATURE_DELTA) {
-        display_temperature = value;
-        return;
-    } else {
-        if (display_temperature < value) {
-            display_temperature += DISPLAY_TEMPERATURE_DELTA;
-            if (display_temperature > value) {
-                display_temperature = value;
-            }
-        } else if (display_temperature > value) {
-            display_temperature -= DISPLAY_TEMPERATURE_DELTA;
-            if (display_temperature < value) {
-                display_temperature = value;
-            }
-        }
-    }
+
+    display_temperature = display_temperature * (1 - DISPLAY_TEMPERATURE_ALPHA) + value * DISPLAY_TEMPERATURE_ALPHA;
 }
 
 const char *get_var_temperature_str() {

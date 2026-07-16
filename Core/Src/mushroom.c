@@ -12,7 +12,7 @@
 #define MGP_LIST_SIZE 10
 #define NODE_POOL_SIZE MGP_LIST_SIZE * 10
 #define TICK_PERIOD 1000*60*60 // 1 hour
-#define GROW_SPEED_MULTIPLIER 1
+#define GROW_SPEED_MULTIPLIER 1 // 10000ish for debugging
 
 MGP_t MGP_list[MGP_LIST_SIZE];
 uint8_t MGP_list_index = 0;
@@ -27,8 +27,8 @@ static uint32_t last_mpg_tick;
 
 // oyster
 static uint8_t oyster_default_h[] = {90, 90, 80};
-static uint8_t oyster_default_f[] = {15, 35, 35};
-static uint16_t oyster_default_t[] = {72, 72, 72};
+static uint8_t oyster_default_f[] = {15, 30, 35};
+static uint16_t oyster_default_t[] = {96, 72, 72};
 
 MGP_data_t oyster_data = {
     .humidity_cv = oyster_default_h,
@@ -38,9 +38,9 @@ MGP_data_t oyster_data = {
 };
 
 // shiitake
-static uint8_t shiitake_default_h[] = {95, 95, 90, 80};
-static uint8_t shiitake_default_f[] = {15, 20, 25, 25};
-static uint16_t shiitake_default_t[] = {48, 24, 72, 72};
+static uint8_t shiitake_default_h[] = {95, 90, 90, 80};
+static uint8_t shiitake_default_f[] = {25, 20, 15, 15};
+static uint16_t shiitake_default_t[] = {48, 24, 96, 72};
 
 MGP_data_t shiitake_data = {
     .humidity_cv = shiitake_default_h,
@@ -48,6 +48,7 @@ MGP_data_t shiitake_data = {
     .time = shiitake_default_t,
     .length = 4
 };
+
 
 
 // function prototypes
@@ -68,6 +69,9 @@ static void grow_process(void) {
     if (current_node->progress >= current_node->time) {
         if (current_node->type == NODE_TYPE_END) {
             // profile complete
+            shedControl.manualHumidityControlValue = current_node->humidity_cv;
+            shedControl.manualFanControlValue = current_node->fan_cv;
+
             current_profile = NULL;
             current_node = NULL;
             return;
