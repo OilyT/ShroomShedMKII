@@ -8,7 +8,7 @@
 #include "mushroom.h"
 #include "rgb.h"
 
-#define DISPLAY_HUMIDITY_ALPHA 0.0005
+#define DISPLAY_HUMIDITY_ALPHA 0.01
 #define DISPLAY_TEMPERATURE_ALPHA 0.001
 
 extern MGP_t MGP_list[];

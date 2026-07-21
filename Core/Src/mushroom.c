@@ -26,8 +26,8 @@ MGP_node_t *current_node = NULL;
 static uint32_t last_mpg_tick;
 
 // oyster
-static uint8_t oyster_default_h[] = {90, 90, 80};
-static uint8_t oyster_default_f[] = {15, 30, 35};
+static uint8_t oyster_default_h[] = {95, 90, 85};
+static uint8_t oyster_default_f[] = {20, 30, 35};
 static uint16_t oyster_default_t[] = {96, 72, 72};
 
 MGP_data_t oyster_data = {
@@ -38,9 +38,9 @@ MGP_data_t oyster_data = {
 };
 
 // shiitake
-static uint8_t shiitake_default_h[] = {95, 90, 90, 80};
-static uint8_t shiitake_default_f[] = {25, 20, 15, 15};
-static uint16_t shiitake_default_t[] = {48, 24, 96, 72};
+static uint8_t shiitake_default_h[] = {95, 95, 90, 75};
+static uint8_t shiitake_default_f[] = {20, 20, 20, 20};
+static uint16_t shiitake_default_t[] = {48, 24, 96, 96};
 
 MGP_data_t shiitake_data = {
     .humidity_cv = shiitake_default_h,

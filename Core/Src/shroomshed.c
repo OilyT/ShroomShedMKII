@@ -29,12 +29,12 @@
 
 
 // humidity PID
-#define PID_ID_PERIOD 1 // seconds
+#define PID_ID_PERIOD 180 // seconds
 #define MAX_PULSE 1100
 #define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
 #define PID_MODIFIER 100
-#define RATE_LIMIT 20 // percent per cycle
+#define RATE_LIMIT 5 // percent per second
 /* ============================================================================
  * Static Variables
  * ============================================================================ */
@@ -163,7 +163,7 @@ static void shed_control(void) {
 
 static void humidity_control(void) {
     // humidifier PID control
-    const static uint16_t Pk = 50;
+    const static uint16_t Pk = 10;
     const static uint16_t Ik = 1; 
     const static uint16_t Dk = 100;
     const static uint16_t rate_limit = RATE_LIMIT * PULSE_RANGE / 100;
@@ -194,7 +194,7 @@ static void humidity_control(void) {
     if (counter >= CONTROL_PROCESS_HZ * PID_ID_PERIOD) {
         // integral
         int16_t I_delta = Ik * error * PID_ID_PERIOD;
-        I_delta /= 2;
+        I_delta /= 5;
         I_term += I_delta;
 
         if (I_term < 0) {
