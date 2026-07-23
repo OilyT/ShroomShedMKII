@@ -31,11 +31,7 @@ extern "C" {
 #define CONTROL_PROCESS_HZ 1
 #define RGB_PROCESS_HZ 100
 
-#define TRANSDUCER_PWM_TIMER htim3
-#define FAN_PWM_TIMER htim1
 
-extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
-extern TIM_HandleTypeDef FAN_PWM_TIMER;
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 extern struct shedState_t shedState;
@@ -56,7 +52,7 @@ typedef enum shedControlMode_e {
 
 typedef enum shedOutputMode_e {
     OUTPUT_NORMAL = 0,
-    OUTPUT_SLEEP = 1
+    OUTPUT_DISABLED = 1
 } shedOutputMode_e;
 
 typedef struct shedControl_t {

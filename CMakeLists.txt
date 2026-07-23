@@ -74,6 +74,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/rgb.c
     Core/Src/sd.c
     Core/Src/mushroom.c
+    Core/Src/shroomshed_hal.c
     ${SHT31_SOURCES}
     ${USB_SOURCES}
 )

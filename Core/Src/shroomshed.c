@@ -15,12 +15,9 @@
 #include "display_manager.h"
 #include "screens.h"
 #include "sensors.h"
-#include "ili9341_touch.h"
-#include "ili9341.h"
 #include "rgb.h"
 #include "mushroom.h"
-#include "stm32h5xx_hal.h"
-#include "stm32h5xx_hal_gpio.h"
+#include "shroomshed_hal.h"
 
 
 /* ============================================================================
@@ -28,13 +25,6 @@
  * ============================================================================ */
 
 
-// humidity PID
-#define PID_ID_PERIOD 180 // seconds
-#define MAX_PULSE 1100
-#define MIN_PULSE 600
-#define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
-#define PID_MODIFIER 100
-#define RATE_LIMIT 5 // percent per second
 /* ============================================================================
  * Static Variables
  * ============================================================================ */
@@ -74,24 +64,22 @@ struct shedControl_t shedControl = {
  * Function Prototypes
  * ============================================================================ */
 static void shed_control(void);
-static void init_pwm(void);
-static void humidity_control(void);
-static void fan_control(void);
 static void determine_water_state(void);
-static void calibrate_touch(void);
 /* ============================================================================
  * Function Implementations
  * ============================================================================ */
 
 void init_shroomshed(void) {
 
-    initDisplay();
-    displayProcess();
     init_sensors();
-    init_pwm();
     RGB_Init();
     init_mushrooms();
+    initDisplay();
+    displayProcess();
     switch_screen(SCREEN_ID_MAIN);
+
+    enable_boost();
+    enable_shed();
 }
 
 void loop(void)
@@ -112,7 +100,6 @@ void loop(void)
     if (lastTouchProcess + (SYSTICK_HZ/TOUCH_PROCESS_HZ) < currentSystick) {
         lastTouchProcess = currentSystick;
         poll_touchpad();
-        //calibrate_touch();
     }
 
     currentSystick = HAL_GetTick();
@@ -143,9 +130,8 @@ void loop(void)
 
 static void shed_control(void) {
 
-    if (shedControl.outputMode == OUTPUT_SLEEP) {
-        shedControl.humidityControlValue = 0;
-        shedControl.fanControlValue = 0;
+    if (shedControl.outputMode == OUTPUT_DISABLED) {
+        // do nothing currently
     } else {
         if (shedControl.controlMode == MODE_AUTOMATIC) {
             tick_MGP();
@@ -153,103 +139,10 @@ static void shed_control(void) {
             shedControl.humidityControlValue = shedControl.manualHumidityControlValue;
             shedControl.fanControlValue = shedControl.manualFanControlValue;
         }
+        set_fan_speed(shedControl.fanControlValue);
+        humidity_process(shedControl.humidityControlValue);
+        determine_water_state();
     }
-
-    
-    humidity_control();
-    determine_water_state();
-    fan_control();
-}
-
-static void humidity_control(void) {
-    // humidifier PID control
-    const static uint16_t Pk = 10;
-    const static uint16_t Ik = 1; 
-    const static uint16_t Dk = 100;
-    const static uint16_t rate_limit = RATE_LIMIT * PULSE_RANGE / 100;
-
-    static uint16_t counter = 0;
-    static int32_t lastError = 0;
-
-    bool printSerial = false;
-
-    int32_t PID_output = 0;
-    static int32_t rate_limited_PID_output = 0;
-
-
-    int32_t P_term = 0;
-    static int32_t I_term = 0;
-    static int32_t D_term = 0;
-
-    int32_t error = (shedControl.humidityControlValue*PID_MODIFIER) - (shedState.humidityCurrent*PID_MODIFIER);
-
-    P_term = (Pk * error);
-    if (P_term > PULSE_RANGE * PID_MODIFIER) {
-        P_term = PULSE_RANGE * PID_MODIFIER;
-    } else if (P_term < - (PULSE_RANGE * PID_MODIFIER)) {
-        P_term = -(PULSE_RANGE * PID_MODIFIER);
-    }
-
-    counter++;
-    if (counter >= CONTROL_PROCESS_HZ * PID_ID_PERIOD) {
-        // integral
-        int16_t I_delta = Ik * error * PID_ID_PERIOD;
-        I_delta /= 5;
-        I_term += I_delta;
-
-        if (I_term < 0) {
-            I_term = 0;
-        }
-        if (I_term > (PULSE_RANGE * PID_MODIFIER) - P_term) {
-            I_term = (PULSE_RANGE * PID_MODIFIER) - P_term;
-        }
-
-        // derivative
-        int16_t error_delta = error - lastError;
-        D_term = Dk * error_delta / PID_ID_PERIOD;
-
-
-        lastError = error;
-        printSerial = true;
-        counter = 0;
-    }
-
-
-    PID_output = P_term/PID_MODIFIER + I_term/PID_MODIFIER + D_term/PID_MODIFIER;
-
-    if (PID_output < 0) {
-        PID_output = 0;
-    } else if (PID_output > PULSE_RANGE) {
-        PID_output = PULSE_RANGE;
-    }
-
-    // Rate limiting
-    int16_t PID_delta = PID_output - rate_limited_PID_output;
-    if (PID_delta > rate_limit) {
-        rate_limited_PID_output += rate_limit;
-    } else if (PID_delta < -rate_limit) {
-        rate_limited_PID_output -= rate_limit;
-    } else {
-        rate_limited_PID_output = PID_output;
-    }
-
-    PID_output = rate_limited_PID_output;
-
-    int16_t PID_output_normalised;
-    if (PID_output == 0) {
-        PID_output_normalised = 0;
-    } else {
-        PID_output_normalised = (PID_output * 100) / PULSE_RANGE;
-    }
-
-
-    if (printSerial) {
-        //sprintf(usb_buffer, "Error: %d, P: %d, I: %d, D: %d, Output: %d\r\n", error/10, P_term/PID_MODIFIER, I_term/PID_MODIFIER, D_term/PID_MODIFIER, PID_output);
-        //sprintf(usb_buffer, "CV: %d, PV: %.2f, PID: %d, FAN: %d\r\n", shedControl.humidityControlValue, shedState.humidityCurrent, PID_output_normalised, shedControl.fanControlValue);
-    }
-    // load pulse value into timer register, add min pulse value if not PID_oputput is not 0
-    if (PID_output) PID_output += MIN_PULSE;
-    TRANSDUCER_PWM_TIMER.Instance->CCR3 = (PID_output);
 }
 
 
@@ -288,7 +181,7 @@ static void determine_water_state(void) {
         }
     }
 
-    if (shedControl.outputMode == OUTPUT_SLEEP) {
+    if (shedControl.outputMode == OUTPUT_DISABLED) {
         shedState.waterState = true;
     }
 
@@ -297,22 +190,9 @@ static void determine_water_state(void) {
 }
 
 
-static void fan_control(void) {
-    float gamma = 0.7;
-    uint16_t pwm_output = pow(shedControl.fanControlValue / 100.0f, gamma) * FAN_PWM_TIMER.Init.Period;
-    FAN_PWM_TIMER.Instance->CCR3 = pwm_output;
-}
 
 
-static void init_pwm(void) {
-    HAL_TIM_PWM_Start(&TRANSDUCER_PWM_TIMER, TIM_CHANNEL_3);
-    HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);  // TIMEx_PWMN_Start is for complementary channel (3N)
-    HAL_GPIO_WritePin(BOOST_EN_GPIO_Port, BOOST_EN_Pin, GPIO_PIN_SET);
-}
 
-void calibrate_touch(void) {
-    uint32_t raw_x, raw_y;
-    if (touch_raw(&raw_x, &raw_y)) {
-        sprintf(usb_buffer, "Raw touch coordinates: X=%lu, Y=%lu\r\n", raw_x, raw_y);
-    }
-}
+
+
+

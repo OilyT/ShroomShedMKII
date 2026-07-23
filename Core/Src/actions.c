@@ -40,7 +40,7 @@ void action_set_output_mode(lv_event_t * e) {
     if (lv_obj_has_state(ta, LV_STATE_CHECKED)) {
         shedControl.outputMode = OUTPUT_NORMAL;
     } else {
-        shedControl.outputMode = OUTPUT_SLEEP;
+        shedControl.outputMode = OUTPUT_DISABLED;
     }
 }
 

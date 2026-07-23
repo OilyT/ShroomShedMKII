@@ -50,7 +50,6 @@ MGP_data_t shiitake_data = {
 };
 
 
-
 // function prototypes
 static void grow_process(void);
 static void add_profile(char *name, MGP_data_t *data, uint16_t estimatedHarvestWindow);
@@ -81,7 +80,6 @@ static void grow_process(void) {
             current_node->progress = 0;
         }
     }  
-
 
     if (current_node->type != NODE_TYPE_END) {    
         uint8_t normalised_progress = (current_node->progress * 100) / current_node->time;

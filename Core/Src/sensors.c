@@ -14,6 +14,7 @@
 #include "driver_sht31.h"
 #include "stdint.h"
 #include <stdint.h>
+#include "shroomshed_hal.h"
 
 
 
@@ -66,7 +67,7 @@ void sensor_process(void) {
             shedState.temperatureCurrent = temperature;
         }
     } else {
-        shedControl.outputMode = OUTPUT_SLEEP; // if sensor read fails, put shed into sleep mode to prevent damage
+        disable_shed(); // if sensor read fails disable shed to prevent excessive humidification
         sht31_shot_init(SHT31_ADDRESS_0);
     }
     /*
