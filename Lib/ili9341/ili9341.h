@@ -25,11 +25,16 @@ extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 #define ILI9341_DC_Pin        DISPLAY_DC_Pin
 #define ILI9341_DC_GPIO_Port  DISPLAY_DC_GPIO_Port
 
-// default orientation
+#define USE_TEST_UNIT true
 
 #define ILI9341_WIDTH  320
 #define ILI9341_HEIGHT 240
-#define ILI9341_ROTATION (ILI9341_MADCTL_MV | ILI9341_MADCTL_BGR)
+
+#ifdef USE_TEST_UNIT
+    #define ILI9341_ROTATION (ILI9341_MADCTL_MY | ILI9341_MADCTL_RGB)
+#else
+    #define ILI9341_ROTATION (ILI9341_MADCTL_MV | ILI9341_MADCTL_BGR)
+#endif
 
 
 // Color definitions

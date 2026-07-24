@@ -80,8 +80,10 @@ bool ILI9341_TouchGetCoordinates(uint16_t* x, uint16_t* y) {
     *x = (raw_x - ILI9341_TOUCH_MIN_RAW_X) * ILI9341_TOUCH_SCALE_X / ILI9341_TOUCH_X_RANGE;
     *y = (raw_y - ILI9341_TOUCH_MIN_RAW_Y) * ILI9341_TOUCH_SCALE_Y / ILI9341_TOUCH_Y_RANGE;
 
+    /*
     *x = ILI9341_TOUCH_SCALE_X - *x; // flip x coordinate
     *y = ILI9341_TOUCH_SCALE_Y - *y; // flip y coordinate
+    */
 
     return true;
 }

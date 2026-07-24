@@ -7,16 +7,17 @@
 #include "main.h"
 #include "stm32h5xx_hal_spi.h"
 
-/*** Redefine if necessary ***/
-
 // Warning! Use SPI bus with < 1.3 Mbit speed, better ~650 Kbit to be save.
 #define ILI9341_TOUCH_SPI_PORT hspi1
 extern SPI_HandleTypeDef ILI9341_TOUCH_SPI_PORT;
 
 #define ILI9341_TOUCH_IRQ_Pin       TOUCH_IRQ_Pin
 #define ILI9341_TOUCH_IRQ_GPIO_Port TOUCH_IRQ_GPIO_Port
+
+
 #define ILI9341_TOUCH_CS_Pin        TOUCH_CS_Pin
 #define ILI9341_TOUCH_CS_GPIO_Port  TOUCH_CS_GPIO_Port
+
 
 // change depending on screen orientation
 #define ILI9341_TOUCH_SCALE_X 320
