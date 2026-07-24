@@ -21,6 +21,7 @@ extern "C" {
 #include "main.h"
 #include "usbd_cdc_if.h"
 #include "rgb.h"
+#include "mushroom.h"
 
 // system polling
 #define SYSTICK_HZ 1000
@@ -38,13 +39,6 @@ extern struct shedState_t shedState;
 extern struct shedSettings_t shedSettings;
 extern struct shedControl_t shedControl;
 
-
-typedef struct shedSettings_t {
-    uint8_t lowWaterTimeout; // minutes
-    RGB_disco_settings_t *discoSettings;
-} shedSettings_t;
-
-
 typedef enum shedControlMode_e {
     MODE_AUTOMATIC = 0,
     MODE_MANUAL = 1
@@ -57,7 +51,7 @@ typedef enum shedOutputMode_e {
 
 typedef struct shedControl_t {
     shedControlMode_e controlMode; // 0 for automatic, 1 for manual
-    shedOutputMode_e outputMode; // 0 for default 1 for sleep
+    shedOutputMode_e outputMode; // 0 for normal, 1 for disabled
     uint8_t humidityControlValue;
     uint8_t fanControlValue;
     uint8_t manualHumidityControlValue;
@@ -71,10 +65,19 @@ typedef struct shedState_t {
     bool waterState;
 } shedState_t;
 
+typedef struct shedSettings_t {
+    uint8_t lowWaterTimeout; // minutes
+    RGB_disco_settings_t *rgbSettings;
+    shedControl_t *controlSettings;
+    mushroom_settings_t *mushroomSettings;
+} shedSettings_t;
+
 
 
 void init_shroomshed(void);
 void loop(void);
+void save_settings_to_flash(uint32_t flashAddress);
+bool load_settings_from_flash(uint32_t flashAddress);
 
 
 

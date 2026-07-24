@@ -36,7 +36,13 @@ typedef struct MGP_t {
     uint16_t estimatedHarvestWindow; // days, start of window
 } MGP_t;
 
+typedef struct mushroom_settings_t {
+    MGP_t *current_profile;
+    MGP_node_t *current_node;
+} mushroom_settings_t;
+
 extern struct MGP_t MGP_list[];
+extern struct mushroom_settings_t mushroom_settings;
 
 
 void tick_MGP(void);

@@ -18,11 +18,14 @@
 #include "rgb.h"
 #include "mushroom.h"
 #include "shroomshed_hal.h"
+#include "stm32h5xx_hal_flash.h"
 
 
 /* ============================================================================
  * Defines
  * ============================================================================ */
+
+
 
 
 /* ============================================================================
@@ -47,9 +50,7 @@ struct shedState_t shedState = {
     .co2Current = 0,
     .waterState = true
 };
-struct shedSettings_t shedSettings = {
-    .lowWaterTimeout = 15
-};
+
 struct shedControl_t shedControl = {
     .controlMode = MODE_MANUAL,
     .outputMode = OUTPUT_NORMAL,
@@ -59,12 +60,19 @@ struct shedControl_t shedControl = {
     .manualFanControlValue = 20
 };
 
+struct shedSettings_t shedSettings = {
+    .lowWaterTimeout = 15,
+    .rgbSettings = &discoSettings,
+    .controlSettings = &shedControl
+};
+
 
 /* ============================================================================
  * Function Prototypes
  * ============================================================================ */
 static void shed_control(void);
 static void determine_water_state(void);
+
 /* ============================================================================
  * Function Implementations
  * ============================================================================ */

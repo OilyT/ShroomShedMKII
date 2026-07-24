@@ -20,9 +20,17 @@ MGP_node_t node_pool[NODE_POOL_SIZE];
 static uint16_t node_pool_index = 0;
 
 
-//Mushroom grow profiles
+// State structs
 MGP_t *current_profile = NULL;
 MGP_node_t *current_node = NULL;
+ 
+/* Mushroom settings struct 
+mushroom_settings_t mushroom_settings = {
+    .current_profile = &current_profile,
+    .current_node = &current_node
+};
+*/
+
 static uint32_t last_mpg_tick;
 
 // oyster

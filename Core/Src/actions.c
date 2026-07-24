@@ -17,6 +17,7 @@
 #include "rgb.h"
 #include "display_manager.h"
 #include "mushroom.h"
+#include "shroomshed_hal.h"
 
 #define MAX_HUMIDITY 95
 #define MIN_HUMIDITY 30
@@ -38,9 +39,9 @@ inline void action_load_screen_menu(lv_event_t *e) {
 void action_set_output_mode(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
     if (lv_obj_has_state(ta, LV_STATE_CHECKED)) {
-        shedControl.outputMode = OUTPUT_NORMAL;
+        enable_shed();
     } else {
-        shedControl.outputMode = OUTPUT_DISABLED;
+        disable_shed();
     }
 }
 
