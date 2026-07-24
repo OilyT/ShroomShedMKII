@@ -35,7 +35,8 @@ static mushroom_settings_t restoredMushroomSettings = {
 
 // PFP's
 static uint8_t count_mushroom_nodes(const MGP_t *profile);
-
+static void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings);
+static void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings);
 
 /* ============================================================================
  * Function Implementations
@@ -138,117 +139,16 @@ inline void stop_fan(void) {
 }
 
 
-void save_settings_to_flash(uint32_t flashAddress) {
-    settings_flash_blob_t flashBlob;
-    FLASH_EraseInitTypeDef eraseInit = {0};
-    uint32_t sectorError = 0;
-    uint32_t currentAddress = flashAddress;
-    uint32_t endAddress;
-    uint32_t programBuffer[(sizeof(settings_flash_blob_t) + (SETTINGS_FLASH_QUADWORD_BYTES - 1U)) / 4U];
-
-    if ((flashAddress % SETTINGS_FLASH_QUADWORD_BYTES) != 0U) {
-        return;
-    }
-
-    endAddress = flashAddress + (uint32_t)sizeof(settings_flash_blob_t);
-    endAddress = (endAddress + (SETTINGS_FLASH_QUADWORD_BYTES - 1U)) & ~(SETTINGS_FLASH_QUADWORD_BYTES - 1U);
-
-    if (!IS_FLASH_USER_MEM_ADDRESS(flashAddress) || !IS_FLASH_USER_MEM_ADDRESS(endAddress - 1U)) {
-        return;
-    }
-
-    if (HAL_FLASH_Unlock() != HAL_OK) {
-        return;
-    }
-
-    memset(&flashBlob, 0xFF, sizeof(flashBlob));
-    flashBlob.magic = SETTINGS_FLASH_MAGIC;
-    flashBlob.version = SETTINGS_FLASH_VERSION;
-    flashBlob.lowWaterTimeout = shedSettings.lowWaterTimeout;
-
-    if (shedSettings.rgbSettings != NULL) {
-        flashBlob.rgbSettings = *shedSettings.rgbSettings;
-    }
-
-    if (shedSettings.controlSettings != NULL) {
-        flashBlob.controlSettings = *shedSettings.controlSettings;
-    }
-
-    snapshot_mushroom_settings(&flashBlob.mushroomSettings, shedSettings.mushroomSettings);
-
-    memset(programBuffer, 0xFF, sizeof(programBuffer));
-    memcpy(programBuffer, &flashBlob, sizeof(flashBlob));
-
-    while (currentAddress < endAddress) {
-        uint32_t bankBase;
-        uint32_t bank;
-        uint32_t sector;
-
-        if (currentAddress < (FLASH_BASE + FLASH_BANK_SIZE)) {
-            bank = FLASH_BANK_1;
-            bankBase = FLASH_BASE;
-        } else {
-            bank = FLASH_BANK_2;
-            bankBase = FLASH_BASE + FLASH_BANK_SIZE;
-        }
-
-        sector = (currentAddress - bankBase) / SETTINGS_FLASH_SECTOR_SIZE;
-
-        eraseInit.TypeErase = FLASH_TYPEERASE_SECTORS;
-        eraseInit.Banks = bank;
-        eraseInit.Sector = sector;
-        eraseInit.NbSectors = 1U;
-
-        if (HAL_FLASHEx_Erase(&eraseInit, &sectorError) != HAL_OK) {
-            goto flash_cleanup;
-        }
-
-        currentAddress = bankBase + ((sector + 1U) * SETTINGS_FLASH_SECTOR_SIZE);
-    }
-
-    for (uint32_t offset = 0U; offset < sizeof(programBuffer); offset += SETTINGS_FLASH_QUADWORD_BYTES) {
-        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_QUADWORD, flashAddress + offset, (uint32_t)(uintptr_t)&((uint8_t *)programBuffer)[offset]) != HAL_OK) {
-            goto flash_cleanup;
-        }
-    }
-
-flash_cleanup:
-    HAL_FLASH_Lock();
+void save_settings(void) {
+  
 }
 
-bool load_settings_from_flash(uint32_t flashAddress) {
-    const settings_flash_blob_t *flashBlob;
-
-    if ((flashAddress % SETTINGS_FLASH_QUADWORD_BYTES) != 0U) {
-        return false;
-    }
-
-    if (!IS_FLASH_USER_MEM_ADDRESS(flashAddress) || !IS_FLASH_USER_MEM_ADDRESS(flashAddress + sizeof(settings_flash_blob_t) - 1U)) {
-        return false;
-    }
-
-    flashBlob = (const settings_flash_blob_t *)flashAddress;
-    if ((flashBlob->magic != SETTINGS_FLASH_MAGIC) || (flashBlob->version != SETTINGS_FLASH_VERSION)) {
-        return false;
-    }
-
-    shedSettings.lowWaterTimeout = flashBlob->lowWaterTimeout;
-
-    if (shedSettings.rgbSettings != NULL) {
-        *shedSettings.rgbSettings = flashBlob->rgbSettings;
-    }
-
-    if (shedSettings.controlSettings != NULL) {
-        *shedSettings.controlSettings = flashBlob->controlSettings;
-    }
-
-    restore_mushroom_settings(&flashBlob->mushroomSettings, &restoredMushroomSettings);
-    shedSettings.mushroomSettings = &restoredMushroomSettings;
-
-    return true;
+bool load_settings(void) {
+    
 }
 
-void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings) {
+
+static void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings) {
     const MGP_t *profile;
     const MGP_node_t *node;
     uint8_t nodeCount;
@@ -291,7 +191,7 @@ void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mu
     }
 }
 
-void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings) {
+static void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings) {
     uint8_t nodeCount;
     uint8_t currentNodeIndex;
 

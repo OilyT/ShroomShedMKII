@@ -19,12 +19,6 @@
 #define TRANSDUCER_PWM_TIMER htim3
 #define FAN_PWM_TIMER htim1
 
-// FLASH config
-#define SETTINGS_FLASH_MAGIC                0x53534831U
-#define SETTINGS_FLASH_VERSION              1U
-#define SETTINGS_FLASH_QUADWORD_BYTES       16U
-#define SETTINGS_FLASH_SECTOR_SIZE          (FLASH_BANK_SIZE / (FLASH_SECTOR_NB / 2U))
-#define SETTINGS_FLASH_MAX_MUSHROOM_NODES   100U
 
 extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern TIM_HandleTypeDef FAN_PWM_TIMER;
@@ -71,8 +65,10 @@ void start_fan(void);
 void set_fan_speed(uint8_t speed);
 void stop_fan(void);
 
-void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings);
-void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings);
+void save_settings(void);
+bool load_settings(void);
+
+
 
 
 

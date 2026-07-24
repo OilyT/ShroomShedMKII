@@ -76,8 +76,7 @@ typedef struct shedSettings_t {
 
 void init_shroomshed(void);
 void loop(void);
-void save_settings_to_flash(uint32_t flashAddress);
-bool load_settings_from_flash(uint32_t flashAddress);
+
 
 
 
