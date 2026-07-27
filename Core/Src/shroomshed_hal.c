@@ -12,8 +12,7 @@
 #include "shroomshed.h"
 #include <stdint.h>
 #include <math.h>
-#include "stm32h5xx_hal_flash.h"
-#include "eeprom_emul.h"
+
 
 // humidity PID
 #define PID_ID_PERIOD 180 // seconds
@@ -27,17 +26,9 @@ static float P_term = 0;
 static float I_term = 0;
 static float D_term = 0;
 
-static MGP_t restoredMushroomProfile;
-static MGP_node_t restoredMushroomNodes[SETTINGS_FLASH_MAX_MUSHROOM_NODES];
-static mushroom_settings_t restoredMushroomSettings = {
-    .current_profile = NULL,
-    .current_node = NULL
-};
+
 
 // PFP's
-static uint8_t count_mushroom_nodes(const MGP_t *profile);
-static void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings);
-static void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings);
 
 /* ============================================================================
  * Function Implementations
@@ -140,132 +131,4 @@ inline void stop_fan(void) {
 }
 
 
-// EEPROM EMULATION / FLASH
-
-bool init_EEPROM_emulation(void) {
-    EE_Status status = EE_Init(EE_FORCED_ERASE);
-    if (status != EE_OK) {
-        // Handle error
-        return false;
-    }
-    return true;
-}
-
-void save_settings(void) {
-  
-}
-
-bool load_settings(void) {
-    
-}
-
-
-static void snapshot_mushroom_settings(settings_mushroom_snapshot_t *snapshot, const mushroom_settings_t *mushroomSettings) {
-    const MGP_t *profile;
-    const MGP_node_t *node;
-    uint8_t nodeCount;
-
-    memset(snapshot, 0xFF, sizeof(*snapshot));
-
-    if ((mushroomSettings == NULL) || (mushroomSettings->current_profile == NULL)) {
-        snapshot->active = 0U;
-        snapshot->currentNodeIndex = 0xFFU;
-        snapshot->nodeCount = 0U;
-        return;
-    }
-
-    profile = mushroomSettings->current_profile;
-    node = profile->head;
-    nodeCount = 0U;
-
-    snapshot->active = 1U;
-    snapshot->currentNodeIndex = 0xFFU;
-    snapshot->nodeCount = count_mushroom_nodes(profile);
-    strncpy(snapshot->name, profile->name, sizeof(snapshot->name));
-    snapshot->name[sizeof(snapshot->name) - 1U] = '\0';
-    snapshot->duration = profile->duration;
-    snapshot->progress = profile->progress;
-    snapshot->estimatedHarvestWindow = profile->estimatedHarvestWindow;
-
-    while ((node != NULL) && (nodeCount < SETTINGS_FLASH_MAX_MUSHROOM_NODES)) {
-        snapshot->nodes[nodeCount].humidity_cv = node->humidity_cv;
-        snapshot->nodes[nodeCount].fan_cv = node->fan_cv;
-        snapshot->nodes[nodeCount].time = node->time;
-        snapshot->nodes[nodeCount].progress = node->progress;
-        snapshot->nodes[nodeCount].type = (uint8_t)node->type;
-
-        if (node == mushroomSettings->current_node) {
-            snapshot->currentNodeIndex = nodeCount;
-        }
-
-        node = node->next;
-        nodeCount++;
-    }
-}
-
-static void restore_mushroom_settings(const settings_mushroom_snapshot_t *snapshot, mushroom_settings_t *mushroomSettings) {
-    uint8_t nodeCount;
-    uint8_t currentNodeIndex;
-
-    if (mushroomSettings == NULL) {
-        return;
-    }
-
-    memset(restoredMushroomNodes, 0xFF, sizeof(restoredMushroomNodes));
-    memset(&restoredMushroomProfile, 0x00, sizeof(restoredMushroomProfile));
-    restoredMushroomSettings.current_profile = NULL;
-    restoredMushroomSettings.current_node = NULL;
-
-    if ((snapshot == NULL) || (snapshot->active == 0U) || (snapshot->nodeCount == 0U)) {
-        return;
-    }
-
-    nodeCount = snapshot->nodeCount;
-    if (nodeCount > SETTINGS_FLASH_MAX_MUSHROOM_NODES) {
-        nodeCount = SETTINGS_FLASH_MAX_MUSHROOM_NODES;
-    }
-
-    restoredMushroomProfile.duration = snapshot->duration;
-    restoredMushroomProfile.progress = snapshot->progress;
-    restoredMushroomProfile.estimatedHarvestWindow = snapshot->estimatedHarvestWindow;
-    strncpy(restoredMushroomProfile.name, snapshot->name, sizeof(restoredMushroomProfile.name));
-    restoredMushroomProfile.name[sizeof(restoredMushroomProfile.name) - 1U] = '\0';
-    restoredMushroomProfile.head = &restoredMushroomNodes[0];
-
-    for (uint8_t i = 0U; i < nodeCount; i++) {
-        restoredMushroomNodes[i].humidity_cv = snapshot->nodes[i].humidity_cv;
-        restoredMushroomNodes[i].fan_cv = snapshot->nodes[i].fan_cv;
-        restoredMushroomNodes[i].time = snapshot->nodes[i].time;
-        restoredMushroomNodes[i].progress = snapshot->nodes[i].progress;
-        restoredMushroomNodes[i].type = (node_type_e)snapshot->nodes[i].type;
-        restoredMushroomNodes[i].next = (i + 1U < nodeCount) ? &restoredMushroomNodes[i + 1U] : NULL;
-    }
-
-    currentNodeIndex = snapshot->currentNodeIndex;
-    if (currentNodeIndex >= nodeCount) {
-        currentNodeIndex = 0U;
-    }
-
-    restoredMushroomSettings.current_profile = &restoredMushroomProfile;
-    restoredMushroomSettings.current_node = &restoredMushroomNodes[currentNodeIndex];
-    mushroomSettings->current_profile = restoredMushroomSettings.current_profile;
-    mushroomSettings->current_node = restoredMushroomSettings.current_node;
-}
-
-static uint8_t count_mushroom_nodes(const MGP_t *profile) {
-    const MGP_node_t *current;
-    uint8_t count = 0U;
-
-    if (profile == NULL) {
-        return 0U;
-    }
-
-    current = profile->head;
-    while ((current != NULL) && (count < SETTINGS_FLASH_MAX_MUSHROOM_NODES)) {
-        count++;
-        current = current->next;
-    }
-
-    return count;
-}
 

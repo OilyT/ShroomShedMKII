@@ -121,7 +121,7 @@ void action_increment_humidity(lv_event_t *e) {
     if (shedControl.manualHumidityControlValue > MAX_HUMIDITY) {
         shedControl.manualHumidityControlValue = MAX_HUMIDITY;
     } else {
-        save_settings();
+        //save_settings();
     }
 }
 
@@ -131,7 +131,7 @@ void action_decrement_humidity(lv_event_t * e) {
     if (shedControl.manualHumidityControlValue < MIN_HUMIDITY) {
         shedControl.manualHumidityControlValue = MIN_HUMIDITY;
     } else {
-        save_settings();
+        //save_settings();
     }
 }
 
@@ -140,7 +140,7 @@ void action_increment_airflow(lv_event_t * e) {
     if (shedControl.manualFanControlValue > MAX_FAN) {
         shedControl.manualFanControlValue = MAX_FAN;
     } else {
-        save_settings();
+        //save_settings();
     }
 
 }
@@ -150,7 +150,7 @@ void action_decrement_airflow(lv_event_t *e) {
     if (shedControl.manualFanControlValue < MIN_FAN) {
         shedControl.manualFanControlValue = MIN_FAN;
     } else {
-        save_settings();
+        //save_settings();
     }
 }
 

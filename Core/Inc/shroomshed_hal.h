@@ -65,9 +65,7 @@ void start_fan(void);
 void set_fan_speed(uint8_t speed);
 void stop_fan(void);
 
-bool init_EEPROM_emulation(void);
-void save_settings(void);
-bool load_settings(void);
+
 
 
 

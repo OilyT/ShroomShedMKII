@@ -75,8 +75,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     Core/Src/sd.c
     Core/Src/mushroom.c
     Core/Src/shroomshed_hal.c
-    Core/Src/eeprom_emul.c
-    Core/Src/flash_interface.c
+    #Core/Src/eeprom_emul.c
+    #Core/Src/flash_interface.c
     ${SHT31_SOURCES}
     ${USB_SOURCES}
 )
