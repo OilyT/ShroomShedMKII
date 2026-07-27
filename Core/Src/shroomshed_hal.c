@@ -145,12 +145,12 @@ inline void stop_humidifier(void) {
 }
 
 inline void start_fan(void) {
-    HAL_TIM_PWM_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);
+    HAL_TIMEx_PWMN_Start(&FAN_PWM_TIMER, TIM_CHANNEL_3);
 }
 
 inline void stop_fan(void) {
-    HAL_TIM_PWM_Stop(&FAN_PWM_TIMER, TIM_CHANNEL_3);
+    HAL_TIMEx_PWMN_Stop(&FAN_PWM_TIMER, TIM_CHANNEL_3);
 }
 
 
-
+    

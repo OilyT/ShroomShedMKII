@@ -25,7 +25,7 @@ extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 #define ILI9341_DC_Pin        DISPLAY_DC_Pin
 #define ILI9341_DC_GPIO_Port  DISPLAY_DC_GPIO_Port
 
-#define USE_TEST_UNIT true
+//#define USE_TEST_UNIT
 
 #define ILI9341_WIDTH  320
 #define ILI9341_HEIGHT 240
