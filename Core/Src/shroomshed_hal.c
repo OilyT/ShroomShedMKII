@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <math.h>
 #include "stm32h5xx_hal_flash.h"
+#include "eeprom_emul.h"
 
 // humidity PID
 #define PID_ID_PERIOD 180 // seconds
@@ -49,7 +50,7 @@ void set_humidifier_power(uint16_t power) {
 
 void humidity_process(uint8_t humidity_setpoint) {
     const static float Pk = 100.0;
-    const static float Ik = 5.0;
+    const static float Ik = 50.0;
     const static float Dk = 1000.0;
 
     static uint16_t ID_counter = 0;
@@ -138,6 +139,17 @@ inline void stop_fan(void) {
     HAL_TIM_PWM_Stop(&FAN_PWM_TIMER, TIM_CHANNEL_3);
 }
 
+
+// EEPROM EMULATION / FLASH
+
+bool init_EEPROM_emulation(void) {
+    EE_Status status = EE_Init(EE_FORCED_ERASE);
+    if (status != EE_OK) {
+        // Handle error
+        return false;
+    }
+    return true;
+}
 
 void save_settings(void) {
   

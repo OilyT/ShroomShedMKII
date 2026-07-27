@@ -41,7 +41,7 @@ typedef struct {
     uint16_t duration;
     uint16_t progress;
     uint16_t estimatedHarvestWindow;
-    settings_mushroom_node_t nodes[SETTINGS_FLASH_MAX_MUSHROOM_NODES];
+    settings_mushroom_node_t nodes[100];
 } settings_mushroom_snapshot_t;
 
 typedef struct {
@@ -65,6 +65,7 @@ void start_fan(void);
 void set_fan_speed(uint8_t speed);
 void stop_fan(void);
 
+bool init_EEPROM_emulation(void);
 void save_settings(void);
 bool load_settings(void);
 

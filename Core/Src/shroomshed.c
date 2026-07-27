@@ -101,7 +101,7 @@ void loop(void)
     currentSystick = HAL_GetTick();
     if (lastSensorProcess + (SYSTICK_HZ/SENSOR_PROCESS_HZ) < currentSystick) {
         lastSensorProcess = currentSystick;
-        sensor_process ();
+        sensor_process();
     }
 
     currentSystick = HAL_GetTick();
@@ -152,6 +152,7 @@ static void shed_control(void) {
         determine_water_state();
     }
 }
+
 
 
 static void determine_water_state(void) {
