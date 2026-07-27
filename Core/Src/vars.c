@@ -9,8 +9,8 @@
 #include "rgb.h"
 #include "shroomshed_hal.h"
 
-#define DISPLAY_HUMIDITY_ALPHA 0.01
-#define DISPLAY_TEMPERATURE_ALPHA 0.001
+#define DISPLAY_HUMIDITY_ALPHA 0.003
+#define DISPLAY_TEMPERATURE_ALPHA 0.01
 
 extern MGP_t MGP_list[];
 extern uint8_t MGP_list_index;
