@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/-1",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
     "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/18",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/20",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/14",
@@ -130,7 +130,7 @@
                 {
                   "type": "tabset",
                   "id": "#6a4e08c5-ad67-4682-adad-39f5157e26a3",
-                  "weight": 0.9241917721302745,
+                  "weight": 1.249693276779931,
                   "enableClose": false,
                   "children": [
                     {
@@ -162,7 +162,7 @@
                 {
                   "type": "tabset",
                   "id": "#59ad6a08-6b18-4c31-b3f9-29f05ee49b77",
-                  "weight": 1.1218176856675657,
+                  "weight": 0.7963161810179095,
                   "enableClose": false,
                   "children": [
                     {
@@ -197,10 +197,21 @@
               "type": "tabset",
               "id": "EDITORS",
               "weight": 49.45158060630654,
-              "selected": -1,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
-              "children": [],
+              "children": [
+                {
+                  "type": "tab",
+                  "id": "#f0a6fed2-b344-4bb8-8d21-0be2306e5c43",
+                  "name": "Main",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+                    "permanent": false
+                  },
+                  "icon": "svg:page"
+                }
+              ],
               "active": true
             },
             {
@@ -1049,7 +1060,7 @@
           "x": -283.72916666666663,
           "y": -277.97291666666666
         },
-        "scale": 3
+        "scale": 1.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1097,7 +1108,7 @@
           "x": -318,
           "y": -249
         },
-        "scale": 2
+        "scale": 1.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1144,7 +1155,7 @@
           "x": -304,
           "y": -362
         },
-        "scale": 3
+        "scale": 1.5
       },
       "timeline": {
         "isEditorActive": false,
