@@ -15,7 +15,7 @@
 
 
 // humidity PID
-#define PID_ID_PERIOD 100 // seconds
+#define PID_ID_PERIOD 10 // seconds
 #define MAX_PULSE 1100
 #define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
@@ -40,11 +40,12 @@ void set_humidifier_power(uint16_t power) {
 }
 
 void humidity_process(uint8_t humidity_setpoint) {
-    const static float Pk = 50.0;
-    const static float Ik = 0.1;
-    const static float Dk = 100.0;
+    const static float Pk = 20.0;
+    const static float Ik = 0.3;
+    const static float Dk = 250.0;
 
     static uint16_t ID_counter = 0;
+    static float remainder = 0;
 
     float error = (float)humidity_setpoint - shedState.humidityCurrent;
     static float lastError = 0;
@@ -65,6 +66,8 @@ void humidity_process(uint8_t humidity_setpoint) {
     if (ID_counter >= CONTROL_PROCESS_HZ * PID_ID_PERIOD) {
         // integral
         temp_term = Ik * error * PID_ID_PERIOD;
+        temp_term += remainder;
+        remainder = temp_term - (int16_t)temp_term;
         I_term += (int16_t)temp_term;
 
         if (I_term < 0) {
@@ -153,4 +156,4 @@ inline void stop_fan(void) {
 }
 
 
-    
+
