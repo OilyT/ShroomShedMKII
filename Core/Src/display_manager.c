@@ -167,6 +167,9 @@ void switch_screen(enum ScreensEnum screen) {
         case SCREEN_ID_MENU_MAIN:
             loadScreen(SCREEN_ID_MENU_MAIN);
             break;
+        case SCREEN_ID_MENU_MAIN_2:
+            loadScreen(SCREEN_ID_MENU_MAIN_2);
+            break;
         case SCREEN_ID_MENU_GENERAL:
             loadScreen(SCREEN_ID_MENU_GENERAL);
             break;
@@ -178,6 +181,9 @@ void switch_screen(enum ScreensEnum screen) {
             break;
         case SCREEN_ID_GROW_MENU:
             loadScreen(SCREEN_ID_GROW_MENU);
+            break;
+        case SCREEN_ID_DEBUG:
+            loadScreen(SCREEN_ID_DEBUG);
             break;
     }
 }

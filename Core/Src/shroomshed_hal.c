@@ -15,17 +15,17 @@
 
 
 // humidity PID
-#define PID_ID_PERIOD 180 // seconds
+#define PID_ID_PERIOD 100 // seconds
 #define MAX_PULSE 1100
 #define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
 #define MAX_POWER 1000
 
 // PV's
-static float P_term = 0;
-static float I_term = 0;
-static float D_term = 0;
-
+static int16_t P_term = 0;
+static int16_t I_term = 0;
+static int16_t D_term = 0;
+static int16_t H_power = 0;
 
 
 // PFP's
@@ -40,17 +40,21 @@ void set_humidifier_power(uint16_t power) {
 }
 
 void humidity_process(uint8_t humidity_setpoint) {
-    const static float Pk = 100.0;
-    const static float Ik = 50.0;
-    const static float Dk = 1000.0;
+    const static float Pk = 50.0;
+    const static float Ik = 0.1;
+    const static float Dk = 100.0;
 
     static uint16_t ID_counter = 0;
 
     float error = (float)humidity_setpoint - shedState.humidityCurrent;
     static float lastError = 0;
 
+    // for storing temporary calculation float values
+    float temp_term = 0;
+
     // proportional
-    P_term = Pk * error;
+    temp_term = Pk * error;
+    P_term = (int16_t)temp_term;
     if (P_term > MAX_POWER) {
         P_term = MAX_POWER;
     } else if (P_term < 0) {
@@ -60,8 +64,8 @@ void humidity_process(uint8_t humidity_setpoint) {
     ID_counter++;
     if (ID_counter >= CONTROL_PROCESS_HZ * PID_ID_PERIOD) {
         // integral
-        float I_delta = (Ik * error) / PID_ID_PERIOD;
-        I_term += I_delta;
+        temp_term = Ik * error * PID_ID_PERIOD;
+        I_term += (int16_t)temp_term;
 
         if (I_term < 0) {
             I_term = 0;
@@ -72,21 +76,39 @@ void humidity_process(uint8_t humidity_setpoint) {
 
         // derivative
         float error_delta = error - lastError;
-        D_term = Dk * error_delta / PID_ID_PERIOD;
+        temp_term = Dk * error_delta / PID_ID_PERIOD;
+        D_term = (int16_t)temp_term;
 
         lastError = error;
         ID_counter = 0;
     }
 
-    uint16_t power = (uint16_t)(P_term + I_term + D_term);
-    if (power > MAX_POWER) {
-        power = MAX_POWER;
-    } else if (power < 0) {
-        power = 0;
+    H_power = (P_term + I_term + D_term);
+    if (H_power > MAX_POWER) {
+        H_power = MAX_POWER;
+    } else if (H_power < 0) {
+        H_power = 0;
     }
 
-    set_humidifier_power(power);
+    set_humidifier_power(H_power);
 }
+
+inline int16_t get_PID_p(void) {
+    return P_term;
+}
+
+inline int16_t get_PID_i(void) {
+    return I_term;
+}
+
+inline int16_t get_PID_d(void) {
+    return D_term;
+}
+
+inline int16_t get_PID_power(void) {
+    return H_power;
+}
+
 
 void set_fan_speed(uint8_t speed) {
     float gamma = 0.7;

@@ -20,21 +20,29 @@
 #include "shroomshed_hal.h"
 
 #define MAX_HUMIDITY 95
-#define MIN_HUMIDITY 30
+#define MIN_HUMIDITY 0
 #define MAX_FAN 100
 #define MIN_FAN 10
 
 
-// GENERAL ACTIONS
+// LOAD SCREEN
 inline void action_load_previous_screen(lv_event_t *e) {
     load_previous_screen();
 }
 
-// MAIN SCREEN ACTIONS 
-
 inline void action_load_screen_menu(lv_event_t *e) {
     switch_screen(SCREEN_ID_MENU_MAIN);
 }
+
+inline void action_load_screen_menu_2(lv_event_t *e) {
+    switch_screen(SCREEN_ID_MENU_MAIN_2);
+}
+
+inline void action_load_screen_main(lv_event_t * e) {
+    switch_screen(SCREEN_ID_MAIN);
+}
+
+// MAIN SCREEN ACTIONS 
 
 void action_set_output_mode(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
@@ -47,9 +55,6 @@ void action_set_output_mode(lv_event_t * e) {
 
 
 // MAIN MENU ACTIONS
-inline void action_load_screen_disco(lv_event_t * e) {
-    switch_screen(SCREEN_ID_DISCO_MODE);
-}
 
 void action_load_menu_button_matrix(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
@@ -73,6 +78,27 @@ void action_load_menu_button_matrix(lv_event_t * e) {
 }
 
 
+
+// MAIN MENU PAGE 2
+
+void action_load_menu_button_matrix_2(lv_event_t * e) {
+    lv_obj_t *ta = lv_event_get_target(e);
+    uint16_t id = lv_buttonmatrix_get_selected_button(ta);
+    switch (id) {
+        case 0:
+            switch_screen(SCREEN_ID_DEBUG);
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
+}
+
 // GENERAL SETTINGS ACTIONS
 void action_update_display_brightness(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
@@ -83,9 +109,7 @@ void action_update_display_brightness(lv_event_t * e) {
 
 // DISCO SCREEN ACTIONS
 
-inline void action_load_screen_main(lv_event_t * e) {
-    switch_screen(SCREEN_ID_MAIN);
-}
+
 
 void action_disco_switch(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);

@@ -67,7 +67,7 @@ void sensor_process(void) {
             shedState.temperatureCurrent = temperature;
         }
     } else {
-        disable_shed(); // if sensor read fails disable shed to prevent excessive humidification
+        //disable_shed(); // if sensor read fails disable shed to prevent excessive humidification
         sht31_shot_init(SHT31_ADDRESS_0);
     }
     /*

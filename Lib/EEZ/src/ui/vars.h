@@ -35,7 +35,11 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_SHED_MANUAL_MODE = 17,
     FLOW_GLOBAL_VARIABLE_SHED_AUTO_MODE = 18,
     FLOW_GLOBAL_VARIABLE_GROW_STATUS = 19,
-    FLOW_GLOBAL_VARIABLE_SHED_OUTPUT_NORMAL = 20
+    FLOW_GLOBAL_VARIABLE_SHED_OUTPUT_NORMAL = 20,
+    FLOW_GLOBAL_VARIABLE_H_PID_P = 21,
+    FLOW_GLOBAL_VARIABLE_H_PID_I = 22,
+    FLOW_GLOBAL_VARIABLE_H_PID_D = 23,
+    FLOW_GLOBAL_VARIABLE_H_PID_POWER = 24
 };
 
 // Native global variables
@@ -82,6 +86,14 @@ extern const char *get_var_grow_status();
 extern void set_var_grow_status(const char *value);
 extern bool get_var_shed_output_normal();
 extern void set_var_shed_output_normal(bool value);
+extern const char *get_var_h_pid_p();
+extern void set_var_h_pid_p(const char *value);
+extern const char *get_var_h_pid_i();
+extern void set_var_h_pid_i(const char *value);
+extern const char *get_var_h_pid_d();
+extern void set_var_h_pid_d(const char *value);
+extern const char *get_var_h_pid_power();
+extern void set_var_h_pid_power(const char *value);
 
 
 #ifdef __cplusplus

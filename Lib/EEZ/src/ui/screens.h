@@ -12,9 +12,11 @@ typedef struct _objects_t {
     lv_obj_t *main;
     lv_obj_t *disco_mode;
     lv_obj_t *menu_main;
+    lv_obj_t *menu_main_2;
     lv_obj_t *menu_general;
     lv_obj_t *manual_control;
     lv_obj_t *grow_menu;
+    lv_obj_t *debug;
     lv_obj_t *grow_progress_bar;
     lv_obj_t *mushroom_label;
     lv_obj_t *output_mode_switch;
@@ -41,6 +43,10 @@ typedef struct _objects_t {
     lv_obj_t *disco_power_slider_1;
     lv_obj_t *disco_phase;
     lv_obj_t *disco_power_slider_2;
+    lv_obj_t *main_menu_header_2;
+    lv_obj_t *menu_buttons_2;
+    lv_obj_t *back_button_4;
+    lv_obj_t *next_button;
     lv_obj_t *main_menu_header;
     lv_obj_t *menu_buttons;
     lv_obj_t *back_button;
@@ -68,6 +74,13 @@ typedef struct _objects_t {
     lv_obj_t *start_grow_button_label;
     lv_obj_t *stop_grow_button;
     lv_obj_t *stop_grow_button_label;
+    lv_obj_t *h_pid_p_label;
+    lv_obj_t *back_button_5;
+    lv_obj_t *main_menu_header_1;
+    lv_obj_t *h_pid_prefix_label;
+    lv_obj_t *h_pid_i_label;
+    lv_obj_t *h_pid_d_label;
+    lv_obj_t *h_pid_power_label;
 } objects_t;
 
 extern objects_t objects;
@@ -77,9 +90,11 @@ enum ScreensEnum {
     SCREEN_ID_MAIN = 2,
     SCREEN_ID_DISCO_MODE = 3,
     SCREEN_ID_MENU_MAIN = 4,
-    SCREEN_ID_MENU_GENERAL = 5,
-    SCREEN_ID_MANUAL_CONTROL = 6,
-    SCREEN_ID_GROW_MENU = 7,
+    SCREEN_ID_MENU_MAIN_2 = 5,
+    SCREEN_ID_MENU_GENERAL = 6,
+    SCREEN_ID_MANUAL_CONTROL = 7,
+    SCREEN_ID_GROW_MENU = 8,
+    SCREEN_ID_DEBUG = 9,
 };
 
 void create_screen_splash_screen();
@@ -94,6 +109,9 @@ void tick_screen_disco_mode();
 void create_screen_menu_main();
 void tick_screen_menu_main();
 
+void create_screen_menu_main_2();
+void tick_screen_menu_main_2();
+
 void create_screen_menu_general();
 void tick_screen_menu_general();
 
@@ -102,6 +120,9 @@ void tick_screen_manual_control();
 
 void create_screen_grow_menu();
 void tick_screen_grow_menu();
+
+void create_screen_debug();
+void tick_screen_debug();
 
 enum Themes {
     THEME_ID_DEFAULT,

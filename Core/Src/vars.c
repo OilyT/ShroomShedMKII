@@ -7,6 +7,7 @@
 #include "shroomshed.h"
 #include "mushroom.h"
 #include "rgb.h"
+#include "shroomshed_hal.h"
 
 #define DISPLAY_HUMIDITY_ALPHA 0.01
 #define DISPLAY_TEMPERATURE_ALPHA 0.001
@@ -231,4 +232,35 @@ int32_t get_var_mushroom_list_index() {
 
 void set_var_mushroom_list_index(int32_t value) {
     mushroom_list_index = value;
+}
+
+
+// DEBUG SCREEN VARS
+
+const char *get_var_h_pid_p(void) {
+    int16_t value = get_PID_p();
+    static char str[10];
+    snprintf(str, sizeof(str), "%d", value);
+    return str;
+}
+
+const char *get_var_h_pid_i(void) {
+    int16_t value = get_PID_i();
+    static char str[10];
+    snprintf(str, sizeof(str), "%d", value);
+    return str;
+}
+
+const char *get_var_h_pid_d(void) {
+    int16_t value = get_PID_d();
+    static char str[10];
+    snprintf(str, sizeof(str), "%d", value);
+    return str;
+}
+
+const char *get_var_h_pid_power(void) {
+    int16_t value = get_PID_power();
+    static char str[10];
+    snprintf(str, sizeof(str), "%d", value);
+    return str;
 }

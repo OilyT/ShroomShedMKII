@@ -1,8 +1,8 @@
 {
   "navigation": {
     "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
-    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/18",
-    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/20",
+    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/20",
+    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/24",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/14",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
     "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/4",
@@ -29,7 +29,7 @@
           },
           {
             "type": "border",
-            "selected": 0,
+            "selected": 3,
             "size": 249.5,
             "location": "right",
             "children": [
@@ -130,7 +130,7 @@
                 {
                   "type": "tabset",
                   "id": "#6a4e08c5-ad67-4682-adad-39f5157e26a3",
-                  "weight": 1.249693276779931,
+                  "weight": 1.1859786437224198,
                   "enableClose": false,
                   "children": [
                     {
@@ -162,7 +162,7 @@
                 {
                   "type": "tabset",
                   "id": "#59ad6a08-6b18-4c31-b3f9-29f05ee49b77",
-                  "weight": 0.7963161810179095,
+                  "weight": 0.7615828056945956,
                   "enableClose": false,
                   "children": [
                     {
@@ -178,7 +178,7 @@
                 {
                   "type": "tabset",
                   "id": "#eee461b7-7a16-4c57-8ce8-e1b5652c3392",
-                  "weight": 0.95399054220216,
+                  "weight": 1.0524385505829839,
                   "enableClose": false,
                   "children": [
                     {
@@ -828,7 +828,8 @@
                       "component": "themes",
                       "enableClose": false
                     }
-                  ]
+                  ],
+                  "active": true
                 },
                 {
                   "type": "tabset",
@@ -844,8 +845,7 @@
                       "component": "colors",
                       "enableClose": false
                     }
-                  ],
-                  "active": true
+                  ]
                 }
               ]
             }
@@ -1023,7 +1023,11 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/1[flow-state]": {
       "selection": {
         "0": {
+          "0": {},
           "1": {},
+          "7": {
+            "0": {}
+          },
           "12": {}
         }
       },
@@ -1032,7 +1036,7 @@
           "x": -255.27848097176522,
           "y": -226.126453770111
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1060,7 +1064,7 @@
           "x": -283.72916666666663,
           "y": -277.97291666666666
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1073,18 +1077,16 @@
       "selection": {
         "0": {
           "0": {},
-          "1": {
-            "$selected": true
-          },
-          "2": {}
+          "2": {},
+          "3": {}
         }
       },
       "transform": {
         "translate": {
-          "x": -307,
-          "y": -352
+          "x": -228,
+          "y": -120
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1096,9 +1098,7 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/4[flow-state]": {
       "selection": {
         "0": {
-          "0": {
-            "0": {}
-          },
+          "0": {},
           "1": {},
           "2": {}
         }
@@ -1108,7 +1108,7 @@
           "x": -318,
           "y": -249
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1135,7 +1135,7 @@
           "x": -305,
           "y": -229
         },
-        "scale": 1.5
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1155,7 +1155,50 @@
           "x": -304,
           "y": -362
         },
-        "scale": 1.5
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ShroomShed_MKII_App.eez-project]:/userPages/7[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "2": {},
+          "3": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -228,
+          "y": -120
+        },
+        "scale": 1.75
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ShroomShed_MKII_App.eez-project]:/userPages/8[flow-state]": {
+      "selection": {
+        "0": {
+          "0": {},
+          "1": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -240.33332681655884,
+          "y": -206.33333456516266
+        },
+        "scale": 1.75
       },
       "timeline": {
         "isEditorActive": false,
@@ -1178,12 +1221,12 @@
   "logsPanelFilter": "all",
   "selectedStylePropertyName": "",
   "lvglPart": "INDICATOR",
-  "lvglState": "DEFAULT",
+  "lvglState": "CHECKED",
   "lvglExpandedPropertiesGroup": [
-    "TEXT"
+    "BACKGROUND"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 1.5,
+  "flowZoom": 1.75,
   "implementationLanguage": "C"
 }
