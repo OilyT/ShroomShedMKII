@@ -218,6 +218,7 @@ void remove_style_default_scale(lv_obj_t *obj) {
 void init_style_std_button_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_bg_color(style, lv_color_hex(0xff00c8d2));
     lv_style_set_text_font(style, &lv_font_montserrat_16);
+    lv_style_set_text_color(style, lv_color_hex(theme_colors[active_theme_index][2]));
 };
 
 lv_style_t *get_style_std_button_MAIN_DEFAULT() {

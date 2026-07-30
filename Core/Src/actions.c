@@ -78,7 +78,6 @@ void action_load_menu_button_matrix(lv_event_t * e) {
 }
 
 
-
 // MAIN MENU PAGE 2
 
 void action_load_menu_button_matrix_2(lv_event_t * e) {
@@ -89,6 +88,7 @@ void action_load_menu_button_matrix_2(lv_event_t * e) {
             switch_screen(SCREEN_ID_DEBUG);
             break;
         case 1:
+            loadScreen(SCREEN_ID_GROW_KITS_QR);
             break;
         case 2:
             break;
@@ -108,8 +108,6 @@ void action_update_display_brightness(lv_event_t * e) {
 
 
 // DISCO SCREEN ACTIONS
-
-
 
 void action_disco_switch(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);

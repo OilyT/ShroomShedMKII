@@ -58,8 +58,8 @@ void humidity_process(uint8_t humidity_setpoint) {
     P_term = (int16_t)temp_term;
     if (P_term > MAX_POWER) {
         P_term = MAX_POWER;
-    } else if (P_term < 0) {
-        P_term = 0;
+    } else if (P_term < -MAX_POWER) {
+        P_term = -MAX_POWER;
     }
 
     ID_counter++;

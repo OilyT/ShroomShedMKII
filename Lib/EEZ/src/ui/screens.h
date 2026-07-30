@@ -17,6 +17,7 @@ typedef struct _objects_t {
     lv_obj_t *manual_control;
     lv_obj_t *grow_menu;
     lv_obj_t *debug;
+    lv_obj_t *grow_kits_qr;
     lv_obj_t *grow_progress_bar;
     lv_obj_t *mushroom_label;
     lv_obj_t *output_mode_switch;
@@ -47,11 +48,17 @@ typedef struct _objects_t {
     lv_obj_t *menu_buttons_2;
     lv_obj_t *back_button_4;
     lv_obj_t *next_button;
+    lv_obj_t *home_button__3;
+    lv_obj_t *home_button_label_3;
     lv_obj_t *main_menu_header;
     lv_obj_t *menu_buttons;
     lv_obj_t *back_button;
+    lv_obj_t *home_button__4;
+    lv_obj_t *home_button_label_4;
     lv_obj_t *back_button_1;
     lv_obj_t *display_brightness_slider;
+    lv_obj_t *home_button__2;
+    lv_obj_t *home_button_label_2;
     lv_obj_t *manual_control_header;
     lv_obj_t *back_button_2;
     lv_obj_t *humidity_control_container;
@@ -68,6 +75,8 @@ typedef struct _objects_t {
     lv_obj_t *dec_humidity_cv_label_1;
     lv_obj_t *incr_airflow;
     lv_obj_t *incr_humidity_cv_label_1;
+    lv_obj_t *home_button__5;
+    lv_obj_t *home_button_label_5;
     lv_obj_t *back_button_3;
     lv_obj_t *mushroom_roller;
     lv_obj_t *start_grow_button;
@@ -81,6 +90,13 @@ typedef struct _objects_t {
     lv_obj_t *h_pid_i_label;
     lv_obj_t *h_pid_d_label;
     lv_obj_t *h_pid_power_label;
+    lv_obj_t *home_button__1;
+    lv_obj_t *home_button_label_1;
+    lv_obj_t *back_button_6;
+    lv_obj_t *home_button_;
+    lv_obj_t *home_button_label;
+    lv_obj_t *grow_kit_qr_label;
+    lv_obj_t *checkout_comment_label;
 } objects_t;
 
 extern objects_t objects;
@@ -95,6 +111,7 @@ enum ScreensEnum {
     SCREEN_ID_MANUAL_CONTROL = 7,
     SCREEN_ID_GROW_MENU = 8,
     SCREEN_ID_DEBUG = 9,
+    SCREEN_ID_GROW_KITS_QR = 10,
 };
 
 void create_screen_splash_screen();
@@ -123,6 +140,9 @@ void tick_screen_grow_menu();
 
 void create_screen_debug();
 void tick_screen_debug();
+
+void create_screen_grow_kits_qr();
+void tick_screen_grow_kits_qr();
 
 enum Themes {
     THEME_ID_DEFAULT,
