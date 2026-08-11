@@ -15,11 +15,18 @@
 
 RGB_Colour zone_colour[4];
 uint8_t rgb_buffer[RGB_BUFFER_SIZE];
+RGB_Mode current_mode = RGB_static_colour;
+
 RGB_disco_settings_t discoSettings = {
     .on = false,
     .discoPower = DISCO_POWER,
     .discoSpeed = DISCO_SPEED,
     .discoOffset = DISCO_OFFSET
+};
+RGB_Colour static_colour = {
+    .red = 0,
+    .green = 0,
+    .blue = 255
 };
 
 
@@ -36,13 +43,21 @@ void RGB_Init(void) {
 }
 
 void RGB_Process(void) {
-    if (discoSettings.on) {
-        for (uint8_t i = 0; i < 4; i++) {
-            disco_mode(&zone_colour[i], discoSettings.discoOffset*i);
-        } 
-     } else {
-        RGB_Colour off_colour = { .red = 0, .green = 0, .blue = 0 };
-        set_all_zones(off_colour);
+
+    switch (current_mode) {
+        case RGB_static_colour:
+            set_all_zones(static_colour);
+            break;
+        case RGB_disco_mode:
+            if (discoSettings.on) {
+                for (uint8_t i = 0; i < 4; i++) {
+                    disco_mode(&zone_colour[i], discoSettings.discoOffset*i);
+                } 
+            } else {
+                RGB_Colour off_colour = { .red = 0, .green = 0, .blue = 0 };
+                set_all_zones(off_colour);
+            }
+            break;
     }
     RGB_flush_buffer();
 }

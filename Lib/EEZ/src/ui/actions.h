@@ -28,6 +28,7 @@ extern void action_stop_grow(lv_event_t * e);
 extern void action_set_output_mode(lv_event_t * e);
 extern void action_load_menu_button_matrix_2(lv_event_t * e);
 extern void action_load_screen_menu_2(lv_event_t * e);
+extern void action_load_screen_static_colour(lv_event_t * e);
 
 
 #ifdef __cplusplus

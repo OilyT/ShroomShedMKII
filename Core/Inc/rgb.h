@@ -19,6 +19,11 @@ typedef struct {
     uint8_t discoOffset;
 } RGB_disco_settings_t;
 
+typedef enum uint8_t {
+    RGB_static_colour = 0,
+    RGB_disco_mode = 1
+} RGB_Mode;
+
 
 #define RGB_SPI_PORT hspi2
 extern SPI_HandleTypeDef RGB_SPI_PORT;
