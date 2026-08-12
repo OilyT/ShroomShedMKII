@@ -119,6 +119,37 @@ void set_var_grow_status(const char *value) {
     // n/a
 }
 
+// STATIC COLOUR SCREEN VARS
+const char *get_var_red_value(void) {
+    static char red_value_str[12];
+    snprintf(red_value_str, sizeof(red_value_str), "RED %u%%", rgbSettings.staticRed * 10);
+    return red_value_str;
+}
+
+void set_var_red_value(const char *value) {
+    (void)value;
+}
+
+const char *get_var_green_value(void) {
+    static char green_value_str[14];
+    snprintf(green_value_str, sizeof(green_value_str), "GREEN %u%%", rgbSettings.staticGreen * 10);
+    return green_value_str;
+}
+
+void set_var_green_value(const char *value) {
+    (void)value;
+}
+
+const char *get_var_blue_value(void) {
+    static char blue_value_str[13];
+    snprintf(blue_value_str, sizeof(blue_value_str), "BLUE %u%%", rgbSettings.staticBlue * 10);
+    return blue_value_str;
+}
+
+void set_var_blue_value(const char *value) {
+    (void)value;
+}
+
 
 
 // DISCO SCREEN VARS

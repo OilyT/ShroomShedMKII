@@ -13,22 +13,30 @@ typedef struct {
 } RGB_Colour;
 
 typedef struct {
-    bool on;
-    uint8_t discoPower;
-    uint8_t discoSpeed;
-    uint8_t discoOffset;
+
 } RGB_disco_settings_t;
 
 typedef enum uint8_t {
-    RGB_static_colour = 0,
-    RGB_disco_mode = 1
+    RGB_mode_static_colour = 0,
+    RGB_mode_disco = 1,
 } RGB_Mode;
+
+typedef struct {
+    bool enabled;
+    RGB_Mode currentMode;
+    uint8_t discoPower;
+    uint8_t discoSpeed;
+    uint8_t discoOffset;
+    uint8_t staticRed; // 0 - 10 intensity value
+    uint8_t staticGreen;
+    uint8_t staticBlue;
+} RGB_settings_t;
 
 
 #define RGB_SPI_PORT hspi2
 extern SPI_HandleTypeDef RGB_SPI_PORT;
 
-extern RGB_disco_settings_t discoSettings;
+extern RGB_settings_t rgbSettings;
 
 
 #define LOGIC_0 0xC0
@@ -40,4 +48,3 @@ void RGB_Process(void);
 
 
 #endif /* RGB_H */
-

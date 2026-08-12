@@ -198,9 +198,9 @@ static void update_display_vars(void) {
             set_var_airflow_int(shedControl.fanControlValue);
             break;
         case SCREEN_ID_DISCO_MODE:
-            set_var_disco_power_int(discoSettings.discoPower);
-            set_var_disco_speed_int(discoSettings.discoSpeed);
-            set_var_disco_phase_int(discoSettings.discoOffset);
+            set_var_disco_power_int(rgbSettings.discoPower);
+            set_var_disco_speed_int(rgbSettings.discoSpeed);
+            set_var_disco_phase_int(rgbSettings.discoOffset);
             break;
         case SCREEN_ID_MENU_GENERAL:
             set_var_display_brightness(get_var_display_brightness());

@@ -31,15 +31,15 @@ inline void action_load_previous_screen(lv_event_t *e) {
 }
 
 inline void action_load_screen_menu(lv_event_t *e) {
-    switch_screen(SCREEN_ID_MENU_MAIN);
+    loadScreen(SCREEN_ID_MENU_MAIN);
 }
 
 inline void action_load_screen_menu_2(lv_event_t *e) {
-    switch_screen(SCREEN_ID_MENU_MAIN_2);
+    loadScreen(SCREEN_ID_MENU_MAIN_2);
 }
 
 inline void action_load_screen_main(lv_event_t * e) {
-    switch_screen(SCREEN_ID_MAIN);
+    loadScreen(SCREEN_ID_MAIN);
 }
 
 // MAIN SCREEN ACTIONS 
@@ -61,16 +61,16 @@ void action_load_menu_button_matrix(lv_event_t * e) {
     uint16_t id = lv_buttonmatrix_get_selected_button(ta);
     switch (id) {
         case 0:
-            switch_screen(SCREEN_ID_DISCO_MODE);
+            loadScreen(SCREEN_ID_LIGHTING);
             break;
         case 1:
-            switch_screen(SCREEN_ID_MENU_GENERAL);
+            loadScreen(SCREEN_ID_MENU_GENERAL);
             break;
         case 2:
-            switch_screen(SCREEN_ID_MANUAL_CONTROL);
+            loadScreen(SCREEN_ID_MANUAL_CONTROL);
             break;
         case 3:
-            switch_screen(SCREEN_ID_GROW_MENU);
+            loadScreen(SCREEN_ID_GROW_MENU);
             break;
         default:
             break;
@@ -85,7 +85,7 @@ void action_load_menu_button_matrix_2(lv_event_t * e) {
     uint16_t id = lv_buttonmatrix_get_selected_button(ta);
     switch (id) {
         case 0:
-            switch_screen(SCREEN_ID_DEBUG);
+            loadScreen(SCREEN_ID_DEBUG);
             break;
         case 1:
             loadScreen(SCREEN_ID_GROW_KITS_QR);
@@ -107,33 +107,89 @@ void action_update_display_brightness(lv_event_t * e) {
 }
 
 
-// DISCO SCREEN ACTIONS
+// LIGHTING SCREEN ACTIONS
 
-void action_disco_switch(lv_event_t * e) {
+void action_rgb_switch(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
     if (lv_obj_has_state(ta, LV_STATE_CHECKED)) {
-        discoSettings.on = true;
+        rgbSettings.enabled = true;
     } else {
-        discoSettings.on = false;
+        rgbSettings.enabled = false;
     }
 }
+
+void action_load_screen_static_colour(lv_event_t * e) {
+    loadScreen(SCREEN_ID_SINGLE_COLOUR);
+    rgbSettings.currentMode = RGB_mode_static_colour;
+}
+
+void action_load_screen_disco(lv_event_t * e) {
+    loadScreen(SCREEN_ID_DISCO_MODE);
+    rgbSettings.currentMode = RGB_mode_disco;
+}
+
+// SINGLE COLOUR SCREEN ACTIONS
+
+void action_load_screen_lighting(lv_event_t *e) {
+    loadScreen(SCREEN_ID_LIGHTING);
+}
+
+void action_increase_red(lv_event_t * e) {
+    if (rgbSettings.staticRed < 10) {
+        rgbSettings.staticRed++;
+    }
+}
+
+void action_decrease_red(lv_event_t * e) {
+    if (rgbSettings.staticRed > 0) {
+        rgbSettings.staticRed--;
+    }
+}
+
+void action_increase_green(lv_event_t * e) {
+    if (rgbSettings.staticGreen < 10) {
+        rgbSettings.staticGreen++;
+    }
+}
+
+void action_decrease_green(lv_event_t * e) {
+    if (rgbSettings.staticGreen > 0) {
+        rgbSettings.staticGreen--;
+    }
+}
+
+void action_increase_blue(lv_event_t * e) {
+    if (rgbSettings.staticBlue < 10) {
+        rgbSettings.staticBlue++;
+    }
+}
+
+void action_decrease_blue(lv_event_t * e) {
+    if (rgbSettings.staticBlue > 0) {
+        rgbSettings.staticBlue--;
+    }
+}
+
+
+
+// DISCO SCREEN ACTIONS
 
 void action_update_disco_power(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
     int32_t value = lv_slider_get_value(ta);
-    discoSettings.discoPower = value;
+    rgbSettings.discoPower = value;
 }
 
 void action_update_disco_speed(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
     int32_t value = lv_slider_get_value(ta);
-    discoSettings.discoSpeed = value;
+    rgbSettings.discoSpeed = value;
 }
 
 void action_update_disco_phase(lv_event_t * e) {
     lv_obj_t *ta = lv_event_get_target(e);
     int32_t value = lv_slider_get_value(ta);
-    discoSettings.discoOffset = value;
+    rgbSettings.discoOffset = value;
 }
 
 // MANUAL CONTROL ACTIONS
@@ -190,5 +246,5 @@ void action_set_control_mode(lv_event_t * e) {
 void action_start_grow(lv_event_t *e) {
     uint8_t index = (uint8_t)get_var_mushroom_list_index();
     start_grow(index);
-    switch_screen(SCREEN_ID_MAIN);
+    loadScreen(SCREEN_ID_MAIN);
 }

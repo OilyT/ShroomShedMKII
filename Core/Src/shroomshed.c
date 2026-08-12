@@ -62,7 +62,7 @@ struct shedControl_t shedControl = {
 
 struct shedSettings_t shedSettings = {
     .lowWaterTimeout = 15,
-    .rgbSettings = &discoSettings,
+    .rgbSettings = &rgbSettings,
     .controlSettings = &shedControl
 };
 

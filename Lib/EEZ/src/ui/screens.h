@@ -19,6 +19,7 @@ typedef struct _objects_t {
     lv_obj_t *debug;
     lv_obj_t *grow_kits_qr;
     lv_obj_t *lighting;
+    lv_obj_t *single_colour;
     lv_obj_t *grow_progress_bar;
     lv_obj_t *mushroom_label;
     lv_obj_t *output_mode_switch;
@@ -102,6 +103,20 @@ typedef struct _objects_t {
     lv_obj_t *home_button_label_6;
     lv_obj_t *lighting_master_switch;
     lv_obj_t *static_colour_button;
+    lv_obj_t *disco_mode_button;
+    lv_obj_t *home_button__7;
+    lv_obj_t *home_button_label_7;
+    lv_obj_t *red_value_label;
+    lv_obj_t *back_button_7;
+    lv_obj_t *green_value_label;
+    lv_obj_t *blue_value_label;
+    lv_obj_t *increase_red_button;
+    lv_obj_t *increase_green_button;
+    lv_obj_t *increase_blue_button;
+    lv_obj_t *decrease_red_button;
+    lv_obj_t *decrease_green;
+    lv_obj_t *decrease_blue_button;
+    lv_obj_t *single_color_header;
 } objects_t;
 
 extern objects_t objects;
@@ -118,6 +133,7 @@ enum ScreensEnum {
     SCREEN_ID_DEBUG = 9,
     SCREEN_ID_GROW_KITS_QR = 10,
     SCREEN_ID_LIGHTING = 11,
+    SCREEN_ID_SINGLE_COLOUR = 12,
 };
 
 void create_screen_splash_screen();
@@ -152,6 +168,9 @@ void tick_screen_grow_kits_qr();
 
 void create_screen_lighting();
 void tick_screen_lighting();
+
+void create_screen_single_colour();
+void tick_screen_single_colour();
 
 enum Themes {
     THEME_ID_DEFAULT,

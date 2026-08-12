@@ -34,9 +34,9 @@ mushroom_settings_t mushroom_settings = {
 static uint32_t last_mpg_tick;
 
 // oyster
-static uint8_t oyster_default_h[] = {95, 90, 85};
-static uint8_t oyster_default_f[] = {20, 30, 35};
-static uint16_t oyster_default_t[] = {96, 72, 72};
+static uint8_t oyster_default_h[] = {95, 90, 80};
+static uint8_t oyster_default_f[] = {15, 20, 35};
+static uint16_t oyster_default_t[] = {24, 144, 72};
 
 MGP_data_t oyster_data = {
     .humidity_cv = oyster_default_h,

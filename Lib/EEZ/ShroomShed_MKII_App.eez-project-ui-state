@@ -1,12 +1,12 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
-    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/20",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/10",
+    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/21",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/24",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/5",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
     "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/2",
-    "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/-1",
+    "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/2",
     "subnavigationSelectedItems": {
       "variables-tab/sub-navigation/selected-item": "Global"
     }
@@ -131,6 +131,7 @@
                   "type": "tabset",
                   "id": "#6a4e08c5-ad67-4682-adad-39f5157e26a3",
                   "weight": 1.031061943809008,
+                  "selected": 2,
                   "enableClose": false,
                   "children": [
                     {
@@ -203,16 +204,15 @@
                 {
                   "type": "tab",
                   "id": "#af7ac388-f521-4445-8910-05b69c4ef0b0",
-                  "name": "Manual_control",
+                  "name": "Lighting",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/6",
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/10",
                     "permanent": false
                   },
                   "icon": "svg:page"
                 }
-              ],
-              "active": true
+              ]
             },
             {
               "type": "row",
@@ -247,7 +247,8 @@
                       "enableClose": false,
                       "icon": "svg:components"
                     }
-                  ]
+                  ],
+                  "active": true
                 }
               ]
             }
@@ -1036,7 +1037,7 @@
           "x": -255.27848097176522,
           "y": -226.126453770111
         },
-        "scale": 1.75
+        "scale": 2
       },
       "timeline": {
         "isEditorActive": false,
@@ -1053,10 +1054,7 @@
           },
           "1": {},
           "2": {},
-          "4": {
-            "$selected": true
-          },
-          "6": {}
+          "5": {}
         }
       },
       "transform": {
@@ -1077,8 +1075,7 @@
       "selection": {
         "0": {
           "0": {},
-          "2": {},
-          "3": {}
+          "2": {}
         }
       },
       "transform": {
@@ -1212,15 +1209,33 @@
     "[ShroomShed_MKII_App.eez-project]:/userPages/9[flow-state]": {
       "selection": {
         "0": {
-          "1": {
-            "$selected": true
-          }
+          "1": {}
         }
       },
       "transform": {
         "translate": {
           "x": -324,
           "y": -276.78999999999905
+        },
+        "scale": 2
+      },
+      "timeline": {
+        "isEditorActive": false,
+        "position": 0,
+        "secondToPx": 200,
+        "scrollLeft": 0
+      }
+    },
+    "[ShroomShed_MKII_App.eez-project]:/userPages/10[flow-state]": {
+      "selection": {
+        "0": {
+          "4": {}
+        }
+      },
+      "transform": {
+        "translate": {
+          "x": -297,
+          "y": -268.4999966621399
         },
         "scale": 2
       },
@@ -1247,7 +1262,8 @@
   "lvglPart": "ITEMS",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "TEXT"
+    "TEXT",
+    "BACKGROUND"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,

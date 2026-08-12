@@ -67,7 +67,7 @@ typedef struct shedState_t {
 
 typedef struct shedSettings_t {
     uint8_t lowWaterTimeout; // minutes
-    RGB_disco_settings_t *rgbSettings;
+    RGB_settings_t *rgbSettings;
     shedControl_t *controlSettings;
     mushroom_settings_t *mushroomSettings;
 } shedSettings_t;

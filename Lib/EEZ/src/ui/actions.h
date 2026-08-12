@@ -14,7 +14,7 @@ extern void action_decrement_airflow(lv_event_t * e);
 extern void action_load_screen_disco(lv_event_t * e);
 extern void action_disco_settings(lv_event_t * e);
 extern void action_load_screen_main(lv_event_t * e);
-extern void action_disco_switch(lv_event_t * e);
+extern void action_rgb_switch(lv_event_t * e);
 extern void action_update_disco_power(lv_event_t * e);
 extern void action_update_disco_speed(lv_event_t * e);
 extern void action_update_disco_phase(lv_event_t * e);
@@ -29,6 +29,13 @@ extern void action_set_output_mode(lv_event_t * e);
 extern void action_load_menu_button_matrix_2(lv_event_t * e);
 extern void action_load_screen_menu_2(lv_event_t * e);
 extern void action_load_screen_static_colour(lv_event_t * e);
+extern void action_increase_red(lv_event_t * e);
+extern void action_increase_green(lv_event_t * e);
+extern void action_increase_blue(lv_event_t * e);
+extern void action_decrease_red(lv_event_t * e);
+extern void action_decrease_green(lv_event_t * e);
+extern void action_decrease_blue(lv_event_t * e);
+extern void action_load_screen_lighting(lv_event_t * e);
 
 
 #ifdef __cplusplus

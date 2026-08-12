@@ -39,7 +39,10 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_H_PID_P = 21,
     FLOW_GLOBAL_VARIABLE_H_PID_I = 22,
     FLOW_GLOBAL_VARIABLE_H_PID_D = 23,
-    FLOW_GLOBAL_VARIABLE_H_PID_POWER = 24
+    FLOW_GLOBAL_VARIABLE_H_PID_POWER = 24,
+    FLOW_GLOBAL_VARIABLE_RED_VALUE = 25,
+    FLOW_GLOBAL_VARIABLE_GREEN_VALUE = 26,
+    FLOW_GLOBAL_VARIABLE_BLUE_VALUE = 27
 };
 
 // Native global variables
@@ -94,6 +97,12 @@ extern const char *get_var_h_pid_d();
 extern void set_var_h_pid_d(const char *value);
 extern const char *get_var_h_pid_power();
 extern void set_var_h_pid_power(const char *value);
+extern const char *get_var_red_value();
+extern void set_var_red_value(const char *value);
+extern const char *get_var_green_value();
+extern void set_var_green_value(const char *value);
+extern const char *get_var_blue_value();
+extern void set_var_blue_value(const char *value);
 
 
 #ifdef __cplusplus

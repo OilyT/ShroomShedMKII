@@ -15,18 +15,28 @@
 
 RGB_Colour zone_colour[4];
 uint8_t rgb_buffer[RGB_BUFFER_SIZE];
-RGB_Mode current_mode = RGB_static_colour;
 
-RGB_disco_settings_t discoSettings = {
-    .on = false,
+RGB_settings_t rgbSettings = {
+    .enabled = false,
+    .currentMode = RGB_mode_static_colour,
     .discoPower = DISCO_POWER,
     .discoSpeed = DISCO_SPEED,
-    .discoOffset = DISCO_OFFSET
+    .discoOffset = DISCO_OFFSET,
+    .staticRed = 0,
+    .staticGreen = 5,
+    .staticBlue = 5,
 };
+
 RGB_Colour static_colour = {
     .red = 0,
     .green = 0,
-    .blue = 255
+    .blue = 0,
+};
+
+static RGB_Colour colour_off = {
+    .red = 0,
+    .green = 0,
+    .blue = 0,
 };
 
 
@@ -44,19 +54,23 @@ void RGB_Init(void) {
 
 void RGB_Process(void) {
 
-    switch (current_mode) {
-        case RGB_static_colour:
+    if (!rgbSettings.enabled) {
+        set_all_zones(colour_off);
+        RGB_flush_buffer();
+        return;
+    }
+
+    switch (rgbSettings.currentMode) {
+        case RGB_mode_static_colour:
+            static_colour.red = (rgbSettings.staticRed * 255) / 10;
+            static_colour.green = (rgbSettings.staticGreen * 255) / 10;
+            static_colour.blue = (rgbSettings.staticBlue * 255) / 10;
             set_all_zones(static_colour);
             break;
-        case RGB_disco_mode:
-            if (discoSettings.on) {
-                for (uint8_t i = 0; i < 4; i++) {
-                    disco_mode(&zone_colour[i], discoSettings.discoOffset*i);
-                } 
-            } else {
-                RGB_Colour off_colour = { .red = 0, .green = 0, .blue = 0 };
-                set_all_zones(off_colour);
-            }
+        case RGB_mode_disco:
+            for (uint8_t i = 0; i < 4; i++) {
+                disco_mode(&zone_colour[i], rgbSettings.discoOffset*i);
+            } 
             break;
     }
     RGB_flush_buffer();
@@ -87,14 +101,14 @@ void disco_mode(RGB_Colour *colour, uint16_t offset) {
     static uint16_t pos = 0;
     static uint16_t step_remainder = 0;
 
-    uint16_t range = (discoSettings.discoPower * 255) / 100;
+    uint16_t range = (rgbSettings.discoPower * 255) / 100;
     offset = (offset * range) / 100;
-    uint16_t step = (range * discoSettings.discoSpeed);
+    uint16_t step = (range * rgbSettings.discoSpeed);
     step = step + step_remainder;
     step_remainder = step % DISCO_STEP_DIVISOR;
     step = step / DISCO_STEP_DIVISOR;
 
-    uint32_t redshift = (REDSHIFT * range * discoSettings.discoPower) / 10000;
+    uint32_t redshift = (REDSHIFT * range * rgbSettings.discoPower) / 10000;
   
     pos = pos + step;
     if (pos >= range * 3) {
