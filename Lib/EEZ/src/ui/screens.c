@@ -874,7 +874,7 @@ void create_screen_menu_general() {
             objects.back_button_1 = obj;
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, LV_PCT(20), LV_PCT(20));
-            lv_obj_add_event_cb(obj, action_load_previous_screen, LV_EVENT_PRESSED, (void *)0);
+            lv_obj_add_event_cb(obj, action_load_screen_menu, LV_EVENT_PRESSED, (void *)0);
             add_style_std_button_dark(obj);
             {
                 lv_obj_t *parent_obj = obj;
@@ -968,7 +968,7 @@ void create_screen_manual_control() {
             objects.back_button_2 = obj;
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, LV_PCT(20), LV_PCT(20));
-            lv_obj_add_event_cb(obj, action_load_previous_screen, LV_EVENT_PRESSED, (void *)0);
+            lv_obj_add_event_cb(obj, action_load_screen_menu, LV_EVENT_PRESSED, (void *)0);
             add_style_std_button_dark(obj);
             {
                 lv_obj_t *parent_obj = obj;

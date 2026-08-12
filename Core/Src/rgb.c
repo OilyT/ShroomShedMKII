@@ -41,7 +41,7 @@ static RGB_Colour colour_off = {
 
 
 static void RGB_flush_buffer(void);
-static uint8_t* rgb_colour_to_buffer(RGB_Colour color);
+static void rgb_colour_to_buffer(RGB_Colour color, uint8_t *buffer);
 static uint8_t RGB_bit_to_byte(uint8_t byte, uint8_t bit_position);
 static void disco_mode(RGB_Colour *colour, uint16_t offset);
 static void set_all_zones(RGB_Colour colour);
@@ -83,14 +83,12 @@ void set_all_zones(RGB_Colour colour) {
 }
 
 void RGB_flush_buffer(void) {
-    uint8_t *zone_buffer;
-    uint8_t byte;
+    uint8_t zone_buffer[24];
 
     for (uint8_t i = 0; i < 4; i++) {
-        zone_buffer = rgb_colour_to_buffer(zone_colour[i]);
+        rgb_colour_to_buffer(zone_colour[i], zone_buffer);
         for (uint8_t j = 0; j < 24; j++) {
-            byte = *(zone_buffer+j);
-            rgb_buffer[i*24 + j] = byte;
+            rgb_buffer[i*24 + j] = zone_buffer[j];
         }
     }
     HAL_SPI_Transmit(&RGB_SPI_PORT, rgb_buffer, RGB_BUFFER_SIZE, HAL_MAX_DELAY);
@@ -158,15 +156,12 @@ void disco_mode(RGB_Colour *colour, uint16_t offset) {
     }
 }
 
-static uint8_t* rgb_colour_to_buffer(RGB_Colour color) {
-    uint8_t buffer[24] = {0};
+static void rgb_colour_to_buffer(RGB_Colour color, uint8_t *buffer) {
     for (uint8_t i = 0; i < 8; i++) {
         buffer[7-i] = RGB_bit_to_byte(color.red, i);
         buffer[15-i] = RGB_bit_to_byte(color.green, i);
         buffer[23-i] = RGB_bit_to_byte(color.blue, i);
     }
-    uint8_t *pBuffer = &buffer[0];
-    return pBuffer;
 }
 
 static uint8_t RGB_bit_to_byte(uint8_t byte, uint8_t bit_position) {

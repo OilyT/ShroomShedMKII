@@ -3037,7 +3037,7 @@
                   "objID": "877d6168-5ba7-4e2c-ec31-dea32ec8db5a",
                   "eventName": "PRESSED",
                   "handlerType": "action",
-                  "action": "load_previous_screen",
+                  "action": "load_screen_menu",
                   "userData": 0
                 }
               ],
@@ -3436,7 +3436,7 @@
                   "objID": "6db6c31b-dfcc-4233-8511-9713982393f3",
                   "eventName": "PRESSED",
                   "handlerType": "action",
-                  "action": "load_previous_screen",
+                  "action": "load_screen_menu",
                   "userData": 0
                 }
               ],
