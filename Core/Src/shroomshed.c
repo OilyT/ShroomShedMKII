@@ -84,7 +84,7 @@ void init_shroomshed(void) {
     init_mushrooms();
     initDisplay();
     displayProcess();
-    switch_screen(SCREEN_ID_MAIN);
+    loadScreen(SCREEN_ID_MAIN);
 
     enable_boost();
     enable_shed();

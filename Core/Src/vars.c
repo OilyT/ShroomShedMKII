@@ -153,7 +153,7 @@ void set_var_blue_value(const char *value) {
 
 
 // DISCO SCREEN VARS
-static uint8_t disco_power = 75;
+static uint8_t disco_power = 100;
 static uint8_t disco_speed = 25;
 static uint8_t disco_phase = 25;
 

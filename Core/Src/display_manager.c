@@ -41,8 +41,6 @@ lv_display_t * display;
 lv_indev_t * indev_touchpad;
 
 static int16_t current_screen = 2;
-static int16_t previous_screen = 2;
-extern RGB_disco_settings_t discoSettings;
 
 uint8_t display_brightness = 100;
 
@@ -154,39 +152,6 @@ void displayProcess(void) {
     lv_timer_handler();
 }
 
-void switch_screen(enum ScreensEnum screen) {
-    previous_screen = current_screen;
-    current_screen = screen;
-    switch (screen) {
-        case SCREEN_ID_SPLASH_SCREEN:
-            loadScreen(SCREEN_ID_SPLASH_SCREEN);
-            break;
-        case SCREEN_ID_MAIN:
-            loadScreen(SCREEN_ID_MAIN );
-            break;
-        case SCREEN_ID_MENU_MAIN:
-            loadScreen(SCREEN_ID_MENU_MAIN);
-            break;
-        case SCREEN_ID_MENU_MAIN_2:
-            loadScreen(SCREEN_ID_MENU_MAIN_2);
-            break;
-        case SCREEN_ID_MENU_GENERAL:
-            loadScreen(SCREEN_ID_MENU_GENERAL);
-            break;
-        case SCREEN_ID_DISCO_MODE:
-            loadScreen(SCREEN_ID_DISCO_MODE);
-            break;
-        case SCREEN_ID_MANUAL_CONTROL:
-            loadScreen(SCREEN_ID_MANUAL_CONTROL);
-            break;
-        case SCREEN_ID_GROW_MENU:
-            loadScreen(SCREEN_ID_GROW_MENU);
-            break;
-        case SCREEN_ID_DEBUG:
-            loadScreen(SCREEN_ID_DEBUG);
-            break;
-    }
-}
 
 
 static void update_display_vars(void) {
@@ -217,10 +182,6 @@ static void update_display_vars(void) {
 
 
 // INTERFACE FUNCTIONS
-
-inline void load_previous_screen(void) {
-    switch_screen(previous_screen);
-}
 
 
 inline void set_display_brightness(uint8_t brightness) {

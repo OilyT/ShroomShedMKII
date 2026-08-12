@@ -6399,7 +6399,14 @@
               "states": "",
               "useStyle": "std_Label_24",
               "localStyles": {
-                "objID": "3dfb1936-a5f8-4acc-e70b-0bbf30447eb7"
+                "objID": "3dfb1936-a5f8-4acc-e70b-0bbf30447eb7",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "Red"
+                    }
+                  }
+                }
               },
               "group": "",
               "groupIndex": 0,
@@ -6537,7 +6544,14 @@
               "states": "",
               "useStyle": "std_Label_24",
               "localStyles": {
-                "objID": "aefd9166-7c82-4024-af4f-76b37b5035b3"
+                "objID": "aefd9166-7c82-4024-af4f-76b37b5035b3",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "Light_Green"
+                    }
+                  }
+                }
               },
               "group": "",
               "groupIndex": 0,
@@ -6582,7 +6596,14 @@
               "states": "",
               "useStyle": "std_Label_24",
               "localStyles": {
-                "objID": "132fc66d-b299-4014-aac6-39d6e61fdcc8"
+                "objID": "132fc66d-b299-4014-aac6-39d6e61fdcc8",
+                "definition": {
+                  "MAIN": {
+                    "DEFAULT": {
+                      "text_color": "Dark_blue"
+                    }
+                  }
+                }
               },
               "group": "",
               "groupIndex": 0,

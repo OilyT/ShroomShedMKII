@@ -6,7 +6,7 @@
 
 
 #define RGB_BUFFER_SIZE 96
-#define DISCO_POWER 75
+#define DISCO_POWER 100
 #define DISCO_SPEED 10
 #define DISCO_OFFSET 10
 #define DISCO_STEP_DIVISOR (RGB_PROCESS_HZ * 65)
@@ -23,7 +23,7 @@ RGB_settings_t rgbSettings = {
     .discoSpeed = DISCO_SPEED,
     .discoOffset = DISCO_OFFSET,
     .staticRed = 0,
-    .staticGreen = 5,
+    .staticGreen = 10,
     .staticBlue = 5,
 };
 

@@ -27,7 +27,7 @@
 
 // LOAD SCREEN
 inline void action_load_previous_screen(lv_event_t *e) {
-    load_previous_screen();
+    //load_previous_screen();
 }
 
 inline void action_load_screen_menu(lv_event_t *e) {
