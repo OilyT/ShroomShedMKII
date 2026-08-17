@@ -26,6 +26,8 @@ typedef struct MGP_data_t {
     uint8_t *fan_cv;
     uint16_t *time;
     uint8_t length;
+    uint8_t minimum_temperature; // degrees C
+    uint8_t maximum_temperature; // degrees C
 } MGP_data_t;
 
 typedef struct MGP_t {

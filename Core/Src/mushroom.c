@@ -4,6 +4,7 @@
 #include "main.h"
 #include "shroomshed.h"
 #include "mushroom.h"
+#include "vars.h"
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
@@ -58,6 +59,18 @@ MGP_data_t shiitake_data = {
 };
 
 
+// nz lions mane
+static uint8_t lions_mane_default_h[] = {95, 95, 90, 80};
+static uint8_t lions_mane_default_f[] = {20, 20, 20, 20};
+static uint16_t lions_mane_default_t[] = {24, 48, 300, 96};
+
+MGP_data_t lions_mane_data = {
+    .humidity_cv = lions_mane_default_h,
+    .fan_cv = lions_mane_default_f,
+    .time = lions_mane_default_t,
+    .length = 4
+};
+
 // function prototypes
 static void grow_process(void);
 static void add_profile(char *name, MGP_data_t *data, uint16_t estimatedHarvestWindow);
@@ -68,6 +81,9 @@ static MGP_node_t* add_node(MGP_node_t *base_node, uint8_t humidity_cv, uint8_t 
 void init_mushrooms(void) {
     add_profile("Oyster", &oyster_data, 5);
     add_profile("Shiitake", &shiitake_data, 6);
+    add_profile("Lions Mane", &lions_mane_data, 7);
+
+    set_var_mushroom_names_list(NULL);
 }
 
 
