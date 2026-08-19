@@ -102,13 +102,19 @@ void Error_Handler(void);
 #define TOUCH_MOSI_GPIO_Port GPIOB
 #define TOUCH_IRQ_Pin GPIO_PIN_6
 #define TOUCH_IRQ_GPIO_Port GPIOB
-#define TOUCH_CS_Pin GPIO_PIN_7
-#define TOUCH_CS_GPIO_Port GPIOB
 #define DISPLAY_LED_Pin GPIO_PIN_8
 #define DISPLAY_LED_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-//#define USE_TEST_UNIT
+#define USE_TEST_UNIT
+
+#ifdef USE_TEST_UNIT
+  #define TOUCH_CS_Pin GPIO_PIN_15
+  #define TOUCH_CS_GPIO_Port GPIOA
+#else 
+  #define TOUCH_CS_Pin GPIO_PIN_7
+  #define TOUCH_CS_GPIO_Port GPIOB
+#endif
 
 
 /* USER CODE END Private defines */
