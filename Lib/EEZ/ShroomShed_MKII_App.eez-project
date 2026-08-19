@@ -347,6 +347,14 @@
         "defaultValue": "false",
         "persistent": false,
         "native": false
+      },
+      {
+        "objID": "667f1010-8870-486d-da27-16a4e138bd47",
+        "name": "mushroom_display_data",
+        "type": "string",
+        "defaultValue": "\"\"",
+        "persistent": false,
+        "native": false
       }
     ],
     "structures": [],
@@ -4615,7 +4623,7 @@
               "type": "LVGLRollerWidget",
               "left": 0,
               "top": 84,
-              "width": 100,
+              "width": 60,
               "height": 65,
               "customInputs": [],
               "customOutputs": [],
@@ -4885,6 +4893,51 @@
               },
               "group": "",
               "groupIndex": 0
+            },
+            {
+              "objID": "137963bb-c99b-45b9-a885-b8ccf0d0714f",
+              "type": "LVGLLabelWidget",
+              "left": 192,
+              "top": 84,
+              "width": 128,
+              "height": 156,
+              "customInputs": [],
+              "customOutputs": [],
+              "style": {
+                "objID": "b879a8bf-f20b-46c6-c827-5e7128d085f7",
+                "useStyle": "default",
+                "conditionalStyles": [],
+                "childStyles": []
+              },
+              "timeline": [],
+              "eventHandlers": [],
+              "identifier": "mushroom_display_data_label",
+              "leftUnit": "px",
+              "topUnit": "px",
+              "widthUnit": "px",
+              "heightUnit": "px",
+              "children": [],
+              "widgetFlags": "CLICK_FOCUSABLE|GESTURE_BUBBLE|PRESS_LOCK|SCROLLABLE|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_WITH_ARROW|SNAPPABLE",
+              "hiddenFlagType": "literal",
+              "clickableFlagType": "literal",
+              "flagScrollbarMode": "",
+              "flagScrollDirection": "",
+              "scrollSnapX": "",
+              "scrollSnapY": "",
+              "checkedStateType": "literal",
+              "disabledStateType": "literal",
+              "states": "",
+              "useStyle": "ShroomShed_SmallLabel",
+              "localStyles": {
+                "objID": "fb5f0356-bd38-49f2-bb85-3dea3492049a"
+              },
+              "group": "",
+              "groupIndex": 0,
+              "text": "mushroom_display_data",
+              "textType": "expression",
+              "longMode": "WRAP",
+              "recolor": false,
+              "previewValue": "Pleurotus Ostreatus\\n\\n Temperature\\n 20-22C\\n\\n Grow time\\n 7 - 12 days"
             }
           ],
           "widgetFlags": "CLICKABLE",

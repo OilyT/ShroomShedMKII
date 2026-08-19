@@ -137,6 +137,7 @@ void loop(void)
  * ============================================================================ */
 
 static void shed_control(void) {
+    determine_water_state();
 
     if (shedControl.outputMode == OUTPUT_DISABLED) {
         // do nothing currently
@@ -149,7 +150,6 @@ static void shed_control(void) {
         }
         set_fan_speed(shedControl.fanControlValue);
         humidity_process(shedControl.humidityControlValue);
-        determine_water_state();
     }
 }
 

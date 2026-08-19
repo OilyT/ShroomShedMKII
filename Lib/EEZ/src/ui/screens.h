@@ -85,6 +85,7 @@ typedef struct _objects_t {
     lv_obj_t *start_grow_button_label;
     lv_obj_t *stop_grow_button;
     lv_obj_t *stop_grow_button_label;
+    lv_obj_t *mushroom_display_data_label;
     lv_obj_t *h_pid_p_label;
     lv_obj_t *back_button_5;
     lv_obj_t *main_menu_header_1;

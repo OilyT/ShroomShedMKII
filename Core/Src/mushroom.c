@@ -44,7 +44,8 @@ MGP_data_t oyster_data = {
     .fan_cv = oyster_default_f,
     .time = oyster_default_t,
     .wait_for_pinning = true,
-    .length = 3
+    .length = 3,
+    .display_data = "Pleurotus Ostreatus\n\n Temperature\n 20-22C\n\n Grow time\n 7 - 12 days"
 };
 
 // shiitake
@@ -57,13 +58,15 @@ MGP_data_t shiitake_data = {
     .fan_cv = shiitake_default_f,
     .time = shiitake_default_t,
     .wait_for_pinning = false,
-    .length = 4
+    .length = 4,
+    .display_data = "Lentinula Edodes\n\n Temperature\n 10-21C\n\n Grow time\n 10 - 15 days"
+
 };
 
 
 // nz lions mane
 static uint8_t lions_mane_default_h[] = {95, 95, 90, 80};
-static uint8_t lions_mane_default_f[] = {20, 20, 20, 20};
+static uint8_t lions_mane_default_f[] = {15, 20, 20, 20};
 static uint16_t lions_mane_default_t[] = {24, 48, 300, 96};
 
 MGP_data_t lions_mane_data = {
@@ -71,7 +74,8 @@ MGP_data_t lions_mane_data = {
     .fan_cv = lions_mane_default_f,
     .time = lions_mane_default_t,
     .wait_for_pinning = false,
-    .length = 4
+    .length = 4,
+    .display_data = "Hericium novae-zealandiae\n\n Temperature\n 15-24C\n\n Grow time\n 14 - 21 days"
 };
 
 // function prototypes
@@ -260,6 +264,14 @@ bool get_var_hide_progress_grow_button(void) {
 
 const char *get_var_progress_grow_button_label(void) {
     return "Growing";
+}
+
+const char *get_var_mushroom_display_data(void) {
+    int32_t selected_profile_index = get_var_mushroom_list_index();
+    if (selected_profile_index < 0 || selected_profile_index >= MGP_list_index) {
+        return "";
+    }
+    return MGP_list[selected_profile_index].data->display_data;
 }
 
 
