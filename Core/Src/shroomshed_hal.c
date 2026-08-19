@@ -40,8 +40,8 @@ void set_humidifier_power(uint16_t power) {
 }
 
 void humidity_process(uint8_t humidity_setpoint) {
-    const static float Pk = 20.0;
-    const static float Ik = 0.3;
+    const static float Pk = 25.0;
+    const static float Ik = 0.25;
     const static float Dk = 250.0;
 
     static uint16_t ID_counter = 0;

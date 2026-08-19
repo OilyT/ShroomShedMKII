@@ -34,7 +34,6 @@ typedef struct MGP_data_t {
 } MGP_data_t;
 
 
-
 typedef struct MGP_t {
     char name[20];
     MGP_node_t *head;
