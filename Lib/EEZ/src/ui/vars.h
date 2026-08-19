@@ -42,7 +42,9 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_H_PID_POWER = 24,
     FLOW_GLOBAL_VARIABLE_RED_VALUE = 25,
     FLOW_GLOBAL_VARIABLE_GREEN_VALUE = 26,
-    FLOW_GLOBAL_VARIABLE_BLUE_VALUE = 27
+    FLOW_GLOBAL_VARIABLE_BLUE_VALUE = 27,
+    FLOW_GLOBAL_VARIABLE_PROGRESS_GROW_BUTTON_LABEL = 28,
+    FLOW_GLOBAL_VARIABLE_HIDE_PROGRESS_GROW_BUTTON = 29
 };
 
 // Native global variables
@@ -103,6 +105,10 @@ extern const char *get_var_green_value();
 extern void set_var_green_value(const char *value);
 extern const char *get_var_blue_value();
 extern void set_var_blue_value(const char *value);
+extern const char *get_var_progress_grow_button_label();
+extern void set_var_progress_grow_button_label(const char *value);
+extern bool get_var_hide_progress_grow_button();
+extern void set_var_hide_progress_grow_button(bool value);
 
 
 #ifdef __cplusplus

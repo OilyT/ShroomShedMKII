@@ -37,6 +37,8 @@ typedef struct _objects_t {
     lv_obj_t *grow_progres_value_label;
     lv_obj_t *manual_indicatorr;
     lv_obj_t *auto_indicator;
+    lv_obj_t *next_grow_stage_button;
+    lv_obj_t *obj0;
     lv_obj_t *home_button;
     lv_obj_t *disco_power_slider;
     lv_obj_t *disco_power;

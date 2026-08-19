@@ -99,25 +99,7 @@ void set_var_humidity_display_str(const char *value) {
     // not used
 }
 
-const char *get_var_grow_progress_str(void) {
 
-    int32_t progress = get_var_grow_progress_int();
-    static char progress_str[10];
-    snprintf(progress_str, sizeof(progress_str), "%d%%", (int)(progress));
-    return progress_str;
-}
-
-void set_var_grow_progress_str(const char *value) {
-    (void)value;
-}
-
-void set_var_grow_progress_int(int32_t value) {
-    // not used, grow progress is calculated in tick_MGP
-}
-
-void set_var_grow_status(const char *value) {
-    // n/a
-}
 
 // STATIC COLOUR SCREEN VARS
 const char *get_var_red_value(void) {
@@ -263,6 +245,24 @@ int32_t get_var_mushroom_list_index() {
 
 void set_var_mushroom_list_index(int32_t value) {
     mushroom_list_index = value;
+}
+
+// AUTOMATIC GROWING VARS
+
+
+
+
+
+void set_var_grow_progress_str(const char *value) {
+    (void)value;
+}
+
+void set_var_grow_progress_int(int32_t value) {
+    // not used, grow progress is calculated in tick_MGP
+}
+
+void set_var_grow_status(const char *value) {
+    // n/a
 }
 
 

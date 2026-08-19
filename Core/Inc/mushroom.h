@@ -5,6 +5,7 @@
 #include "shroomshed.h"
 #include "main.h"
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef enum node_type_e {
     NODE_TYPE_START = 0, // primordia formation
@@ -25,6 +26,7 @@ typedef struct MGP_data_t {
     uint8_t *humidity_cv;
     uint8_t *fan_cv;
     uint16_t *time;
+    bool wait_for_pinning;
     uint8_t length;
     uint8_t minimum_temperature; // degrees C
     uint8_t maximum_temperature; // degrees C
@@ -33,9 +35,10 @@ typedef struct MGP_data_t {
 typedef struct MGP_t {
     char name[20];
     MGP_node_t *head;
+    MGP_data_t *data;
     uint16_t duration; 
     uint16_t progress;
-    uint16_t estimatedHarvestWindow; // days, start of window
+    uint8_t stage; // 0 = waiting for pinning, 1 = fruitbody development
 } MGP_t;
 
 typedef struct mushroom_settings_t {

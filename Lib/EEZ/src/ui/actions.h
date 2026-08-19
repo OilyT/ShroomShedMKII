@@ -36,6 +36,7 @@ extern void action_decrease_red(lv_event_t * e);
 extern void action_decrease_green(lv_event_t * e);
 extern void action_decrease_blue(lv_event_t * e);
 extern void action_load_screen_lighting(lv_event_t * e);
+extern void action_next_grow_stage(lv_event_t * e);
 
 
 #ifdef __cplusplus

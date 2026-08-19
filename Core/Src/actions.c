@@ -248,3 +248,6 @@ void action_start_grow(lv_event_t *e) {
     start_grow(index);
     loadScreen(SCREEN_ID_MAIN);
 }
+
+// AUTOMATIC GROWING ACTIONS
+
