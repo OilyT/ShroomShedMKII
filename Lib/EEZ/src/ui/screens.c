@@ -1281,8 +1281,8 @@ void create_screen_grow_menu() {
             // mushroom_roller
             lv_obj_t *obj = lv_roller_create(parent_obj);
             objects.mushroom_roller = obj;
-            lv_obj_set_pos(obj, 0, 84);
-            lv_obj_set_size(obj, LV_PCT(60), LV_PCT(65));
+            lv_obj_set_pos(obj, 0, 72);
+            lv_obj_set_size(obj, LV_PCT(60), 168);
             lv_roller_set_options(obj, "", LV_ROLLER_MODE_NORMAL);
             lv_obj_add_event_cb(obj, event_handler_cb_grow_menu_mushroom_roller, LV_EVENT_ALL, 0);
             lv_obj_set_style_bg_color(obj, lv_color_hex(theme_colors[active_theme_index][2]), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1349,8 +1349,8 @@ void create_screen_grow_menu() {
             // mushroom_display_data_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.mushroom_display_data_label = obj;
-            lv_obj_set_pos(obj, 192, 84);
-            lv_obj_set_size(obj, 128, 156);
+            lv_obj_set_pos(obj, 192, 72);
+            lv_obj_set_size(obj, 128, 168);
             add_style_shroom_shed_small_label(obj);
             lv_label_set_text(obj, "");
         }
