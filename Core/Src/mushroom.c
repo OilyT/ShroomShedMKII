@@ -13,7 +13,7 @@
 #define MGP_LIST_SIZE 10
 #define NODE_POOL_SIZE MGP_LIST_SIZE * 10
 #define TICK_PERIOD 1000*60*60 // 1 hour
-#define GROW_SPEED_MULTIPLIER 10000 // 10000ish for debugging
+#define GROW_SPEED_MULTIPLIER 1 // 10000ish for debugging
 
 MGP_t MGP_list[MGP_LIST_SIZE];
 uint8_t MGP_list_index = 0;
@@ -35,23 +35,50 @@ mushroom_settings_t mushroom_settings = {
 static uint32_t last_mpg_tick;
 
 // oyster
-static uint8_t oyster_default_h[] = {90, 90, 80};
-static uint8_t oyster_default_f[] = {15, 20, 35};
+static uint8_t oyster_default_h[] = {95, 90, 80};
+static uint8_t oyster_default_f[] = {15, 15, 30};
 static uint16_t oyster_default_t[] = {24, 144, 72};
 
 MGP_data_t oyster_data = {
     .humidity_cv = oyster_default_h,
     .fan_cv = oyster_default_f,
     .time = oyster_default_t,
-    .wait_for_pinning = true,
+    .wait_for_pinning = false,
     .length = 3,
-    .display_data = "Pleurotus Ostreatus\n\n Temperature\n 20-22C\n\n Grow time\n 7 - 12 days"
+    .display_data = "Pleurotus Ostreatus\n\n Temperature\n 10-22C\n\n Grow time\n 7 - 14 days"
 };
 
+// pink oyster
+static uint8_t pink_oyster_default_h[] = {95, 90, 80};
+static uint8_t pink_oyster_default_f[] = {15, 15, 30};
+static uint16_t pink_oyster_default_t[] = {24, 144, 72};
+
+MGP_data_t pink_oyster_data = {
+    .humidity_cv = pink_oyster_default_h,
+    .fan_cv = pink_oyster_default_f,
+    .time = pink_oyster_default_t,
+    .wait_for_pinning = false,
+    .length = 3,
+    .display_data = "Pleurotus Djamor\n\n Temperature\n 15-25C\n\n Grow time\n 7 - 14 days"
+};
+
+// black king oyster
+static uint8_t bk_oyster_default_h[] = {95, 90, 80};
+static uint8_t bk_oyster_default_f[] = {10, 10, 10};
+static uint16_t bk_oyster_default_t[] = {24, 144, 72};
+
+MGP_data_t bk_oyster_data = {
+    .humidity_cv = bk_oyster_default_h,
+    .fan_cv = bk_oyster_default_f,
+    .time = bk_oyster_default_t,
+    .wait_for_pinning = false,
+    .length = 3,
+    .display_data = "Pleurotus Ostreatus\n/Eryngii\n\n Temperature\n 10-20C\n\n Grow time\n 7 - 14 days"
+};
 // shiitake
-static uint8_t shiitake_default_h[] = {95, 95, 90, 75};
-static uint8_t shiitake_default_f[] = {20, 20, 20, 20};
-static uint16_t shiitake_default_t[] = {48, 24, 96, 96};
+static uint8_t shiitake_default_h[] = {95, 90, 90, 75};
+static uint8_t shiitake_default_f[] = {15, 20, 15, 15};
+static uint16_t shiitake_default_t[] = {36, 12, 192, 96};
 
 MGP_data_t shiitake_data = {
     .humidity_cv = shiitake_default_h,
@@ -65,7 +92,7 @@ MGP_data_t shiitake_data = {
 
 
 // nz lions mane
-static uint8_t lions_mane_default_h[] = {95, 95, 90, 80};
+static uint8_t lions_mane_default_h[] = {95, 90, 90, 80};
 static uint8_t lions_mane_default_f[] = {15, 20, 20, 20};
 static uint16_t lions_mane_default_t[] = {24, 48, 300, 96};
 
@@ -87,6 +114,8 @@ static MGP_node_t* add_node(MGP_node_t *base_node, uint8_t humidity_cv, uint8_t 
 
 void init_mushrooms(void) {
     add_profile("Oyster", &oyster_data);
+    add_profile("Pink Oyster", &pink_oyster_data);
+    add_profile("King Oyster", &bk_oyster_data);
     add_profile("Shiitake", &shiitake_data);
     add_profile("Lions Mane", &lions_mane_data);
 
