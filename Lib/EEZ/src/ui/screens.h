@@ -35,9 +35,11 @@ typedef struct _objects_t {
     lv_obj_t *temperature_bar;
     lv_obj_t *temperature_value_label;
     lv_obj_t *grow_progres_value_label;
+    lv_obj_t *shroom_os_label;
     lv_obj_t *manual_indicatorr;
     lv_obj_t *auto_indicator;
     lv_obj_t *next_grow_stage_button;
+    lv_obj_t *os_version_label;
     lv_obj_t *obj0;
     lv_obj_t *home_button;
     lv_obj_t *disco_power_slider;
@@ -80,12 +82,14 @@ typedef struct _objects_t {
     lv_obj_t *home_button__5;
     lv_obj_t *home_button_label_5;
     lv_obj_t *back_button_3;
-    lv_obj_t *mushroom_roller;
     lv_obj_t *start_grow_button;
     lv_obj_t *start_grow_button_label;
     lv_obj_t *stop_grow_button;
     lv_obj_t *stop_grow_button_label;
     lv_obj_t *mushroom_display_data_label;
+    lv_obj_t *increment_mushroom_list_button;
+    lv_obj_t *decrement_mushroom_list_button;
+    lv_obj_t *obj1;
     lv_obj_t *h_pid_p_label;
     lv_obj_t *back_button_5;
     lv_obj_t *main_menu_header_1;

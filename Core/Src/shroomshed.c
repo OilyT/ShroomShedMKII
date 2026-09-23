@@ -24,13 +24,13 @@
 /* ============================================================================
  * Defines
  * ============================================================================ */
-
-
+#define SHROOM_OS_VERSION "0.21"
 
 
 /* ============================================================================
  * Static Variables
  * ============================================================================ */
+
 static uint32_t currentSystick;
 static uint32_t lastSerialProcess;
 static uint32_t lastTouchProcess;
@@ -42,8 +42,11 @@ static uint32_t lastRgbProcess;
 static uint8_t usb_buffer[100];
 
 /* ============================================================================
- * Global Structs
+ * Globals
  * ============================================================================ */
+
+const char* shroomOS_VERSION = SHROOM_OS_VERSION;
+
 struct shedState_t shedState = {
     .temperatureCurrent = 0,
     .humidityCurrent = 0,

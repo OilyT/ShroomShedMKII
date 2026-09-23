@@ -1,6 +1,7 @@
 // Mushroom.c
 // all source relating to mushrooms
 
+#include "actions.h"
 #include "main.h"
 #include "shroomshed.h"
 #include "mushroom.h"
@@ -13,10 +14,15 @@
 #define MGP_LIST_SIZE 10
 #define NODE_POOL_SIZE MGP_LIST_SIZE * 10
 #define TICK_PERIOD 1000*60*60 // 1 hour
-#define GROW_SPEED_MULTIPLIER 1 // 10000ish for debugging
+
+#ifdef USE_TEST_UNIT
+    #define GROW_SPEED_MULTIPLIER 10000
+#else   
+    #define GROW_SPEED_MULTIPLIER 1
+#endif
 
 MGP_t MGP_list[MGP_LIST_SIZE];
-uint8_t MGP_list_index = 0;
+uint8_t MGP_list_size = 0;
 MGP_node_t node_pool[NODE_POOL_SIZE];
 static uint16_t node_pool_index = 0;
 
@@ -45,13 +51,13 @@ MGP_data_t oyster_data = {
     .time = oyster_default_t,
     .wait_for_pinning = false,
     .length = 3,
-    .display_data = "Pleurotus Ostreatus\n\n Temperature\n 10-22C\n\n Grow time\n 7 - 14 days"
+    .display_data = "Pleurotus Ostreatus\nPleurotusPulmonarius\n\n Temperature: 10-22C\n\n Grow time: 7 - 14 days"
 };
 
 // pink oyster
 static uint8_t pink_oyster_default_h[] = {95, 90, 80};
 static uint8_t pink_oyster_default_f[] = {15, 15, 30};
-static uint16_t pink_oyster_default_t[] = {24, 144, 72};
+static uint16_t pink_oyster_default_t[] = {12, 144, 72};
 
 MGP_data_t pink_oyster_data = {
     .humidity_cv = pink_oyster_default_h,
@@ -59,7 +65,7 @@ MGP_data_t pink_oyster_data = {
     .time = pink_oyster_default_t,
     .wait_for_pinning = false,
     .length = 3,
-    .display_data = "Pleurotus Djamor\n\n Temperature\n 15-25C\n\n Grow time\n 7 - 14 days"
+    .display_data = "Pleurotus Djamor\n\n Temperature: 15-25C\n\n Grow time: 7 - 14 days"
 };
 
 // black king oyster
@@ -73,7 +79,7 @@ MGP_data_t bk_oyster_data = {
     .time = bk_oyster_default_t,
     .wait_for_pinning = false,
     .length = 3,
-    .display_data = "Pleurotus Ostreatus\n/Eryngii\n\n Temperature\n 10-20C\n\n Grow time\n 7 - 14 days"
+    .display_data = "Pleurotus Ostreatus-Eryngii\n\n Temperature: 10-20C\n\n Grow time: 7 - 14 days"
 };
 // shiitake
 static uint8_t shiitake_default_h[] = {95, 90, 90, 75};
@@ -86,10 +92,9 @@ MGP_data_t shiitake_data = {
     .time = shiitake_default_t,
     .wait_for_pinning = false,
     .length = 4,
-    .display_data = "Lentinula Edodes\n\n Temperature\n 10-21C\n\n Grow time\n 10 - 15 days"
+    .display_data = "Lentinula Edodes\n\n Temperature: 10-21C\n\n Grow time: 10 - 15 days"
 
 };
-
 
 // nz lions mane
 static uint8_t lions_mane_default_h[] = {95, 90, 90, 80};
@@ -102,7 +107,7 @@ MGP_data_t lions_mane_data = {
     .time = lions_mane_default_t,
     .wait_for_pinning = false,
     .length = 4,
-    .display_data = "Hericium novae-zealandiae\n\n Temperature\n 15-24C\n\n Grow time\n 14 - 21 days"
+    .display_data = "Hericium novae-zealandiae\n\n Temperature: 15-24C\n\n Grow time: 14 - 21 days"
 };
 
 // function prototypes
@@ -115,9 +120,9 @@ static MGP_node_t* add_node(MGP_node_t *base_node, uint8_t humidity_cv, uint8_t 
 void init_mushrooms(void) {
     add_profile("Oyster", &oyster_data);
     add_profile("Pink Oyster", &pink_oyster_data);
-    add_profile("King Oyster", &bk_oyster_data);
+    add_profile("Black King Oyster", &bk_oyster_data);
     add_profile("Shiitake", &shiitake_data);
-    add_profile("Lions Mane", &lions_mane_data);
+    add_profile("NZ Lions Mane", &lions_mane_data);
 
     set_var_mushroom_names_list(NULL);
 }
@@ -179,7 +184,7 @@ void tick_MGP(void) {
 }
 
 void start_grow(uint8_t profile_index) {
-    if (profile_index >= MGP_list_index) {
+    if (profile_index >= MGP_list_size) {
         return;
     }
     shedControl.controlMode = MODE_AUTOMATIC;
@@ -203,8 +208,8 @@ void start_grow(uint8_t profile_index) {
 // profile and init functions
 
 static void add_profile(char *name, MGP_data_t *data) {
-    if (MGP_list_index >= MGP_LIST_SIZE) return;
-    MGP_t *new_profile = &MGP_list[MGP_list_index++];
+    if (MGP_list_size >= MGP_LIST_SIZE) return;
+    MGP_t *new_profile = &MGP_list[MGP_list_size++];
     strncpy(new_profile->name, name, 20);
     init_profile(new_profile, data);
 }
@@ -277,11 +282,17 @@ const char *get_var_grow_progress_str(void) {
 
 
 const char *get_var_mushroom_grow_label(void) {
+
+    /*
     if (current_profile == NULL) {
         return "";
     }
     return current_profile->name;
-}
+    */
+
+    return MGP_list[get_var_mushroom_list_index()].name;
+
+    }
 
 bool get_var_hide_progress_grow_button(void) {
     if (current_profile == NULL) {
@@ -297,7 +308,7 @@ const char *get_var_progress_grow_button_label(void) {
 
 const char *get_var_mushroom_display_data(void) {
     int32_t selected_profile_index = get_var_mushroom_list_index();
-    if (selected_profile_index < 0 || selected_profile_index >= MGP_list_index) {
+    if (selected_profile_index < 0 || selected_profile_index >= MGP_list_size) {
         return "";
     }
     return MGP_list[selected_profile_index].data->display_data;
@@ -305,7 +316,8 @@ const char *get_var_mushroom_display_data(void) {
 
 
 // action funcs
-void action_stop_grow(void) {
+
+void action_stop_grow(lv_event_t *e) {
     current_profile = NULL;
     current_node = NULL;
     shedControl.controlMode = MODE_MANUAL;
@@ -317,5 +329,23 @@ void action_next_grow_stage(lv_event_t *e) {
     }
     if (current_profile->stage == 0) {
         current_profile->stage = 1;
+    }
+}
+
+void action_increment_mushroom_list_index(lv_event_t *e) {
+    int32_t selected_profile_index = get_var_mushroom_list_index();
+    if (selected_profile_index < MGP_list_size - 1) {
+        set_var_mushroom_list_index(selected_profile_index + 1);
+    } else {
+        set_var_mushroom_list_index(0);
+    }
+}
+
+void action_decrement_mushroom_list_index(lv_event_t *e) {
+    int32_t selected_profile_index = get_var_mushroom_list_index();
+    if (selected_profile_index > 0) {
+        set_var_mushroom_list_index(selected_profile_index - 1);
+    } else {
+        set_var_mushroom_list_index(MGP_list_size - 1);
     }
 }

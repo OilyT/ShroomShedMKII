@@ -9,11 +9,16 @@
 #include "rgb.h"
 #include "shroomshed_hal.h"
 
-#define DISPLAY_HUMIDITY_ALPHA 0.003
-#define DISPLAY_TEMPERATURE_ALPHA 0.01
+#ifdef USE_TEST_UNIT
+    #define DISPLAY_HUMIDITY_ALPHA 1
+    #define DISPLAY_TEMPERATURE_ALPHA 1
+#else
+    #define DISPLAY_HUMIDITY_ALPHA 0.003
+    #define DISPLAY_TEMPERATURE_ALPHA 0.01
+#endif
 
 extern MGP_t MGP_list[];
-extern uint8_t MGP_list_index;
+extern uint8_t MGP_list_size;
 
 static float display_humidity = 40;
 static float display_temperature = 15;
@@ -48,6 +53,14 @@ void set_var_shed_output_normal(bool value) {
 
 
 // MAIN SCREEN VARS
+
+const char *get_var_shroom_os_version(void) {
+    static char shroom_os_version_str[10];
+    snprintf(shroom_os_version_str, sizeof(shroom_os_version_str), "%s", shroomOS_VERSION);
+    return shroom_os_version_str;
+}
+
+
 float get_var_humidity_fp(void) {
     return display_humidity;
 }
@@ -190,7 +203,7 @@ void set_var_mushroom_names_list(const char *value) {
     mushroom_names_list[0] = '\0';
     size_t offset = 0;
 
-    for (uint8_t i = 0; i < MGP_list_index; i++) {
+    for (uint8_t i = 0; i < MGP_list_size; i++) {
         const char *name = MGP_list[i].name;
 
         if (name[0] == '\0') {
@@ -248,8 +261,6 @@ void set_var_mushroom_list_index(int32_t value) {
 }
 
 // AUTOMATIC GROWING VARS
-
-
 
 void set_var_grow_progress_str(const char *value) {
     (void)value;

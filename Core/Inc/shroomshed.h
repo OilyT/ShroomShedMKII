@@ -38,6 +38,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 extern struct shedState_t shedState;
 extern struct shedSettings_t shedSettings;
 extern struct shedControl_t shedControl;
+extern const char* shroomOS_VERSION;
 
 typedef enum shedControlMode_e {
     MODE_AUTOMATIC = 0,

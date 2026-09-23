@@ -784,6 +784,7 @@ void init_style_std_label_32_MAIN_DEFAULT(lv_style_t *style) {
     lv_style_set_pad_bottom(style, 1);
     lv_style_set_pad_left(style, 1);
     lv_style_set_pad_right(style, 1);
+    lv_style_set_align(style, LV_ALIGN_CENTER);
 };
 
 lv_style_t *get_style_std_label_32_MAIN_DEFAULT() {
