@@ -1,9 +1,9 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/7",
-    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/29",
-    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/30",
-    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/5",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+    "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/31",
+    "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/31",
+    "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/0",
     "selectedThemeObject": "[ShroomShed_MKII_App.eez-project]:/themes/0",
     "selectedThemeColorObject": "[ShroomShed_MKII_App.eez-project]:/colors/3",
     "selectedBitmapObject": "[ShroomShed_MKII_App.eez-project]:/bitmaps/2",
@@ -29,8 +29,8 @@
           },
           {
             "type": "border",
-            "selected": 3,
-            "size": 149.5,
+            "selected": 0,
+            "size": 270.5,
             "location": "right",
             "children": [
               {
@@ -162,7 +162,7 @@
                 {
                   "type": "tabset",
                   "id": "#59ad6a08-6b18-4c31-b3f9-29f05ee49b77",
-                  "weight": 0.8093548346340622,
+                  "weight": 1.295748370235242,
                   "enableClose": false,
                   "children": [
                     {
@@ -178,7 +178,7 @@
                 {
                   "type": "tabset",
                   "id": "#eee461b7-7a16-4c57-8ce8-e1b5652c3392",
-                  "weight": 1.1395349905165069,
+                  "weight": 0.6531414549153252,
                   "enableClose": false,
                   "children": [
                     {
@@ -196,18 +196,29 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 51.140515255558306,
+              "weight": 45.31064305607477,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#af7ac388-f521-4445-8910-05b69c4ef0b0",
+                  "id": "#389e88b3-8f49-4a8e-9f28-d94035cb337a",
+                  "name": "Main",
+                  "component": "editor",
+                  "config": {
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+                    "permanent": false
+                  },
+                  "icon": "svg:page"
+                },
+                {
+                  "type": "tab",
+                  "id": "#1055c34f-76f9-42a5-a470-e2a065a76c8a",
                   "name": "grow_menu",
                   "component": "editor",
                   "config": {
                     "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/7",
-                    "permanent": false
+                    "permanent": true
                   },
                   "icon": "svg:page"
                 }
@@ -217,7 +228,7 @@
             {
               "type": "row",
               "id": "#cc5dea6a-df32-46dd-b7df-5c658d04b06e",
-              "weight": 25.526696711888558,
+              "weight": 31.356568911372094,
               "children": [
                 {
                   "type": "tabset",
@@ -999,14 +1010,14 @@
       }
     },
     "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles[tree-state]": {
-      "0": {},
+      "0": {
+        "$selected": true
+      },
       "1": {},
       "2": {},
       "3": {},
       "4": {},
-      "5": {
-        "$selected": true
-      },
+      "5": {},
       "6": {},
       "7": {},
       "8": {},
@@ -1025,17 +1036,13 @@
         "0": {
           "0": {},
           "1": {},
-          "7": {
-            "0": {}
-          },
-          "12": {},
-          "13": {}
+          "12": {}
         }
       },
       "transform": {
         "translate": {
           "x": -255.27848097176522,
-          "y": -217.95978595108784
+          "y": -172.9597931036452
         },
         "scale": 1.5
       },
@@ -1174,13 +1181,14 @@
           "0": {},
           "1": {},
           "2": {},
-          "3": {}
+          "5": {},
+          "6": {}
         }
       },
       "transform": {
         "translate": {
           "x": -232.33331823349,
-          "y": -175.6666603088379
+          "y": -162.33332300186157
         },
         "scale": 1.5
       },
@@ -1293,7 +1301,7 @@
   "lvglPart": "MAIN",
   "lvglState": "DEFAULT",
   "lvglExpandedPropertiesGroup": [
-    "TEXT"
+    "POSITION AND SIZE"
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
