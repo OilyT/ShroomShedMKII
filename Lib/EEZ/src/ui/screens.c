@@ -1419,7 +1419,7 @@ void create_screen_debug() {
             // h_pid_p_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.h_pid_p_label = obj;
-            lv_obj_set_pos(obj, 42, 58);
+            lv_obj_set_pos(obj, -67, -44);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "");
@@ -1456,7 +1456,7 @@ void create_screen_debug() {
             // H_PID_PREFIX_LABEL
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.h_pid_prefix_label = obj;
-            lv_obj_set_pos(obj, 6, 58);
+            lv_obj_set_pos(obj, -128, 9);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "P:\nI:\nD:\nO:");
@@ -1465,7 +1465,7 @@ void create_screen_debug() {
             // h_pid_i_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.h_pid_i_label = obj;
-            lv_obj_set_pos(obj, 43, 92);
+            lv_obj_set_pos(obj, -66, -10);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "");
@@ -1474,7 +1474,7 @@ void create_screen_debug() {
             // h_pid_d_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.h_pid_d_label = obj;
-            lv_obj_set_pos(obj, 43, 129);
+            lv_obj_set_pos(obj, -66, 27);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "");
@@ -1483,7 +1483,7 @@ void create_screen_debug() {
             // h_pid_power_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.h_pid_power_label = obj;
-            lv_obj_set_pos(obj, 43, 163);
+            lv_obj_set_pos(obj, -66, 64);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "");
@@ -1665,7 +1665,7 @@ void create_screen_lighting() {
             // lighting_label
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.lighting_label = obj;
-            lv_obj_set_pos(obj, 90, 10);
+            lv_obj_set_pos(obj, 0, -90);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "Lighting");
@@ -1952,7 +1952,7 @@ void create_screen_single_colour() {
             // single_color_header
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.single_color_header = obj;
-            lv_obj_set_pos(obj, 66, 5);
+            lv_obj_set_pos(obj, 0, -96);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_std_label_32(obj);
             lv_label_set_text(obj, "RGB Colour");
