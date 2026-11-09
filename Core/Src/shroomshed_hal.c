@@ -16,7 +16,7 @@
 
 // humidity PID
 #define PID_ID_PERIOD 10 // seconds
-#define MAX_PULSE 1100
+#define MAX_PULSE 1200
 #define MIN_PULSE 600
 #define PULSE_RANGE (MAX_PULSE - MIN_PULSE)
 #define MAX_POWER 1000
