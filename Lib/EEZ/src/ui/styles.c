@@ -662,7 +662,7 @@ void remove_style_button_label_24(lv_obj_t *obj) {
 //
 
 void init_style_std_switch_MAIN_DEFAULT(lv_style_t *style) {
-    lv_style_set_border_color(style, lv_color_hex(theme_colors[active_theme_index][3]));
+    lv_style_set_border_color(style, lv_color_hex(theme_colors[active_theme_index][0]));
     lv_style_set_border_width(style, 3);
 };
 

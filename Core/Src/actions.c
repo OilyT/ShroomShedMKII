@@ -61,16 +61,18 @@ void action_load_menu_button_matrix(lv_event_t * e) {
     uint16_t id = lv_buttonmatrix_get_selected_button(ta);
     switch (id) {
         case 0:
-            loadScreen(SCREEN_ID_LIGHTING);
+            loadScreen(SCREEN_ID_GROW_MENU);
             break;
-        case 1:
-            loadScreen(SCREEN_ID_MENU_GENERAL);
+        case 1:   
+            shedControl.controlMode = MODE_MANUAL;
+            shedControl.outputMode = OUTPUT_NORMAL;
+            loadScreen(SCREEN_ID_MAIN);
             break;
         case 2:
-            loadScreen(SCREEN_ID_MANUAL_CONTROL);
+            loadScreen(SCREEN_ID_LIGHTING);
             break;
         case 3:
-            loadScreen(SCREEN_ID_GROW_MENU);
+            loadScreen(SCREEN_ID_MENU_GENERAL);
             break;
         default:
             break;
@@ -245,6 +247,7 @@ void action_set_control_mode(lv_event_t * e) {
 // GROW MENU ACTIONS
 void action_start_grow(lv_event_t *e) {
     uint8_t index = (uint8_t)get_var_mushroom_list_index();
+    shedControl.outputMode = OUTPUT_NORMAL;
     start_grow(index);
     loadScreen(SCREEN_ID_MAIN);
 }

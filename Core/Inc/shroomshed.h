@@ -29,9 +29,9 @@ extern "C" {
 #define SERIAL_PROCESS_HZ 2
 #define DISPLAY_PROCESS_HZ 30
 #define SENSOR_PROCESS_HZ 1
-#define CONTROL_PROCESS_HZ 1
+#define CONTROL_PROCESS_HZ 5
 #define RGB_PROCESS_HZ 100
-
+    
 
 
 extern USBD_HandleTypeDef hUsbDeviceFS;

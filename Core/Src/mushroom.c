@@ -69,16 +69,16 @@ MGP_data_t pink_oyster_data = {
 };
 
 // black king oyster
-static uint8_t bk_oyster_default_h[] = {95, 90, 80};
-static uint8_t bk_oyster_default_f[] = {10, 10, 10};
-static uint16_t bk_oyster_default_t[] = {12, 144, 72};
+static uint8_t bk_oyster_default_h[] = {95, 90, 90, 80};
+static uint8_t bk_oyster_default_f[] = {15, 15, 10, 10};
+static uint16_t bk_oyster_default_t[] = {12, 12, 144, 72};
 
 MGP_data_t bk_oyster_data = {
     .humidity_cv = bk_oyster_default_h,
     .fan_cv = bk_oyster_default_f,
     .time = bk_oyster_default_t,
     .wait_for_pinning = false,
-    .length = 3,
+    .length = 4,
     .display_data = "Pleurotus Ostreatus-Eryngii\n\n Temperature: 10-20C\n\n Grow time: 7 - 14 days"
 };
 // shiitake
@@ -92,14 +92,14 @@ MGP_data_t shiitake_data = {
     .time = shiitake_default_t,
     .wait_for_pinning = false,
     .length = 3,
-    .display_data = "Lentinula Edodes\n\n Temperature: 10-21C\n\n Grow time: 10 - 15 days"
+    .display_data = "Lentinula Edodes\n\n Temperature: 10-21C\n\n Grow time: 8 - 15 days"
 
 };
 
 // nz lions mane
 static uint8_t lions_mane_default_h[] = {95, 90, 90, 80};
-static uint8_t lions_mane_default_f[] = {15, 20, 20, 20};
-static uint16_t lions_mane_default_t[] = {12, 48, 300, 96};
+static uint8_t lions_mane_default_f[] = {15, 15, 15, 20};
+static uint16_t lions_mane_default_t[] = {12, 48, 150, 250};
 
 MGP_data_t lions_mane_data = {
     .humidity_cv = lions_mane_default_h,
@@ -168,7 +168,7 @@ static void grow_process(void) {
 void tick_MGP(void) {
 
     if (current_profile == NULL) {
-        shedControl.controlMode = MODE_MANUAL;
+        //shedControl.controlMode = MODE_MANUAL;
         return;
     }
 
@@ -266,18 +266,38 @@ int32_t get_var_grow_progress_int(void) {
 
 
 const char *get_var_grow_progress_str(void) {
-    if (current_profile == NULL) {
+
+
+    if (shedControl.outputMode == OUTPUT_DISABLED) {
         return "";
     }
 
-    if (current_profile->stage == 0) {
-        return "waiting...";
+    static unsigned int call_count = 0;
+    static unsigned int full_stop_count = 0;
+    static const char * const growing_strings[] = {
+        "Growing",
+        "Growing.",
+        "Growing..",
+        "Growing..."
+    };
+
+    const char *growing_str = growing_strings[full_stop_count];
+    call_count++;
+    if (call_count >= 50) {
+        call_count = 0;
+        full_stop_count = (full_stop_count + 1) % 4;
     }
 
-    int32_t progress = get_var_grow_progress_int();
-    static char progress_str[10];
-    snprintf(progress_str, sizeof(progress_str), "%d%%", (int)(progress));
-    return progress_str;
+
+    /*
+    static char grow_progress_str[12];
+    snprintf(grow_progress_str, sizeof(grow_progress_str), "%d/%d", current_profile->progress, current_profile->duration);
+    static char combined_progress_str[24];
+    snprintf(combined_progress_str, sizeof(combined_progress_str), "%s %s", growing_str, grow_progress_str);
+    return combined_progress_str;
+    */
+    return growing_str;
+
 }
 
 
@@ -320,7 +340,7 @@ const char *get_var_mushroom_display_data(void) {
 void action_stop_grow(lv_event_t *e) {
     current_profile = NULL;
     current_node = NULL;
-    shedControl.controlMode = MODE_MANUAL;
+    shedControl.outputMode = OUTPUT_DISABLED;
 }
 
 void action_next_grow_stage(lv_event_t *e) {

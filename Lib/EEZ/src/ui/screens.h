@@ -20,10 +20,11 @@ typedef struct _objects_t {
     lv_obj_t *grow_kits_qr;
     lv_obj_t *lighting;
     lv_obj_t *single_colour;
-    lv_obj_t *grow_progress_bar;
-    lv_obj_t *mushroom_label;
     lv_obj_t *output_mode_switch;
+    lv_obj_t *mushroom_label;
     lv_obj_t *manual_control_switch;
+    lv_obj_t *shroom_os_label;
+    lv_obj_t *os_version_label;
     lv_obj_t *menu_button;
     lv_obj_t *humidity_label;
     lv_obj_t *humidity_bar;
@@ -34,13 +35,24 @@ typedef struct _objects_t {
     lv_obj_t *temperature_label;
     lv_obj_t *temperature_bar;
     lv_obj_t *temperature_value_label;
-    lv_obj_t *grow_progres_value_label;
-    lv_obj_t *shroom_os_label;
     lv_obj_t *manual_indicatorr;
     lv_obj_t *auto_indicator;
-    lv_obj_t *next_grow_stage_button;
-    lv_obj_t *os_version_label;
-    lv_obj_t *obj0;
+    lv_obj_t *auto_widget_container;
+    lv_obj_t *info_button;
+    lv_obj_t *grow_status_label;
+    lv_obj_t *stop_grow_button_main;
+    lv_obj_t *stop_grow_button_label_1;
+    lv_obj_t *restart_grow_button;
+    lv_obj_t *restart_grow_button_label;
+    lv_obj_t *manual_widget_container;
+    lv_obj_t *incr_humidity_cv;
+    lv_obj_t *incr_humidity_cv_label;
+    lv_obj_t *dec_humidity_cv;
+    lv_obj_t *dec_humidity_cv_label;
+    lv_obj_t *incr_airflow;
+    lv_obj_t *incr_humidity_cv_label_1;
+    lv_obj_t *dec_airflow;
+    lv_obj_t *dec_humidity_cv_label_1;
     lv_obj_t *home_button;
     lv_obj_t *disco_power_slider;
     lv_obj_t *disco_power;
@@ -54,11 +66,15 @@ typedef struct _objects_t {
     lv_obj_t *next_button;
     lv_obj_t *home_button__3;
     lv_obj_t *home_button_label_3;
+    lv_obj_t *shroom_os_label_1;
+    lv_obj_t *os_version_label_1;
     lv_obj_t *main_menu_header;
     lv_obj_t *menu_buttons;
     lv_obj_t *back_button;
     lv_obj_t *home_button__4;
     lv_obj_t *home_button_label_4;
+    lv_obj_t *shroom_os_label_2;
+    lv_obj_t *os_version_label_2;
     lv_obj_t *back_button_1;
     lv_obj_t *display_brightness_slider;
     lv_obj_t *home_button__2;
@@ -68,28 +84,18 @@ typedef struct _objects_t {
     lv_obj_t *humidity_control_container;
     lv_obj_t *manual_humidity_label;
     lv_obj_t *humidity_value_label_1;
-    lv_obj_t *dec_humidity_cv;
-    lv_obj_t *dec_humidity_cv_label;
-    lv_obj_t *incr_humidity_cv;
-    lv_obj_t *incr_humidity_cv_label;
     lv_obj_t *airflow_container;
     lv_obj_t *airflow_value_label_1;
     lv_obj_t *manual_airflow_label;
-    lv_obj_t *dec_airflow;
-    lv_obj_t *dec_humidity_cv_label_1;
-    lv_obj_t *incr_airflow;
-    lv_obj_t *incr_humidity_cv_label_1;
     lv_obj_t *home_button__5;
     lv_obj_t *home_button_label_5;
     lv_obj_t *back_button_3;
     lv_obj_t *start_grow_button;
     lv_obj_t *start_grow_button_label;
-    lv_obj_t *stop_grow_button;
-    lv_obj_t *stop_grow_button_label;
     lv_obj_t *mushroom_display_data_label;
     lv_obj_t *increment_mushroom_list_button;
     lv_obj_t *decrement_mushroom_list_button;
-    lv_obj_t *obj1;
+    lv_obj_t *obj0;
     lv_obj_t *h_pid_p_label;
     lv_obj_t *back_button_5;
     lv_obj_t *main_menu_header_1;
@@ -190,9 +196,10 @@ enum Colors {
     COLOR_ID_LIGHT_GREEN,
     COLOR_ID_RED,
     COLOR_ID_WHITE,
+    COLOR_ID_LIGHT_GREY,
 };
 void change_color_theme(uint32_t themeIndex);
-extern uint32_t theme_colors[1][7];
+extern uint32_t theme_colors[1][8];
 extern uint32_t active_theme_index;
 
 void tick_screen_by_id(enum ScreensEnum screenId);

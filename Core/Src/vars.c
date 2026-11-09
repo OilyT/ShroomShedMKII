@@ -261,7 +261,6 @@ void set_var_mushroom_list_index(int32_t value) {
 }
 
 // AUTOMATIC GROWING VARS
-
 void set_var_grow_progress_str(const char *value) {
     (void)value;
 }
