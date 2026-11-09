@@ -43,7 +43,7 @@ static uint32_t last_mpg_tick;
 // oyster
 static uint8_t oyster_default_h[] = {95, 90, 80};
 static uint8_t oyster_default_f[] = {15, 15, 30};
-static uint16_t oyster_default_t[] = {24, 144, 72};
+static uint16_t oyster_default_t[] = {12, 144, 72};
 
 MGP_data_t oyster_data = {
     .humidity_cv = oyster_default_h,
@@ -71,7 +71,7 @@ MGP_data_t pink_oyster_data = {
 // black king oyster
 static uint8_t bk_oyster_default_h[] = {95, 90, 80};
 static uint8_t bk_oyster_default_f[] = {10, 10, 10};
-static uint16_t bk_oyster_default_t[] = {24, 144, 72};
+static uint16_t bk_oyster_default_t[] = {12, 144, 72};
 
 MGP_data_t bk_oyster_data = {
     .humidity_cv = bk_oyster_default_h,
@@ -82,16 +82,16 @@ MGP_data_t bk_oyster_data = {
     .display_data = "Pleurotus Ostreatus-Eryngii\n\n Temperature: 10-20C\n\n Grow time: 7 - 14 days"
 };
 // shiitake
-static uint8_t shiitake_default_h[] = {95, 90, 90, 75};
-static uint8_t shiitake_default_f[] = {15, 20, 15, 15};
-static uint16_t shiitake_default_t[] = {36, 12, 192, 96};
+static uint8_t shiitake_default_h[] = {95, 90, 75};
+static uint8_t shiitake_default_f[] = {15, 15, 15};
+static uint16_t shiitake_default_t[] = {36, 192, 96};
 
 MGP_data_t shiitake_data = {
     .humidity_cv = shiitake_default_h,
     .fan_cv = shiitake_default_f,
     .time = shiitake_default_t,
     .wait_for_pinning = false,
-    .length = 4,
+    .length = 3,
     .display_data = "Lentinula Edodes\n\n Temperature: 10-21C\n\n Grow time: 10 - 15 days"
 
 };
@@ -99,7 +99,7 @@ MGP_data_t shiitake_data = {
 // nz lions mane
 static uint8_t lions_mane_default_h[] = {95, 90, 90, 80};
 static uint8_t lions_mane_default_f[] = {15, 20, 20, 20};
-static uint16_t lions_mane_default_t[] = {24, 48, 300, 96};
+static uint16_t lions_mane_default_t[] = {12, 48, 300, 96};
 
 MGP_data_t lions_mane_data = {
     .humidity_cv = lions_mane_default_h,
