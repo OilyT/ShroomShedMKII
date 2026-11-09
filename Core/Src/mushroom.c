@@ -49,7 +49,6 @@ MGP_data_t oyster_data = {
     .humidity_cv = oyster_default_h,
     .fan_cv = oyster_default_f,
     .time = oyster_default_t,
-    .wait_for_pinning = false,
     .length = 3,
     .display_data = "Pleurotus Ostreatus\nPleurotusPulmonarius\n\n Temperature: 10-22C\n\n Grow time: 7 - 14 days"
 };
@@ -63,7 +62,6 @@ MGP_data_t pink_oyster_data = {
     .humidity_cv = pink_oyster_default_h,
     .fan_cv = pink_oyster_default_f,
     .time = pink_oyster_default_t,
-    .wait_for_pinning = false,
     .length = 3,
     .display_data = "Pleurotus Djamor\n\n Temperature: 15-25C\n\n Grow time: 7 - 14 days"
 };
@@ -77,7 +75,6 @@ MGP_data_t bk_oyster_data = {
     .humidity_cv = bk_oyster_default_h,
     .fan_cv = bk_oyster_default_f,
     .time = bk_oyster_default_t,
-    .wait_for_pinning = false,
     .length = 4,
     .display_data = "Pleurotus Ostreatus-Eryngii\n\n Temperature: 10-20C\n\n Grow time: 7 - 14 days"
 };
@@ -90,7 +87,6 @@ MGP_data_t shiitake_data = {
     .humidity_cv = shiitake_default_h,
     .fan_cv = shiitake_default_f,
     .time = shiitake_default_t,
-    .wait_for_pinning = false,
     .length = 3,
     .display_data = "Lentinula Edodes\n\n Temperature: 10-21C\n\n Grow time: 8 - 15 days"
 
@@ -105,7 +101,6 @@ MGP_data_t lions_mane_data = {
     .humidity_cv = lions_mane_default_h,
     .fan_cv = lions_mane_default_f,
     .time = lions_mane_default_t,
-    .wait_for_pinning = false,
     .length = 4,
     .display_data = "Hericium novae-zealandiae\n\n Temperature: 15-24C\n\n Grow time: 14 - 21 days"
 };
@@ -175,10 +170,8 @@ void tick_MGP(void) {
     uint32_t now = HAL_GetTick();
     if (now - last_mpg_tick >= (TICK_PERIOD / GROW_SPEED_MULTIPLIER)) {
         last_mpg_tick = now;
-        if (current_profile->stage > 0) {
-            current_node->progress++;
-            current_profile->progress++;
-        }
+        current_node->progress++;
+        current_profile->progress++;
     }
     grow_process();
 }
@@ -195,11 +188,6 @@ void start_grow(uint8_t profile_index) {
     profile->progress = 0;
     current_node = profile->head;
     current_node->progress = 0;
-    if (current_profile->data->wait_for_pinning) {
-        current_profile->stage = 0;
-    } else {
-        current_profile->stage = 1;
-    }
     last_mpg_tick = HAL_GetTick();
     grow_process();
 }
@@ -234,7 +222,6 @@ static void init_profile(MGP_t *profile, MGP_data_t *data) {
     new_node->type = NODE_TYPE_END;
     profile->duration = duration;
     profile->progress = 0;
-    profile->stage = data->wait_for_pinning ? 0 : 1;
     profile->data = data;
 }
 
@@ -314,14 +301,6 @@ const char *get_var_mushroom_grow_label(void) {
 
     }
 
-bool get_var_hide_progress_grow_button(void) {
-    if (current_profile == NULL) {
-        return true;
-    }
-
-    return current_profile->stage;
-}
-
 const char *get_var_progress_grow_button_label(void) {
     return "Growing";
 }
@@ -343,14 +322,6 @@ void action_stop_grow(lv_event_t *e) {
     shedControl.outputMode = OUTPUT_DISABLED;
 }
 
-void action_next_grow_stage(lv_event_t *e) {
-    if (current_profile == NULL) {
-        return;
-    }
-    if (current_profile->stage == 0) {
-        current_profile->stage = 1;
-    }
-}
 
 void action_increment_mushroom_list_index(lv_event_t *e) {
     int32_t selected_profile_index = get_var_mushroom_list_index();
