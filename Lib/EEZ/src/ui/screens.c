@@ -436,26 +436,6 @@ void create_screen_main() {
             {
                 lv_obj_t *parent_obj = obj;
                 {
-                    // humidifier_mode_toggle
-                    lv_obj_t *obj = lv_button_create(parent_obj);
-                    objects.humidifier_mode_toggle = obj;
-                    lv_obj_set_pos(obj, 218, 25);
-                    lv_obj_set_size(obj, 100, 86);
-                    lv_obj_add_event_cb(obj, action_toggle_humidifier_mode, LV_EVENT_PRESSED, (void *)0);
-                    add_style_std_button_dark(obj);
-                    {
-                        lv_obj_t *parent_obj = obj;
-                        {
-                            lv_obj_t *obj = lv_label_create(parent_obj);
-                            lv_obj_set_pos(obj, 0, 0);
-                            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                            add_style_shroom_shed_small_label(obj);
-                            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-                            lv_label_set_text(obj, "Toggle\nHumidifier\nmode");
-                        }
-                    }
-                }
-                {
                     // incr_humidity_cv
                     lv_obj_t *obj = lv_button_create(parent_obj);
                     objects.incr_humidity_cv = obj;
@@ -1037,10 +1017,10 @@ void create_screen_manual_control() {
             // manual_control_header
             lv_obj_t *obj = lv_label_create(parent_obj);
             objects.manual_control_header = obj;
-            lv_obj_set_pos(obj, 96, 5);
+            lv_obj_set_pos(obj, 92, 0);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
             add_style_shroom_shed_header(obj);
-            lv_label_set_text(obj, "Manual");
+            lv_label_set_text(obj, "Manual\nsettings");
         }
         {
             // back_button_2
@@ -1048,7 +1028,7 @@ void create_screen_manual_control() {
             objects.back_button_2 = obj;
             lv_obj_set_pos(obj, 0, 0);
             lv_obj_set_size(obj, LV_PCT(20), LV_PCT(20));
-            lv_obj_add_event_cb(obj, action_load_screen_menu, LV_EVENT_PRESSED, (void *)0);
+            lv_obj_add_event_cb(obj, action_load_screen_main, LV_EVENT_PRESSED, (void *)0);
             add_style_std_button_dark(obj);
             {
                 lv_obj_t *parent_obj = obj;
@@ -1062,96 +1042,33 @@ void create_screen_manual_control() {
             }
         }
         {
-            // humidity_control_container
-            lv_obj_t *obj = lv_obj_create(parent_obj);
-            objects.humidity_control_container = obj;
-            lv_obj_set_pos(obj, 0, 51);
-            lv_obj_set_size(obj, 320, 78);
-            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            add_style_blue_container(obj);
-            {
-                lv_obj_t *parent_obj = obj;
-                {
-                    // manual_humidity_label
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    objects.manual_humidity_label = obj;
-                    lv_obj_set_pos(obj, 26, 10);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    add_style_std_label_24(obj);
-                    lv_label_set_text(obj, "Humidity");
-                }
-                {
-                    // humidity_value_label_1
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    objects.humidity_value_label_1 = obj;
-                    lv_obj_set_pos(obj, 20, 42);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICK_FOCUSABLE|LV_OBJ_FLAG_GESTURE_BUBBLE|LV_OBJ_FLAG_PRESS_LOCK|LV_OBJ_FLAG_SCROLLABLE|LV_OBJ_FLAG_SCROLL_CHAIN_HOR|LV_OBJ_FLAG_SCROLL_CHAIN_VER|LV_OBJ_FLAG_SCROLL_ELASTIC|LV_OBJ_FLAG_SCROLL_MOMENTUM|LV_OBJ_FLAG_SCROLL_WITH_ARROW|LV_OBJ_FLAG_SNAPPABLE);
-                    add_style_std_label_24(obj);
-                    lv_label_set_text(obj, "");
-                }
-            }
-        }
-        {
-            // airflow_container
-            lv_obj_t *obj = lv_obj_create(parent_obj);
-            objects.airflow_container = obj;
-            lv_obj_set_pos(obj, 0, 129);
-            lv_obj_set_size(obj, 320, 79);
-            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            add_style_blue_container(obj);
-            {
-                lv_obj_t *parent_obj = obj;
-                {
-                    // airflow_value_label_1
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    objects.airflow_value_label_1 = obj;
-                    lv_obj_set_pos(obj, 50, 29);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    add_style_button_label_32(obj);
-                    lv_label_set_text(obj, "");
-                }
-                {
-                    // manual_airflow_label
-                    lv_obj_t *obj = lv_label_create(parent_obj);
-                    objects.manual_airflow_label = obj;
-                    lv_obj_set_pos(obj, 32, 0);
-                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-                    add_style_std_label_24(obj);
-                    lv_label_set_text(obj, "Airflow");
-                }
-            }
-        }
-        {
-            // home_button__5
+            // humidifier_mode_toggle
             lv_obj_t *obj = lv_button_create(parent_obj);
-            objects.home_button__5 = obj;
-            lv_obj_set_pos(obj, 130, 201);
-            lv_obj_set_size(obj, 60, 40);
-            lv_obj_add_event_cb(obj, action_load_screen_main, LV_EVENT_PRESSED, (void *)0);
-            add_style_std_button(obj);
+            objects.humidifier_mode_toggle = obj;
+            lv_obj_set_pos(obj, 40, 92);
+            lv_obj_set_size(obj, 240, 58);
+            lv_obj_add_event_cb(obj, action_toggle_humidifier_mode, LV_EVENT_PRESSED, (void *)0);
+            add_style_std_button_dark(obj);
             {
                 lv_obj_t *parent_obj = obj;
                 {
-                    // home_button_label_5
+                    // H_mode_P_label
                     lv_obj_t *obj = lv_label_create(parent_obj);
-                    objects.home_button_label_5 = obj;
+                    objects.h_mode_p_label = obj;
+                    lv_obj_set_pos(obj, 1, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    add_style_button_label_24(obj);
+                    lv_label_set_text(obj, "Humidifier Mode:\nSet Power");
+                }
+                {
+                    // H_mode_H_label
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    objects.h_mode_h_label = obj;
                     lv_obj_set_pos(obj, 0, 0);
                     lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    add_style_button_label_24(obj);
                     lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-                    lv_label_set_text(obj, "HOME");
+                    lv_label_set_text(obj, "Humidifier Mode:\nHumidity Target");
                 }
             }
         }
@@ -1162,20 +1079,22 @@ void create_screen_manual_control() {
 
 void tick_screen_manual_control() {
     {
-        const char *new_val = get_var_manual_humidity_str();
-        const char *cur_val = lv_label_get_text(objects.humidity_value_label_1);
-        if (strcmp(new_val, cur_val) != 0) {
-            tick_value_change_obj = objects.humidity_value_label_1;
-            lv_label_set_text(objects.humidity_value_label_1, new_val);
+        bool new_val = get_var_humidifier_mode_p();
+        bool cur_val = lv_obj_has_flag(objects.h_mode_p_label, LV_OBJ_FLAG_HIDDEN);
+        if (new_val != cur_val) {
+            tick_value_change_obj = objects.h_mode_p_label;
+            if (new_val) lv_obj_add_flag(objects.h_mode_p_label, LV_OBJ_FLAG_HIDDEN);
+            else lv_obj_clear_flag(objects.h_mode_p_label, LV_OBJ_FLAG_HIDDEN);
             tick_value_change_obj = NULL;
         }
     }
     {
-        const char *new_val = get_var_manual_airflow_str();
-        const char *cur_val = lv_label_get_text(objects.airflow_value_label_1);
-        if (strcmp(new_val, cur_val) != 0) {
-            tick_value_change_obj = objects.airflow_value_label_1;
-            lv_label_set_text(objects.airflow_value_label_1, new_val);
+        bool new_val = get_var_humidifier_mode_p();
+        bool cur_val = lv_obj_has_flag(objects.h_mode_h_label, LV_OBJ_FLAG_HIDDEN);
+        if (new_val != cur_val) {
+            tick_value_change_obj = objects.h_mode_h_label;
+            if (new_val) lv_obj_add_flag(objects.h_mode_h_label, LV_OBJ_FLAG_HIDDEN);
+            else lv_obj_clear_flag(objects.h_mode_h_label, LV_OBJ_FLAG_HIDDEN);
             tick_value_change_obj = NULL;
         }
     }

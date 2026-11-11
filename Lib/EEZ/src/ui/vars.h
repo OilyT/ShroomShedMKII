@@ -46,7 +46,9 @@ enum FlowGlobalVariables {
     FLOW_GLOBAL_VARIABLE_PROGRESS_GROW_BUTTON_LABEL = 28,
     FLOW_GLOBAL_VARIABLE_HIDE_PROGRESS_GROW_BUTTON = 29,
     FLOW_GLOBAL_VARIABLE_MUSHROOM_DISPLAY_DATA = 30,
-    FLOW_GLOBAL_VARIABLE_SHROOM_OS_VERSION = 31
+    FLOW_GLOBAL_VARIABLE_SHROOM_OS_VERSION = 31,
+    FLOW_GLOBAL_VARIABLE_HUMIDIFER_MODE_H = 32,
+    FLOW_GLOBAL_VARIABLE_HUMIDIFIER_MODE_P = 33
 };
 
 // Native global variables
@@ -115,6 +117,10 @@ extern const char *get_var_mushroom_display_data();
 extern void set_var_mushroom_display_data(const char *value);
 extern const char *get_var_shroom_os_version();
 extern void set_var_shroom_os_version(const char *value);
+extern bool get_var_humidifer_mode_h();
+extern void set_var_humidifer_mode_h(bool value);
+extern bool get_var_humidifier_mode_p();
+extern void set_var_humidifier_mode_p(bool value);
 
 
 #ifdef __cplusplus

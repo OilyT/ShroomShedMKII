@@ -249,6 +249,14 @@ void set_var_manual_airflow_str(const char *value) {
     (void)value;
 }
 
+bool get_var_humidifer_mode_h(void) {
+    return shedControl.humidifierMode == HUMIDIFIER_MODE_HUMIDITY;
+}
+
+bool get_var_humidifier_mode_p(void) {
+    return shedControl.humidifierMode == HUMIDIFIER_MODE_POWER;
+}
+
 // grow selection vars
 int32_t mushroom_list_index;
 

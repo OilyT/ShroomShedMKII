@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+    "selectedUserPageObject": "[ShroomShed_MKII_App.eez-project]:/userPages/5",
     "selectedActionObject": "[ShroomShed_MKII_App.eez-project]:/actions/31",
     "selectedGlobalVariableObject": "[ShroomShed_MKII_App.eez-project]:/variables/globalVariables/31",
     "selectedStyleObject": "[ShroomShed_MKII_App.eez-project]:/lvglStyles/styles/12",
@@ -125,12 +125,12 @@
             {
               "type": "row",
               "id": "#5471c159-4a4b-43a7-bd07-a48e4be8c669",
-              "weight": 19.06562571546433,
+              "weight": 25.505736001591394,
               "children": [
                 {
                   "type": "tabset",
                   "id": "#6a4e08c5-ad67-4682-adad-39f5157e26a3",
-                  "weight": 1.2683828021542947,
+                  "weight": 1.684159737300308,
                   "enableClose": false,
                   "children": [
                     {
@@ -162,7 +162,7 @@
                 {
                   "type": "tabset",
                   "id": "#59ad6a08-6b18-4c31-b3f9-29f05ee49b77",
-                  "weight": 1.0157588415592484,
+                  "weight": 0.5999819064132348,
                   "enableClose": false,
                   "children": [
                     {
@@ -196,17 +196,17 @@
             {
               "type": "tabset",
               "id": "EDITORS",
-              "weight": 56.455264476747686,
+              "weight": 50.015154190620635,
               "enableDeleteWhenEmpty": false,
               "enableClose": false,
               "children": [
                 {
                   "type": "tab",
-                  "id": "#389e88b3-8f49-4a8e-9f28-d94035cb337a",
-                  "name": "Main",
+                  "id": "#77f3c1ff-f7f1-4527-bff0-dd227fdf551a",
+                  "name": "Manual_control",
                   "component": "editor",
                   "config": {
-                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/1",
+                    "objectPath": "[ShroomShed_MKII_App.eez-project]:/userPages/5",
                     "permanent": false
                   },
                   "icon": "svg:page"
@@ -1052,10 +1052,10 @@
       },
       "transform": {
         "translate": {
-          "x": -463.5919610918269,
-          "y": -372.7598253476038
+          "x": -223.36416236409522,
+          "y": -230.18673085562008
         },
-        "scale": 3
+        "scale": 1.5
       },
       "timeline": {
         "isEditorActive": false,
@@ -1144,10 +1144,10 @@
       },
       "transform": {
         "translate": {
-          "x": -348.5,
-          "y": -383.33331882953644
+          "x": -30.433333333333334,
+          "y": 1151.2388966242472
         },
-        "scale": 3
+        "scale": 0.1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1190,10 +1190,10 @@
       },
       "transform": {
         "translate": {
-          "x": -232.33331823349,
-          "y": -162.33332300186157
+          "x": -194.4166477918625,
+          "y": -177.85415375232697
         },
-        "scale": 3
+        "scale": 0.1
       },
       "timeline": {
         "isEditorActive": false,
@@ -1313,6 +1313,6 @@
   ],
   "showInactiveFlowsInDebugger": true,
   "globalFlowZoom": true,
-  "flowZoom": 3,
+  "flowZoom": 0.1,
   "implementationLanguage": "C"
 }

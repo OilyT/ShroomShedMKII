@@ -44,7 +44,6 @@ typedef struct _objects_t {
     lv_obj_t *restart_grow_button;
     lv_obj_t *restart_grow_button_label;
     lv_obj_t *manual_widget_container;
-    lv_obj_t *humidifier_mode_toggle;
     lv_obj_t *incr_humidity_cv;
     lv_obj_t *incr_humidity_cv_label;
     lv_obj_t *dec_humidity_cv;
@@ -73,14 +72,9 @@ typedef struct _objects_t {
     lv_obj_t *home_button_label_2;
     lv_obj_t *manual_control_header;
     lv_obj_t *back_button_2;
-    lv_obj_t *humidity_control_container;
-    lv_obj_t *manual_humidity_label;
-    lv_obj_t *humidity_value_label_1;
-    lv_obj_t *airflow_container;
-    lv_obj_t *airflow_value_label_1;
-    lv_obj_t *manual_airflow_label;
-    lv_obj_t *home_button__5;
-    lv_obj_t *home_button_label_5;
+    lv_obj_t *humidifier_mode_toggle;
+    lv_obj_t *h_mode_p_label;
+    lv_obj_t *h_mode_h_label;
     lv_obj_t *back_button_3;
     lv_obj_t *start_grow_button;
     lv_obj_t *start_grow_button_label;
