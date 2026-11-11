@@ -106,7 +106,7 @@ void Error_Handler(void);
 #define DISPLAY_LED_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define USE_TEST_UNIT
+//#define USE_TEST_UNIT
 
 #ifdef USE_TEST_UNIT
   #define TOUCH_CS_Pin GPIO_PIN_15

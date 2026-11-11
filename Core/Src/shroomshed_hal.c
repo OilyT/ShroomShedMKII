@@ -30,16 +30,36 @@ static int16_t H_power = 0;
 
 // PFP's
 
+static void set_humidifier_power(uint16_t power);
+static void humidity_pid(uint8_t humidity_setpoint);
+
 /* ============================================================================
  * Function Implementations
  * ============================================================================ */
 
-void set_humidifier_power(uint16_t power) {
-    uint16_t counter_register_power = power / (MAX_POWER / PULSE_RANGE) + MIN_PULSE;
+
+void humidity_process(uint8_t target_value) {
+
+    if (shedControl.humidifierMode == HUMIDIFIER_MODE_HUMIDITY) {
+        humidity_pid(target_value);
+    } else {
+        set_humidifier_power(target_value * 10);
+    }
+}
+
+static void set_humidifier_power(uint16_t power) {
+    uint16_t counter_register_power;
+
+    if (power < 10) {
+        counter_register_power = 0;
+    } else {
+        counter_register_power = power / (MAX_POWER / PULSE_RANGE) + MIN_PULSE;
+    }
+    
     TRANSDUCER_PWM_TIMER.Instance->CCR3 = counter_register_power;
 }
 
-void humidity_process(uint8_t humidity_setpoint) {
+static void humidity_pid(uint8_t humidity_setpoint) {
     const static float Pk = 25.0;
     const static float Ik = 0.25;
     const static float Dk = 250.0;
@@ -95,6 +115,8 @@ void humidity_process(uint8_t humidity_setpoint) {
 
     set_humidifier_power(H_power);
 }
+
+
 
 inline int16_t get_PID_p(void) {
     return P_term;

@@ -19,7 +19,7 @@
 #include "mushroom.h"
 #include "shroomshed_hal.h"
 
-#define MAX_HUMIDITY 95
+#define MAX_HUMIDITY 99
 #define MIN_HUMIDITY 0
 #define MAX_FAN 100
 #define MIN_FAN 10
@@ -240,6 +240,14 @@ void action_set_control_mode(lv_event_t * e) {
         shedControl.controlMode = MODE_MANUAL;
     } else {
         shedControl.controlMode = MODE_AUTOMATIC;
+    }
+}
+
+void action_toggle_humidifier_mode(lv_event_t *e) {
+    if (shedControl.humidifierMode == HUMIDIFIER_MODE_HUMIDITY) {
+        shedControl.humidifierMode = HUMIDIFIER_MODE_POWER;
+    } else {
+        shedControl.humidifierMode = HUMIDIFIER_MODE_HUMIDITY;
     }
 }
 

@@ -10,7 +10,6 @@ extern "C" {
 typedef struct _objects_t {
     lv_obj_t *splash_screen;
     lv_obj_t *main;
-    lv_obj_t *disco_mode;
     lv_obj_t *menu_main;
     lv_obj_t *menu_main_2;
     lv_obj_t *menu_general;
@@ -20,9 +19,9 @@ typedef struct _objects_t {
     lv_obj_t *grow_kits_qr;
     lv_obj_t *lighting;
     lv_obj_t *single_colour;
+    lv_obj_t *disco_mode;
     lv_obj_t *output_mode_switch;
     lv_obj_t *mushroom_label;
-    lv_obj_t *manual_control_switch;
     lv_obj_t *shroom_os_label;
     lv_obj_t *os_version_label;
     lv_obj_t *menu_button;
@@ -45,6 +44,7 @@ typedef struct _objects_t {
     lv_obj_t *restart_grow_button;
     lv_obj_t *restart_grow_button_label;
     lv_obj_t *manual_widget_container;
+    lv_obj_t *humidifier_mode_toggle;
     lv_obj_t *incr_humidity_cv;
     lv_obj_t *incr_humidity_cv_label;
     lv_obj_t *dec_humidity_cv;
@@ -53,14 +53,6 @@ typedef struct _objects_t {
     lv_obj_t *incr_humidity_cv_label_1;
     lv_obj_t *dec_airflow;
     lv_obj_t *dec_humidity_cv_label_1;
-    lv_obj_t *home_button;
-    lv_obj_t *disco_power_slider;
-    lv_obj_t *disco_power;
-    lv_obj_t *disco_mode_label;
-    lv_obj_t *disco_speed;
-    lv_obj_t *disco_power_slider_1;
-    lv_obj_t *disco_phase;
-    lv_obj_t *disco_power_slider_2;
     lv_obj_t *main_menu_header_2;
     lv_obj_t *menu_buttons_2;
     lv_obj_t *next_button;
@@ -130,6 +122,14 @@ typedef struct _objects_t {
     lv_obj_t *decrease_green;
     lv_obj_t *decrease_blue_button;
     lv_obj_t *single_color_header;
+    lv_obj_t *home_button;
+    lv_obj_t *disco_power_slider;
+    lv_obj_t *disco_power;
+    lv_obj_t *disco_mode_label;
+    lv_obj_t *disco_speed;
+    lv_obj_t *disco_power_slider_1;
+    lv_obj_t *disco_phase;
+    lv_obj_t *disco_power_slider_2;
 } objects_t;
 
 extern objects_t objects;
@@ -137,16 +137,16 @@ extern objects_t objects;
 enum ScreensEnum {
     SCREEN_ID_SPLASH_SCREEN = 1,
     SCREEN_ID_MAIN = 2,
-    SCREEN_ID_DISCO_MODE = 3,
-    SCREEN_ID_MENU_MAIN = 4,
-    SCREEN_ID_MENU_MAIN_2 = 5,
-    SCREEN_ID_MENU_GENERAL = 6,
-    SCREEN_ID_MANUAL_CONTROL = 7,
-    SCREEN_ID_GROW_MENU = 8,
-    SCREEN_ID_DEBUG = 9,
-    SCREEN_ID_GROW_KITS_QR = 10,
-    SCREEN_ID_LIGHTING = 11,
-    SCREEN_ID_SINGLE_COLOUR = 12,
+    SCREEN_ID_MENU_MAIN = 3,
+    SCREEN_ID_MENU_MAIN_2 = 4,
+    SCREEN_ID_MENU_GENERAL = 5,
+    SCREEN_ID_MANUAL_CONTROL = 6,
+    SCREEN_ID_GROW_MENU = 7,
+    SCREEN_ID_DEBUG = 8,
+    SCREEN_ID_GROW_KITS_QR = 9,
+    SCREEN_ID_LIGHTING = 10,
+    SCREEN_ID_SINGLE_COLOUR = 11,
+    SCREEN_ID_DISCO_MODE = 12,
 };
 
 void create_screen_splash_screen();
@@ -154,9 +154,6 @@ void tick_screen_splash_screen();
 
 void create_screen_main();
 void tick_screen_main();
-
-void create_screen_disco_mode();
-void tick_screen_disco_mode();
 
 void create_screen_menu_main();
 void tick_screen_menu_main();
@@ -184,6 +181,9 @@ void tick_screen_lighting();
 
 void create_screen_single_colour();
 void tick_screen_single_colour();
+
+void create_screen_disco_mode();
+void tick_screen_disco_mode();
 
 enum Themes {
     THEME_ID_DEFAULT,

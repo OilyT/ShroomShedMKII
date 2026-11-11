@@ -50,9 +50,15 @@ typedef enum shedOutputMode_e {
     OUTPUT_DISABLED = 1
 } shedOutputMode_e;
 
+typedef enum humidifierMode_e {
+    HUMIDIFIER_MODE_HUMIDITY = 0,
+    HUMIDIFIER_MODE_POWER = 1
+} humidifierMode_e;
+
 typedef struct shedControl_t {
     shedControlMode_e controlMode; // 0 for automatic, 1 for manual
     shedOutputMode_e outputMode; // 0 for normal, 1 for disabled
+    humidifierMode_e humidifierMode; // 0 for target humidity, 1 for target humidifier power
     uint8_t humidityControlValue;
     uint8_t fanControlValue;
     uint8_t manualHumidityControlValue;

@@ -39,6 +39,7 @@ extern void action_load_screen_lighting(lv_event_t * e);
 extern void action_next_grow_stage(lv_event_t * e);
 extern void action_increment_mushroom_list_index(lv_event_t * e);
 extern void action_decrement_mushroom_list_index(lv_event_t * e);
+extern void action_toggle_humidifier_mode(lv_event_t * e);
 
 
 #ifdef __cplusplus

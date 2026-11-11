@@ -20,7 +20,7 @@
 
 #define HEATER_THRESHOLD 96 // % RH
 #define HEATER_ON_TIME 5 // cycles
-#define HEATER_COOLDOWN 15 // cycles
+#define HEATER_COOLDOWN 180 // cycles
 #define HEATER_TIMEOUT 30 // cycles
 
 #define HUMIDITY_BUFFER_SIZE 4

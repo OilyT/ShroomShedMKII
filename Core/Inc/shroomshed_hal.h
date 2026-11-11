@@ -24,11 +24,10 @@ extern TIM_HandleTypeDef TRANSDUCER_PWM_TIMER;
 extern TIM_HandleTypeDef FAN_PWM_TIMER;
 
 
-
 void enable_shed(void);
 void disable_shed(void);
 void start_humidifier(void);
-void humidity_process(uint8_t humidity_setpoint);
+void humidity_process(uint8_t target_value);
 void stop_humidifier(void);
 void enable_boost(void);
 void disable_boost(void);

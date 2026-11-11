@@ -11,7 +11,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "ili9341_touch.h"
 
 /* Private includes */
 /* TODO: Add project-specific includes */
